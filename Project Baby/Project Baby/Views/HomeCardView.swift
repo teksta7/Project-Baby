@@ -9,9 +9,51 @@ import SwiftUI
 
 @ViewBuilder
 func HomeCardView(_ homeCard: HomeCard) -> some View {
-        RoundedRectangle(cornerRadius: 15.0)
-            .fill(homeCard.color.gradient)
+    @State var isSheetPresented = false
+    ZStack {
+        NavigationLink(value: homeCard.viewString)
+        {
+            ZStack{
+                RoundedRectangle(cornerRadius: 15.0)
+                    .fill(homeCard.color.gradient)
+                Circle()
+                    .frame(width: DeviceDimensions().width/2)
+                    .foregroundStyle(.black)
+                    .offset(y: -DeviceDimensions().height/5)
+//                Circle()
+//                    .frame(width: DeviceDimensions().width/2)
+//                    .foregroundStyle(.black)
+//                    .offset(y: DeviceDimensions().height/3)
+//                    .offset(x: DeviceDimensions().height/9)
+//                Circle()
+//                    .frame(width: DeviceDimensions().width/2)
+//                    .foregroundStyle(.black)
+//                    .offset(y: DeviceDimensions().height/3)
+//                    .offset(x: -DeviceDimensions().height/9)
+                
+            }
+            
+        }
+       
+       
+//        NavigationLink("More info", value: homeCard.viewString)
+//            .foregroundStyle(.white)
+
+//        Text(homeCard.viewString)
+//            .foregroundStyle(.black)
+        //Circle()
+            //.fill(.black)
+    }
+//    .onTapGesture {
+//        print("changed")
+//        isSheetPresented = true
+//    }
+//    .sheet(isPresented: $isSheetPresented, content: {
+//        BottlesView()
+//    })
+    
 }
+
 
 func minX( _ proxy: GeometryProxy) -> CGFloat {
     let minX = proxy.frame(in: .scrollView(axis: .horizontal)).minX
@@ -24,6 +66,8 @@ func progress(_ proxy: GeometryProxy, limit: CGFloat = 2) -> CGFloat {
     
     let progress = (maxX / width) - 1.0
     let cappedProgress = min(progress, limit)
+    print(cappedProgress)
+    //HomeView().activeCard = cappedProgress
     
     return cappedProgress
 }
@@ -46,6 +90,6 @@ func rotation(_ proxy: GeometryProxy, rotation: CGFloat = 5) -> Angle {
     return .init(degrees: progress * rotation)
 }
 
-//#Preview {
-//    HomeCardView()
-//}
+#Preview {
+    HomeCardView(HomeCard(id: UUID(), color: .green, viewString: "ABC"))
+}

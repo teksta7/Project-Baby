@@ -1,5 +1,5 @@
 //
-//  BottlesView.swift
+//  WindView.swift
 //  Project Baby
 //
 //  Created by Jake thompson on 16/08/2024.
@@ -7,12 +7,12 @@
 
 import SwiftUI
 
-struct BottlesView: View {
+struct WindView: View {
     var body: some View {
-        Text("Bottles")
+        Text("Wind")
     }
 }
 
 #Preview {
-    BottlesView()
+    WindView()
 }

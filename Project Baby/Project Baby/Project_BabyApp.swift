@@ -9,11 +9,13 @@ import SwiftUI
 
 @main
 struct Project_BabyApp: App {
-    //let persistenceController = PersistenceController.shared
-
+    //Controller for setup data
+    @StateObject private var coreDataController: CoreDataController = CoreDataController()
+    
     var body: some Scene {
         WindowGroup {
             HomeView()
+                .environmentObject(coreDataController)
         }
     }
 }
