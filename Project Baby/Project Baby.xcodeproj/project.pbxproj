@@ -19,6 +19,16 @@
 		838A3AD72C6EB97100F8495D /* HomeCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838A3AD62C6EB97100F8495D /* HomeCard.swift */; };
 		838A3AD92C6F581E00F8495D /* DeviceDimensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838A3AD82C6F581E00F8495D /* DeviceDimensions.swift */; };
 		838A3ADB2C6F828E00F8495D /* BottlesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838A3ADA2C6F828E00F8495D /* BottlesView.swift */; };
+		838A3ADD2C6FA3C500F8495D /* SleepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838A3ADC2C6FA3C500F8495D /* SleepView.swift */; };
+		838A3ADF2C6FA3CF00F8495D /* PooView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838A3ADE2C6FA3CF00F8495D /* PooView.swift */; };
+		838A3AE12C6FA3EF00F8495D /* WindView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838A3AE02C6FA3EF00F8495D /* WindView.swift */; };
+		838A3AE32C6FA40600F8495D /* FoodView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838A3AE22C6FA40600F8495D /* FoodView.swift */; };
+		838A3AE52C6FA41000F8495D /* MedsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838A3AE42C6FA41000F8495D /* MedsView.swift */; };
+		838A3AE72C6FD98E00F8495D /* TopMiniCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838A3AE62C6FD98E00F8495D /* TopMiniCardView.swift */; };
+		838A3AE92C7185EE00F8495D /* CoreDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838A3AE82C7185EE00F8495D /* CoreDataController.swift */; };
+		838A3AEB2C718BC900F8495D /* BottomMiniCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838A3AEA2C718BC900F8495D /* BottomMiniCardView.swift */; };
+		838A3AED2C718CBF00F8495D /* ChartsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838A3AEC2C718CBF00F8495D /* ChartsView.swift */; };
+		838A3AEF2C718DAC00F8495D /* CardSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838A3AEE2C718DAC00F8495D /* CardSettingsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +64,16 @@
 		838A3AD62C6EB97100F8495D /* HomeCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCard.swift; sourceTree = "<group>"; };
 		838A3AD82C6F581E00F8495D /* DeviceDimensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceDimensions.swift; sourceTree = "<group>"; };
 		838A3ADA2C6F828E00F8495D /* BottlesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottlesView.swift; sourceTree = "<group>"; };
+		838A3ADC2C6FA3C500F8495D /* SleepView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepView.swift; sourceTree = "<group>"; };
+		838A3ADE2C6FA3CF00F8495D /* PooView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PooView.swift; sourceTree = "<group>"; };
+		838A3AE02C6FA3EF00F8495D /* WindView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindView.swift; sourceTree = "<group>"; };
+		838A3AE22C6FA40600F8495D /* FoodView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodView.swift; sourceTree = "<group>"; };
+		838A3AE42C6FA41000F8495D /* MedsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedsView.swift; sourceTree = "<group>"; };
+		838A3AE62C6FD98E00F8495D /* TopMiniCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopMiniCardView.swift; sourceTree = "<group>"; };
+		838A3AE82C7185EE00F8495D /* CoreDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataController.swift; sourceTree = "<group>"; };
+		838A3AEA2C718BC900F8495D /* BottomMiniCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomMiniCardView.swift; sourceTree = "<group>"; };
+		838A3AEC2C718CBF00F8495D /* ChartsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartsView.swift; sourceTree = "<group>"; };
+		838A3AEE2C718DAC00F8495D /* CardSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardSettingsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,7 +131,6 @@
 				838A3ACF2C6EB85E00F8495D /* Models */,
 				838A3AA02C6EB80E00F8495D /* Project_BabyApp.swift */,
 				838A3AA42C6EB80F00F8495D /* Assets.xcassets */,
-				838A3AAB2C6EB80F00F8495D /* Project_Baby.xcdatamodeld */,
 				838A3AA62C6EB80F00F8495D /* Preview Content */,
 			);
 			path = "Project Baby";
@@ -145,6 +164,7 @@
 		838A3ACF2C6EB85E00F8495D /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				838A3AAB2C6EB80F00F8495D /* Project_Baby.xcdatamodeld */,
 				838A3AD62C6EB97100F8495D /* HomeCard.swift */,
 			);
 			path = Models;
@@ -153,6 +173,7 @@
 		838A3AD02C6EB86300F8495D /* Contollers */ = {
 			isa = PBXGroup;
 			children = (
+				838A3AE82C7185EE00F8495D /* CoreDataController.swift */,
 			);
 			path = Contollers;
 			sourceTree = "<group>";
@@ -161,8 +182,17 @@
 			isa = PBXGroup;
 			children = (
 				838A3AA22C6EB80E00F8495D /* HomeView.swift */,
+				838A3AEC2C718CBF00F8495D /* ChartsView.swift */,
 				838A3AD42C6EB95500F8495D /* HomeCardView.swift */,
 				838A3ADA2C6F828E00F8495D /* BottlesView.swift */,
+				838A3ADC2C6FA3C500F8495D /* SleepView.swift */,
+				838A3ADE2C6FA3CF00F8495D /* PooView.swift */,
+				838A3AE02C6FA3EF00F8495D /* WindView.swift */,
+				838A3AE22C6FA40600F8495D /* FoodView.swift */,
+				838A3AE42C6FA41000F8495D /* MedsView.swift */,
+				838A3AE62C6FD98E00F8495D /* TopMiniCardView.swift */,
+				838A3AEA2C718BC900F8495D /* BottomMiniCardView.swift */,
+				838A3AEE2C718DAC00F8495D /* CardSettingsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -312,12 +342,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				838A3AEB2C718BC900F8495D /* BottomMiniCardView.swift in Sources */,
+				838A3AE12C6FA3EF00F8495D /* WindView.swift in Sources */,
 				838A3AD92C6F581E00F8495D /* DeviceDimensions.swift in Sources */,
+				838A3ADF2C6FA3CF00F8495D /* PooView.swift in Sources */,
+				838A3AE32C6FA40600F8495D /* FoodView.swift in Sources */,
 				838A3AAD2C6EB80F00F8495D /* Project_Baby.xcdatamodeld in Sources */,
+				838A3AE52C6FA41000F8495D /* MedsView.swift in Sources */,
+				838A3AEF2C718DAC00F8495D /* CardSettingsView.swift in Sources */,
 				838A3ADB2C6F828E00F8495D /* BottlesView.swift in Sources */,
 				838A3AA32C6EB80E00F8495D /* HomeView.swift in Sources */,
+				838A3AE72C6FD98E00F8495D /* TopMiniCardView.swift in Sources */,
 				838A3AA12C6EB80E00F8495D /* Project_BabyApp.swift in Sources */,
+				838A3AED2C718CBF00F8495D /* ChartsView.swift in Sources */,
+				838A3AE92C7185EE00F8495D /* CoreDataController.swift in Sources */,
 				838A3AD52C6EB95500F8495D /* HomeCardView.swift in Sources */,
+				838A3ADD2C6FA3C500F8495D /* SleepView.swift in Sources */,
 				838A3AD72C6EB97100F8495D /* HomeCard.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
