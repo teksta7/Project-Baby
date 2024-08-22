@@ -100,7 +100,7 @@ struct HomeView: View {
                         .scrollIndicators(showIndicator ? .visible : .hidden)
                 }
                 .frame(height: DeviceDimensions().height/1.75)
-                //INSERT BOTTOM MINI VIEW
+                //INSERT BOTTOM MINI VIEW (BABY AT A GLANCE VIEW)
                 BottomMiniCardView()
                     .onTapGesture {
                         isCardSettingsSheetPresented.toggle()

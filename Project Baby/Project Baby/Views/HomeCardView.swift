@@ -16,42 +16,16 @@ func HomeCardView(_ homeCard: HomeCard) -> some View {
             ZStack{
                 RoundedRectangle(cornerRadius: 15.0)
                     .fill(homeCard.color.gradient)
-                Circle()
-                    .frame(width: DeviceDimensions().width/2)
-                    .foregroundStyle(.black)
-                    .offset(y: -DeviceDimensions().height/5)
-//                Circle()
-//                    .frame(width: DeviceDimensions().width/2)
-//                    .foregroundStyle(.black)
-//                    .offset(y: DeviceDimensions().height/3)
-//                    .offset(x: DeviceDimensions().height/9)
-//                Circle()
-//                    .frame(width: DeviceDimensions().width/2)
-//                    .foregroundStyle(.black)
-//                    .offset(y: DeviceDimensions().height/3)
-//                    .offset(x: -DeviceDimensions().height/9)
+                //ATTEMPT DIAGONAL TEXT
+                
+//                RoundedRectangle(cornerRadius: 10)
+//                    .fill(.black)
+//                    .frame(width: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/, height: 100)
                 
             }
             
         }
-       
-       
-//        NavigationLink("More info", value: homeCard.viewString)
-//            .foregroundStyle(.white)
-
-//        Text(homeCard.viewString)
-//            .foregroundStyle(.black)
-        //Circle()
-            //.fill(.black)
     }
-//    .onTapGesture {
-//        print("changed")
-//        isSheetPresented = true
-//    }
-//    .sheet(isPresented: $isSheetPresented, content: {
-//        BottlesView()
-//    })
-    
 }
 
 
