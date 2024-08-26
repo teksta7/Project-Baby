@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		83694DF42C7CA6F100C5C8FC /* BottleListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83694DF32C7CA6F100C5C8FC /* BottleListView.swift */; };
+		83694DF62C7CA70A00C5C8FC /* BottleChartsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83694DF52C7CA70A00C5C8FC /* BottleChartsView.swift */; };
 		838A3AA12C6EB80E00F8495D /* Project_BabyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838A3AA02C6EB80E00F8495D /* Project_BabyApp.swift */; };
 		838A3AA32C6EB80E00F8495D /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838A3AA22C6EB80E00F8495D /* HomeView.swift */; };
 		838A3AA52C6EB80F00F8495D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 838A3AA42C6EB80F00F8495D /* Assets.xcassets */; };
@@ -29,6 +31,7 @@
 		838A3AEB2C718BC900F8495D /* BottomMiniCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838A3AEA2C718BC900F8495D /* BottomMiniCardView.swift */; };
 		838A3AED2C718CBF00F8495D /* ChartsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838A3AEC2C718CBF00F8495D /* ChartsView.swift */; };
 		838A3AEF2C718DAC00F8495D /* CardSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838A3AEE2C718DAC00F8495D /* CardSettingsView.swift */; };
+		83B2AD0A2C77E1F400663BC8 /* FeatureCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B2AD092C77E1F400663BC8 /* FeatureCardView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +52,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		83694DF32C7CA6F100C5C8FC /* BottleListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottleListView.swift; sourceTree = "<group>"; };
+		83694DF52C7CA70A00C5C8FC /* BottleChartsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottleChartsView.swift; sourceTree = "<group>"; };
 		838A3A9D2C6EB80E00F8495D /* Project Baby.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Project Baby.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		838A3AA02C6EB80E00F8495D /* Project_BabyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project_BabyApp.swift; sourceTree = "<group>"; };
 		838A3AA22C6EB80E00F8495D /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -74,6 +79,7 @@
 		838A3AEA2C718BC900F8495D /* BottomMiniCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomMiniCardView.swift; sourceTree = "<group>"; };
 		838A3AEC2C718CBF00F8495D /* ChartsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartsView.swift; sourceTree = "<group>"; };
 		838A3AEE2C718DAC00F8495D /* CardSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardSettingsView.swift; sourceTree = "<group>"; };
+		83B2AD092C77E1F400663BC8 /* FeatureCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureCardView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -185,6 +191,8 @@
 				838A3AEC2C718CBF00F8495D /* ChartsView.swift */,
 				838A3AD42C6EB95500F8495D /* HomeCardView.swift */,
 				838A3ADA2C6F828E00F8495D /* BottlesView.swift */,
+				83694DF52C7CA70A00C5C8FC /* BottleChartsView.swift */,
+				83694DF32C7CA6F100C5C8FC /* BottleListView.swift */,
 				838A3ADC2C6FA3C500F8495D /* SleepView.swift */,
 				838A3ADE2C6FA3CF00F8495D /* PooView.swift */,
 				838A3AE02C6FA3EF00F8495D /* WindView.swift */,
@@ -193,6 +201,7 @@
 				838A3AE62C6FD98E00F8495D /* TopMiniCardView.swift */,
 				838A3AEA2C718BC900F8495D /* BottomMiniCardView.swift */,
 				838A3AEE2C718DAC00F8495D /* CardSettingsView.swift */,
+				83B2AD092C77E1F400663BC8 /* FeatureCardView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -349,6 +358,7 @@
 				838A3AE32C6FA40600F8495D /* FoodView.swift in Sources */,
 				838A3AAD2C6EB80F00F8495D /* Project_Baby.xcdatamodeld in Sources */,
 				838A3AE52C6FA41000F8495D /* MedsView.swift in Sources */,
+				83694DF62C7CA70A00C5C8FC /* BottleChartsView.swift in Sources */,
 				838A3AEF2C718DAC00F8495D /* CardSettingsView.swift in Sources */,
 				838A3ADB2C6F828E00F8495D /* BottlesView.swift in Sources */,
 				838A3AA32C6EB80E00F8495D /* HomeView.swift in Sources */,
@@ -356,7 +366,9 @@
 				838A3AA12C6EB80E00F8495D /* Project_BabyApp.swift in Sources */,
 				838A3AED2C718CBF00F8495D /* ChartsView.swift in Sources */,
 				838A3AE92C7185EE00F8495D /* CoreDataController.swift in Sources */,
+				83694DF42C7CA6F100C5C8FC /* BottleListView.swift in Sources */,
 				838A3AD52C6EB95500F8495D /* HomeCardView.swift in Sources */,
+				83B2AD0A2C77E1F400663BC8 /* FeatureCardView.swift in Sources */,
 				838A3ADD2C6FA3C500F8495D /* SleepView.swift in Sources */,
 				838A3AD72C6EB97100F8495D /* HomeCard.swift in Sources */,
 			);
