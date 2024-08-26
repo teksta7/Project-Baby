@@ -9,10 +9,33 @@ import SwiftUI
 
 struct BottlesView: View {
     
-    @State var timeRemaining = 0
     @State var bottleFeedTimer: Bool = false
     @State var bottleFeedButtonLabel: String = "Start Bottle Feed"
     @State var bottleFeedButtonColor: Color = .green
+    @AppStorage("projectbaby.bottles\(Date.now.formatted(.dateTime.dayOfYear()))") var bottlesTakenToday: Int = 0
+    @State var isOuncesSheetPresented = false
+    @State var isBottleListSheetPresented = false
+    @State var imagePadding = 10.0 //60.0 for small, 30 for medium
+    @State var notesCardColor: Color = .blue
+    @State var bottleCardColor: Color = .blue
+    @State var ouncesCardColor: Color = .orange
+    @State var notesTextColor: Color = .white
+    
+    @State var cardWidth: CGFloat = 2.5
+    @State var outerCardHeight: CGFloat = 5
+    @State var innerCardHeight: CGFloat = 15
+    @State var bottomCardOpacity: CGFloat = 0.5
+    @State var countableValueTextSize: CGFloat = 8.0
+    @State var cardColorChange: Bool = false
+
+
+    
+    @State var notesToSave: String = ""
+    @State var startTimeeToSave: Date = Date.now
+    @State var endTimeeToSave: Date = Date.now
+    @State var bottleDuration = 0
+    @State var ouncesToSave: CGFloat = 0.0
+    
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     var body: some View {
         ScrollView
@@ -20,6 +43,7 @@ struct BottlesView: View {
             VStack
             {
                 imageView()
+                    .padding(.bottom, imagePadding)
                 Group
                 {
                     HStack
@@ -27,47 +51,172 @@ struct BottlesView: View {
                         ZStack
                         {
                             RoundedRectangle(cornerRadius: 10)
-                                .fill(.blue)
-                                .frame(width: DeviceDimensions().width/2.5, height: DeviceDimensions().height/5)
-                                .padding(.vertical, DeviceDimensions().height/10)
+                                .fill(bottleCardColor)
+                                .frame(width: DeviceDimensions().width/cardWidth, height: DeviceDimensions().height/outerCardHeight)
+                                //.padding(.vertical, DeviceDimensions().height/10)
                             
                             Rectangle()
                                 .fill(.background)
-                                .frame(width: DeviceDimensions().width/2.5, height: DeviceDimensions().height/15)
-                                .offset(y: DeviceDimensions().height/15)
-                                .opacity(0.5)
+                                .frame(width: DeviceDimensions().width/cardWidth, height: DeviceDimensions().height/innerCardHeight)
+                                .offset(y: DeviceDimensions().height/innerCardHeight)
+                                .opacity(bottomCardOpacity)
                             VStack
                             {
-                                Text("0").bold().font(.system(size: DeviceDimensions().height/8))
-                                    .offset(y: -DeviceDimensions().height/50)
-                                Text("Bottles taken today:").font(.system(size: DeviceDimensions().width/25))
-                                    .offset(y: -DeviceDimensions().height/250)
+                                    Text(String(bottlesTakenToday)).bold().font(.system(size: DeviceDimensions().height/8))
+                                        .offset(y: -DeviceDimensions().height/45)
+
+                                        Text("Bottles taken today:").font(.system(size: DeviceDimensions().width/25))
+                                        .offset(y: -DeviceDimensions().height/250)
                             }
                         }
-                        .padding(.vertical, DeviceDimensions().height/25)
+                        .padding(.horizontal, 5)
+                            .onTapGesture {
+                                withAnimation {
+                                    print("triggering BottleListView")
+                                    isBottleListSheetPresented.toggle()
+                                }
+                            }
+                            .popover(isPresented: $isBottleListSheetPresented, content: {
+                                //Text("IT WORKS")
+//                                Stepper("Ounces to give:", value: $ouncesToSave, in: 0...10, step: 0.5)
+//                                    .padding()
+//
+                                    BottleListView()
+
+                                    .presentationCompactAdaptation(.sheet)
+                            })
+                            .sensoryFeedback(.increase, trigger: isOuncesSheetPresented)
+                        
+                        ZStack
+                        {
+                            RoundedRectangle(cornerRadius: 10)
+                                .fill(ouncesCardColor)
+                                .frame(width: DeviceDimensions().width/cardWidth, height: DeviceDimensions().height/outerCardHeight)
+                                //.padding(.vertical, DeviceDimensions().height/10)
+                            
+                            Rectangle()
+                                .fill(.background)
+                                .frame(width: DeviceDimensions().width/cardWidth, height: DeviceDimensions().height/innerCardHeight)
+                                .offset(y: DeviceDimensions().height/innerCardHeight)
+                                .opacity(bottomCardOpacity)
+                            VStack
+                            {
+                                    Text(String(format: "%.2f", Double(ouncesToSave))).bold().font(.system(size: DeviceDimensions().height/12))
+                                        .offset(y: -DeviceDimensions().height/45)
+
+                                        Text("Ounces(oz):").font(.system(size: DeviceDimensions().width/25))
+                                    .offset(y: DeviceDimensions().height/50)
+                                
+                            }
+                        }
+                        .padding(.horizontal, 5)
+                        
+                        .onTapGesture {
+                            withAnimation {
+                                //Do a popover here of OZ to ML conversion
+                            }
+                        }
+                            .onLongPressGesture {
+                            print("Long pressed!")
+                            isOuncesSheetPresented.toggle()
+                                withAnimation
+                                {
+                                    
+                                    ouncesCardColor = .orange
+                                }
+                        }
+                        .popover(isPresented: $isOuncesSheetPresented, content: {
+                            //Text("IT WORKS")
+                            Stepper("Ounces to give:", value: $ouncesToSave, in: 0...10, step: 0.25)
+                                .padding()
+                                
+                                .presentationCompactAdaptation(.popover)
+                        })
+                        .sensoryFeedback(.increase, trigger: isOuncesSheetPresented)
+                        .onAppear()
+                        {
+                            withAnimation {
+                                if ouncesToSave == 0.0
+                                {
+                                    //print("AAAAAA")
+                                    ouncesCardColor = .red
+                                }
+                            }
+                        }
+                        .onChange(of: ouncesToSave)
+                        {
+                            withAnimation
+                            {
+                                if ouncesToSave == 0.0
+                                {
+                                    ouncesCardColor = .red
+                                }
+                                else
+                                {
+                                    ouncesCardColor = .green
+                                }
+                                if bottlesTakenToday > 0 
+                                {
+                                    bottleCardColor = .green
+                                }
+                            }
+                        }
                     }
+                    Spacer()
+                    //.padding(.all, 0)
+                    .padding(.vertical, 1)
                     HStack
                     {
-                        //this needs to be a dropdown
-                        Text("Ounces:")
-                        Text("1oz")
+                        ZStack
+                        {
+                            RoundedRectangle(cornerRadius: 10)
+                                .fill(notesCardColor)
+                                .frame(width: DeviceDimensions().width/1.2, height: DeviceDimensions().height/12)
+                            TextField("Add notes for bottle...", text: $notesToSave, onEditingChanged: { (isBegin) in
+                                if isBegin {
+                                    //print("Begins editing")
+                                    withAnimation
+                                    {
+                                        notesCardColor = .yellow
+                                        notesTextColor = .black
+                                    }
+                                } else {
+                                    //print("Finishes editing")
+                                }
+                            },
+                            onCommit: {
+                                print("commit")
+                                withAnimation {
+                                    notesCardColor = .green
+                                    notesTextColor = .white
+                                }
+
+                            }
+                            )
+                                .frame(width: DeviceDimensions().width/2)
+                                .padding()
+                                .multilineTextAlignment(.center)
+                                .foregroundColor(notesTextColor)
+
+                            
+                        }
                     }
-                    List {
-                        Text("A List Item")
-                        Text("A Second List Item")
-                        Text("A Third List Item")
-                    }
-                    Text("\(timeRemaining)")
+                    .padding(.vertical, 10)
+
+                   
+                    Text("\(bottleDuration) seconds").bold().font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
                         .onReceive(timer) { _ in
-                            if ((timeRemaining >= 0) && (bottleFeedTimer == true)) {
-                                timeRemaining += 1
+                            if ((bottleDuration >= 0) && (bottleFeedTimer == true)) {
+                                withAnimation{
+                                    bottleDuration += 1
+                                }
                             }
                         }
                     ZStack
                     {
                         RoundedRectangle(cornerRadius: 10)
                             .fill(bottleFeedButtonColor)
-                            .frame(width: DeviceDimensions().width/2, height: DeviceDimensions().height/10)
+                            .frame(width: DeviceDimensions().width/2, height: DeviceDimensions().height/15)
                             .onTapGesture {
                                 withAnimation
                                 {
@@ -81,6 +230,7 @@ struct BottlesView: View {
                                     {
                                         bottleFeedButtonLabel = "Start Bottle Feed"
                                         bottleFeedButtonColor = .green
+                                        notesCardColor = .blue
                                         
                                     }
                                 }
@@ -91,13 +241,33 @@ struct BottlesView: View {
                         
                     }
                 }
-                //.padding(.vertical, DeviceDimensions().height/399)
-
             }
             .ignoresSafeArea()
-            //.navigationTitle("Bottles")
+        }
+        .onAppear()
+        {
+            if DeviceDimensions().height == 667.0
+            {
+                imagePadding = 60.0
+                
+            }
+            else
+                if DeviceDimensions().height == 852.0
+            {
+                imagePadding = 30.0
+            }
+            else
+            {
+                imagePadding = 10.0
+            }
         }
     }
+
+}
+
+func resetViewForNewBottleFeed()
+{
+    //Reset all values in view to 0 upon completion of bottle feed
 }
 
 #Preview {

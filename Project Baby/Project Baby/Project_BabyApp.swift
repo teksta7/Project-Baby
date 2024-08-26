@@ -16,6 +16,7 @@ struct Project_BabyApp: App {
         WindowGroup {
             HomeView()
                 .environmentObject(coreDataController)
+                .environment(\.colorScheme, .dark)
         }
     }
 }
