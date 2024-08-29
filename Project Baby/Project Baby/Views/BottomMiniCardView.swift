@@ -9,8 +9,20 @@ import SwiftUI
 
 struct BottomMiniCardView: View {
     var body: some View {
-        RoundedRectangle(cornerRadius: 25)
-            .frame(width: DeviceDimensions().width/1.5, height: DeviceDimensions().height/10)
+        ZStack
+        {
+            RoundedRectangle(cornerRadius: 25)
+                .frame(width: DeviceDimensions().width/1.5, height: DeviceDimensions().height/10)
+            HStack
+            {
+                Image(systemName: "gearshape")
+                    .foregroundStyle(.black)
+    
+                Text("Settings")
+                    .font(.title2)
+                    .foregroundStyle(.black)
+            }
+        }
     }
 }
 

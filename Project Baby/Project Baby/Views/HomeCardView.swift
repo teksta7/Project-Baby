@@ -16,6 +16,16 @@ func HomeCardView(_ homeCard: HomeCard) -> some View {
             ZStack{
                 RoundedRectangle(cornerRadius: 15.0)
                     .fill(homeCard.color.gradient)
+                VStack
+                {
+                    Image(systemName: homeCard.imageToDisplay)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: DeviceDimensions().width/2, height: DeviceDimensions().height/4)
+                        .foregroundStyle(.white)
+                    Text(homeCard.presentedString).font(.system(size: 50))
+                        .foregroundStyle(.white)
+                }
                 //ATTEMPT DIAGONAL TEXT
                 
 //                RoundedRectangle(cornerRadius: 10)
@@ -65,5 +75,5 @@ func rotation(_ proxy: GeometryProxy, rotation: CGFloat = 5) -> Angle {
 }
 
 #Preview {
-    HomeCardView(HomeCard(id: UUID(), color: .green, viewString: "ABC"))
+    HomeCardView(HomeCard(id: UUID(), color: .green, viewString: "ABC", presentedString: "ABC", imageToDisplay: "waterbottle"))
 }

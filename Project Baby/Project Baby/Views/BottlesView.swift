@@ -77,12 +77,7 @@ struct BottlesView: View {
                                 }
                             }
                             .popover(isPresented: $isBottleListSheetPresented, content: {
-                                //Text("IT WORKS")
-//                                Stepper("Ounces to give:", value: $ouncesToSave, in: 0...10, step: 0.5)
-//                                    .padding()
-//
                                     BottleListView()
-
                                     .presentationCompactAdaptation(.sheet)
                             })
                             .sensoryFeedback(.increase, trigger: isOuncesSheetPresented)
@@ -237,6 +232,8 @@ struct BottlesView: View {
                                             //Add popup alert for successful commit
                                             
                                             
+                                            //Recalculate average bottle duration
+                                            BottleController().calculateAverageBottleDuration()
                                             //These below can be moved into reset view function
                                             bottleFeedButtonLabel = "Start Bottle Feed"
                                             bottleFeedButtonColor = .green
@@ -288,7 +285,14 @@ struct BottlesView: View {
         print(newBottle.id ?? "")
         newBottle.date = Date()
             print(newBottle.date ?? "")
-        newBottle.addtional_notes = addtionalNotes
+        if addtionalNotes == ""
+        {
+            newBottle.addtional_notes = "None provided"
+        }
+        else
+        {
+            newBottle.addtional_notes = addtionalNotes
+        }
             print(newBottle.addtional_notes ?? "")
         newBottle.duration = Double(Int(ConversionUtil().getDateDiff(start: startTime, end: endTime)))
             print(newBottle.duration)
@@ -307,6 +311,7 @@ struct BottlesView: View {
             let nsError = error as NSError
             fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
         }
+        BottleController().addBottleData(durationToAdd: newBottle.duration)
         BottleController().addBottleToTodayCount()
         return true
     }
