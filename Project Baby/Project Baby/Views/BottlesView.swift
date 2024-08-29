@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct BottlesView: View {
-    
+    @Environment(\.managedObjectContext) private var viewContext
+
     @State var bottleFeedTimer: Bool = false
     @State var bottleFeedButtonLabel: String = "Start Bottle Feed"
     @State var bottleFeedButtonColor: Color = .green
-    @AppStorage("projectbaby.bottles\(Date.now.formatted(.dateTime.dayOfYear()))") var bottlesTakenToday: Int = 0
     @State var isOuncesSheetPresented = false
     @State var isBottleListSheetPresented = false
     @State var imagePadding = 10.0 //60.0 for small, 30 for medium
@@ -31,8 +31,8 @@ struct BottlesView: View {
 
     
     @State var notesToSave: String = ""
-    @State var startTimeeToSave: Date = Date.now
-    @State var endTimeeToSave: Date = Date.now
+    @State var startTimeToSave: Date = Date.now
+    @State var endTimeToSave: Date = Date.now
     @State var bottleDuration = 0
     @State var ouncesToSave: CGFloat = 0.0
     
@@ -62,7 +62,7 @@ struct BottlesView: View {
                                 .opacity(bottomCardOpacity)
                             VStack
                             {
-                                    Text(String(bottlesTakenToday)).bold().font(.system(size: DeviceDimensions().height/8))
+                                Text(String(BottleController().bottlesTakenToday)).bold().font(.system(size: DeviceDimensions().height/8))
                                         .offset(y: -DeviceDimensions().height/45)
 
                                         Text("Bottles taken today:").font(.system(size: DeviceDimensions().width/25))
@@ -155,7 +155,7 @@ struct BottlesView: View {
                                 {
                                     ouncesCardColor = .green
                                 }
-                                if bottlesTakenToday > 0 
+                                if BottleController().bottlesTakenToday > 0 
                                 {
                                     bottleCardColor = .green
                                 }
@@ -223,14 +223,32 @@ struct BottlesView: View {
                                     bottleFeedTimer.toggle()
                                     if bottleFeedTimer == true
                                     {
+                                        startTimeToSave = Date.now
                                         bottleFeedButtonLabel = "Stop Bottle Feed"
                                         bottleFeedButtonColor = .orange
                                     }
                                     else
                                     {
-                                        bottleFeedButtonLabel = "Start Bottle Feed"
-                                        bottleFeedButtonColor = .green
-                                        notesCardColor = .blue
+                                        endTimeToSave = Date.now
+
+                                        //Code to add bottle
+                                        if (addBottleToModel(addtionalNotes: notesToSave, startTime: startTimeToSave, endTime: endTimeToSave, ounces: ouncesToSave)) == true
+                                        {
+                                            //Add popup alert for successful commit
+                                            
+                                            
+                                            //These below can be moved into reset view function
+                                            bottleFeedButtonLabel = "Start Bottle Feed"
+                                            bottleFeedButtonColor = .green
+                                            notesCardColor = .blue
+                                        }
+                                        else
+                                        {
+                                            bottleFeedButtonColor = .red
+                                            bottleFeedButtonLabel = "Error"
+                                        }
+                                        
+                                        
                                         
                                     }
                                 }
@@ -262,7 +280,36 @@ struct BottlesView: View {
             }
         }
     }
-
+    func addBottleToModel(addtionalNotes: String, startTime: Date, endTime: Date, ounces: CGFloat) -> Bool
+    {
+        print("Adding bottle to data model")
+        let newBottle = Bottle(context: viewContext)
+        newBottle.id = UUID()
+        print(newBottle.id ?? "")
+        newBottle.date = Date()
+            print(newBottle.date ?? "")
+        newBottle.addtional_notes = addtionalNotes
+            print(newBottle.addtional_notes ?? "")
+        newBottle.duration = Double(Int(ConversionUtil().getDateDiff(start: startTime, end: endTime)))
+            print(newBottle.duration)
+        newBottle.start_time = startTime
+            print(newBottle.start_time ?? "")
+        newBottle.end_time = endTime
+            print(newBottle.end_time ?? "")
+        newBottle.ounces = ounces
+            print(newBottle.ounces)
+        
+        do {
+            try viewContext.save()
+        } catch {
+            // Replace this implementation with code to handle the error appropriately.
+            // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+            let nsError = error as NSError
+            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+        }
+        BottleController().addBottleToTodayCount()
+        return true
+    }
 }
 
 func resetViewForNewBottleFeed()

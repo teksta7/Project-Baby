@@ -15,6 +15,8 @@ struct HomeView: View {
     @State private var cardScale = 1.0
     @State var isChartSheetPresented = false
     @State var isCardSettingsSheetPresented = false
+    //@Environment(\.managedObjectContext) private var viewContext
+
     var body: some View
     {
         NavigationStack
