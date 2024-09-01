@@ -13,6 +13,7 @@ class BottleController
 {
     @Environment(\.managedObjectContext) private var viewContext
     @AppStorage("projectbaby.bottles.\(Date.now.formatted(.dateTime.dayOfYear()))") var bottlesTakenToday: Int = 0
+    @AppStorage("projectbaby.bottles.\(Calendar.current.date(byAdding: .day, value: -1, to: Date.now)!.formatted(.dateTime.dayOfYear()))")  var yesterdayCount = UserDefaults.standard.integer(forKey: "projectbaby.bottles \(Calendar.current.date(byAdding: .day, value: -1, to: Date.now)!.formatted(.dateTime.dayOfYear()))")
     @AppStorage("projectbaby.averagebottleduration") var averageBottleDuration: Double = 0.0
     @AppStorage("projectbaby.totalbottleduration") var totalBottleDuration: Double = 0.0
     @AppStorage("projectbaby.totalbottles") var totalBottles: Double = 0.0
@@ -29,6 +30,13 @@ class BottleController
         print("Removing bottle to count")
         bottlesTakenToday -= 1
         UserDefaults.standard.set(bottlesTakenToday, forKey: "projectbaby.bottles.\(Date.now.formatted(.dateTime.dayOfYear()))")
+    }
+    func removeBottleFromYesterdayCount()
+    {
+        print("Removing bottle to count")
+        var bottlesTakenYesterday = UserDefaults.standard.integer(forKey: "projectbaby.bottles.\(Calendar.current.date(byAdding: .day, value: -1, to: Date.now)!.formatted(.dateTime.dayOfYear()))")
+        bottlesTakenYesterday -= 1
+        UserDefaults.standard.set(bottlesTakenYesterday, forKey: "projectbaby.bottles.\(Calendar.current.date(byAdding: .day, value: -1, to: Date.now)!.formatted(.dateTime.dayOfYear()))")
     }
     
     func calculateAverageBottleDuration()

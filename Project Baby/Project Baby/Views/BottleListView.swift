@@ -15,24 +15,19 @@ struct BottleListView: View {
 
     
     @State var todayCount = BottleController().bottlesTakenToday
+    @State var yesterdayCount = BottleController().yesterdayCount
     
     var body: some View {
         NavigationView {
             VStack
             {
-                //                Text("List of bottles to be displayed here")
-                //                List {
-                //                    Text("Example A")
-                //                    Text("Example B")
-                //                    Text("Example C")
-                //                }
                 List {
                     Section(header: Text("Today").font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)) {
                         DisclosureGroup("Bottles today: \(todayCount)")
                         {
                             ForEach(bottles) { bottle in
-//                                if (Calendar.current.isDateInToday(bottle.date!))
-//                                {
+                                if (Calendar.current.isDateInToday(bottle.date!))
+                                {
                                     NavigationLink(destination: SingleBottleView(bottle: bottle)
                                         .onDisappear() { self.destID = self.destID + 1 })
                                     {
@@ -45,12 +40,11 @@ struct BottleListView: View {
                                                     .foregroundColor(.gray)
                                             }
                                             Spacer()
-//
                                         }
                                     }
-                               // }
+                                }
                             }
-                            //.onDelete(perform: delete)
+                            .onDelete(perform: delete)
                         }
                     }
                     .headerProminence(.increased)
@@ -60,6 +54,10 @@ struct BottleListView: View {
             .preferredColorScheme(.dark)
             
         }
+        .onChange(of: BottleController().bottlesTakenToday) { _ in
+            print("Changed")
+            todayCount = BottleController().bottlesTakenToday
+        }
     }
     private func formatThisDate(_ date: Date) -> String {
         let formatter = DateFormatter()
@@ -68,31 +66,34 @@ struct BottleListView: View {
         return formatter.string(from: date)
     }
     
-//    private func delete(at offsets: IndexSet) {
-//        var yesterday = Calendar.current.date(byAdding: .day, value: -1, to: Date())
-//        for index in offsets {
-//            let kick = kicks[index]
-//            if (kick.kickAgeValue == Date.now.formatted(.dateTime.dayOfYear()))
-//            {
-//                print("Removing 1 from todayCount")
-//                CounterController().removeKickFromTodayTally()
-//            }
-//            if (kick.kickAgeValue == Calendar.current.date(byAdding: .day, value: -1, to: Date())?.formatted(.dateTime.dayOfYear()))
-//            {
-//                print("Removing 1 from yesterdayCount")
-//                CounterController().removeKickFromYesterdayTally()
-//            }
-//            self.viewContext.delete(kick)
-//            do {
-//                try viewContext.save()
-//                print("Deleted Kick")
-//            } catch {
-//                print("Error occured when saving kick... \(error.localizedDescription)")
-//            }
-//        }
+    private func delete(at offsets: IndexSet) {
+
+        for index in offsets {
+            let bottle = bottles[index]
+                if (bottle.date?.formatted(.dateTime.dayOfYear()) == Date.now.formatted(.dateTime.dayOfYear()))
+            {
+                print("Removing 1 from todayCount")
+                    BottleController().removeBottleData(durationToRemove: bottle.duration)
+                    BottleController().removeBottleFromTodayCount()
+            }
+            if (bottle.date?.formatted(.dateTime.dayOfYear()) == Calendar.current.date(byAdding: .day, value: -1, to: Date())?.formatted(.dateTime.dayOfYear()))
+            {
+                print("Removing 1 from yesterdayCount")
+                BottleController().removeBottleData(durationToRemove: bottle.duration)
+                BottleController().removeBottleFromYesterdayCount()
+
+            }
+            self.viewContext.delete(bottle)
+            do {
+                try viewContext.save()
+                print("Deleted Bottle")
+            } catch {
+                print("Error occured when saving bottle... \(error.localizedDescription)")
+            }
+        }
 //        localTodayCount = CounterController().todayCount
 //        localYesterdayCount = CounterController().yesterdayCount
-//    }
+    }
 }
 
 #Preview {

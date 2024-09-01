@@ -34,6 +34,7 @@
 		838A3AED2C718CBF00F8495D /* ChartsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838A3AEC2C718CBF00F8495D /* ChartsView.swift */; };
 		838A3AEF2C718DAC00F8495D /* CardSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838A3AEE2C718DAC00F8495D /* CardSettingsView.swift */; };
 		839AD7F62C80A19E0006B3F1 /* SingleBottleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 839AD7F52C80A19E0006B3F1 /* SingleBottleView.swift */; };
+		83AE2E8A2C82046400ACF31F /* CustomAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83AE2E892C82046400ACF31F /* CustomAlertView.swift */; };
 		83B2AD0A2C77E1F400663BC8 /* FeatureCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B2AD092C77E1F400663BC8 /* FeatureCardView.swift */; };
 /* End PBXBuildFile section */
 
@@ -86,6 +87,7 @@
 		838A3AEE2C718DAC00F8495D /* CardSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardSettingsView.swift; sourceTree = "<group>"; };
 		839AD7F52C80A19E0006B3F1 /* SingleBottleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleBottleView.swift; sourceTree = "<group>"; };
 		839AD7F72C80A7740006B3F1 /* Project-Baby-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Project-Baby-Info.plist"; sourceTree = SOURCE_ROOT; };
+		83AE2E892C82046400ACF31F /* CustomAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertView.swift; sourceTree = "<group>"; };
 		83B2AD092C77E1F400663BC8 /* FeatureCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureCardView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -212,6 +214,7 @@
 				838A3AEA2C718BC900F8495D /* BottomMiniCardView.swift */,
 				838A3AEE2C718DAC00F8495D /* CardSettingsView.swift */,
 				83B2AD092C77E1F400663BC8 /* FeatureCardView.swift */,
+				83AE2E892C82046400ACF31F /* CustomAlertView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -368,6 +371,7 @@
 				838A3ADF2C6FA3CF00F8495D /* PooView.swift in Sources */,
 				838A3AE32C6FA40600F8495D /* FoodView.swift in Sources */,
 				838A3AAD2C6EB80F00F8495D /* Project_Baby.xcdatamodeld in Sources */,
+				83AE2E8A2C82046400ACF31F /* CustomAlertView.swift in Sources */,
 				838A3AE52C6FA41000F8495D /* MedsView.swift in Sources */,
 				83694DF82C7CB34800C5C8FC /* BottleController.swift in Sources */,
 				83694DF62C7CA70A00C5C8FC /* BottleChartsView.swift in Sources */,
