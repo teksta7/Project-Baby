@@ -27,8 +27,10 @@ struct BottlesView: View {
     @State var bottomCardOpacity: CGFloat = 0.5
     @State var countableValueTextSize: CGFloat = 8.0
     @State var cardColorChange: Bool = false
-
-
+    @State var showSuccessAlert = false
+    @State var showWarningAlert = false
+    @State var showErrorAlert = false
+    
     
     @State var notesToSave: String = ""
     @State var startTimeToSave: Date = Date.now
@@ -38,38 +40,40 @@ struct BottlesView: View {
     
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     var body: some View {
-        ScrollView
+        ZStack
         {
-            VStack
+            ScrollView
             {
-                imageView()
-                    .padding(.bottom, imagePadding)
-                Group
+                VStack
                 {
-                    HStack
+                    imageView()
+                        .padding(.bottom, imagePadding)
+                    Group
                     {
-                        ZStack
+                        HStack
                         {
-                            RoundedRectangle(cornerRadius: 10)
-                                .fill(bottleCardColor)
-                                .frame(width: DeviceDimensions().width/cardWidth, height: DeviceDimensions().height/outerCardHeight)
-                                //.padding(.vertical, DeviceDimensions().height/10)
-                            
-                            Rectangle()
-                                .fill(.background)
-                                .frame(width: DeviceDimensions().width/cardWidth, height: DeviceDimensions().height/innerCardHeight)
-                                .offset(y: DeviceDimensions().height/innerCardHeight)
-                                .opacity(bottomCardOpacity)
-                            VStack
+                            ZStack
                             {
-                                Text(String(BottleController().bottlesTakenToday)).bold().font(.system(size: DeviceDimensions().height/8))
+                                RoundedRectangle(cornerRadius: 10)
+                                    .fill(bottleCardColor)
+                                    .frame(width: DeviceDimensions().width/cardWidth, height: DeviceDimensions().height/outerCardHeight)
+                                //.padding(.vertical, DeviceDimensions().height/10)
+                                
+                                Rectangle()
+                                    .fill(.background)
+                                    .frame(width: DeviceDimensions().width/cardWidth, height: DeviceDimensions().height/innerCardHeight)
+                                    .offset(y: DeviceDimensions().height/innerCardHeight)
+                                    .opacity(bottomCardOpacity)
+                                VStack
+                                {
+                                    Text(String(BottleController().bottlesTakenToday)).bold().font(.system(size: DeviceDimensions().height/8))
                                         .offset(y: -DeviceDimensions().height/45)
-
-                                        Text("Bottles taken today:").font(.system(size: DeviceDimensions().width/25))
+                                    
+                                    Text("Bottles taken today:").font(.system(size: DeviceDimensions().width/25))
                                         .offset(y: -DeviceDimensions().height/250)
+                                }
                             }
-                        }
-                        .padding(.horizontal, 5)
+                            .padding(.horizontal, 5)
                             .onTapGesture {
                                 withAnimation {
                                     print("triggering BottleListView")
@@ -77,205 +81,224 @@ struct BottlesView: View {
                                 }
                             }
                             .popover(isPresented: $isBottleListSheetPresented, content: {
-                                    BottleListView()
+                                BottleListView()
                                     .presentationCompactAdaptation(.sheet)
                             })
                             .sensoryFeedback(.increase, trigger: isOuncesSheetPresented)
-                        
-                        ZStack
-                        {
-                            RoundedRectangle(cornerRadius: 10)
-                                .fill(ouncesCardColor)
-                                .frame(width: DeviceDimensions().width/cardWidth, height: DeviceDimensions().height/outerCardHeight)
-                                //.padding(.vertical, DeviceDimensions().height/10)
                             
-                            Rectangle()
-                                .fill(.background)
-                                .frame(width: DeviceDimensions().width/cardWidth, height: DeviceDimensions().height/innerCardHeight)
-                                .offset(y: DeviceDimensions().height/innerCardHeight)
-                                .opacity(bottomCardOpacity)
-                            VStack
+                            ZStack
                             {
+                                RoundedRectangle(cornerRadius: 10)
+                                    .fill(ouncesCardColor)
+                                    .frame(width: DeviceDimensions().width/cardWidth, height: DeviceDimensions().height/outerCardHeight)
+                                //.padding(.vertical, DeviceDimensions().height/10)
+                                
+                                Rectangle()
+                                    .fill(.background)
+                                    .frame(width: DeviceDimensions().width/cardWidth, height: DeviceDimensions().height/innerCardHeight)
+                                    .offset(y: DeviceDimensions().height/innerCardHeight)
+                                    .opacity(bottomCardOpacity)
+                                VStack
+                                {
                                     Text(String(format: "%.2f", Double(ouncesToSave))).bold().font(.system(size: DeviceDimensions().height/12))
                                         .offset(y: -DeviceDimensions().height/45)
-
-                                        Text("Ounces(oz):").font(.system(size: DeviceDimensions().width/25))
-                                    .offset(y: DeviceDimensions().height/50)
-                                
+                                    
+                                    Text("Ounces(oz):").font(.system(size: DeviceDimensions().width/25))
+                                        .offset(y: DeviceDimensions().height/50)
+                                    
+                                }
                             }
-                        }
-                        .padding(.horizontal, 5)
-                        
-                        .onTapGesture {
-                            withAnimation {
-                                //Do a popover here of OZ to ML conversion
+                            .padding(.horizontal, 5)
+                            
+                            .onTapGesture {
+                                withAnimation {
+                                    //Do a popover here of OZ to ML conversion
+                                }
                             }
-                        }
                             .onLongPressGesture {
-                            print("Long pressed!")
-                            isOuncesSheetPresented.toggle()
+                                print("Long pressed!")
+                                isOuncesSheetPresented.toggle()
                                 withAnimation
                                 {
                                     
                                     ouncesCardColor = .orange
                                 }
-                        }
-                        .popover(isPresented: $isOuncesSheetPresented, content: {
-                            //Text("IT WORKS")
-                            Stepper("Ounces to give:", value: $ouncesToSave, in: 0...10, step: 0.25)
-                                .padding()
+                            }
+                            .popover(isPresented: $isOuncesSheetPresented, content: {
+                                //Text("IT WORKS")
+                                Stepper("Ounces to give:", value: $ouncesToSave, in: 0...10, step: 0.25)
+                                    .padding()
                                 
-                                .presentationCompactAdaptation(.popover)
-                        })
-                        .sensoryFeedback(.increase, trigger: isOuncesSheetPresented)
-                        .onAppear()
-                        {
-                            withAnimation {
-                                if ouncesToSave == 0.0
-                                {
-                                    //print("AAAAAA")
-                                    ouncesCardColor = .red
+                                    .presentationCompactAdaptation(.popover)
+                            })
+                            .sensoryFeedback(.increase, trigger: isOuncesSheetPresented)
+                            .onAppear()
+                            {
+                                withAnimation {
+                                    if ouncesToSave == 0.0
+                                    {
+                                        //print("AAAAAA")
+                                        ouncesCardColor = .red
+                                    }
                                 }
                             }
-                        }
-                        .onChange(of: ouncesToSave)
-                        {
-                            withAnimation
+                            .onChange(of: ouncesToSave)
                             {
-                                if ouncesToSave == 0.0
+                                withAnimation
                                 {
-                                    ouncesCardColor = .red
+                                    if ouncesToSave == 0.0
+                                    {
+                                        ouncesCardColor = .red
+                                    }
+                                    else
+                                    {
+                                        ouncesCardColor = .green
+                                    }
                                 }
-                                else
-                                {
-                                    ouncesCardColor = .green
-                                }
-                                if BottleController().bottlesTakenToday > 0 
+                            }
+                            .onChange(of: BottleController().bottlesTakenToday)
+                            {
+                                if BottleController().bottlesTakenToday > 0
                                 {
                                     bottleCardColor = .green
                                 }
+                                else
+                                {
+                                    bottleCardColor = .blue
+                                }
                             }
                         }
-                    }
-                    Spacer()
-                    //.padding(.all, 0)
-                    .padding(.vertical, 1)
-                    HStack
-                    {
-                        ZStack
+                        Spacer()
+                            .padding(.vertical, 1)
+                        HStack
                         {
-                            RoundedRectangle(cornerRadius: 10)
-                                .fill(notesCardColor)
-                                .frame(width: DeviceDimensions().width/1.2, height: DeviceDimensions().height/12)
-                            TextField("Add notes for bottle...", text: $notesToSave, onEditingChanged: { (isBegin) in
-                                if isBegin {
-                                    //print("Begins editing")
-                                    withAnimation
-                                    {
-                                        notesCardColor = .yellow
-                                        notesTextColor = .black
+                            ZStack
+                            {
+                                RoundedRectangle(cornerRadius: 10)
+                                    .fill(notesCardColor)
+                                    .frame(width: DeviceDimensions().width/1.2, height: DeviceDimensions().height/12)
+                                TextField("Add notes for bottle...", text: $notesToSave, onEditingChanged: { (isBegin) in
+                                    if isBegin {
+                                        //print("Begins editing")
+                                        withAnimation
+                                        {
+                                            notesCardColor = .yellow
+                                            notesTextColor = .black
+                                        }
+                                    } else {
+                                        notesTextColor = .white
                                     }
-                                } else {
-                                    //print("Finishes editing")
+                                },
+                                          onCommit: {
+                                    print("commit")
+                                    withAnimation {
+                                        notesCardColor = .green
+                                        notesTextColor = .white
+                                    }
+                                    
                                 }
-                            },
-                            onCommit: {
-                                print("commit")
-                                withAnimation {
-                                    notesCardColor = .green
-                                    notesTextColor = .white
-                                }
-
-                            }
-                            )
+                                )
                                 .frame(width: DeviceDimensions().width/2)
                                 .padding()
                                 .multilineTextAlignment(.center)
                                 .foregroundColor(notesTextColor)
-
-                            
-                        }
-                    }
-                    .padding(.vertical, 10)
-
-                   
-                    Text("\(bottleDuration) seconds").bold().font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
-                        .onReceive(timer) { _ in
-                            if ((bottleDuration >= 0) && (bottleFeedTimer == true)) {
-                                withAnimation{
-                                    bottleDuration += 1
-                                }
+                                
+                                
                             }
                         }
-                    ZStack
-                    {
-                        RoundedRectangle(cornerRadius: 10)
-                            .fill(bottleFeedButtonColor)
-                            .frame(width: DeviceDimensions().width/2, height: DeviceDimensions().height/15)
-                            .onTapGesture {
-                                withAnimation
-                                {
-                                    bottleFeedTimer.toggle()
-                                    if bottleFeedTimer == true
-                                    {
-                                        startTimeToSave = Date.now
-                                        bottleFeedButtonLabel = "Stop Bottle Feed"
-                                        bottleFeedButtonColor = .orange
+                        .padding(.vertical, 10)
+                        
+                        
+                        Text("\(bottleDuration) seconds").bold().font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
+                            .onReceive(timer) { _ in
+                                if ((bottleDuration >= 0) && (bottleFeedTimer == true)) {
+                                    withAnimation{
+                                        bottleDuration += 1
                                     }
-                                    else
+                                }
+                            }
+                        ZStack
+                        {
+                            RoundedRectangle(cornerRadius: 10)
+                                .fill(bottleFeedButtonColor)
+                                .frame(width: DeviceDimensions().width/2, height: DeviceDimensions().height/15)
+                                .onTapGesture {
+                                    withAnimation
                                     {
-                                        endTimeToSave = Date.now
-
-                                        //Code to add bottle
-                                        if (addBottleToModel(addtionalNotes: notesToSave, startTime: startTimeToSave, endTime: endTimeToSave, ounces: ouncesToSave)) == true
+                                        if ouncesToSave == 0.0
                                         {
-                                            //Add popup alert for successful commit
-                                            
-                                            
-                                            //Recalculate average bottle duration
-                                            BottleController().calculateAverageBottleDuration()
-                                            //These below can be moved into reset view function
-                                            bottleFeedButtonLabel = "Start Bottle Feed"
-                                            bottleFeedButtonColor = .green
-                                            notesCardColor = .blue
+                                            showWarningAlert = true
                                         }
                                         else
                                         {
-                                            bottleFeedButtonColor = .red
-                                            bottleFeedButtonLabel = "Error"
+                                        bottleFeedTimer.toggle()
+                                        if bottleFeedTimer == true
+                                        {
+                                            startTimeToSave = Date.now
+                                            bottleFeedButtonLabel = "Stop Bottle Feed"
+                                            bottleFeedButtonColor = .orange
                                         }
-                                        
-                                        
-                                        
+                                        else
+                                        {
+                                            endTimeToSave = Date.now
+                                            
+                                            //Code to add bottle
+                                            if (addBottleToModel(addtionalNotes: notesToSave, startTime: startTimeToSave, endTime: endTimeToSave, ounces: ouncesToSave)) == true
+                                            {
+                                                //Add popup alert for successful commit
+                                                
+                                                showSuccessAlert = true
+                                                //Recalculate average bottle duration
+                                                BottleController().calculateAverageBottleDuration()
+                                                //These below can be moved into reset view function
+                                                bottleFeedButtonLabel = "Start Bottle Feed"
+                                                bottleFeedButtonColor = .green
+                                                notesCardColor = .blue
+                                            }
+                                            else
+                                            {
+                                                showErrorAlert = true
+                                                bottleFeedButtonColor = .red
+                                                bottleFeedButtonLabel = "Error"
+                                            }
+                                            
+                                            
+                                            
+                                        }
+                                    }
                                     }
                                 }
-                            }
-                        Text(bottleFeedButtonLabel)
-                            .foregroundStyle(.white)
-                            .bold()
-                        
+                            Text(bottleFeedButtonLabel)
+                                .foregroundStyle(.white)
+                                .bold()
+                            
+                        }
                     }
                 }
+                .ignoresSafeArea()
             }
-            .ignoresSafeArea()
-        }
-        .onAppear()
-        {
-            if DeviceDimensions().height == 667.0
+            .onAppear()
             {
-                imagePadding = 60.0
-                
-            }
-            else
+                if DeviceDimensions().height == 667.0
+                {
+                    imagePadding = 60.0
+                    
+                }
+                else
                 if DeviceDimensions().height == 852.0
-            {
-                imagePadding = 30.0
+                {
+                    imagePadding = 30.0
+                }
+                else
+                {
+                    imagePadding = 10.0
+                }
             }
-            else
-            {
-                imagePadding = 10.0
-            }
+            CustomAlertView(show: $showSuccessAlert, icon: .success, text: "Success", gradientColor: .green, circleAColor: .green, details: "Bottle recorded successfully", corner: 30)
+            CustomAlertView(show: $showWarningAlert, icon: .warning, text: "Invalid ounces", gradientColor: .yellow, circleAColor: .yellow, details: "Hold down on the ounces card to set a value other than 0", corner: 30)
+            CustomAlertView(show: $showErrorAlert, icon: .error, text: "Whoops", gradientColor: .red, circleAColor: .red, details: "Couldn't save the bottle, please try again", corner: 30)
         }
+        
     }
     func addBottleToModel(addtionalNotes: String, startTime: Date, endTime: Date, ounces: CGFloat) -> Bool
     {
@@ -306,10 +329,7 @@ struct BottlesView: View {
         do {
             try viewContext.save()
         } catch {
-            // Replace this implementation with code to handle the error appropriately.
-            // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-            let nsError = error as NSError
-            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+            return false
         }
         BottleController().addBottleData(durationToAdd: newBottle.duration)
         BottleController().addBottleToTodayCount()
