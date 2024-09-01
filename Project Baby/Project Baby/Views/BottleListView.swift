@@ -16,6 +16,8 @@ struct BottleListView: View {
     
     @State var todayCount = BottleController().bottlesTakenToday
     @State var yesterdayCount = BottleController().yesterdayCount
+    private var olderDate = Calendar.current.date(byAdding: .day, value: -2, to: Date())
+
     
     var body: some View {
         NavigationView {
@@ -34,6 +36,57 @@ struct BottleListView: View {
                                         HStack(alignment: .center) {
                                             VStack(alignment: .leading) {
                                                 Text("Given at: \(bottle.start_time?.formatted(date: .omitted, time: .shortened) ?? " ")")
+                                                    .font(.title3)
+                                                Text(formatThisDate(bottle.date ?? Date()))
+                                                    .font(.subheadline)
+                                                    .foregroundColor(.gray)
+                                            }
+                                            Spacer()
+                                        }
+                                    }
+                                }
+                            }
+                            .onDelete(perform: delete)
+                        }
+                    }
+                    .headerProminence(.increased)
+                    Section(header: Text("Yesterday").font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)) {
+                        DisclosureGroup("Bottles yesterday: \(yesterdayCount)")
+                        {
+                            ForEach(bottles) { bottle in
+                                if (Calendar.current.isDateInYesterday(bottle.date!))
+                                {
+                                    NavigationLink(destination: SingleBottleView(bottle: bottle)
+                                        .onDisappear() { self.destID = self.destID + 1 })
+                                    {
+                                        HStack(alignment: .center) {
+                                            VStack(alignment: .leading) {
+                                                Text("Given at: \(bottle.start_time?.formatted(date: .omitted, time: .shortened) ?? " ")")
+                                                    .font(.title3)
+                                                Text(formatThisDate(bottle.date ?? Date()))
+                                                    .font(.subheadline)
+                                                    .foregroundColor(.gray)
+                                            }
+                                            Spacer()
+                                        }
+                                    }
+                                }
+                            }
+                            .onDelete(perform: delete)
+                        }
+                    }
+                    .headerProminence(.increased)
+                    Section(header: Text("Older").font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)) {
+                        DisclosureGroup("Older bottles")
+                        {
+                            ForEach(bottles) { bottle in
+                                if ((bottle.date?.formatted(.dateTime.dayOfYear()))! <= (olderDate?.formatted(.dateTime.dayOfYear()))!)                                {
+                                    NavigationLink(destination: SingleBottleView(bottle: bottle)
+                                        .onDisappear() { self.destID = self.destID + 1 })
+                                    {
+                                        HStack(alignment: .center) {
+                                            VStack(alignment: .leading) {
+                                                Text("Given on:  \(bottle.start_time?.formatted(date: .omitted, time: .shortened) ?? " ")")
                                                     .font(.title3)
                                                 Text(formatThisDate(bottle.date ?? Date()))
                                                     .font(.subheadline)
@@ -76,12 +129,18 @@ struct BottleListView: View {
                     BottleController().removeBottleData(durationToRemove: bottle.duration)
                     BottleController().removeBottleFromTodayCount()
             }
+            else
             if (bottle.date?.formatted(.dateTime.dayOfYear()) == Calendar.current.date(byAdding: .day, value: -1, to: Date())?.formatted(.dateTime.dayOfYear()))
             {
                 print("Removing 1 from yesterdayCount")
                 BottleController().removeBottleData(durationToRemove: bottle.duration)
                 BottleController().removeBottleFromYesterdayCount()
 
+            }
+            else
+            {
+                print("Removing 1 from older bottles and updating average")
+                BottleController().removeBottleData(durationToRemove: bottle.duration)
             }
             self.viewContext.delete(bottle)
             do {
