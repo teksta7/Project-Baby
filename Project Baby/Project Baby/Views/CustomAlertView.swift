@@ -58,6 +58,7 @@ struct CustomAlertView: View {
                         Text(details)
                             .foregroundStyle(.black)
                             .opacity(0.5)
+                            .padding(.horizontal)
                         Button("Dismiss") {
                             withAnimation {
                                 show = false

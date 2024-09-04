@@ -23,14 +23,15 @@ struct HomeView: View {
         {
             VStack
             {
+                Spacer(minLength: 10)
                 //INSERT TOP MINI VIEW
-                TopMiniCardView()
+                TopMiniCardView(average: BottleController().averageBottleDuration, topText: "Average bottle feed time:")
                     .onTapGesture {
                         isChartSheetPresented.toggle()
                         print(String(isChartSheetPresented))
                     }
                     .sheet(isPresented: $isChartSheetPresented, content: {
-                        ChartsView()
+                        BottleChartsView()
                     })
                 GeometryReader
                 {
@@ -113,10 +114,6 @@ struct HomeView: View {
                     })
             }
             .navigationTitle("Project Baby")
-//            .onAppear()
-//            {
-//                BottleController().calculateAverageBottleDuration()
-//            }
         }
     }
 }

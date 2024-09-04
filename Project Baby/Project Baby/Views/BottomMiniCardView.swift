@@ -12,7 +12,7 @@ struct BottomMiniCardView: View {
         ZStack
         {
             RoundedRectangle(cornerRadius: 25)
-                .frame(width: DeviceDimensions().width/1.5, height: DeviceDimensions().height/10)
+                .frame(width: DeviceDimensions().width/1.5, height: DeviceDimensions().height/9)
             HStack
             {
                 Image(systemName: "gearshape")

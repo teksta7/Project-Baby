@@ -9,13 +9,14 @@ import SwiftUI
 
 struct TopMiniCardView: View {
     @State var average = BottleController().averageBottleDuration
+    @State var topText = "ABC"
     @Environment(\.managedObjectContext) private var viewContext
 
     var body: some View {
         ZStack
         {
             RoundedRectangle(cornerRadius: 25)
-                .frame(width: DeviceDimensions().width/1.5, height: DeviceDimensions().height/10)
+                .frame(width: DeviceDimensions().width/1.5, height: DeviceDimensions().height/9)
             VStack
             {
                 HStack
@@ -23,12 +24,17 @@ struct TopMiniCardView: View {
                     Image(systemName: "info.circle")
                         .foregroundStyle(.black)
                     
-                    Text("Average bottle feed time:")
+                    Text(topText)
                         .font(.callout)
                         .foregroundStyle(.black)
                 }
                 Text(String(format: "%.0f", average))
                     .foregroundStyle(.black)
+                    
+                Text("Press here for charts")
+                    .foregroundStyle(.black)
+                    .font(.caption2)
+                    .padding(0.5)
             }
         }
         .onAppear()
@@ -37,11 +43,6 @@ struct TopMiniCardView: View {
             average = BottleController().averageBottleDuration
             print("Average is now \(average)")
         }
-//        .onChange(of: BottleController().averageBottleDuration)
-//        {
-//            
-//
-//        }
     }
 }
 

@@ -10,6 +10,8 @@ import SwiftUI
 @ViewBuilder
 func HomeCardView(_ homeCard: HomeCard) -> some View {
     @State var isSheetPresented = false
+    //@State var imageAnimateCount = 1
+    @State var animate = true
     ZStack {
         NavigationLink(value: homeCard.viewString)
         {
@@ -23,6 +25,7 @@ func HomeCardView(_ homeCard: HomeCard) -> some View {
                         .aspectRatio(contentMode: .fit)
                         .frame(width: DeviceDimensions().width/2, height: DeviceDimensions().height/4)
                         .foregroundStyle(.white)
+                        .symbolEffect(.variableColor, isActive: animate)
                     Text(homeCard.presentedString).font(.system(size: 50))
                         .foregroundStyle(.white)
                 }
