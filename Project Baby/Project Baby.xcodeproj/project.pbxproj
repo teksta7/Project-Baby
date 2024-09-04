@@ -35,6 +35,7 @@
 		838A3AEF2C718DAC00F8495D /* CardSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838A3AEE2C718DAC00F8495D /* CardSettingsView.swift */; };
 		839AD7F62C80A19E0006B3F1 /* SingleBottleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 839AD7F52C80A19E0006B3F1 /* SingleBottleView.swift */; };
 		83AE2E8A2C82046400ACF31F /* CustomAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83AE2E892C82046400ACF31F /* CustomAlertView.swift */; };
+		83AE2E8C2C852F9200ACF31F /* GeneralUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83AE2E8B2C852F9200ACF31F /* GeneralUtil.swift */; };
 		83B2AD0A2C77E1F400663BC8 /* FeatureCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B2AD092C77E1F400663BC8 /* FeatureCardView.swift */; };
 /* End PBXBuildFile section */
 
@@ -88,6 +89,7 @@
 		839AD7F52C80A19E0006B3F1 /* SingleBottleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleBottleView.swift; sourceTree = "<group>"; };
 		839AD7F72C80A7740006B3F1 /* Project-Baby-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Project-Baby-Info.plist"; sourceTree = SOURCE_ROOT; };
 		83AE2E892C82046400ACF31F /* CustomAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertView.swift; sourceTree = "<group>"; };
+		83AE2E8B2C852F9200ACF31F /* GeneralUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralUtil.swift; sourceTree = "<group>"; };
 		83B2AD092C77E1F400663BC8 /* FeatureCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureCardView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -231,6 +233,7 @@
 			children = (
 				838A3AD82C6F581E00F8495D /* DeviceDimensions.swift */,
 				83694DF92C7CBA0700C5C8FC /* ConversionUtil.swift */,
+				83AE2E8B2C852F9200ACF31F /* GeneralUtil.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -370,6 +373,7 @@
 				838A3AD92C6F581E00F8495D /* DeviceDimensions.swift in Sources */,
 				838A3ADF2C6FA3CF00F8495D /* PooView.swift in Sources */,
 				838A3AE32C6FA40600F8495D /* FoodView.swift in Sources */,
+				83AE2E8C2C852F9200ACF31F /* GeneralUtil.swift in Sources */,
 				838A3AAD2C6EB80F00F8495D /* Project_Baby.xcdatamodeld in Sources */,
 				83AE2E8A2C82046400ACF31F /* CustomAlertView.swift in Sources */,
 				838A3AE52C6FA41000F8495D /* MedsView.swift in Sources */,

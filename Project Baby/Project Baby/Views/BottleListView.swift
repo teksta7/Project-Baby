@@ -111,6 +111,10 @@ struct BottleListView: View {
             print("Changed")
             todayCount = BottleController().bottlesTakenToday
         }
+        .onChange(of: BottleController().yesterdayCount) { _ in
+            print("Changed")
+            yesterdayCount = BottleController().yesterdayCount
+        }
     }
     private func formatThisDate(_ date: Date) -> String {
         let formatter = DateFormatter()

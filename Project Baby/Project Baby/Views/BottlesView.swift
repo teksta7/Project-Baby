@@ -67,9 +67,11 @@ struct BottlesView: View {
                                 VStack
                                 {
                                     Text(String(BottleController().bottlesTakenToday)).bold().font(.system(size: DeviceDimensions().height/8))
-                                        .offset(y: -DeviceDimensions().height/45)
+                                        .offset(y: -DeviceDimensions().height/100)
                                     
                                     Text("Bottles taken today:").font(.system(size: DeviceDimensions().width/25))
+                                        .offset(y: -DeviceDimensions().height/250)
+                                    Text("Press for bottle history").font(.caption)
                                         .offset(y: -DeviceDimensions().height/250)
                                 }
                             }
@@ -100,7 +102,7 @@ struct BottlesView: View {
                                     .opacity(bottomCardOpacity)
                                 VStack
                                 {
-                                    Text(String(format: "%.2f", Double(ouncesToSave))).bold().font(.system(size: DeviceDimensions().height/12))
+                                    Text(String(format: "%.2f", Double(ouncesToSave))).bold().font(.system(size: DeviceDimensions().height/15))
                                         .offset(y: -DeviceDimensions().height/45)
                                     
                                     Text("Ounces(oz):").font(.system(size: DeviceDimensions().width/25))
