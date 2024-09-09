@@ -16,4 +16,10 @@ class ConversionUtil
         let seconds = dateComponents.second
         return Int(seconds!)
     }
+    
+    func convertMinutesToHours(minutes: CGFloat) -> CGFloat
+    {
+        let hours = minutes / 60
+        return hours
+    }
 }
