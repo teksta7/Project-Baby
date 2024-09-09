@@ -9,7 +9,7 @@ import SwiftUI
 
 struct BottlesView: View {
     @Environment(\.managedObjectContext) private var viewContext
-
+    
     @State var bottleFeedTimer: Bool = false
     @State var bottleFeedButtonLabel: String = "Start Bottle Feed"
     @State var bottleFeedButtonColor: Color = .green
@@ -20,6 +20,8 @@ struct BottlesView: View {
     @State var bottleCardColor: Color = .blue
     @State var ouncesCardColor: Color = .orange
     @State var notesTextColor: Color = .white
+    
+    @ObservedObject var bottleSettings = BottleSettings()
     
     @State var cardWidth: CGFloat = 2.5
     @State var outerCardHeight: CGFloat = 5
@@ -233,140 +235,157 @@ struct BottlesView: View {
                                         }
                                         else
                                         {
-                                        bottleFeedTimer.toggle()
-                                        if bottleFeedTimer == true
-                                        {
-                                            startTimeToSave = Date.now
-                                            bottleFeedButtonLabel = "Stop Bottle Feed"
-                                            bottleFeedButtonColor = .orange
-                                        }
-                                        else
-                                        {
-                                            endTimeToSave = Date.now
-                                            
-                                            //Code to add bottle
-                                            if (addBottleToModel(addtionalNotes: notesToSave, startTime: startTimeToSave, endTime: endTimeToSave, ounces: ouncesToSave)) == true
+                                            bottleFeedTimer.toggle()
+                                            if bottleFeedTimer == true
                                             {
-                                                //Add popup alert for successful commit
-                                                
-                                                showSuccessAlert = true
-                                                //Recalculate average bottle duration
-                                                BottleController().calculateAverageBottleDuration()
-                                                //These below can be moved into reset view function
-                                                bottleFeedButtonLabel = "Start Bottle Feed"
-                                                bottleFeedButtonColor = .green
-                                                notesCardColor = .blue
+                                                startTimeToSave = Date.now
+                                                bottleFeedButtonLabel = "Stop Bottle Feed"
+                                                bottleFeedButtonColor = .orange
                                             }
                                             else
                                             {
-                                                showErrorAlert = true
-                                                bottleFeedButtonColor = .red
-                                                bottleFeedButtonLabel = "Error"
+                                                endTimeToSave = Date.now
+                                                
+                                                //Code to add bottle
+                                                if (addBottleToModel(addtionalNotes: notesToSave, startTime: startTimeToSave, endTime: endTimeToSave, ounces: ouncesToSave)) == true
+                                                {
+                                                    //Add popup alert for successful commit
+                                                    
+                                                    showSuccessAlert = true
+                                                    //Recalculate average bottle duration
+                                                    BottleController().calculateAverageBottleDuration()
+                                                    
+                                                        //These below can be moved into reset view function
+                                                        bottleFeedButtonLabel = "Start Bottle Feed"
+                                                        bottleFeedButtonColor = .green
+                                                        notesCardColor = .blue
+                                                        bottleDuration = 0
+                                                    }
+                                                    else
+                                                    {
+                                                        showErrorAlert = true
+                                                        bottleFeedButtonColor = .red
+                                                        bottleFeedButtonLabel = "Error"
+                                                    }
+                                                    
+                                                    
+                                                    
+                                                }
                                             }
-                                            
-                                            
-                                            
                                         }
                                     }
-                                    }
+                                    Text(bottleFeedButtonLabel)
+                                        .foregroundStyle(.white)
+                                        .bold()
+                                    
                                 }
-                            Text(bottleFeedButtonLabel)
-                                .foregroundStyle(.white)
-                                .bold()
-                            
+                        }
+                    }
+                    .ignoresSafeArea()
+                }
+            .onChange(of: showSuccessAlert)
+            {
+                if showSuccessAlert == true 
+                {
+                    //Setting Notification if user has that enabled
+                    if bottleSettings.enableBottleNotification
+                    {
+                        Task {
+                            await BottleNotificationController().requestNotificationAccessByUser()
+                            await
+                            BottleNotificationController().scheduleBottleNotification(Int((UserDefaults.standard.double(forKey: "com.projectbaby.localTimeBetweenFeeds"))))
                         }
                     }
                 }
-                .ignoresSafeArea()
             }
-            .onAppear()
-            {
-                if DeviceDimensions().height == 667.0
+                .onAppear()
                 {
-                    imagePadding = 60.0
-                    
+                    if DeviceDimensions().height == 667.0
+                    {
+                        imagePadding = 60.0
+                        
+                    }
+                    else
+                    if DeviceDimensions().height == 852.0
+                    {
+                        imagePadding = 30.0
+                    }
+                    else
+                    {
+                        imagePadding = 10.0
+                    }
                 }
-                else
-                if DeviceDimensions().height == 852.0
-                {
-                    imagePadding = 30.0
-                }
-                else
-                {
-                    imagePadding = 10.0
-                }
+                CustomAlertView(show: $showSuccessAlert, icon: .success, text: "Success", gradientColor: .green, circleAColor: .green, details: "Bottle recorded successfully", corner: 30)
+                CustomAlertView(show: $showWarningAlert, icon: .warning, text: "Invalid ounces", gradientColor: .yellow, circleAColor: .yellow, details: "Hold down on the ounces card to set a value other than 0", corner: 30)
+                CustomAlertView(show: $showErrorAlert, icon: .error, text: "Whoops", gradientColor: .red, circleAColor: .red, details: "Couldn't save the bottle, please try again", corner: 30)
             }
-            CustomAlertView(show: $showSuccessAlert, icon: .success, text: "Success", gradientColor: .green, circleAColor: .green, details: "Bottle recorded successfully", corner: 30)
-            CustomAlertView(show: $showWarningAlert, icon: .warning, text: "Invalid ounces", gradientColor: .yellow, circleAColor: .yellow, details: "Hold down on the ounces card to set a value other than 0", corner: 30)
-            CustomAlertView(show: $showErrorAlert, icon: .error, text: "Whoops", gradientColor: .red, circleAColor: .red, details: "Couldn't save the bottle, please try again", corner: 30)
+            
         }
-        
-    }
-    func addBottleToModel(addtionalNotes: String, startTime: Date, endTime: Date, ounces: CGFloat) -> Bool
-    {
-        print("Adding bottle to data model")
-        let newBottle = Bottle(context: viewContext)
-        newBottle.id = UUID()
-        print(newBottle.id ?? "")
-        newBottle.date = Date()
+        func addBottleToModel(addtionalNotes: String, startTime: Date, endTime: Date, ounces: CGFloat) -> Bool
+        {
+            print("Adding bottle to data model")
+            let newBottle = Bottle(context: viewContext)
+            newBottle.id = UUID()
+            print(newBottle.id ?? "")
+            newBottle.date = Date()
             print(newBottle.date ?? "")
-        if addtionalNotes == ""
-        {
-            newBottle.addtional_notes = "None provided"
-        }
-        else
-        {
-            newBottle.addtional_notes = addtionalNotes
-        }
+            if addtionalNotes == ""
+            {
+                newBottle.addtional_notes = "None provided"
+            }
+            else
+            {
+                newBottle.addtional_notes = addtionalNotes
+            }
             print(newBottle.addtional_notes ?? "")
-        newBottle.duration = Double(Int(ConversionUtil().getDateDiff(start: startTime, end: endTime)))
+            newBottle.duration = Double(Int(ConversionUtil().getDateDiff(start: startTime, end: endTime)))
             print(newBottle.duration)
-        newBottle.start_time = startTime
+            newBottle.start_time = startTime
             print(newBottle.start_time ?? "")
-        newBottle.end_time = endTime
+            newBottle.end_time = endTime
             print(newBottle.end_time ?? "")
-        newBottle.ounces = ounces
+            newBottle.ounces = ounces
             print(newBottle.ounces)
-        
-        do {
-            try viewContext.save()
-        } catch {
-            return false
+            
+            do {
+                try viewContext.save()
+            } catch {
+                return false
+            }
+            BottleController().addBottleData(durationToAdd: newBottle.duration)
+            BottleController().addBottleToTodayCount()
+            return true
         }
-        BottleController().addBottleData(durationToAdd: newBottle.duration)
-        BottleController().addBottleToTodayCount()
-        return true
     }
-}
-
-func resetViewForNewBottleFeed()
-{
-    //Reset all values in view to 0 upon completion of bottle feed
-}
-
-#Preview {
-    BottlesView()
-}
-
-@ViewBuilder
-func imageView() -> some View
-{
-    GeometryReader{ geo in
-        let minY = geo.frame(in: .global).minY
-        let minX = geo.frame(in: .global).minX
-        let isScrolling = minY > 0
-        VStack
-        {
-            Image(.test).resizable().scaledToFill()
-                .frame(height: isScrolling ? 160 + minY/3 : 160 )
-                .clipped()
-                .offset(y: isScrolling ? -minY : 0)
-                .offset(x: isScrolling ? -minX : 0)
-                .blur(radius: isScrolling ? 0 + minY / 80 : 0)
-                .scaleEffect(isScrolling ? 1 + minY / 2000 : 1)
-                .overlay(alignment: .bottom)
+    
+    func resetViewForNewBottleFeed()
+    {
+        //Reset all values in view to 0 upon completion of bottle feed
+    }
+    
+    #Preview {
+        BottlesView()
+    }
+    
+    @ViewBuilder
+    func imageView() -> some View
+    {
+        GeometryReader{ geo in
+            let minY = geo.frame(in: .global).minY
+            let minX = geo.frame(in: .global).minX
+            let isScrolling = minY > 0
+            VStack
+            {
+                Image(.test).resizable().scaledToFill()
+                    .frame(height: isScrolling ? 160 + minY/3 : 160 )
+                    .clipped()
+                    .offset(y: isScrolling ? -minY : 0)
+                    .offset(x: isScrolling ? -minX : 0)
+                    .blur(radius: isScrolling ? 0 + minY / 80 : 0)
+                    .scaleEffect(isScrolling ? 1 + minY / 2000 : 1)
+                    .overlay(alignment: .bottom)
                 {
-                  ZStack
+                    ZStack
                     {
                         Image(.test).resizable().scaledToFill()
                         Circle().stroke(lineWidth: 60)
@@ -376,19 +395,19 @@ func imageView() -> some View
                     .offset(y: 50)
                     .offset(y: isScrolling ? -minY : 0)
                 }
-            Group
-            {
-                VStack
+                Group
                 {
-                    Text("Bottles").bold().font(.title)
+                    VStack
+                    {
+                        Text("Bottles").bold().font(.title)
+                    }
+                    .offset(y: isScrolling ? -minY : 0)
+                    
                 }
-                .offset(y: isScrolling ? -minY : 0)
-
+                .padding(.vertical, DeviceDimensions().height/30)
+                
             }
-            .padding(.vertical, DeviceDimensions().height/30)
-
         }
+        .frame(height: DeviceDimensions().height/5)
+        
     }
-    .frame(height: DeviceDimensions().height/5)
-    
-}

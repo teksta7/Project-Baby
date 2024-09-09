@@ -105,13 +105,15 @@ struct HomeView: View {
                 .frame(height: DeviceDimensions().height/1.75)
                 //INSERT BOTTOM MINI VIEW (BABY AT A GLANCE VIEW)
                 BottomMiniCardView()
+                    .frame(width: DeviceDimensions().width/1.5, height: DeviceDimensions().height/15)
                     .onTapGesture {
                         isCardSettingsSheetPresented.toggle()
                         print(String(isCardSettingsSheetPresented))
                     }
                     .sheet(isPresented: $isCardSettingsSheetPresented, content: {
-                        CardSettingsView()
+                        BottleCardSettingsView()
                     })
+                Spacer()
             }
             .navigationTitle("Project Baby")
         }

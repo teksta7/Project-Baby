@@ -27,3 +27,17 @@ struct TimeRangePicker: View {
         .pickerStyle(.segmented)
     }
 }
+
+class UtilFunctions
+{
+    func getAppVersion() -> String {
+        return "\(Bundle.main.infoDictionary!["CFBundleShortVersionString"] ?? "")"
+    }
+    
+}
+
+extension Date {
+    func adding(minutes: Int) -> Date {
+        return Calendar.current.date(byAdding: .minute, value: minutes, to: self)!
+    }
+}
