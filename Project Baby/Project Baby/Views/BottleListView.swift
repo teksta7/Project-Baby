@@ -132,6 +132,7 @@ struct BottleListView: View {
                 print("Removing 1 from todayCount")
                     BottleController().removeBottleData(durationToRemove: bottle.duration)
                     BottleController().removeBottleFromTodayCount()
+                    BottleNotificationController().removeExistingNotifications(bottle.id!.uuidString)
             }
             else
             if (bottle.date?.formatted(.dateTime.dayOfYear()) == Calendar.current.date(byAdding: .day, value: -1, to: Date())?.formatted(.dateTime.dayOfYear()))
@@ -139,12 +140,14 @@ struct BottleListView: View {
                 print("Removing 1 from yesterdayCount")
                 BottleController().removeBottleData(durationToRemove: bottle.duration)
                 BottleController().removeBottleFromYesterdayCount()
+                BottleNotificationController().removeExistingNotifications(bottle.id!.uuidString)
 
             }
             else
             {
                 print("Removing 1 from older bottles and updating average")
                 BottleController().removeBottleData(durationToRemove: bottle.duration)
+                BottleNotificationController().removeExistingNotifications(bottle.id!.uuidString)
             }
             self.viewContext.delete(bottle)
             do {
