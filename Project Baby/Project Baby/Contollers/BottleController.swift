@@ -65,5 +65,4 @@ class BottleController
         UserDefaults.standard.set(totalBottles, forKey: "projectbaby.totalbottles")
         calculateAverageBottleDuration()
     }
-    
 }

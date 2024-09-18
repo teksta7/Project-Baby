@@ -40,6 +40,8 @@ struct BottlesView: View {
     @State var bottleDuration = 0
     @State var ouncesToSave: CGFloat = 0.0
     
+    @State var latestBottleID: UUID = UUID()
+    
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     var body: some View {
         ZStack
@@ -293,7 +295,7 @@ struct BottlesView: View {
                         Task {
                             await BottleNotificationController().requestNotificationAccessByUser()
                             await
-                            BottleNotificationController().scheduleBottleNotification(Int((UserDefaults.standard.double(forKey: "com.projectbaby.localTimeBetweenFeeds"))))
+                            BottleNotificationController().scheduleBottleNotification(Int((UserDefaults.standard.double(forKey: "com.projectbaby.localTimeBetweenFeeds"))), latestBottleID)
                         }
                     }
                 }
@@ -326,6 +328,7 @@ struct BottlesView: View {
             print("Adding bottle to data model")
             let newBottle = Bottle(context: viewContext)
             newBottle.id = UUID()
+            latestBottleID == newBottle.id
             print(newBottle.id ?? "")
             newBottle.date = Date()
             print(newBottle.date ?? "")

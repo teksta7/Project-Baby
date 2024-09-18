@@ -28,8 +28,11 @@ class BottleNotificationController
         // Enable or disable features based on the authorization.
     }
     
-    func scheduleBottleNotification(_ minutesUntilNotification: Int) async
+    func scheduleBottleNotification(_ minutesUntilNotification: Int, _ bottleID: UUID) async
     {
+        //FOR DEBUG PURPOSES
+        //await removeExistingNotifications("projectbaby")
+        
         // Obtain the notification settings.
         let settings = await center.notificationSettings()
         
@@ -61,8 +64,13 @@ class BottleNotificationController
             dateComponents.calendar = Calendar.current
             
             // 6. Set up the hours and minutes for the notification to be delivered
-            var hourInterval = 0
-            var minuteInterval = 0
+            //var hourInterval = 0
+            //var minuteInterval = 0
+            print(minutesUntilNotification)
+            print("===============")
+            print(Date.now.adding(minutes: 0))
+            print(Date.now.adding(minutes: minutesUntilNotification))
+            print("===============")
             var calculatedDateTimeToNotify = Date.now.adding(minutes: minutesUntilNotification)
             dateComponents = Calendar.current.dateComponents([.hour, .minute], from: calculatedDateTimeToNotify)
             
@@ -76,7 +84,7 @@ class BottleNotificationController
             
             // 8. Create an identifier for the notification
             //let notificationIdentifier = UUID().uuidString
-            let notificationIdentifier = "projectbaby-BottleNotification-\(UUID().uuidString)"
+            let notificationIdentifier = "projectbaby-BottleNotification-\(bottleID.uuidString)"
             
             // 9. Create a notification request object
             let notificationRequest = UNNotificationRequest(
@@ -114,7 +122,7 @@ class BottleNotificationController
         }
     }
     
-    func removeExistingNotifications() async
+    func removeExistingNotifications(_ notificationIdentifier: String) 
     {
         let notificationCenter = UNUserNotificationCenter.current()
 
@@ -123,9 +131,18 @@ class BottleNotificationController
 
         // Removing all pending notifications
         notificationCenter.removeAllPendingNotificationRequests()
+        
+        var notificationIdentifiers = [""]
 
         // Removing pending notifications wiht specific identifiers
-        let notificationIdentifiers = ["projectbaby-BottleNotification"]
+        if notificationIdentifier == ""
+        {
+            notificationIdentifiers = ["projectbaby-BottleNotification"]
+        }
+        else
+        {
+            notificationIdentifiers = [notificationIdentifier]
+        }
         notificationCenter.removePendingNotificationRequests(withIdentifiers: notificationIdentifiers)
 
         print("Removed all notifications from app")
