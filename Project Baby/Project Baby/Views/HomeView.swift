@@ -102,7 +102,7 @@ struct HomeView: View {
                         .scrollTargetBehavior(.paging)
                         .scrollIndicators(showIndicator ? .visible : .hidden)
                 }
-                .frame(height: DeviceDimensions().height/1.75)
+                .frame(height: DeviceDimensions().height/1.9)
                 //INSERT BOTTOM MINI VIEW (BABY AT A GLANCE VIEW)
                 BottomMiniCardView()
                     .frame(width: DeviceDimensions().width/1.5, height: DeviceDimensions().height/15)

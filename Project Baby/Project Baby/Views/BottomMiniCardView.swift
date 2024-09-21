@@ -11,7 +11,7 @@ struct BottomMiniCardView: View {
     var body: some View {
         ZStack
         {
-            RoundedRectangle(cornerRadius: 25)
+            RoundedRectangle(cornerRadius: 15)
                 .frame(width: DeviceDimensions().width/1.5, height: DeviceDimensions().height/15)
             HStack
             {

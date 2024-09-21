@@ -42,6 +42,11 @@ struct BottlesView: View {
     
     @State var latestBottleID: UUID = UUID()
     
+//    @State private var timeRemaining = UserDefaults.standard.double(forKey: "com.projectbaby.localTimeBetweenFeeds")
+//    @State var enableNotificationTimer: Bool = false
+//    let notificationTimer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+    
+    
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     var body: some View {
         ZStack
@@ -285,6 +290,21 @@ struct BottlesView: View {
                     }
                     .ignoresSafeArea()
                 }
+//            .onReceive(notificationTimer) { nTime in
+//                if enableNotificationTimer == true {
+//                    if timeRemaining > 0 {
+//                        timeRemaining -= 1
+//                        print("Time Remaining: \(timeRemaining)")
+//                    }
+//                    else
+//                    {
+//                        print("Notification Timer")
+//                        BottleNotificationController().removeExistingNotifications(latestBottleID.uuidString)
+//                        enableNotificationTimer = false
+//                    }
+//                }
+//            }
+            
             .onChange(of: showSuccessAlert)
             {
                 if showSuccessAlert == true 
@@ -328,7 +348,7 @@ struct BottlesView: View {
             print("Adding bottle to data model")
             let newBottle = Bottle(context: viewContext)
             newBottle.id = UUID()
-            latestBottleID == newBottle.id
+            //latestBottleID = newBottle.id
             print(newBottle.id ?? "")
             newBottle.date = Date()
             print(newBottle.date ?? "")
