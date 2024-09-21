@@ -31,7 +31,7 @@ class BottleNotificationController
     func scheduleBottleNotification(_ minutesUntilNotification: Int, _ bottleID: UUID) async
     {
         //FOR DEBUG PURPOSES
-        //await removeExistingNotifications("projectbaby")
+        await removeExistingNotifications("projectbaby")
         
         // Obtain the notification settings.
         let settings = await center.notificationSettings()
@@ -49,13 +49,15 @@ class BottleNotificationController
             
             // 2. Set up the title and subtitle of the notification
             //notificationContent.title = "Has \(UserDefaults.standard.string(forKey: "babyName")) kicked today?"
-            notificationContent.title = "\(UserDefaults.standard.string(forKey: "projectbaby-babyName") ?? "")'s next bottle feed is due"
-            //notificationContent.subtitle = "a little kick goes a long way"
+            notificationContent.title = "Finley's next bottle is due"
+            //Code for PROD below
+            
+            //notificationContent.title = "\(UserDefaults.standard.string(forKey: "projectbaby-babyName") ?? "")'s next bottle is due"
             
             //print (notificationContent.title)
             
             // 3. Set up the body of the notification
-            notificationContent.body = "Remember when you do their next bottle feed, track it in the app to auto set a reminder for their subsquent bottle feed"
+            notificationContent.body = "Remember when you do their next bottle, track it in the app to auto set a reminder for when the next bottle is due"
             
             // 4. Create the Date Components object
             var dateComponents = DateComponents()
@@ -71,7 +73,7 @@ class BottleNotificationController
             print(Date.now.adding(minutes: 0))
             print(Date.now.adding(minutes: minutesUntilNotification))
             print("===============")
-            var calculatedDateTimeToNotify = Date.now.adding(minutes: minutesUntilNotification)
+            let calculatedDateTimeToNotify = Date.now.adding(minutes: minutesUntilNotification)
             dateComponents = Calendar.current.dateComponents([.hour, .minute], from: calculatedDateTimeToNotify)
             
             

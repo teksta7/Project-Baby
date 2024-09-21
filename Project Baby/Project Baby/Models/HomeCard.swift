@@ -18,12 +18,14 @@ struct HomeCard: Identifiable
 }
 
 var HomeCards: [HomeCard] = [
+    .init(color: .mint, viewString: "PROFILE", presentedString: "Finley's Profile", imageToDisplay: "figure.child"), // Baby Profile
     .init(color: .green, viewString: "BOTTLES", presentedString: "Bottles", imageToDisplay: "waterbottle"), // Bottles
     .init(color: .indigo, viewString: "SLEEP", presentedString: "Sleep", imageToDisplay: "powersleep"), // Sleep/Naps
     .init(color: .yellow, viewString: "FOOD", presentedString: "Food", imageToDisplay: "carrot"), // Food
     .init(color: .red, viewString: "MEDS", presentedString: "Medicene", imageToDisplay: "pill"), // Meds
     .init(color: .blue, viewString: "WIND", presentedString: "Wind", imageToDisplay: "wind"), // Wind
-    .init(color: .brown, viewString: "POO", presentedString: "Poo", imageToDisplay: "toilet") // Poo
+    .init(color: .brown, viewString: "POO", presentedString: "Poo", imageToDisplay: "toilet"), // Poo
+    .init(color: .gray, viewString: "SETTINGS", presentedString: "Settings", imageToDisplay: "gear") // Settings
 ]
 
 extension [HomeCard] {
