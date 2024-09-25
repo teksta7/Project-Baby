@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct TopMiniCardView: View {
-    @State var average = BottleController().averageBottleDuration
+    //@State var average = BottleController().averageBottleDuration
+    @State var average = "Need more data to calculate average"
     @State var topText = "ABC"
     @Environment(\.managedObjectContext) private var viewContext
 
@@ -16,23 +17,27 @@ struct TopMiniCardView: View {
         ZStack
         {
             RoundedRectangle(cornerRadius: 25)
-                .frame(width: DeviceDimensions().width/1.5, height: DeviceDimensions().height/9)
+                .frame(width: DeviceDimensions().width/1.5, height: DeviceDimensions().height/8)
+                .foregroundStyle(.indigo)
             VStack
             {
                 HStack
                 {
                     Image(systemName: "info.circle")
-                        .foregroundStyle(.black)
+                        .foregroundStyle(.white)
                     
                     Text(topText)
                         .font(.callout)
-                        .foregroundStyle(.black)
+                        .foregroundStyle(.white)
                 }
-                Text(String(format: "%.0f", average))
-                    .foregroundStyle(.black)
+                .padding(0.5)
+
+                //Text(String(format: "%.0f", average))
+                Text(average)
+                    .foregroundStyle(.white)
                     
                 Text("Press here for charts")
-                    .foregroundStyle(.black)
+                    .foregroundStyle(.white)
                     .font(.caption2)
                     .padding(0.5)
             }
@@ -40,7 +45,7 @@ struct TopMiniCardView: View {
         .onAppear()
         {
             print("Average was \(average)")
-            average = BottleController().averageBottleDuration
+            average = UtilFunctions().convertSecondsToMinutes( Int(BottleController().averageBottleDuration))
             print("Average is now \(average)")
         }
     }

@@ -7,11 +7,15 @@
 
 import SwiftUI
 
-struct BottleCardSettingsView: View {
+struct SettingsView: View {
     @ObservedObject var bottleSettings = BottleSettings()
     @AppStorage("com.projectbaby.localTimeBetweenFeeds")var localTimeBetweenFeeds: Double = 0.0
     @State var isTimePickertSheetPresented = false
     @State private var config: TimePickerView.Config = .init(count: 36)
+    @AppStorage("setDefaultOunces") var localOunces: Double = UserDefaults.standard.double(forKey: "setDefaultOunces")
+    @State var isOuncesSheetPresented = false
+
+    
     //@State private var minutes: Int = 0
     
     var body: some View {
@@ -23,7 +27,11 @@ struct BottleCardSettingsView: View {
                 Section(header: Text("Information")) {
                     LabeledContent("App Version", value: UtilFunctions().getAppVersion())
                 }
-                Section(header: Text("Notification Options"))
+                Section(header: Text("Top statistic to track"))
+                {
+                    
+                }
+                Section(header: Text("Bottles"))
                 {
                     Toggle(isOn: $bottleSettings.enableBottleNotification)
                     {
@@ -48,7 +56,54 @@ struct BottleCardSettingsView: View {
                         
                         
                     }
+                    HStack
+                    {
+                        Button("Set default ounces:", action: {
+                            isOuncesSheetPresented.toggle()
+                        })
+                        .foregroundStyle(.cyan)
+                        .bold()
+                        Text("\(String(format: "%.2f",localOunces)) oz")
+                    }
+                    .popover(isPresented: $isOuncesSheetPresented, content: {
+                        //Text("IT WORKS")
+                        Stepper("Ounces to give:", value: $localOunces, in: 0...10, step: 0.25)
+                            .padding()
+                        
+                            .presentationCompactAdaptation(.popover)
+                    })
+                    HStack
+                    {
+                        Text("Set default note:")
+                            .foregroundStyle(.cyan)
+                            .bold()
+                        TextField("Enter default note", text: $bottleSettings.setDefaultBottleNote)
+                    }
                 }
+
+                Section(header: Text("Sleep"))
+                {
+                    
+                }
+                Section(header: Text("Food"))
+                {
+                    
+                }
+                Section(header: Text("Medicene"))
+                {
+                    
+                }
+                Section(header: Text("Wind"))
+                {
+                    
+                }
+                Section(header: Text("Nappies"))
+                {
+                    
+                }
+                
+                
+               
                 
                 
                 //.foregroundStyle(settingsTextColour)
@@ -75,7 +130,7 @@ struct BottleCardSettingsView: View {
                 
                                     
             }
-            .navigationTitle("Bottle Settings")
+            .navigationTitle("Settings")
         }
         .onChange(of: bottleSettings.enableBottleNotification)
         {
@@ -95,5 +150,5 @@ struct BottleCardSettingsView: View {
 }
 
 #Preview {
-    BottleCardSettingsView()
+    SettingsView()
 }

@@ -9,6 +9,16 @@ import SwiftUI
 
 struct SingleBottleView: View {
     var bottle: Bottle
+//    init(bottle: Bottle) {
+//        self.bottle = bottle
+//        bottle.id = UUID()
+//        bottle.date = Date()
+//        bottle.addtional_notes = ""
+//        bottle.duration = 90.00
+//        bottle.ounces = 1.00
+//        bottle.start_time = Date()
+//        bottle.end_time = Date()
+//    }
     
     var body: some View {
         ZStack
@@ -41,7 +51,8 @@ struct SingleBottleView: View {
                 HStack
                 {
                     Text("Bottle Duration: ")
-                    Text(String(format: "%.0f", bottle.duration) + " seconds")
+                    //Text(String(format: "%.0f", bottle.duration) + " seconds")
+                    Text(UtilFunctions().convertSecondsToMinutes(Int(bottle.duration)))
                 }
                 HStack
                 {
@@ -55,5 +66,6 @@ struct SingleBottleView: View {
 }
 
 //#Preview {
-//    SingleBottleView()
+//    //SingleBottleView(bottle: .id(UUID(), .startTime(Date.now), .endTime(Date.now), .ounces(1.00), .duration(90.00), .date(Date.now), .additionalNotes("")));)
+//    SingleBottleView(bottle: Bottle)
 //}
