@@ -25,13 +25,16 @@ struct HomeView: View {
             {
                 Spacer(minLength: 10)
                 //INSERT TOP MINI VIEW
-                TopMiniCardView(average: BottleController().averageBottleDuration, topText: "Average bottle feed time:")
+                //TopMiniCardView(average: BottleController().averageBottleDuration, topText: "Average bottle feed time:")
+                TopMiniCardView(average: UtilFunctions().convertSecondsToMinutes( Int(BottleController().averageBottleDuration)), topText: "Average bottle feed time:")
                     .onTapGesture {
                         isChartSheetPresented.toggle()
                         print(String(isChartSheetPresented))
                     }
                     .sheet(isPresented: $isChartSheetPresented, content: {
                         BottleChartsView()
+                            //.environment(\.colorScheme, .dark)
+
                     })
                 GeometryReader
                 {
@@ -62,6 +65,11 @@ struct HomeView: View {
                             .navigationDestination(for: String.self) { viewString in
                                 switch viewString
                                 {
+                                case "PROFILE":
+                                    withAnimation()
+                                    {
+                                        ProfileView()
+                                    }
                                 case "BOTTLES":
                                     withAnimation()
                                     {
@@ -92,6 +100,11 @@ struct HomeView: View {
                                     {
                                         MedsView()
                                     }
+                                case "SETTINGS":
+                                    withAnimation()
+                                    {
+                                        SettingsView()
+                                    }
                                 default:
                                     //BottlesView()
                                     EmptyView()
@@ -104,6 +117,9 @@ struct HomeView: View {
                 }
                 .frame(height: DeviceDimensions().height/1.9)
                 //INSERT BOTTOM MINI VIEW (BABY AT A GLANCE VIEW)
+                
+                
+                
                 BottomMiniCardView()
                     .frame(width: DeviceDimensions().width/1.5, height: DeviceDimensions().height/15)
                     .onTapGesture {
@@ -111,8 +127,10 @@ struct HomeView: View {
                         print(String(isCardSettingsSheetPresented))
                     }
                     .sheet(isPresented: $isCardSettingsSheetPresented, content: {
-                        BottleCardSettingsView()
+                        SettingsView()
                     })
+                
+                
                 Spacer()
             }
             .navigationTitle("Project Baby")

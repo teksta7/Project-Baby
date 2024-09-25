@@ -26,7 +26,9 @@ func HomeCardView(_ homeCard: HomeCard) -> some View {
                         .frame(width: DeviceDimensions().width/2, height: DeviceDimensions().height/4)
                         .foregroundStyle(.white)
                         .symbolEffect(.variableColor, isActive: animate)
-                    Text(homeCard.presentedString).font(.system(size: 50))
+                        .padding()
+                    //Text(homeCard.presentedString).font(.system(size: 50))
+                    Text(homeCard.presentedString).font(.system(size: DeviceDimensions().height/20))
                         .foregroundStyle(.white)
                 }
                 //ATTEMPT DIAGONAL TEXT

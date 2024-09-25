@@ -28,7 +28,7 @@ struct BottleChartsView: View {
         case .total:
             VStack
             {
-                Text("Amount of feeds per day").font(.title2).frame( width: DeviceDimensions().width/1.25, alignment: .leading)
+                Text("Amount of feeds per day").font(.title2).frame( width: DeviceDimensions().width/1.25, alignment: .center)
                     .padding()
                 ZStack
                 {
@@ -40,7 +40,7 @@ struct BottleChartsView: View {
                                 )
                                 .symbol {
                                     Circle()
-                                        .fill(Color.black.opacity(0.6))
+                                        .fill(Color.white.opacity(0.6))
                                         .frame(width: 8)
                                 }
                                 .interpolationMethod(.catmullRom)
@@ -55,6 +55,7 @@ struct BottleChartsView: View {
                             AxisTick()
                             AxisGridLine()
                             AxisValueLabel(format: .dateTime.day().month().year(), centered: true)
+                            //AxisValueLabel(format: .dateTime.day().month(), centered: true)
                         }
                     }
                     .chartLegend(Visibility.hidden)
@@ -62,7 +63,7 @@ struct BottleChartsView: View {
                     .chartScrollableAxes(.horizontal)
                     .chartYVisibleDomain(length: 1)
                     //.chartXSelection(value: $rawSelectedDate)
-                    Spacer(minLength: 10)
+                    //Spacer(minLength: 10)
                 }
             }
 //        case .ounces:
@@ -98,7 +99,7 @@ struct BottleChartsView: View {
         case .hourly:
             VStack
             {
-                Text("Breakdown of feed duration(seconds) per hour").font(.title2).frame( width: DeviceDimensions().width/1.25, alignment: .leading)
+                Text("Breakdown of feed duration(seconds) per hour").font(.title2).frame( width: DeviceDimensions().width/1.25, alignment: .center)
                     .padding()
                 ZStack
                 {
@@ -125,7 +126,7 @@ struct BottleChartsView: View {
         case .daily:
             VStack
             {
-                Text("Breakdown of feed duration(seconds) per day").font(.title2).frame( width: DeviceDimensions().width/1.25, alignment: .leading)
+                Text("Breakdown of feed duration(seconds) per day").font(.title2).frame( width: DeviceDimensions().width/1.25, alignment: .center)
                     .padding()
                 ZStack
                 {

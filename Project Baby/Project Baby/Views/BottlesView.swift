@@ -34,17 +34,13 @@ struct BottlesView: View {
     @State var showErrorAlert = false
     
     
-    @State var notesToSave: String = ""
+    @State var notesToSave: String = UserDefaults.standard.string(forKey: "DefaultBottleNote") ?? ""
     @State var startTimeToSave: Date = Date.now
     @State var endTimeToSave: Date = Date.now
     @State var bottleDuration = 0
-    @State var ouncesToSave: CGFloat = 0.0
+    @State var ouncesToSave: CGFloat = UserDefaults.standard.double(forKey: "setDefaultOunces")
     
     @State var latestBottleID: UUID = UUID()
-    
-//    @State private var timeRemaining = UserDefaults.standard.double(forKey: "com.projectbaby.localTimeBetweenFeeds")
-//    @State var enableNotificationTimer: Bool = false
-//    let notificationTimer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
     
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
@@ -79,9 +75,9 @@ struct BottlesView: View {
                                         .offset(y: -DeviceDimensions().height/100)
                                     
                                     Text("Bottles taken today:").font(.system(size: DeviceDimensions().width/25))
-                                        .offset(y: -DeviceDimensions().height/250)
+                                        .offset(y: -DeviceDimensions().height/100)
                                     Text("Press for bottle history").font(.caption)
-                                        .offset(y: -DeviceDimensions().height/250)
+                                        .offset(y: -DeviceDimensions().height/100)
                                 }
                             }
                             .padding(.horizontal, 5)
@@ -112,9 +108,13 @@ struct BottlesView: View {
                                 VStack
                                 {
                                     Text(String(format: "%.2f", Double(ouncesToSave))).bold().font(.system(size: DeviceDimensions().height/15))
-                                        .offset(y: -DeviceDimensions().height/45)
+                                        .offset(y: -DeviceDimensions().height/250)
+                                        .padding(.vertical, 1)
                                     
                                     Text("Ounces(oz):").font(.system(size: DeviceDimensions().width/25))
+                                        .offset(y: DeviceDimensions().height/50)
+                                    
+                                    Text("Hold to set").font(.caption)
                                         .offset(y: DeviceDimensions().height/50)
                                     
                                 }
@@ -188,7 +188,7 @@ struct BottlesView: View {
                                 RoundedRectangle(cornerRadius: 10)
                                     .fill(notesCardColor)
                                     .frame(width: DeviceDimensions().width/1.2, height: DeviceDimensions().height/12)
-                                TextField("Add notes for bottle...", text: $notesToSave, onEditingChanged: { (isBegin) in
+                                TextField(notesToSave ?? "Add notes for bottle...", text: $notesToSave, onEditingChanged: { (isBegin) in
                                     if isBegin {
                                         //print("Begins editing")
                                         withAnimation
@@ -220,7 +220,8 @@ struct BottlesView: View {
                         .padding(.vertical, 10)
                         
                         
-                        Text("\(bottleDuration) seconds").bold().font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
+                        Text("\(UtilFunctions().convertSecondsToMinutes(bottleDuration)) ").bold().font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
+                        //Text("\(bottleDuration) seconds").bold().font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
                             .onReceive(timer) { _ in
                                 if ((bottleDuration >= 0) && (bottleFeedTimer == true)) {
                                     withAnimation{
@@ -290,21 +291,6 @@ struct BottlesView: View {
                     }
                     .ignoresSafeArea()
                 }
-//            .onReceive(notificationTimer) { nTime in
-//                if enableNotificationTimer == true {
-//                    if timeRemaining > 0 {
-//                        timeRemaining -= 1
-//                        print("Time Remaining: \(timeRemaining)")
-//                    }
-//                    else
-//                    {
-//                        print("Notification Timer")
-//                        BottleNotificationController().removeExistingNotifications(latestBottleID.uuidString)
-//                        enableNotificationTimer = false
-//                    }
-//                }
-//            }
-            
             .onChange(of: showSuccessAlert)
             {
                 if showSuccessAlert == true 

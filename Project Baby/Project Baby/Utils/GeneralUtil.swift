@@ -35,6 +35,12 @@ class UtilFunctions
         return "\(Bundle.main.infoDictionary!["CFBundleShortVersionString"] ?? "")"
     }
     
+    func convertSecondsToMinutes(_ seconds: Int) -> String {
+        let minutes = seconds / 60
+        let secondsLeft = seconds % 60
+        return "\(minutes) minutes \(secondsLeft.formatted()) seconds"
+    }
+    
 }
 
 extension Date {

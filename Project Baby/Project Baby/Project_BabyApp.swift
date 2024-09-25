@@ -17,7 +17,9 @@ struct Project_BabyApp: App {
             HomeView()
                 .environmentObject(coreDataController)
                 .environment(\.managedObjectContext, coreDataController.container.viewContext)
-                .environment(\.colorScheme, .dark)
+                //.environment(\.colorScheme, .dark)
+                //.environment(\.colorScheme, .dark)
+                .preferredColorScheme(.dark)
         }
     }
 }
