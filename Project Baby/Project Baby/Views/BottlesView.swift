@@ -15,7 +15,7 @@ struct BottlesView: View {
     @State var bottleFeedButtonColor: Color = .green
     @State var isOuncesSheetPresented = false
     @State var isBottleListSheetPresented = false
-    @State var imagePadding = 10.0 //60.0 for small, 30 for medium
+    @State var imagePadding = 1.0 //60.0 for small, 30 for medium
     @State var notesCardColor: Color = .blue
     @State var bottleCardColor: Color = .blue
     @State var ouncesCardColor: Color = .orange
@@ -55,9 +55,10 @@ struct BottlesView: View {
                         .padding(.bottom, imagePadding)
                     Spacer(minLength: 20)
                     Text(bottleFeedTimer ? "You can amend the ounces and notes before the bottle feed is done." : " ")
-                        .frame(width: DeviceDimensions().width/1.3, height: bottleFeedTimer ? 35 : 0)
+                        .frame(width: DeviceDimensions().width/1.3, height: bottleFeedTimer ? 45 : 0)
                         .multilineTextAlignment(.center)
                         .opacity(bottleFeedTimer ? 1 : 0)
+                        //.padding(.vertical, bottleFeedTimer ? 10 : 0)
                     Spacer(minLength: 20)
 
                     Group
@@ -186,8 +187,8 @@ struct BottlesView: View {
                                 }
                             }
                         }
-                        Spacer()
-                            .padding(.vertical, 1)
+                        //Spacer()
+                            //.padding(.vertical, 1)
                         HStack
                         {
                             ZStack
@@ -424,6 +425,6 @@ struct BottlesView: View {
                 
             }
         }
-        .frame(height: DeviceDimensions().height/5)
+        .frame(height: DeviceDimensions().height/5.5)
         
     }
