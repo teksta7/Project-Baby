@@ -80,5 +80,5 @@ func rotation(_ proxy: GeometryProxy, rotation: CGFloat = 5) -> Angle {
 }
 
 #Preview {
-    HomeCardView(HomeCard(id: UUID(), color: .green, viewString: "ABC", presentedString: "ABC", imageToDisplay: "waterbottle"))
+    HomeCardView(HomeCard(id: UUID(), color: .green, viewString: "ABC", presentedString: "ABC", imageToDisplay: "waterbottle",  toTrack: true))
 }

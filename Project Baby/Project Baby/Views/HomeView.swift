@@ -16,6 +16,7 @@ struct HomeView: View {
     @State var isChartSheetPresented = false
     @State var isCardSettingsSheetPresented = false
     @Environment(\.managedObjectContext) private var viewContext
+    @State var localHomeCards = HomeCards
 
     var body: some View
     {
@@ -43,21 +44,24 @@ struct HomeView: View {
                         {
                             HStack(spacing: 0)
                             {
-                                ForEach(HomeCards) { homeCard in
-                                    HomeCardView(homeCard)
-                                        .padding(.horizontal, 65)
-                                        .frame(width: size.width)
-                                        .visualEffect { content, geometryProxy in
-                                            content
-                                                .scaleEffect(scale(geometryProxy, scale: 0.1), anchor: .trailing)
-                                                .rotationEffect(rotation(geometryProxy, rotation: 5))
-                                                .offset(x: minX(geometryProxy))
-                                                .offset(x: excessMinX(geometryProxy, offset: 5))
-                                                .opacity(cardScale)
+                                ForEach(localHomeCards) { homeCard in
+                                    if homeCard.toTrack == true
+                                    {
+                                        HomeCardView(homeCard)
+                                            .padding(.horizontal, 65)
+                                            .frame(width: size.width)
+                                            .visualEffect { content, geometryProxy in
+                                                content
+                                                    .scaleEffect(scale(geometryProxy, scale: 0.1), anchor: .trailing)
+                                                    .rotationEffect(rotation(geometryProxy, rotation: 5))
+                                                    .offset(x: minX(geometryProxy))
+                                                    .offset(x: excessMinX(geometryProxy, offset: 5))
+                                                    .opacity(cardScale)
                                                 //.scaleEffect(cardScale)
-                                        
-                                        }
-                                        .zIndex(HomeCards.zIndex(homeCard))
+                                                
+                                            }
+                                            .zIndex(HomeCards.zIndex(homeCard))
+                                    }
                                 }
                                 
                             }
@@ -112,6 +116,7 @@ struct HomeView: View {
                             }
                             .padding(.vertical, DeviceDimensions().height/30)
                         }
+                            
                         .scrollTargetBehavior(.paging)
                         .scrollIndicators(showIndicator ? .visible : .hidden)
                 }
@@ -132,6 +137,11 @@ struct HomeView: View {
                 
                 
                 Spacer()
+            }
+            .onAppear()
+            {
+                print("APPEAR")
+                localHomeCards = HomeCards
             }
             .navigationTitle("Project Baby")
         }

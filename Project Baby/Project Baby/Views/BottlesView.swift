@@ -53,6 +53,13 @@ struct BottlesView: View {
                 {
                     imageView()
                         .padding(.bottom, imagePadding)
+                    Spacer(minLength: 20)
+                    Text(bottleFeedTimer ? "You can amend the ounces and notes before the bottle feed is done." : " ")
+                        .frame(width: DeviceDimensions().width/1.3, height: bottleFeedTimer ? 45 : 0)
+                        .multilineTextAlignment(.center)
+                        .opacity(bottleFeedTimer ? 1 : 0)
+                    Spacer(minLength: 20)
+
                     Group
                     {
                         HStack
@@ -247,7 +254,7 @@ struct BottlesView: View {
                                             if bottleFeedTimer == true
                                             {
                                                 startTimeToSave = Date.now
-                                                bottleFeedButtonLabel = "Stop Bottle Feed"
+                                                bottleFeedButtonLabel = "Finish Bottle Feed"
                                                 bottleFeedButtonColor = .orange
                                             }
                                             else

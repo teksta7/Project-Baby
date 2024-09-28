@@ -59,47 +59,20 @@ struct BottleChartsView: View {
                         }
                     }
                     .chartLegend(Visibility.hidden)
-                    .chartYScale(range: .plotDimension(endPadding: 2))
+                    //.chartYScale(range: .plotDimension(endPadding: 2))
                     .chartScrollableAxes(.horizontal)
                     .chartYVisibleDomain(length: 1)
+                    
+                    .chartXVisibleDomain(length: 250000)
+                    .chartYScale(range: .plotDimension(endPadding: 10))
                     //.chartXSelection(value: $rawSelectedDate)
                     //Spacer(minLength: 10)
                 }
             }
-//        case .ounces:
-//            VStack
-//            {
-//                Text("Amount of times specific ounce measurement has been given").font(.title2).frame( width: DeviceDimensions().width/1.25, alignment: .leading)
-//                    .padding()
-//                ZStack
-//                {
-//                    Chart {
-//                        ForEach(bottles, id: \.id) { bottle in
-//                            BarMark(x: .value("Amount of ounces", bottle.ounces ?? 0.0), y: .value("Count", UserDefaults.standard.integer(forKey: "projectbaby.bottles.\(bottle.date?.formatted(.dateTime.dayOfYear()) ?? Date.now.formatted(.dateTime.dayOfYear()))")))
-//                        }
-//                    }
-//                    .aspectRatio(1, contentMode: .fit)
-//                    .padding()
-//                    .chartLegend(.visible)
-//                    .chartXAxis {
-//                        AxisMarks(position: .bottom, values: .automatic) { value in
-//                            AxisGridLine(centered: true, stroke: StrokeStyle(dash: [1, 2]))
-//                            AxisTick(centered: true, stroke: StrokeStyle(dash: [1, 2]))
-//                            AxisValueLabel() {
-//                                if let doubleValue = value.as(Double.self) {
-//                                    Text("\(String(format: "%.0f", doubleValue)) oz")
-//                                        .font(.system(size: 10))
-//                                }
-//                            }
-//                        }
-//                    }
-//                    //.chartScrollableAxes(.horizontal)
-//                }
-//            }
         case .hourly:
             VStack
             {
-                Text("Breakdown of feed duration(seconds) per hour").font(.title2).frame( width: DeviceDimensions().width/1.25, alignment: .center)
+                Text("Breakdown of feed duration per hour").font(.title2).frame( width: DeviceDimensions().width/1.25, alignment: .center)
                     .padding()
                 ZStack
                 {
@@ -117,6 +90,16 @@ struct BottleChartsView: View {
                             AxisValueLabel(format: .dateTime.day().month().hour(), centered: true)
                         }
                     }
+                    .chartYAxis {
+                            AxisMarks() { value in
+                                if let seconds = value.as(Int.self) {
+                                    let minutes = seconds / 60
+                                    AxisValueLabel {
+                                        Text("\(minutes) min")
+                                    }
+                                }
+                            }
+                        }
                     .chartXVisibleDomain(length: 15000)
                     .chartYScale(range: .plotDimension(endPadding: 10))
                     .chartScrollableAxes(.horizontal)
@@ -126,18 +109,44 @@ struct BottleChartsView: View {
         case .daily:
             VStack
             {
-                Text("Breakdown of feed duration(seconds) per day").font(.title2).frame( width: DeviceDimensions().width/1.25, alignment: .center)
-                    .padding()
+                Text("Total duration of feeds per day").font(.title2).frame( width: DeviceDimensions().width/1.25, alignment: .center)
+                Text("Each feed represented by a different shade on the chart").font(.subheadline).frame( width: DeviceDimensions().width/1.5, alignment: .center)
+                    //.padding()
                 ZStack
                 {
                     Chart {
                         ForEach(bottles, id: \.id) { bottle in
                             BarMark(x: .value("Date", bottle.date ?? Date.now, unit: .day), y: .value("Duration", bottle.duration))
-                                .foregroundStyle(by: .value("Duration", bottle.duration ?? 0.0))
+                                .foregroundStyle(by: .value("Duration", bottle.duration))
                         }
                     }
                     
-                    .chartLegend(.visible)
+                    .chartLegend(.hidden)
+//                    .chartLegend(position: .bottom) {
+//                        ScrollView(.horizontal)
+//                        {
+//                            HStack
+//                            {
+//                                ForEach(bottles) { bottle in
+//                                    let minutes = bottle.duration.rounded(.toNearestOrEven) / 60
+//                                        //Text("\(minutes) min")
+//                                    HStack
+//                                    {
+//                                        BasicChartSymbolShape.circle
+//                                        //Circle()
+//                                        //.foregroundColor(colorFor(symbol: symbol))
+//                                        //.foregroundStyle(by: .value("Duration", bottle.duration))
+//                                            .frame(width: 8, height: 8)
+//                                        //Text(String(format: "%.2f", "\(minutes) min"))
+//                                        Text("\(minutes) min")
+//                                            .foregroundColor(.gray)
+//                                            .font(.caption)
+//                                    }
+//                                }
+//                            }
+//                        }
+//                        //.frame(height: 100)
+//                    }
                     .aspectRatio(1, contentMode: .fit)
                     .padding()
                     .chartXAxis {
@@ -147,6 +156,16 @@ struct BottleChartsView: View {
                             AxisValueLabel(format: .dateTime.day().month().year(), centered: true)
                         }
                     }
+                    .chartYAxis {
+                            AxisMarks() { value in
+                                if let seconds = value.as(Int.self) {
+                                    let minutes = seconds / 60
+                                    AxisValueLabel {
+                                        Text("\(minutes) min")
+                                    }
+                                }
+                            }
+                        }
                     .chartXVisibleDomain(length: 250000)
                     .chartYScale(range: .plotDimension(endPadding: 10))
                     .chartScrollableAxes(.horizontal)
