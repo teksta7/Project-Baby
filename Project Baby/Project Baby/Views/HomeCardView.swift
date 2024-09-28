@@ -30,6 +30,8 @@ func HomeCardView(_ homeCard: HomeCard) -> some View {
                     //Text(homeCard.presentedString).font(.system(size: 50))
                     Text(homeCard.presentedString).font(.system(size: DeviceDimensions().height/20))
                         .foregroundStyle(.white)
+                        .frame(width: DeviceDimensions().width/2.5)
+                        .multilineTextAlignment(.center)
                 }
                 //ATTEMPT DIAGONAL TEXT
                 
