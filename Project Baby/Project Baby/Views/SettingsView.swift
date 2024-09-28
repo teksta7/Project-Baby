@@ -14,7 +14,13 @@ struct SettingsView: View {
     @State private var config: TimePickerView.Config = .init(count: 36)
     @AppStorage("setDefaultOunces") var localOunces: Double = UserDefaults.standard.double(forKey: "setDefaultOunces")
     @State var isOuncesSheetPresented = false
-
+    @ObservedObject var homeCardStore: HomeCardStore = HomeCardStore()
+    @AppStorage("com.projectbaby.isSleepCardTracked") var isSleepCardTracked: Bool = UserDefaults.standard.bool(forKey: "com.projectbaby.isSleepCardTracked")
+    @AppStorage("com.projectbaby.isBottlesCardTracked") var isBottlesCardTracked: Bool = UserDefaults.standard.bool(forKey: "com.projectbaby.isBottlesCardTracked")
+    @AppStorage("com.projectbaby.isFoodCardTracked") var isFoodCardTracked: Bool = UserDefaults.standard.bool(forKey: "com.projectbaby.isFoodCardTracked")
+    @AppStorage("com.projectbaby.isMedsCardTracked") var isMedsCardTracked: Bool = UserDefaults.standard.bool(forKey: "com.projectbaby.isMedsCardTracked")
+    @AppStorage("com.projectbaby.isWindCardTracked") var isWindCardTracked: Bool = UserDefaults.standard.bool(forKey: "com.projectbaby.isWindCardTracked")
+    @AppStorage("com.projectbaby.isPooCardTracked") var isPooCardTracked: Bool = UserDefaults.standard.bool(forKey: "com.projectbaby.isPooCardTracked")
     
     //@State private var minutes: Int = 0
     
@@ -27,9 +33,41 @@ struct SettingsView: View {
                 Section(header: Text("Information")) {
                     LabeledContent("App Version", value: UtilFunctions().getAppVersion())
                 }
-                Section(header: Text("Top statistic to track"))
+                Section(header: Text("Baby stat cards"))
                 {
-                    
+                    Text("Top statistic to track(TBC)")
+                    Toggle(isOn: $isBottlesCardTracked)
+                    {
+                        Text("Bottles")
+                        Text("Enable the app to track the number of bottles you have given to your baby")
+                    }
+                    //Toggle(isOn: $homeCardStore.sleepHomeCard.toTrack)
+                    Toggle(isOn: $isSleepCardTracked)
+                    {
+                        Text("Sleep")
+                        Text("Enable the app to track the amount sleep your baby has had")
+                    }
+                    Toggle(isOn: $isFoodCardTracked)
+                    {
+                        Text("Food")
+                        Text("Enable the app to track the amount of food you give to your baby")
+                    }
+                    Toggle(isOn: $isMedsCardTracked)
+                    {
+                        Text("Medicene")
+                        Text("Enable the app to track any medicene administered to your baby")
+                    }
+                    Toggle(isOn: $isWindCardTracked)
+                    {
+                        Text("Wind")
+                        Text("Enable the app to track the amount of wind your baby has had")
+                    }
+                    Toggle(isOn: $isPooCardTracked)
+                    {
+                        Text("Nappies")
+                        Text("Enable the app to track any nappy changes your baby has had")
+                    }
+
                 }
                 Section(header: Text("Bottles"))
                 {
@@ -131,6 +169,30 @@ struct SettingsView: View {
                                     
             }
             .navigationTitle("Settings")
+        }
+        .onChange(of: isBottlesCardTracked)
+        {
+            HomeCards[1].toTrack = isBottlesCardTracked
+        }
+        .onChange(of: isSleepCardTracked)
+        {
+            HomeCards[2].toTrack = isSleepCardTracked
+        }
+        .onChange(of: isFoodCardTracked)
+        {
+            HomeCards[3].toTrack = isFoodCardTracked
+        }
+        .onChange(of: isMedsCardTracked)
+        {
+            HomeCards[4].toTrack = isMedsCardTracked
+        }
+        .onChange(of: isWindCardTracked)
+        {
+            HomeCards[5].toTrack = isWindCardTracked
+        }
+        .onChange(of: isPooCardTracked)
+        {
+            HomeCards[6].toTrack = isPooCardTracked
         }
         .onChange(of: bottleSettings.enableBottleNotification)
         {

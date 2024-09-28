@@ -15,18 +15,36 @@ struct HomeCard: Identifiable
     var viewString: String //TO BE USED TO CHECK WHICH VIEW TO DISPLAY ON THE CARD
     var presentedString: String //TO BE USED TO CHECK WHICH VIEW TO DISPLAY ON THE CARD
     var imageToDisplay: String //TO BE USED TO CHECK WHICH VIEW TO DISPLAY ON THE CARD
+    var toTrack: Bool
 }
 
-var HomeCards: [HomeCard] = [
-    .init(color: .mint, viewString: "PROFILE", presentedString: "Finley's Profile", imageToDisplay: "figure.child"), // Baby Profile
-    .init(color: .green, viewString: "BOTTLES", presentedString: "Bottles", imageToDisplay: "waterbottle"), // Bottles
-    .init(color: .indigo, viewString: "SLEEP", presentedString: "Sleep", imageToDisplay: "powersleep"), // Sleep/Naps
-    .init(color: .yellow, viewString: "FOOD", presentedString: "Food", imageToDisplay: "carrot"), // Food
-    .init(color: .red, viewString: "MEDS", presentedString: "Medicene", imageToDisplay: "pill"), // Meds
-    .init(color: .blue, viewString: "WIND", presentedString: "Wind", imageToDisplay: "wind"), // Wind
-    .init(color: .brown, viewString: "POO", presentedString: "Nappies", imageToDisplay: "toilet"), // Poo
-    .init(color: .gray, viewString: "SETTINGS", presentedString: "Settings", imageToDisplay: "gear") // Settings
-]
+class HomeCardStore: ObservableObject
+{
+    var profileHomeCard: HomeCard = .init(color: .mint, viewString: "PROFILE", presentedString: "Finley's Profile", imageToDisplay: "figure.child", toTrack: true)
+    var bottlesHomeCard: HomeCard = .init(color: .green, viewString: "BOTTLES", presentedString: "Bottles", imageToDisplay: "waterbottle",  toTrack: UserDefaults().bool(forKey: "com.projectbaby.isBottleCardTracked"))
+    var sleepHomeCard: HomeCard = .init(color: .indigo, viewString: "SLEEP", presentedString: "Sleep", imageToDisplay: "powersleep", toTrack: UserDefaults().bool(forKey: "com.projectbaby.isSleepCardTracked"))
+    var foodHomeCard: HomeCard = .init(color: .yellow, viewString: "FOOD", presentedString: "Food", imageToDisplay: "carrot", toTrack: UserDefaults().bool(forKey: "com.projectbaby.isFoodCardTracked"))
+    var medsHomeCard: HomeCard = .init(color: .red, viewString: "MEDS", presentedString: "Medicene", imageToDisplay: "pill", toTrack: UserDefaults().bool(forKey: "com.projectbaby.isMedsCardTracked"))
+    var windHomeCard: HomeCard = .init(color: .blue, viewString: "WIND", presentedString: "Wind", imageToDisplay: "wind", toTrack: UserDefaults().bool(forKey: "com.projectbaby.isWindCardTracked"))
+    var pooHomeCard: HomeCard = .init(color: .brown, viewString: "POO", presentedString: "Nappies", imageToDisplay: "toilet", toTrack: UserDefaults().bool(forKey: "com.projectbaby.isPooCardTracked"))
+    var settingsHomeCard: HomeCard = .init(color: .gray, viewString: "SETTINGS", presentedString: "Settings", imageToDisplay: "gear", toTrack: true)
+    
+    @Published var homeCards: [HomeCard] = []
+}
+
+
+var HomeCards: [HomeCard] = [HomeCardStore().profileHomeCard, HomeCardStore().bottlesHomeCard, HomeCardStore().sleepHomeCard, HomeCardStore().foodHomeCard, HomeCardStore().medsHomeCard, HomeCardStore().windHomeCard, HomeCardStore().pooHomeCard, HomeCardStore().settingsHomeCard]
+
+//var HomeCards: [HomeCard] = [
+//    .init(color: .mint, viewString: "PROFILE", presentedString: "Finley's Profile", imageToDisplay: "figure.child", toTrack: true), // Baby Profile
+//    .init(color: .green, viewString: "BOTTLES", presentedString: "Bottles", imageToDisplay: "waterbottle",  toTrack: true), // Bottles
+//    .init(color: .indigo, viewString: "SLEEP", presentedString: "Sleep", imageToDisplay: "powersleep", toTrack: false), // Sleep/Naps
+//    .init(color: .yellow, viewString: "FOOD", presentedString: "Food", imageToDisplay: "carrot", toTrack: false), // Food
+//    .init(color: .red, viewString: "MEDS", presentedString: "Medicene", imageToDisplay: "pill", toTrack: false), // Meds
+//    .init(color: .blue, viewString: "WIND", presentedString: "Wind", imageToDisplay: "wind", toTrack: false), // Wind
+//    .init(color: .brown, viewString: "POO", presentedString: "Nappies", imageToDisplay: "toilet", toTrack: false), // Poo
+//    .init(color: .gray, viewString: "SETTINGS", presentedString: "Settings", imageToDisplay: "gear", toTrack: true) // Settings
+//]
 
 extension [HomeCard] {
     
