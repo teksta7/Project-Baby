@@ -270,11 +270,12 @@ struct BottlesView: View {
                                                     showSuccessAlert = true
                                                     //Recalculate average bottle duration
                                                     BottleController().calculateAverageBottleDuration()
-                                                    
+                                                    BottleController().calculateAverageTimeBetweenBottles()
                                                         //These below can be moved into reset view function
                                                         bottleFeedButtonLabel = "Start Bottle Feed"
                                                         bottleFeedButtonColor = .green
                                                         notesCardColor = .blue
+                                                        notesToSave = UserDefaults.standard.string(forKey: "DefaultBottleNote") ?? ""
                                                         bottleDuration = 0
                                                     }
                                                     else
