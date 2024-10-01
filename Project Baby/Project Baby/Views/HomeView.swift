@@ -127,13 +127,13 @@ struct HomeView: View {
                 
                 BottomMiniCardView()
                     .frame(width: DeviceDimensions().width/1.5, height: DeviceDimensions().height/15)
-                    .onTapGesture {
-                        isCardSettingsSheetPresented.toggle()
-                        print(String(isCardSettingsSheetPresented))
-                    }
-                    .sheet(isPresented: $isCardSettingsSheetPresented, content: {
-                        SettingsView()
-                    })
+//                    .onTapGesture {
+//                        isCardSettingsSheetPresented.toggle()
+//                        print(String(isCardSettingsSheetPresented))
+//                    }
+//                    .sheet(isPresented: $isCardSettingsSheetPresented, content: {
+//                        SettingsView()
+//                    })
                 
                 
                 Spacer()

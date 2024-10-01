@@ -41,6 +41,12 @@ class UtilFunctions
         return "\(minutes) minutes \(secondsLeft.formatted()) seconds"
     }
     
+    func convertSecondsToHours(_ seconds: Int) -> String {
+        let hours = seconds / 3600
+        let minutesLeft = seconds % 3600 / 60
+        return "\(hours) hours \(minutesLeft.formatted()) minutes"
+    }
+    
 }
 
 extension Date {

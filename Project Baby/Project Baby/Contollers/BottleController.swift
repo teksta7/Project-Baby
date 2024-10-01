@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 import CoreData
+import Combine
 
 class BottleController
 {
@@ -17,6 +18,8 @@ class BottleController
     @AppStorage("projectbaby.averagebottleduration") var averageBottleDuration: Double = 0.0
     @AppStorage("projectbaby.totalbottleduration") var totalBottleDuration: Double = 0.0
     @AppStorage("projectbaby.totalbottles") var totalBottles: Double = 0.0
+    
+    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \Bottle.date, ascending: false)], animation: .default) private var bottles: FetchedResults<Bottle>
     
     func addBottleToTodayCount()
     {
@@ -46,6 +49,49 @@ class BottleController
         print("Average Bottle time is \(averageBottleDuration)")
         UserDefaults.standard.set(averageBottleDuration, forKey: "projectbaby.averagebottleduration")
 
+    }
+    
+    func calculateTimeUntilNextBottle()
+    {
+        
+    }
+    
+    func calculateAverageTimeBetweenBottles()
+    {
+        var totalSecondsBetweenBottles: Double = 0.0
+        var currentSecondsBetweenBottles: Double = 0.0
+        var bottleCount: Int = 0
+        var previousBottleTime: Date? = nil
+        
+        // Create a fetch request for a NamedEntity
+        let bottleFetchRequest: NSFetchRequest<Bottle>
+        bottleFetchRequest = Bottle.fetchRequest()
+        bottleFetchRequest.sortDescriptors = [NSSortDescriptor(key: "start_time", ascending: true)]
+
+        // Perform the fetch request to get the objects
+        // matching the predicate
+        let coreBottles =  try! CoreDataController().container.viewContext.fetch(bottleFetchRequest)
+            
+        for bottle in coreBottles
+            {
+                var currentBottleTime: Date = bottle.start_time!
+                if bottleCount > 0
+                {
+                    print(currentBottleTime, " - ", previousBottleTime!)
+                    totalSecondsBetweenBottles += currentBottleTime.timeIntervalSince(previousBottleTime!)
+                    previousBottleTime = currentBottleTime
+                    
+                }
+                bottleCount += 1
+                print("Bottle Count: \(bottleCount)")
+                print("Total Seconds Between Bottles: \(totalSecondsBetweenBottles)")
+                previousBottleTime = bottle.start_time!
+
+            }
+            var averageTimeBetweenBottles: Double = 0.0
+            averageTimeBetweenBottles = totalSecondsBetweenBottles / Double(bottleCount)
+            print("Average Time Between Bottles: \(averageTimeBetweenBottles)")
+            UserDefaults.standard.set(averageTimeBetweenBottles, forKey: "projectbaby.averagetimebetweenbottles")
     }
     
     func addBottleData(durationToAdd: CGFloat)

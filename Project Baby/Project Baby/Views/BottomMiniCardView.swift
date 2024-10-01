@@ -18,8 +18,8 @@ struct BottomMiniCardView: View {
     //amount of nappy changes
     
     @State var msg = "Welcome"
-    @State var messagesToShow: [String] = ["Time until next bottle is due: ", "Wake windows today: ", "Food eaten today: ", "Any medicene due: ", "Amount of wind: ", "Amount of nappy changes: "]
-    @State var imagesToShow: [String] = ["waterbottle", "powersleep", "carrot", "pill", "wind", "toilet"]
+    @State var messagesToShow: [String] = ["Time until next bottle is due: ", "Wake windows today: N/A ", "Average time between bottles: \(UtilFunctions().convertSecondsToHours (Int(UserDefaults.standard.double(forKey: "projectbaby.averagetimebetweenbottles"))))" , "Food eaten today: N/A ", "Any medicene due: N/A", "Amount of wind: N/A", "Amount of nappy changes: N/A"]
+    @State var imagesToShow: [String] = ["waterbottle", "powersleep", "waterbottle" , "carrot", "pill", "wind", "toilet"]
     @State var colorsToShow: [Color] = [.blue, .purple, .indigo]
     @State var colorsToShowIndex: Int = 0
     @State var messagesArrayIndex: Int = 0
@@ -38,11 +38,13 @@ struct BottomMiniCardView: View {
                 .foregroundStyle(colorsToShow[colorsToShowIndex])
             HStack
             {
-                Image(systemName: "gearshape")
+                Image(systemName: "hand.point.right")
                     .foregroundStyle(.white)
                 Text("\(msg)")
                     .font(.caption)
                     .foregroundStyle(.white)
+                    .multilineTextAlignment(.center)
+                    .frame(width: DeviceDimensions().width/2.25, height: DeviceDimensions().height/2)
                     //.foregroundStyle(.black)
                     .onReceive(timer) {_ in
                                 //self.now = Date()
@@ -68,6 +70,11 @@ struct BottomMiniCardView: View {
 //                    .foregroundStyle(.black)
             }
         }
+//        .onAppear()
+//        {
+//            print("onAppear Ticker View")
+//            BottleController().calculateAverageTimeBetweenBottles()
+//        }
     }
 }
 
