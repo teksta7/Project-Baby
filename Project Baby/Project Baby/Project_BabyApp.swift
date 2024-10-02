@@ -12,6 +12,7 @@ struct Project_BabyApp: App {
     //Controller for setup data
     @StateObject private var coreDataController: CoreDataController = CoreDataController()
     
+    
     var body: some Scene {
         WindowGroup {
             HomeView()
