@@ -41,6 +41,7 @@
 		83AE2E8A2C82046400ACF31F /* CustomAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83AE2E892C82046400ACF31F /* CustomAlertView.swift */; };
 		83AE2E8C2C852F9200ACF31F /* GeneralUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83AE2E8B2C852F9200ACF31F /* GeneralUtil.swift */; };
 		83B2AD0A2C77E1F400663BC8 /* FeatureCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B2AD092C77E1F400663BC8 /* FeatureCardView.swift */; };
+		83BC12732CAD6BF300D19428 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83BC12722CAD6BF300D19428 /* Launch Screen.storyboard */; };
 		83C0BACF2CA02C2A00949DF7 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C0BACE2CA02C2A00949DF7 /* ProfileView.swift */; };
 /* End PBXBuildFile section */
 
@@ -100,6 +101,7 @@
 		83AE2E892C82046400ACF31F /* CustomAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertView.swift; sourceTree = "<group>"; };
 		83AE2E8B2C852F9200ACF31F /* GeneralUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralUtil.swift; sourceTree = "<group>"; };
 		83B2AD092C77E1F400663BC8 /* FeatureCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureCardView.swift; sourceTree = "<group>"; };
+		83BC12722CAD6BF300D19428 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		83C0BACE2CA02C2A00949DF7 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -131,6 +133,7 @@
 		838A3A942C6EB80E00F8495D = {
 			isa = PBXGroup;
 			children = (
+				83BC12722CAD6BF300D19428 /* Launch Screen.storyboard */,
 				838A3A9F2C6EB80E00F8495D /* Project Baby */,
 				838A3AB52C6EB80F00F8495D /* Project BabyTests */,
 				838A3ABF2C6EB80F00F8495D /* Project BabyUITests */,
@@ -357,6 +360,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				83BC12732CAD6BF300D19428 /* Launch Screen.storyboard in Resources */,
 				838A3AA82C6EB80F00F8495D /* Preview Assets.xcassets in Resources */,
 				838A3AA52C6EB80F00F8495D /* Assets.xcassets in Resources */,
 			);

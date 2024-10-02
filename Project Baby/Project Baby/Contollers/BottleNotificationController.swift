@@ -50,6 +50,8 @@ class BottleNotificationController
             // 2. Set up the title and subtitle of the notification
             //notificationContent.title = "Has \(UserDefaults.standard.string(forKey: "babyName")) kicked today?"
             notificationContent.title = "Finley's next bottle is due"
+            notificationContent.interruptionLevel = .timeSensitive
+            notificationContent.badge = 1
             //Code for PROD below
             
             //notificationContent.title = "\(UserDefaults.standard.string(forKey: "projectbaby-babyName") ?? "")'s next bottle is due"
@@ -75,7 +77,10 @@ class BottleNotificationController
             print("===============")
             let calculatedDateTimeToNotify = Date.now.adding(minutes: minutesUntilNotification)
             dateComponents = Calendar.current.dateComponents([.hour, .minute], from: calculatedDateTimeToNotify)
-            
+            let calculatedDateTimeToNotifyString = calculatedDateTimeToNotify.formatted(date: .omitted, time: .shortened)
+            print(calculatedDateTimeToNotifyString)
+            UserDefaults().set(calculatedDateTimeToNotifyString, forKey: "projectbaby-nextBottleNotificationDateTime")
+            //print(calculatedDateTimeToNotify)
             
             //dateComponents.hour = calculatedDateTimeToNotify
             //dateComponents.minute = minuteInterval
