@@ -6,9 +6,13 @@
 //
 
 import SwiftUI
+import StoreKit
 
 struct BottlesView: View {
     @Environment(\.managedObjectContext) private var viewContext
+    @Environment(\.requestReview) private var requestReview
+    @State var bottlesBeforeReview = 10
+    
     
     @State var bottleFeedTimer: Bool = false
     @State var bottleFeedButtonLabel: String = "Start Bottle Feed"
@@ -277,6 +281,11 @@ struct BottlesView: View {
                                                         notesCardColor = .blue
                                                         notesToSave = UserDefaults.standard.string(forKey: "DefaultBottleNote") ?? ""
                                                         bottleDuration = 0
+                                                        bottlesBeforeReview -= 1
+                                                    if bottlesBeforeReview == 0
+                                                    {
+                                                        requestReview()
+                                                    }
                                                     }
                                                     else
                                                     {

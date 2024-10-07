@@ -78,9 +78,9 @@ class BottleNotificationController
             let calculatedDateTimeToNotify = Date.now.adding(minutes: minutesUntilNotification)
             dateComponents = Calendar.current.dateComponents([.hour, .minute], from: calculatedDateTimeToNotify)
             let calculatedDateTimeToNotifyString = calculatedDateTimeToNotify.formatted(date: .omitted, time: .shortened)
+            await BottleController().setTimeUntilNextBottle(timeString: calculatedDateTimeToNotifyString)
             print(calculatedDateTimeToNotifyString)
-            UserDefaults().set(calculatedDateTimeToNotifyString, forKey: "projectbaby-nextBottleNotificationDateTime")
-            //print(calculatedDateTimeToNotify)
+            
             
             //dateComponents.hour = calculatedDateTimeToNotify
             //dateComponents.minute = minuteInterval

@@ -18,6 +18,7 @@ class BottleController
     @AppStorage("projectbaby.averagebottleduration") var averageBottleDuration: Double = 0.0
     @AppStorage("projectbaby.totalbottleduration") var totalBottleDuration: Double = 0.0
     @AppStorage("projectbaby.totalbottles") var totalBottles: Double = 0.0
+    @AppStorage("projectbaby.nextBottleNotificationDateTime") var nextBottleNotificationDateTime: String = ""
     
     @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \Bottle.date, ascending: false)], animation: .default) private var bottles: FetchedResults<Bottle>
     
@@ -51,15 +52,17 @@ class BottleController
 
     }
     
-    func calculateTimeUntilNextBottle()
+    func setTimeUntilNextBottle(timeString: String)
     {
-        
+        print("++++++++++++++++++++++")
+        UserDefaults.standard.set(timeString, forKey: "projectbaby.nextBottleNotificationDateTime")
+        print("++++++++++++++++++++++")
     }
     
     func calculateAverageTimeBetweenBottles()
     {
         var totalSecondsBetweenBottles: Double = 0.0
-        var currentSecondsBetweenBottles: Double = 0.0
+        //var currentSecondsBetweenBottles: Double = 0.0
         var bottleCount: Int = 0
         var previousBottleTime: Date? = nil
         
@@ -74,7 +77,7 @@ class BottleController
             
         for bottle in coreBottles
             {
-                var currentBottleTime: Date = bottle.start_time!
+                let currentBottleTime: Date = bottle.start_time!
                 if bottleCount > 0
                 {
                     print(currentBottleTime, " - ", previousBottleTime!)

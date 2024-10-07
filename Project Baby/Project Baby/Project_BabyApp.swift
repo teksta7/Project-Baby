@@ -15,7 +15,8 @@ struct Project_BabyApp: App {
     
     var body: some Scene {
         WindowGroup {
-            HomeView()
+            //HomeView()
+            InitialOnboardingView()
                 .environmentObject(coreDataController)
                 .environment(\.managedObjectContext, coreDataController.container.viewContext)
                 //.environment(\.colorScheme, .dark)

@@ -44,27 +44,27 @@ struct SettingsView: View {
                     //Toggle(isOn: $homeCardStore.sleepHomeCard.toTrack)
                     Toggle(isOn: $isSleepCardTracked)
                     {
-                        Text("Sleep")
+                        Text("Sleep (COMING SOON)")
                         Text("Enable the app to track the amount sleep your baby has had")
                     }
                     Toggle(isOn: $isFoodCardTracked)
                     {
-                        Text("Food")
+                        Text("Food (COMING SOON)")
                         Text("Enable the app to track the amount of food you give to your baby")
                     }
                     Toggle(isOn: $isMedsCardTracked)
                     {
-                        Text("Medicene")
+                        Text("Medicene (COMING SOON)")
                         Text("Enable the app to track any medicene administered to your baby")
                     }
                     Toggle(isOn: $isWindCardTracked)
                     {
-                        Text("Wind")
+                        Text("Wind (COMING SOON)")
                         Text("Enable the app to track the amount of wind your baby has had")
                     }
                     Toggle(isOn: $isPooCardTracked)
                     {
-                        Text("Nappies")
+                        Text("Nappies (COMING SOON)")
                         Text("Enable the app to track any nappy changes your baby has had")
                     }
 

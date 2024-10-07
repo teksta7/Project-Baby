@@ -18,7 +18,7 @@ struct BottomMiniCardView: View {
     //amount of nappy changes
     
     @State var msg = "Welcome"
-    @State var messagesToShow: [String] = ["Next bottle is due: \(UserDefaults.standard.string(forKey: "projectbaby-nextBottleNotificationDateTime") ?? "")", "Wake windows today: N/A ", "Average time between bottles: \(UtilFunctions().convertSecondsToHours (Int(UserDefaults.standard.double(forKey: "projectbaby.averagetimebetweenbottles"))))" , "Food eaten today: N/A ", "Any medicene due: N/A", "Amount of wind: N/A", "Amount of nappy changes: N/A"]
+    @State var messagesToShow: [String] = ["Next bottle is due: \(UserDefaults.standard.string(forKey: "projectbaby.nextBottleNotificationDateTime") ?? "N/A")", "Wake windows today: N/A ", "Average time between bottles: \(UtilFunctions().convertSecondsToHours (Int(UserDefaults.standard.double(forKey: "projectbaby.averagetimebetweenbottles"))))" , "Food eaten today: N/A ", "Any medicene due: N/A", "Amount of wind: N/A", "Amount of nappy changes: N/A"]
     @State var imagesToShow: [String] = ["waterbottle", "powersleep", "waterbottle" , "carrot", "pill", "wind", "toilet"]
     @State var colorsToShow: [Color] = [.blue, .purple, .indigo]
     @State var colorsToShowIndex: Int = 0
