@@ -28,7 +28,7 @@ func HomeCardView(_ homeCard: HomeCard) -> some View {
                         .symbolEffect(.variableColor, isActive: animate)
                         .padding()
                     //Text(homeCard.presentedString).font(.system(size: 50))
-                    Text(homeCard.presentedString).font(.system(size: DeviceDimensions().height/20))
+                    Text(homeCard.presentedString).font(.system(size: DeviceDimensions().height/25))
                         .foregroundStyle(.white)
                         .frame(width: DeviceDimensions().width/2.5)
                         .multilineTextAlignment(.center)
