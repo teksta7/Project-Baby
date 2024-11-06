@@ -31,10 +31,10 @@ struct CardSelectionOnboardingView: View {
             .offset(x: 15)
             .padding()
         Text("Here you can select which baby stat cards to enable, each of which enable you to track different stats about your baby.")
-            .frame(width: DeviceDimensions().width, alignment: .center)
+            .frame(width: DeviceDimensions().width/1.1, alignment: .center)
             .padding()
         Text("You can change this at any time in the settings.")
-            .frame(width: DeviceDimensions().width, alignment: .center)
+            .frame(width: DeviceDimensions().width/1.1, alignment: .center)
 
         NavigationView
         {

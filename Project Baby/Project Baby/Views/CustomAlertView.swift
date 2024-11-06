@@ -26,6 +26,7 @@ struct CustomAlertView: View {
                     .frame(height: 300)
                     .foregroundStyle(LinearGradient(gradient: Gradient(colors: [.clear, .clear, gradientColor]), startPoint: .top, endPoint: .bottom))
                     .opacity(0.5)
+                    //.offset(y: show ? 0: DeviceDimensions().height/2.5)
                     .offset(y: show ? 0: 300)
 
                 ZStack
@@ -67,7 +68,8 @@ struct CustomAlertView: View {
                     }
                 }
                 .padding(.horizontal, 10)
-                .offset(y: show ? -30: 300)
+                //.offset(y: show ? -30: 300)
+                .offset(y: show ? -30: DeviceDimensions().height/2)
             }
             .onChange(of: show) { oldValue, newValue in
                 if newValue {
