@@ -10,6 +10,7 @@
 		832DED502CB3E7C300E3793F /* BabyProfileOnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832DED4F2CB3E7C300E3793F /* BabyProfileOnboardingView.swift */; };
 		832DED522CB3E7E200E3793F /* CardSelectionOnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832DED512CB3E7E200E3793F /* CardSelectionOnboardingView.swift */; };
 		832DED542CB3EF9600E3793F /* ImageFileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832DED532CB3EF9600E3793F /* ImageFileController.swift */; };
+		832DED582CC1086700E3793F /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832DED572CC1086700E3793F /* ProfileController.swift */; };
 		83694DF42C7CA6F100C5C8FC /* BottleListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83694DF32C7CA6F100C5C8FC /* BottleListView.swift */; };
 		83694DF62C7CA70A00C5C8FC /* BottleChartsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83694DF52C7CA70A00C5C8FC /* BottleChartsView.swift */; };
 		83694DF82C7CB34800C5C8FC /* BottleController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83694DF72C7CB34700C5C8FC /* BottleController.swift */; };
@@ -70,6 +71,7 @@
 		832DED4F2CB3E7C300E3793F /* BabyProfileOnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BabyProfileOnboardingView.swift; sourceTree = "<group>"; };
 		832DED512CB3E7E200E3793F /* CardSelectionOnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardSelectionOnboardingView.swift; sourceTree = "<group>"; };
 		832DED532CB3EF9600E3793F /* ImageFileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFileController.swift; sourceTree = "<group>"; };
+		832DED572CC1086700E3793F /* ProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; };
 		83694DF32C7CA6F100C5C8FC /* BottleListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottleListView.swift; sourceTree = "<group>"; };
 		83694DF52C7CA70A00C5C8FC /* BottleChartsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottleChartsView.swift; sourceTree = "<group>"; };
 		83694DF72C7CB34700C5C8FC /* BottleController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottleController.swift; sourceTree = "<group>"; };
@@ -217,6 +219,7 @@
 				83694DF72C7CB34700C5C8FC /* BottleController.swift */,
 				839CBC7B2C8E702A00DE05CE /* BottleNotificationController.swift */,
 				832DED532CB3EF9600E3793F /* ImageFileController.swift */,
+				832DED572CC1086700E3793F /* ProfileController.swift */,
 			);
 			path = Contollers;
 			sourceTree = "<group>";
@@ -407,6 +410,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				832DED582CC1086700E3793F /* ProfileController.swift in Sources */,
 				838A3AEB2C718BC900F8495D /* BottomMiniCardView.swift in Sources */,
 				838A3AE12C6FA3EF00F8495D /* WindView.swift in Sources */,
 				838A3AD92C6F581E00F8495D /* DeviceDimensions.swift in Sources */,

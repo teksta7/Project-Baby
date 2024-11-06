@@ -28,12 +28,15 @@ struct InitialOnboardingView: View {
                 Image(ImageResource.appLogo)
                     .resizable()
                     .offset(y: -200)
-                    .frame(width: 200, height: 200)
+                    .frame(width: 200 + DeviceDimensions().width/5, height: 200 + DeviceDimensions().height/15)
+                    //.frame(width: DeviceDimensions().width/1.75, height: DeviceDimensions().height/4)
+                    //.frame(width: 200, height: 200)
                 Text("Welcome to Project Baby").bold().font(.largeTitle)
-                    .offset(y: -75)
+                    .offset(y: -65)
+                    .frame(width: 200)
                     .multilineTextAlignment(.center)
                 Text("Lets get started by completing the sections below to setup the app...").font(.title2)
-                    .offset(y: -25)
+                    .offset(y: -15)
                     .frame(width: 250)
                     .multilineTextAlignment(.center)
                 //Text("Complete the sections below to setup the app").font(.title3)
@@ -45,12 +48,12 @@ struct InitialOnboardingView: View {
                     ZStack{
                         RoundedRectangle(cornerRadius: 10)
                             .fill(babyCardColor)
-                            .frame(width: 100, height: 50)
+                            .frame(width: 100, height: 100)
                             .padding()
-                            .offset(y: 150)
+                            .offset(y: 175)
                             .opacity(0.5)
                         Text("Baby").foregroundColor(.white)
-                            .offset(y: 150)
+                            .offset(y: 175)
                     }
                     .onTapGesture {
                         withAnimation {
@@ -69,12 +72,12 @@ struct InitialOnboardingView: View {
                     ZStack{
                         RoundedRectangle(cornerRadius: 10)
                             .fill(cardsCardColor)
-                            .frame(width: 100, height: 50)
+                            .frame(width: 100, height: 100)
                             .padding()
-                            .offset(y: 150)
+                            .offset(y: 175)
                             .opacity(0.5)
                         Text("Cards").foregroundColor(.white)
-                            .offset(y: 150)
+                            .offset(y: 175)
                     }
                     .onTapGesture {
                         withAnimation {
@@ -137,12 +140,12 @@ struct InitialOnboardingView: View {
                 {
                     RoundedRectangle(cornerRadius: 10)
                         .fill(finishColor)
-                        .frame(width: 240, height: 50)
+                        .frame(width: 240, height: 60)
                         .padding()
-                        .offset(y: 235)
+                        .offset(y: 275)
                         .opacity(0.5)
                     Text("Finish").foregroundColor(.white)
-                        .offset(y: 235)
+                        .offset(y: 275)
                         .onTapGesture {
                             withAnimation {
                                 print("Checking Onboarding")
@@ -168,7 +171,10 @@ struct InitialOnboardingView: View {
             }
         }
         else {
-            HomeView()
+            withAnimation
+            {
+                HomeView()
+            }
         }
         //Welcome
         //Baby Profile
@@ -178,5 +184,5 @@ struct InitialOnboardingView: View {
 }
 
 #Preview {
-    InitialOnboardingView()
+    InitialOnboardingView(showWelcomeOnboarding: true)
 }

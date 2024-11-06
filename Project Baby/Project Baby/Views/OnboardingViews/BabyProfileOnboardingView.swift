@@ -19,7 +19,7 @@ struct BabyProfileOnboardingView: View {
     @State var animation: Bool = false
     @State private var babyName = ""
     @State private var gender = "Boy"
-    @State private var dueDate =  Calendar.current.date(bySettingHour: 1, minute: 0, second: 0, of: Date.now)!
+    @State private var birthDate =  Calendar.current.date(bySettingHour: 1, minute: 0, second: 0, of: Date.now)!
     @State private var pickerItem: PhotosPickerItem?
     @State private var babyProfilePic: Image? = Image(systemName: "questionmark")
     @State private var pictureString = "Select a profile picture"
@@ -27,6 +27,9 @@ struct BabyProfileOnboardingView: View {
     @State var showSuccessAlert = false
     @State var showWarningAlert = false
     @State var showErrorAlert = false
+    
+    @State private var weightValuePounds: Int = 0
+    @State private var weightValueOunces: Int = 0
     //@State private var appColor = UserDefaults().getAppTheme()
 
     var body: some View {
@@ -36,7 +39,7 @@ struct BabyProfileOnboardingView: View {
                 Image(systemName: imageName)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .frame(height: 200)
+                    .frame(height: 150)
                     .foregroundColor(.yellow)
                     .symbolEffect(.pulse, isActive: animation)
                     .onAppear {
@@ -51,17 +54,38 @@ struct BabyProfileOnboardingView: View {
                     .font(.title)
                     .fontWeight(.bold)
                 
-                Text(description)
-                    .font(.body)
-                    .multilineTextAlignment(.center)
-                    .padding(.horizontal, 10)
-                    .foregroundColor(.gray)
+//                Text(description)
+//                    .font(.body)
+//                    .multilineTextAlignment(.center)
+//                    .padding(.horizontal, 10)
+//                    .foregroundColor(.gray)
                 
                 TextField("What is your baby's name?", text: $babyName)
                     .multilineTextAlignment(.center)
                     .padding(.horizontal, 40)
                     .foregroundColor(.gray)
                 
+                Text("What was their birth weight?")
+                    .multilineTextAlignment(.center)
+                    .padding(.horizontal, 40)
+                    .foregroundColor(.gray)
+                HStack
+                {
+                    
+                 
+                Stepper("\(Int(weightValuePounds)) lbs",
+                        value: $weightValuePounds,
+                                    in: 0...20,
+                                    step: 1)
+                .padding(.horizontal, 10)
+                Stepper("\(Int(weightValueOunces)) oz",
+                            value: $weightValueOunces,
+                                        in: 0...15,
+                                        step: 1)
+                .padding(.horizontal, 10)
+
+                }
+               
                 
                 HStack
                 {
@@ -80,7 +104,7 @@ struct BabyProfileOnboardingView: View {
                 
                 // the interval represents 273 days in the future to allow for picking a date in a full pregnancy window
                 
-                DatePicker(selection: $dueDate)
+                DatePicker(selection: $birthDate)
                 {
                     Text("When were they born?")
                         .foregroundColor(.gray)
@@ -131,6 +155,7 @@ struct BabyProfileOnboardingView: View {
                         }
                     }
                 }
+                //.frame(width: 350, height: 100)
                 .buttonStyle(.bordered)
                 .foregroundStyle(.white)
                 .padding()
@@ -143,7 +168,6 @@ struct BabyProfileOnboardingView: View {
        
         .padding()
     }
-    
     func setupBabyProfile() -> Bool {
         
         if selectedImageData != nil && babyName != "" 
@@ -153,11 +177,20 @@ struct BabyProfileOnboardingView: View {
             UserDefaults.standard.set(babyName, forKey: "projectbaby.babyName")
             print("Saving gender...")
             UserDefaults.standard.set(gender, forKey: "projectbaby.babyGender")
-            print("Saving due date...\(dueDate)")
+            print("Saving due date...\(birthDate)")
             
-            UserDefaults.standard.set(dueDate.timeIntervalSince1970, forKey: "projectbaby.babyBirthDateTime")
+            UserDefaults.standard.set(birthDate.timeIntervalSince1970, forKey: "projectbaby.babyBirthDateTime")
             print("Saving image...")
-            return true
+            print("Saving weight...")
+            let weightInKg = ProfileController().lbsOzToKg(pounds: Double(weightValuePounds), ounces: Double(weightValueOunces))
+            if addWeightToModel(kg: weightInKg)
+            {
+                return true
+            }
+            else
+            {
+                return false
+            }
         }
         else
         {
@@ -175,6 +208,20 @@ struct BabyProfileOnboardingView: View {
             }
             return false
         }
+    }
+    func addWeightToModel(kg: Double) -> Bool
+    {
+        print("Adding weight to data model")
+        let newWeight = Weight(context: viewContext)
+        newWeight.date = Date()
+        newWeight.kg = kg
+        
+        do {
+            try viewContext.save()
+        } catch {
+            return false
+        }
+        return true
     }
 }
 
