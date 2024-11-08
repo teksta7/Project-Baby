@@ -14,7 +14,7 @@ class ProfileController
 {
     @Environment(\.managedObjectContext) private var viewContext
     @AppStorage("projectbaby.babyBirthDateTime") var birthDay = 0.0
-    private var currentWeight: Double = 0
+    @AppStorage("projectbaby.currentWeight") var currentWeight: Double = 0.0
     
     func lbsOzToKg(pounds: Double, ounces: Double) -> Double
     {
@@ -29,9 +29,12 @@ class ProfileController
     
     func kgToLbsOz(kg: Double) -> (Int, Double)
     {
+        print ("kg: \(kg)")
         let totalPounds = kg * 2.20462
         let pounds = Int(totalPounds)
         let ounces = (totalPounds - Double(pounds)) * 16
+        print ("pounds: \(pounds)")
+        print ("ounces: \(ounces)")
         return (pounds, ounces)
         
         // Usage
@@ -41,11 +44,19 @@ class ProfileController
     
     func giveCurrentWeightInKg() -> Double
     {
+//        if currentWeight == 0.0
+//        {
+//            currentWeight = fetchLatestWeight()?.kg ?? 0.0
+//        }
         return currentWeight
     }
     
     func giveCurrentWeightInLbsOz() -> (Int, Double)
     {
+//        if currentWeight == 0.0
+//        {
+//            currentWeight = fetchLatestWeight()?.kg ?? 0.0
+//        }
         return kgToLbsOz(kg: currentWeight)
         //// Use the function
         //let weightInLbsOz = giveCurrentWeightInLbsOz()
@@ -56,26 +67,14 @@ class ProfileController
     {
 //        if addWeightToModel(kg: kg) == true
 //        {
+//        if currentWeight == 0.0
+//        {
+//            currentWeight = fetchLatestWeight()?.kg ?? 0.0
+//        }
             currentWeight = kg
             return true
        // }
        // else { return false }
-    }
-    
-    func fetchLatestWeight() -> Weight? {
-
-        let fetchRequest = NSFetchRequest<Weight>(entityName: "Weight")
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "kilograms", ascending: false)]
-        fetchRequest.fetchLimit = 1
-
-        do {
-            let lastWeight = try viewContext.fetch(fetchRequest).first
-            print(lastWeight?.kg ?? 0.0)
-            return lastWeight
-        } catch let error as NSError {
-            print("Could not fetch. \(error), \(error.userInfo)")
-            return nil
-        }
     }
     
     func getAgeInDays() -> Int

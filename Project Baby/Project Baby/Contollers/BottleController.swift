@@ -56,6 +56,7 @@ class BottleController
     {
         print("++++++++++++++++++++++")
         UserDefaults.standard.set(timeString, forKey: "projectbaby.nextBottleNotificationDateTime")
+        nextBottleNotificationDateTime = UserDefaults.standard.string(forKey: "projectbaby.nextBottleNotificationDateTime") ?? "N/A"
         print("++++++++++++++++++++++")
     }
     

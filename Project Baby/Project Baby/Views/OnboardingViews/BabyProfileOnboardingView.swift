@@ -215,6 +215,7 @@ struct BabyProfileOnboardingView: View {
         let newWeight = Weight(context: viewContext)
         newWeight.date = Date()
         newWeight.kg = kg
+        ProfileController().currentWeight = kg
         
         do {
             try viewContext.save()

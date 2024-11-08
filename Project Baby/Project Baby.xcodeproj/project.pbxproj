@@ -11,6 +11,8 @@
 		832DED522CB3E7E200E3793F /* CardSelectionOnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832DED512CB3E7E200E3793F /* CardSelectionOnboardingView.swift */; };
 		832DED542CB3EF9600E3793F /* ImageFileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832DED532CB3EF9600E3793F /* ImageFileController.swift */; };
 		832DED582CC1086700E3793F /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832DED572CC1086700E3793F /* ProfileController.swift */; };
+		835CC5372CDE6D4900972FC3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 835CC5362CDE6D4900972FC3 /* LaunchScreen.storyboard */; };
+		835CC5392CDE6EB700972FC3 /* PROJECT_BABY_LAUNCH_SCREEN.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 835CC5382CDE6EB700972FC3 /* PROJECT_BABY_LAUNCH_SCREEN.jpg */; };
 		83694DF42C7CA6F100C5C8FC /* BottleListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83694DF32C7CA6F100C5C8FC /* BottleListView.swift */; };
 		83694DF62C7CA70A00C5C8FC /* BottleChartsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83694DF52C7CA70A00C5C8FC /* BottleChartsView.swift */; };
 		83694DF82C7CB34800C5C8FC /* BottleController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83694DF72C7CB34700C5C8FC /* BottleController.swift */; };
@@ -45,7 +47,6 @@
 		83AE2E8A2C82046400ACF31F /* CustomAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83AE2E892C82046400ACF31F /* CustomAlertView.swift */; };
 		83AE2E8C2C852F9200ACF31F /* GeneralUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83AE2E8B2C852F9200ACF31F /* GeneralUtil.swift */; };
 		83B2AD0A2C77E1F400663BC8 /* FeatureCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B2AD092C77E1F400663BC8 /* FeatureCardView.swift */; };
-		83BC12732CAD6BF300D19428 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83BC12722CAD6BF300D19428 /* Launch Screen.storyboard */; };
 		83BC12762CAEAA1300D19428 /* InitialOnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83BC12752CAEAA1300D19428 /* InitialOnboardingView.swift */; };
 		83C0BACF2CA02C2A00949DF7 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C0BACE2CA02C2A00949DF7 /* ProfileView.swift */; };
 /* End PBXBuildFile section */
@@ -72,6 +73,8 @@
 		832DED512CB3E7E200E3793F /* CardSelectionOnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardSelectionOnboardingView.swift; sourceTree = "<group>"; };
 		832DED532CB3EF9600E3793F /* ImageFileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFileController.swift; sourceTree = "<group>"; };
 		832DED572CC1086700E3793F /* ProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; };
+		835CC5362CDE6D4900972FC3 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		835CC5382CDE6EB700972FC3 /* PROJECT_BABY_LAUNCH_SCREEN.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = PROJECT_BABY_LAUNCH_SCREEN.jpg; sourceTree = "<group>"; };
 		83694DF32C7CA6F100C5C8FC /* BottleListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottleListView.swift; sourceTree = "<group>"; };
 		83694DF52C7CA70A00C5C8FC /* BottleChartsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottleChartsView.swift; sourceTree = "<group>"; };
 		83694DF72C7CB34700C5C8FC /* BottleController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottleController.swift; sourceTree = "<group>"; };
@@ -110,7 +113,6 @@
 		83AE2E892C82046400ACF31F /* CustomAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertView.swift; sourceTree = "<group>"; };
 		83AE2E8B2C852F9200ACF31F /* GeneralUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralUtil.swift; sourceTree = "<group>"; };
 		83B2AD092C77E1F400663BC8 /* FeatureCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureCardView.swift; sourceTree = "<group>"; };
-		83BC12722CAD6BF300D19428 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		83BC12752CAEAA1300D19428 /* InitialOnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialOnboardingView.swift; sourceTree = "<group>"; };
 		83C0BACE2CA02C2A00949DF7 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -143,7 +145,7 @@
 		838A3A942C6EB80E00F8495D = {
 			isa = PBXGroup;
 			children = (
-				83BC12722CAD6BF300D19428 /* Launch Screen.storyboard */,
+				835CC5362CDE6D4900972FC3 /* LaunchScreen.storyboard */,
 				838A3A9F2C6EB80E00F8495D /* Project Baby */,
 				838A3AB52C6EB80F00F8495D /* Project BabyTests */,
 				838A3ABF2C6EB80F00F8495D /* Project BabyUITests */,
@@ -205,6 +207,7 @@
 		838A3ACF2C6EB85E00F8495D /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				835CC5382CDE6EB700972FC3 /* PROJECT_BABY_LAUNCH_SCREEN.jpg */,
 				838A3AAB2C6EB80F00F8495D /* Project_Baby.xcdatamodeld */,
 				838A3AD62C6EB97100F8495D /* HomeCard.swift */,
 				839CBC752C8A070500DE05CE /* BottleSettings.swift */,
@@ -343,7 +346,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1540;
-				LastUpgradeCheck = 1540;
+				LastUpgradeCheck = 1610;
 				TargetAttributes = {
 					838A3A9C2C6EB80E00F8495D = {
 						CreatedOnToolsVersion = 15.4;
@@ -383,8 +386,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				83BC12732CAD6BF300D19428 /* Launch Screen.storyboard in Resources */,
+				835CC5372CDE6D4900972FC3 /* LaunchScreen.storyboard in Resources */,
 				838A3AA82C6EB80F00F8495D /* Preview Assets.xcassets in Resources */,
+				835CC5392CDE6EB700972FC3 /* PROJECT_BABY_LAUNCH_SCREEN.jpg in Resources */,
 				838A3AA52C6EB80F00F8495D /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -605,6 +609,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1.0.0;
 				DEVELOPMENT_ASSET_PATHS = "\"Project Baby/Preview Content\"";
@@ -616,7 +621,7 @@
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -641,6 +646,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1.0.0;
 				DEVELOPMENT_ASSET_PATHS = "\"Project Baby/Preview Content\"";
@@ -652,7 +658,7 @@
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -675,7 +681,6 @@
 		838A3ACA2C6EB80F00F8495D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -695,7 +700,6 @@
 		838A3ACB2C6EB80F00F8495D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -715,7 +719,6 @@
 		838A3ACD2C6EB80F00F8495D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = JVBR4R2UHW;
@@ -733,7 +736,6 @@
 		838A3ACE2C6EB80F00F8495D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = JVBR4R2UHW;
