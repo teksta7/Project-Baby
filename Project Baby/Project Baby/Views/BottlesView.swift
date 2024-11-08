@@ -326,6 +326,7 @@ struct BottlesView: View {
             }
                 .onAppear()
                 {
+                    UIApplication.shared.applicationIconBadgeNumber = 0
                     if DeviceDimensions().height == 667.0
                     {
                         imagePadding = 60.0

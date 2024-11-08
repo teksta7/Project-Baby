@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct ProfileView: View {
     @State var imagePadding = 1.0 //60.0 for small, 30 for medium
@@ -20,6 +21,8 @@ struct ProfileView: View {
     @State var weightSubLabel = "Tap for kg"
     @State var weightLabel = "0"
     @State var weightLabelWords = "kg"
+    @Environment(\.managedObjectContext) private var viewContext
+
 
     @State var ageSelector = 0
     @State var weightSelector = 0
@@ -100,8 +103,12 @@ struct ProfileView: View {
                                 VStack
                                 {
                                     //change to a profile controller(to be created) that can interpret kg and lbs/oz from 2 values which are lbs & oz
-                                    Text(weightLabel).bold().font(.system(size: DeviceDimensions().height/8))
-                                        .offset(y: -DeviceDimensions().height/100)
+                                    HStack
+                                    {
+                                        Text(weightLabel).bold().font(.system(size: DeviceDimensions().height/8))
+                                            .offset(y: -DeviceDimensions().height/100)
+                                        Text(weightLabelWords).font(.title3)
+                                    }
                                     
                                     Text("Weight:").font(.system(size: DeviceDimensions().width/25))
                                         .offset(y: -DeviceDimensions().height/100)
@@ -123,6 +130,11 @@ struct ProfileView: View {
                     }
                 }
             }
+        }
+        .onAppear()
+        {
+            weightFormatSelector()
+            ageFormatSelector()
         }
     }
     func ageFormatSelector()
@@ -177,14 +189,36 @@ struct ProfileView: View {
         case 1:
             weightLabelWords = " lbs"
             weightSubLabel = "Tap for kg"
+            let tempWeight = fetchLatestWeight()
+        
+            ProfileController().setCurrentWeight(kg: tempWeight!.kg)
+
             let weightInLbsOz = ProfileController().giveCurrentWeightInLbsOz()
             weightLabel = "\(weightInLbsOz.0) lbs \(weightInLbsOz.1) oz"
+            print("Weight: \(weightInLbsOz.0) lbs \(weightInLbsOz.1) oz")
 
         default:
             weightLabel = " Unknown"
         }
         weightSelector += 1
         //return textToReturn
+    }
+    func fetchLatestWeight() -> Weight? {
+
+        let fetchRequest = NSFetchRequest<Weight>(entityName: "Weight")
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "kg", ascending: false)]
+        fetchRequest.fetchLimit = 1
+
+        do {
+            let lastWeight = try viewContext.fetch(fetchRequest).first
+            print("WEIGHT")
+            print(lastWeight?.kg ?? 0.0)
+           // setCurrentWeight(kg: lastWeight!.kg)
+            return lastWeight
+        } catch let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
+            return nil
+        }
     }
 }
 
@@ -212,7 +246,7 @@ func profileImageView() -> some View
                 ZStack
                 {
                     Image(uiImage: ImageFileController().loadBabyProfilePic()).resizable().scaledToFill()
-                    Circle().stroke(lineWidth: 60)
+                    Circle().stroke(lineWidth: 20)
                 }
                 .frame(width: 110, height: 160)
                 .clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
