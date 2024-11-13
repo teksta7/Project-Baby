@@ -21,6 +21,7 @@ struct ProfileView: View {
     @State var weightSubLabel = "Tap for kg"
     @State var weightLabel = "0"
     @State var weightLabelWords = "kg"
+    @State var weightLabelSize = 8
     @Environment(\.managedObjectContext) private var viewContext
 
 
@@ -105,10 +106,12 @@ struct ProfileView: View {
                                     //change to a profile controller(to be created) that can interpret kg and lbs/oz from 2 values which are lbs & oz
                                     HStack
                                     {
-                                        Text(weightLabel).bold().font(.system(size: DeviceDimensions().height/8))
+                                        Text(weightLabel).bold().font(.system(size: DeviceDimensions().height/16))
+                                        //Text(weightLabel).bold().font(.system(size: weightLabelSize))
                                             .offset(y: -DeviceDimensions().height/100)
                                         Text(weightLabelWords).font(.title3)
                                     }
+                                    .frame(height: DeviceDimensions.screen.height/7)
                                     
                                     Text("Weight:").font(.system(size: DeviceDimensions().width/25))
                                         .offset(y: -DeviceDimensions().height/100)
@@ -183,7 +186,7 @@ struct ProfileView: View {
         {
         case 0:
             //ageLabel = " Days old"
-            weightLabel = String(ProfileController().giveCurrentWeightInKg())
+            weightLabel = String(format: "%.2f" ,(ProfileController().giveCurrentWeightInKg()))
             weightSubLabel = "Tap for lbs/oz"
             weightLabelWords = " kg"
         case 1:
@@ -194,8 +197,28 @@ struct ProfileView: View {
             ProfileController().setCurrentWeight(kg: tempWeight!.kg)
 
             let weightInLbsOz = ProfileController().giveCurrentWeightInLbsOz()
-            weightLabel = "\(weightInLbsOz.0) lbs \(weightInLbsOz.1) oz"
-            print("Weight: \(weightInLbsOz.0) lbs \(weightInLbsOz.1) oz")
+            let weightOzFormattedLabel = String(format: "%.0f" , weightInLbsOz.1)
+            if weightInLbsOz.1 > 15.8
+            {
+                let correctedWeightlbs = weightInLbsOz.0 + 1
+                let correctedWeightOz = 0
+                
+                weightLabel = "\(correctedWeightlbs) lbs \(correctedWeightOz) oz"
+                print("Weight: \(weightInLbsOz.0) lbs \(weightOzFormattedLabel) oz")
+            }
+            else if weightInLbsOz.1 < 1
+            {
+                let correctedWeightlbs = weightInLbsOz.0 - 1
+                let correctedWeightOz = 0
+                
+                weightLabel = "\(correctedWeightlbs) lbs \(correctedWeightOz) oz"
+                print("Weight: \(weightInLbsOz.0) lbs \(weightOzFormattedLabel) oz")
+            }
+            else
+            {
+                weightLabel = "\(weightInLbsOz.0) lbs \(weightOzFormattedLabel) oz"
+                print("Weight: \(weightInLbsOz.0) lbs \(weightOzFormattedLabel) oz")
+            }
 
         default:
             weightLabel = " Unknown"
