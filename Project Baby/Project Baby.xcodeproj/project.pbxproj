@@ -36,7 +36,7 @@
 		838A3AE52C6FA41000F8495D /* MedsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838A3AE42C6FA41000F8495D /* MedsView.swift */; };
 		838A3AE72C6FD98E00F8495D /* TopMiniCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838A3AE62C6FD98E00F8495D /* TopMiniCardView.swift */; };
 		838A3AE92C7185EE00F8495D /* CoreDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838A3AE82C7185EE00F8495D /* CoreDataController.swift */; };
-		838A3AEB2C718BC900F8495D /* BottomMiniCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838A3AEA2C718BC900F8495D /* BottomMiniCardView.swift */; };
+		838A3AEB2C718BC900F8495D /* MiniTickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838A3AEA2C718BC900F8495D /* MiniTickerView.swift */; };
 		838A3AED2C718CBF00F8495D /* ChartsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838A3AEC2C718CBF00F8495D /* ChartsView.swift */; };
 		838A3AEF2C718DAC00F8495D /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838A3AEE2C718DAC00F8495D /* SettingsView.swift */; };
 		839AD7F62C80A19E0006B3F1 /* SingleBottleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 839AD7F52C80A19E0006B3F1 /* SingleBottleView.swift */; };
@@ -101,7 +101,7 @@
 		838A3AE42C6FA41000F8495D /* MedsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedsView.swift; sourceTree = "<group>"; };
 		838A3AE62C6FD98E00F8495D /* TopMiniCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopMiniCardView.swift; sourceTree = "<group>"; };
 		838A3AE82C7185EE00F8495D /* CoreDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataController.swift; sourceTree = "<group>"; };
-		838A3AEA2C718BC900F8495D /* BottomMiniCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomMiniCardView.swift; sourceTree = "<group>"; };
+		838A3AEA2C718BC900F8495D /* MiniTickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniTickerView.swift; sourceTree = "<group>"; };
 		838A3AEC2C718CBF00F8495D /* ChartsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartsView.swift; sourceTree = "<group>"; };
 		838A3AEE2C718DAC00F8495D /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		839AD7F52C80A19E0006B3F1 /* SingleBottleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleBottleView.swift; sourceTree = "<group>"; };
@@ -168,7 +168,6 @@
 			children = (
 				839AD7F72C80A7740006B3F1 /* Project-Baby-Info.plist */,
 				838A3AD32C6EB88200F8495D /* Utils */,
-				838A3AD22C6EB87D00F8495D /* Assets */,
 				838A3AD12C6EB87100F8495D /* Views */,
 				838A3AD02C6EB86300F8495D /* Contollers */,
 				838A3ACF2C6EB85E00F8495D /* Models */,
@@ -246,19 +245,12 @@
 				838A3AE22C6FA40600F8495D /* FoodView.swift */,
 				838A3AE42C6FA41000F8495D /* MedsView.swift */,
 				838A3AE62C6FD98E00F8495D /* TopMiniCardView.swift */,
-				838A3AEA2C718BC900F8495D /* BottomMiniCardView.swift */,
+				838A3AEA2C718BC900F8495D /* MiniTickerView.swift */,
 				83B2AD092C77E1F400663BC8 /* FeatureCardView.swift */,
 				83AE2E892C82046400ACF31F /* CustomAlertView.swift */,
 				839CBC792C8A72A700DE05CE /* TimePickerView.swift */,
 			);
 			path = Views;
-			sourceTree = "<group>";
-		};
-		838A3AD22C6EB87D00F8495D /* Assets */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Assets;
 			sourceTree = "<group>";
 		};
 		838A3AD32C6EB88200F8495D /* Utils */ = {
@@ -415,7 +407,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				832DED582CC1086700E3793F /* ProfileController.swift in Sources */,
-				838A3AEB2C718BC900F8495D /* BottomMiniCardView.swift in Sources */,
+				838A3AEB2C718BC900F8495D /* MiniTickerView.swift in Sources */,
 				838A3AE12C6FA3EF00F8495D /* WindView.swift in Sources */,
 				838A3AD92C6F581E00F8495D /* DeviceDimensions.swift in Sources */,
 				839CBC7A2C8A72A700DE05CE /* TimePickerView.swift in Sources */,

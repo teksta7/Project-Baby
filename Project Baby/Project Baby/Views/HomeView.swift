@@ -125,7 +125,7 @@ struct HomeView: View {
                 
                 
                 
-                BottomMiniCardView()
+                MiniTickerView()
                     .frame(width: DeviceDimensions().width/1.5, height: DeviceDimensions().height/15)
 //                    .onTapGesture {
 //                        isCardSettingsSheetPresented.toggle()
