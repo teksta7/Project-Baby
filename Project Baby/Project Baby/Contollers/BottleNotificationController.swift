@@ -49,12 +49,12 @@ class BottleNotificationController
             
             // 2. Set up the title and subtitle of the notification
             //notificationContent.title = "Has \(UserDefaults.standard.string(forKey: "babyName")) kicked today?"
-            notificationContent.title = "Finley's next bottle is due"
+            //notificationContent.title = "Finley's next bottle is due"
             notificationContent.interruptionLevel = .timeSensitive
             notificationContent.badge = 1
             //Code for PROD below
             
-            //notificationContent.title = "\(UserDefaults.standard.string(forKey: "projectbaby-babyName") ?? "")'s next bottle is due"
+            notificationContent.title = "\(UserDefaults.standard.string(forKey: "projectbaby.babyName") ?? "")'s next bottle is due"
             
             //print (notificationContent.title)
             

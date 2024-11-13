@@ -18,7 +18,7 @@ class BottleController
     @AppStorage("projectbaby.averagebottleduration") var averageBottleDuration: Double = 0.0
     @AppStorage("projectbaby.totalbottleduration") var totalBottleDuration: Double = 0.0
     @AppStorage("projectbaby.totalbottles") var totalBottles: Double = 0.0
-    @AppStorage("projectbaby.nextBottleNotificationDateTime") var nextBottleNotificationDateTime: String = ""
+    @AppStorage("projectbaby.nextBottleNotificationDateTime") var nextBottleNotificationDateTime: String = "N/A"
     
     @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \Bottle.date, ascending: false)], animation: .default) private var bottles: FetchedResults<Bottle>
     

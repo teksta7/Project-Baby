@@ -250,13 +250,16 @@ struct ProfileView: View {
 @ViewBuilder
 func profileImageView() -> some View
 {
+    @State var profileImage = ImageFileController().loadBabyProfilePic()
+
     GeometryReader{ geo in
         let minY = geo.frame(in: .global).minY
         let minX = geo.frame(in: .global).minX
         let isScrolling = minY > 0
         VStack
         {
-            Image (uiImage: ImageFileController().loadBabyProfilePic()).resizable().scaledToFill()
+            //Image (uiImage: ImageFileController().loadBabyProfilePic()).resizable().scaledToFill()
+            Image (uiImage: profileImage).resizable().scaledToFill()
             //Image(.test).resizable().scaledToFill()
                 .frame(height: isScrolling ? 160 + minY/3 : 160 )
                 .clipped()
@@ -268,7 +271,10 @@ func profileImageView() -> some View
             {
                 ZStack
                 {
-                    Image(uiImage: ImageFileController().loadBabyProfilePic()).resizable().scaledToFill()
+                    //Image(uiImage: ImageFileController().loadBabyProfilePic()).resizable().scaledToFill()
+                    Image (uiImage: profileImage).resizable().scaledToFill()
+
+                    //Image(.test).resizable().scaledToFill()
                     Circle().stroke(lineWidth: 20)
                 }
                 .frame(width: 110, height: 160)
