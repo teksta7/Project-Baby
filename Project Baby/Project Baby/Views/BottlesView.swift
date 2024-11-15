@@ -58,6 +58,7 @@ struct BottlesView: View {
                     imageView()
                         .padding(.bottom, imagePadding)
                     Spacer(minLength: 20)
+                        .frame(height: DeviceDimensions.screen.height/15)
                     Text(bottleFeedTimer ? "You can amend the ounces and notes before the bottle feed is done." : " ")
                         .frame(width: DeviceDimensions().width/1.3, height: bottleFeedTimer ? 45 : 0)
                         .multilineTextAlignment(.center)
