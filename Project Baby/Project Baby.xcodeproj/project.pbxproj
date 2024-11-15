@@ -68,6 +68,19 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		83A839AB2CE7915A00379F01 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		832DED4F2CB3E7C300E3793F /* BabyProfileOnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BabyProfileOnboardingView.swift; sourceTree = "<group>"; };
 		832DED512CB3E7E200E3793F /* CardSelectionOnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardSelectionOnboardingView.swift; sourceTree = "<group>"; };
@@ -110,6 +123,8 @@
 		839CBC772C8A077300DE05CE /* UserDefault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefault.swift; sourceTree = "<group>"; };
 		839CBC792C8A72A700DE05CE /* TimePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePickerView.swift; sourceTree = "<group>"; };
 		839CBC7B2C8E702A00DE05CE /* BottleNotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottleNotificationController.swift; sourceTree = "<group>"; };
+		83A839962CE7915800379F01 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		83A839982CE7915800379F01 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		83AE2E892C82046400ACF31F /* CustomAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertView.swift; sourceTree = "<group>"; };
 		83AE2E8B2C852F9200ACF31F /* GeneralUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralUtil.swift; sourceTree = "<group>"; };
 		83B2AD092C77E1F400663BC8 /* FeatureCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureCardView.swift; sourceTree = "<group>"; };
@@ -149,6 +164,7 @@
 				838A3A9F2C6EB80E00F8495D /* Project Baby */,
 				838A3AB52C6EB80F00F8495D /* Project BabyTests */,
 				838A3ABF2C6EB80F00F8495D /* Project BabyUITests */,
+				83A839952CE7915800379F01 /* Frameworks */,
 				838A3A9E2C6EB80E00F8495D /* Products */,
 			);
 			sourceTree = "<group>";
@@ -264,6 +280,15 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
+		83A839952CE7915800379F01 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				83A839962CE7915800379F01 /* WidgetKit.framework */,
+				83A839982CE7915800379F01 /* SwiftUI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		83BC12742CAEA9DD00D19428 /* OnboardingViews */ = {
 			isa = PBXGroup;
 			children = (
@@ -284,6 +309,7 @@
 				838A3A992C6EB80E00F8495D /* Sources */,
 				838A3A9A2C6EB80E00F8495D /* Frameworks */,
 				838A3A9B2C6EB80E00F8495D /* Resources */,
+				83A839AB2CE7915A00379F01 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
@@ -337,7 +363,7 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1540;
+				LastSwiftUpdateCheck = 1610;
 				LastUpgradeCheck = 1610;
 				TargetAttributes = {
 					838A3A9C2C6EB80E00F8495D = {
