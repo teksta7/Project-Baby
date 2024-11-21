@@ -115,10 +115,16 @@ struct HomeView: View {
                                 }
                             }
                             .padding(.vertical, DeviceDimensions().height/30)
+                            .foregroundColor(.white)
+                            .accentColor(.white)
+                            .buttonStyle(PlainButtonStyle())
                         }
                             
                         .scrollTargetBehavior(.paging)
                         .scrollIndicators(showIndicator ? .visible : .hidden)
+                        .foregroundColor(.white)
+                        .accentColor(.white)
+                        .buttonStyle(PlainButtonStyle())
                 }
                 .frame(height: DeviceDimensions().height/1.9)
                 //INSERT BOTTOM MINI VIEW (BABY AT A GLANCE VIEW)
@@ -146,7 +152,15 @@ struct HomeView: View {
                 //UNUserNotificationCenter.current().setBadgeCount(0)
             }
             .navigationTitle("Project Baby")
+            .foregroundColor(.white)
+            .accentColor(.white)
+            .buttonStyle(PlainButtonStyle())
         }
+        .foregroundColor(.white)
+        .accentColor(.white)
+        .buttonStyle(PlainButtonStyle())
+        
+        
     }
 }
 
