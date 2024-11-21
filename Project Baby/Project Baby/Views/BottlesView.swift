@@ -405,8 +405,10 @@ struct BottlesView: View {
             let isScrolling = minY > 0
             VStack
             {
-                Image(.test).resizable().scaledToFill()
+                Image(.bottle).resizable()
+                    .scaledToFill()
                     .frame(height: isScrolling ? 160 + minY/3 : 160 )
+                    .opacity(0.75)
                     .clipped()
                     .offset(y: isScrolling ? -minY : 0)
                     .offset(x: isScrolling ? -minX : 0)
@@ -416,8 +418,9 @@ struct BottlesView: View {
                 {
                     ZStack
                     {
-                        Image(.test).resizable().scaledToFill()
-                        Circle().stroke(lineWidth: 60)
+                        Image(.bottle).resizable().scaledToFit().scaleEffect(0.9).imageScale(.small)
+                        Circle().stroke(lineWidth: 10)
+                        
                     }
                     .frame(width: 110, height: 160)
                     .clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
