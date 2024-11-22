@@ -14,6 +14,7 @@ struct CardSelectionOnboardingView: View {
     @State private var config: TimePickerView.Config = .init(count: 36)
     @AppStorage("setDefaultOunces") var localOunces: Double = UserDefaults.standard.double(forKey: "setDefaultOunces")
     @State var isOuncesSheetPresented = false
+    @Binding var isCardSettingsSheetPresented: Bool
     @ObservedObject var homeCardStore: HomeCardStore = HomeCardStore()
     @AppStorage("com.projectbaby.isSleepCardTracked") var isSleepCardTracked: Bool = UserDefaults.standard.bool(forKey: "com.projectbaby.isSleepCardTracked")
     @AppStorage("com.projectbaby.isBottlesCardTracked") var isBottlesCardTracked: Bool = UserDefaults.standard.bool(forKey: "com.projectbaby.isBottlesCardTracked")
@@ -48,6 +49,7 @@ struct CardSelectionOnboardingView: View {
                         Text("Bottles")
                         Text("Enable the app to track the number of bottles you have given to your baby")
                     }
+                    
                     //Toggle(isOn: $homeCardStore.sleepHomeCard.toTrack)
 //                    Toggle(isOn: $isSleepCardTracked)
 //                    {
@@ -77,8 +79,15 @@ struct CardSelectionOnboardingView: View {
 
                 }
             }
+            
             //.navigationTitle("Card Selection")
         }
+        Button("Complete baby profile") {
+            isCardSettingsSheetPresented = false
+        }
+        .buttonStyle(.bordered)
+        .foregroundStyle(.white)
+        .padding()
         .onChange(of: isBottlesCardTracked)
         {
             HomeCards[1].toTrack = isBottlesCardTracked
@@ -116,5 +125,5 @@ struct CardSelectionOnboardingView: View {
 }
 
 #Preview {
-    CardSelectionOnboardingView()
+    CardSelectionOnboardingView(isCardSettingsSheetPresented: .constant(true))
 }

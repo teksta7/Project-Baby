@@ -86,7 +86,7 @@ struct InitialOnboardingView: View {
                         }
                     }
                     .popover(isPresented: $isCardSelectionSheetPresented, content: {
-                        CardSelectionOnboardingView()
+                        CardSelectionOnboardingView( isCardSettingsSheetPresented: $isCardSelectionSheetPresented)
                             .presentationCompactAdaptation(.sheet)
                     })
                     .sensoryFeedback(.increase, trigger: isCardSelectionSheetPresented)
