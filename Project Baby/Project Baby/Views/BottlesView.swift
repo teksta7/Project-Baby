@@ -328,6 +328,8 @@ struct BottlesView: View {
                 .onAppear()
                 {
                     UIApplication.shared.applicationIconBadgeNumber = 0
+                    // Disable the idle timer when the view appears to prevent screen to sleep
+                    UIApplication.shared.isIdleTimerDisabled = true
                     if DeviceDimensions().height == 667.0
                     {
                         imagePadding = 60.0
@@ -342,6 +344,11 @@ struct BottlesView: View {
                     {
                         imagePadding = 10.0
                     }
+                }
+                .onDisappear()
+                {
+                    // Re-enable the idle timer when the view disappears to allow the screen to sleep
+                    UIApplication.shared.isIdleTimerDisabled = false
                 }
                 CustomAlertView(show: $showSuccessAlert, icon: .success, text: "Success", gradientColor: .green, circleAColor: .green, details: "Bottle recorded successfully", corner: 30)
                 CustomAlertView(show: $showWarningAlert, icon: .warning, text: "Invalid ounces", gradientColor: .yellow, circleAColor: .yellow, details: "Hold down on the ounces card to set a value other than 0", corner: 30)
