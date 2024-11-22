@@ -126,26 +126,27 @@ struct SettingsView: View {
                     }
                 }
 
-                Section(header: Text("Sleep"))
-                {
-                    
-                }
-                Section(header: Text("Food"))
-                {
-                    
-                }
-                Section(header: Text("Medicene"))
-                {
-                    
-                }
-                Section(header: Text("Wind"))
-                {
-                    
-                }
-                Section(header: Text("Nappies"))
-                {
-                    
-                }
+                //RE-ENABLE THIS SECTION IN PARTS
+//                Section(header: Text("Sleep"))
+//                {
+//                    
+//                }
+//                Section(header: Text("Food"))
+//                {
+//                    
+//                }
+//                Section(header: Text("Medicene"))
+//                {
+//                    
+//                }
+//                Section(header: Text("Wind"))
+//                {
+//                    
+//                }
+//                Section(header: Text("Nappies"))
+//                {
+//                    
+//                }
                 
                 
                
