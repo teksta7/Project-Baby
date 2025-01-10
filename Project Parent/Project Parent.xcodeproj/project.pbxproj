@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8327700A2D3182C80018D853 /* Project_Parent.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 832770062D3182C80018D853 /* Project_Parent.xcdatamodeld */; };
 		832DED502CB3E7C300E3793F /* BabyProfileOnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832DED4F2CB3E7C300E3793F /* BabyProfileOnboardingView.swift */; };
 		832DED522CB3E7E200E3793F /* CardSelectionOnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832DED512CB3E7E200E3793F /* CardSelectionOnboardingView.swift */; };
 		832DED542CB3EF9600E3793F /* ImageFileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832DED532CB3EF9600E3793F /* ImageFileController.swift */; };
@@ -21,7 +22,6 @@
 		838A3AA32C6EB80E00F8495D /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838A3AA22C6EB80E00F8495D /* HomeView.swift */; };
 		838A3AA52C6EB80F00F8495D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 838A3AA42C6EB80F00F8495D /* Assets.xcassets */; };
 		838A3AA82C6EB80F00F8495D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 838A3AA72C6EB80F00F8495D /* Preview Assets.xcassets */; };
-		838A3AAD2C6EB80F00F8495D /* Project_Baby.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 838A3AAB2C6EB80F00F8495D /* Project_Baby.xcdatamodeld */; };
 		838A3AB72C6EB80F00F8495D /* Project_BabyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838A3AB62C6EB80F00F8495D /* Project_BabyTests.swift */; };
 		838A3AC12C6EB80F00F8495D /* Project_BabyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838A3AC02C6EB80F00F8495D /* Project_BabyUITests.swift */; };
 		838A3AC32C6EB80F00F8495D /* Project_BabyUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838A3AC22C6EB80F00F8495D /* Project_BabyUITestsLaunchTests.swift */; };
@@ -88,6 +88,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		832770082D3182C80018D853 /* Project_Parent.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Project_Parent.xcdatamodel; sourceTree = "<group>"; };
 		832DED4F2CB3E7C300E3793F /* BabyProfileOnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BabyProfileOnboardingView.swift; sourceTree = "<group>"; };
 		832DED512CB3E7E200E3793F /* CardSelectionOnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardSelectionOnboardingView.swift; sourceTree = "<group>"; };
 		832DED532CB3EF9600E3793F /* ImageFileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFileController.swift; sourceTree = "<group>"; };
@@ -104,7 +105,6 @@
 		838A3AA22C6EB80E00F8495D /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		838A3AA42C6EB80F00F8495D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		838A3AA72C6EB80F00F8495D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		838A3AAC2C6EB80F00F8495D /* Project_Baby.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Project_Baby.xcdatamodel; sourceTree = "<group>"; };
 		838A3AB22C6EB80F00F8495D /* Project ParentTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Project ParentTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		838A3AB62C6EB80F00F8495D /* Project_BabyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project_BabyTests.swift; sourceTree = "<group>"; };
 		838A3ABC2C6EB80F00F8495D /* Project ParentUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Project ParentUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -238,8 +238,8 @@
 		838A3ACF2C6EB85E00F8495D /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				832770062D3182C80018D853 /* Project_Parent.xcdatamodeld */,
 				835CC5382CDE6EB700972FC3 /* PROJECT_BABY_LAUNCH_SCREEN.jpg */,
-				838A3AAB2C6EB80F00F8495D /* Project_Baby.xcdatamodeld */,
 				838A3AD62C6EB97100F8495D /* HomeCard.swift */,
 				839CBC752C8A070500DE05CE /* BottleSettings.swift */,
 			);
@@ -468,7 +468,6 @@
 				838A3AE32C6FA40600F8495D /* FoodView.swift in Sources */,
 				83AE2E8C2C852F9200ACF31F /* GeneralUtil.swift in Sources */,
 				832DED502CB3E7C300E3793F /* BabyProfileOnboardingView.swift in Sources */,
-				838A3AAD2C6EB80F00F8495D /* Project_Baby.xcdatamodeld in Sources */,
 				83AE2E8A2C82046400ACF31F /* CustomAlertView.swift in Sources */,
 				838A3AE52C6FA41000F8495D /* MedsView.swift in Sources */,
 				83694DF82C7CB34800C5C8FC /* BottleController.swift in Sources */,
@@ -488,6 +487,7 @@
 				838A3AD52C6EB95500F8495D /* HomeCardView.swift in Sources */,
 				839AD7F62C80A19E0006B3F1 /* SingleBottleView.swift in Sources */,
 				839CBC782C8A077300DE05CE /* UserDefault.swift in Sources */,
+				8327700A2D3182C80018D853 /* Project_Parent.xcdatamodeld in Sources */,
 				83F6BDAF2CF63405005E3265 /* GoogleMobileAdsConsentManager.swift in Sources */,
 				83C0BACF2CA02C2A00949DF7 /* ProfileView.swift in Sources */,
 				83B2AD0A2C77E1F400663BC8 /* FeatureCardView.swift in Sources */,
@@ -863,13 +863,13 @@
 /* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
-		838A3AAB2C6EB80F00F8495D /* Project_Baby.xcdatamodeld */ = {
+		832770062D3182C80018D853 /* Project_Parent.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				838A3AAC2C6EB80F00F8495D /* Project_Baby.xcdatamodel */,
+				832770082D3182C80018D853 /* Project_Parent.xcdatamodel */,
 			);
-			currentVersion = 838A3AAC2C6EB80F00F8495D /* Project_Baby.xcdatamodel */;
-			path = Project_Baby.xcdatamodeld;
+			currentVersion = 832770082D3182C80018D853 /* Project_Parent.xcdatamodel */;
+			path = Project_Parent.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
