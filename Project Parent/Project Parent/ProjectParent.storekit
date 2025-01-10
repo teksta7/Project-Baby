@@ -1,0 +1,106 @@
+{
+  "appPolicies" : {
+    "eula" : "",
+    "policies" : [
+      {
+        "locale" : "en_US",
+        "policyText" : "",
+        "policyURL" : ""
+      }
+    ]
+  },
+  "identifier" : "E84946A0",
+  "nonRenewingSubscriptions" : [
+
+  ],
+  "products" : [
+    {
+      "displayPrice" : "0.99",
+      "familyShareable" : true,
+      "internalID" : "832A1271",
+      "localizations" : [
+        {
+          "description" : "Remove ads from Project Baby",
+          "displayName" : "Ad removal",
+          "locale" : "en_US"
+        },
+        {
+          "description" : "Remove ads from Project Baby",
+          "displayName" : "Ad Removal",
+          "locale" : "en_GB"
+        }
+      ],
+      "productID" : "com.teksta.projectbaby.noads",
+      "referenceName" : "Lifetime",
+      "type" : "NonConsumable"
+    }
+  ],
+  "settings" : {
+    "_failTransactionsEnabled" : false,
+    "_locale" : "en_GB",
+    "_storefront" : "GBR",
+    "_storeKitErrors" : [
+      {
+        "current" : {
+          "index" : 2,
+          "type" : "generic"
+        },
+        "enabled" : false,
+        "name" : "Load Products"
+      },
+      {
+        "current" : {
+          "index" : 1,
+          "type" : "purchase"
+        },
+        "enabled" : false,
+        "name" : "Purchase"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Verification"
+      },
+      {
+        "current" : {
+          "index" : 2,
+          "type" : "generic"
+        },
+        "enabled" : false,
+        "name" : "App Store Sync"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Subscription Status"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "App Transaction"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Manage Subscriptions Sheet"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Refund Request Sheet"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Offer Code Redeem Sheet"
+      }
+    ]
+  },
+  "subscriptionGroups" : [
+
+  ],
+  "version" : {
+    "major" : 4,
+    "minor" : 0
+  }
+}
