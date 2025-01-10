@@ -10,7 +10,7 @@ import CoreData
 
 class CoreDataController: NSObject, ObservableObject {
             
-    let container = NSPersistentContainer(name: "Project_Baby")
+    let container = NSPersistentContainer(name: "Project_Parent")
         
     /// Dynamic properties that the UI will react to
     @Published var bottles: [Bottle] = [Bottle]()
