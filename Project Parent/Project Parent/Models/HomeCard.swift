@@ -20,7 +20,7 @@ struct HomeCard: Identifiable
 
 class HomeCardStore: ObservableObject
 {
-    var profileHomeCard: HomeCard = .init(color: .mint, viewString: "PROFILE", presentedString: "Finley's Profile", imageToDisplay: "figure.child", toTrack: true)
+    var profileHomeCard: HomeCard = .init(color: .mint, viewString: "PROFILE", presentedString: ProfileController().localProfileString, imageToDisplay: "figure.child", toTrack: true)
     var bottlesHomeCard: HomeCard = .init(color: .green, viewString: "BOTTLES", presentedString: "Bottles", imageToDisplay: "waterbottle",  toTrack: UserDefaults().bool(forKey: "com.projectparent.isBottlesCardTracked"))
     var sleepHomeCard: HomeCard = .init(color: .indigo, viewString: "SLEEP", presentedString: "Sleep", imageToDisplay: "powersleep", toTrack: UserDefaults().bool(forKey: "com.projectparent.isSleepCardTracked"))
     var foodHomeCard: HomeCard = .init(color: .yellow, viewString: "FOOD", presentedString: "Food", imageToDisplay: "carrot", toTrack: UserDefaults().bool(forKey: "com.projectparent.isFoodCardTracked"))
