@@ -60,12 +60,15 @@ struct SettingsView: View {
                                     }
                                 }
                             }
+                            .foregroundStyle(.blue)
+                            
                         }
                         Button("Restore Purchases") {
                             Task {
                                 await AdCoordinator().restorePurchases()
                             }
                         }
+                        .foregroundStyle(.blue)
                         .frame(height: 15, alignment: .center)
 //                        ForEach(IAP.products) { product in
 //                            Button ("Remove Ads") {
