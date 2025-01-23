@@ -103,32 +103,32 @@ struct SettingsView: View {
                         Text("Bottles")
                         Text("Enable the app to track the number of bottles you have given to your baby")
                     }
-//                    //Toggle(isOn: $homeCardStore.sleepHomeCard.toTrack)
-//                    //ENABLE FOR MILESTONE 3
+                    //Toggle(isOn: $homeCardStore.sleepHomeCard.toTrack)
+                    //ENABLE FOR MILESTONE 2
 //                    Toggle(isOn: $isSleepCardTracked)
 //                    {
 //                        Text("Sleep (COMING SOON)")
 //                        Text("Enable the app to track the amount sleep your baby has had")
 //                    }
-//                    //ENABLE FOR MILESTONE 6
+//                    //ENABLE FOR MILESTONE 3
 //                    Toggle(isOn: $isFoodCardTracked)
 //                    {
 //                        Text("Food (COMING SOON)")
 //                        Text("Enable the app to track the amount of food you give to your baby")
 //                    }
-//                    //ENABLE FOR MILESTONE 5
+//                    //ENABLE FOR MILESTONE 4
 //                    Toggle(isOn: $isMedsCardTracked)
 //                    {
 //                        Text("Medicene (COMING SOON)")
 //                        Text("Enable the app to track any medicene administered to your baby")
 //                    }
-//                    //ENABLE FOR MILESTONE 4
+//                    //ENABLE FOR MILESTONE 5
 //                    Toggle(isOn: $isWindCardTracked)
 //                    {
 //                        Text("Wind (COMING SOON)")
 //                        Text("Enable the app to track the amount of wind your baby has had")
 //                    }
-//                    //ENABLE FOR MILESTONE 2
+//                    //ENABLE FOR MILESTONE 6
 //                    Toggle(isOn: $isPooCardTracked)
 //                    {
 //                        Text("Nappies (COMING SOON)")
