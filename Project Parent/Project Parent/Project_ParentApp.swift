@@ -18,12 +18,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     //GADMobileAds.sharedInstance().start(completionHandler: nil)
       GADMobileAds.sharedInstance().start()
       print("Ad setup")
+      
+      if UNMutableNotificationContent().badge?.intValue ?? 0 > 0
+      {
+          BottleNotificationController().removeExistingNotifications("projectparent")
+      }
 
     return true
   }
-    
+        
     func applicationWillTerminate(_ application: UIApplication) {
-        if UNMutableNotificationContent().badge == 1
+        if UNMutableNotificationContent().badge?.intValue ?? 0 > 0
         {
             BottleNotificationController().removeExistingNotifications("projectparent")
         }
@@ -31,7 +36,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func applicationDidEnterBackground(_ application: UIApplication) {
-        if UNMutableNotificationContent().badge == 1
+        if UNMutableNotificationContent().badge?.intValue ?? 0 > 0
+        {
+            BottleNotificationController().removeExistingNotifications("projectparent")
+        }
+    }
+    
+    func applicationWillResignActive(_ application: UIApplication) {
+        if UNMutableNotificationContent().badge?.intValue ?? 0 > 0
+        {
+            BottleNotificationController().removeExistingNotifications("projectparent")
+        }
+    }
+    
+    func applicationDidBecomeActive(_ application: UIApplication) {
+        if UNMutableNotificationContent().badge?.intValue ?? 0 > 0
+        {
+            BottleNotificationController().removeExistingNotifications("projectparent")
+        }
+    }
+    func applicationDidFinishLaunching(_ application: UIApplication) {
+        if UNMutableNotificationContent().badge?.intValue ?? 0 > 0
         {
             BottleNotificationController().removeExistingNotifications("projectparent")
         }
