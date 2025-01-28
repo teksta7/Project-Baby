@@ -77,6 +77,12 @@ class Stopwatch: ObservableObject {
     }
 }
 
+class ReloadViewHelper: ObservableObject {
+    func reloadView() {
+        objectWillChange.send()
+    }
+}
+
 // MARK: - Public Interface
 
 extension Stopwatch {

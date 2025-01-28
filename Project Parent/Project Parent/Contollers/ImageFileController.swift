@@ -23,5 +23,9 @@ class ImageFileController
          let image = UIImage(data: decoded)
         return image!
     }
+//    func updateBabyProfilePic(imageData: Data) {
+//        saveBabyProfilePic(imageData: imageData)
+//    }
+    
 }
 

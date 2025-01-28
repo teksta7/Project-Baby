@@ -7,6 +7,7 @@
 
 import SwiftUI
 import CoreData
+import _PhotosUI_SwiftUI
 
 struct ProfileView: View {
     @State var imagePadding = 1.0 //60.0 for small, 30 for medium
@@ -22,7 +23,14 @@ struct ProfileView: View {
     @State var weightLabel = "0"
     @State var weightLabelWords = "kg"
     @State var weightLabelSize = 8
+    @State private var pickerItem: PhotosPickerItem?
+    @State private var babyProfilePic: Image?
+    @State private var selectedImageData: Data? = nil
     @Environment(\.managedObjectContext) private var viewContext
+    @State var isShowingPicker: Bool = false
+    @ObservedObject var reloadViewHelper = ReloadViewHelper()
+
+
 
 
     @State var ageSelector = 0
@@ -38,6 +46,11 @@ struct ProfileView: View {
                 {
                     profileImageView()
                         .padding(.bottom, imagePadding)
+                        .onTapGesture {
+                            updateBabyProfilePic()
+                        print("HELLO")
+                        
+                        }
                     Spacer(minLength: 20)
                         .frame(width: DeviceDimensions().width/1.3, height: 45)
                         .multilineTextAlignment(.center)
@@ -132,14 +145,62 @@ struct ProfileView: View {
                         }
                     }
                 }
+                .photosPicker(isPresented: $isShowingPicker, selection: $pickerItem, matching: .images)
+//                    .task(id: pickerItem){
+//                                do {
+//                                    print("Picking image")
+//
+//                                    babyProfilePic = try await pickerItem?.loadTransferable(type: Image.self)
+//                                    print("Picked image")
+//
+//                                    //let uiImage = UIImage(data: selectedImageData)
+//                                    if let data = try? await pickerItem?.loadTransferable(type: Data.self) {
+//                                        selectedImageData = data
+//                                        print("Saving image")
+//                                        ImageFileController().saveBabyProfilePic(imageData: selectedImageData!)
+//                                    }
+////                                    if selectedImageData != nil
+////                                    {
+////                                        
+////                                    }
+//                                    
+//                                    
+//                                    } catch {
+//                                    print (error) //Show error to user.
+//                                }
+//                            }
             }
         }
+//        PhotosPicker(pictureString, selection: $pickerItem, matching: .images)
+//            .padding(.horizontal, 10)
+//            .tint(.blue)
         .onAppear()
         {
             weightFormatSelector()
             ageFormatSelector()
         }
+        .onChange(of: pickerItem)
+        {
+            Task{
+                print("Picking image")
+                
+                babyProfilePic = try await pickerItem?.loadTransferable(type: Image.self)
+                print("Picked image")
+                
+                //let uiImage = UIImage(data: selectedImageData)
+                if let data = try? await pickerItem?.loadTransferable(type: Data.self) {
+                    selectedImageData = data
+                    print("Saving image")
+                    ImageFileController().saveBabyProfilePic(imageData: selectedImageData!)
+                    print("Image saved, reloading view")
+                reloadViewHelper.reloadView()
+                }
+            }
+        }
     }
+    func updateBabyProfilePic() {
+            isShowingPicker.toggle()
+        }
     func ageFormatSelector()
     {
         if ageSelector > 3
