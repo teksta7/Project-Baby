@@ -21,6 +21,7 @@ struct SettingsView: View {
     @AppStorage("com.projectparent.isMedsCardTracked") var isMedsCardTracked: Bool = UserDefaults.standard.bool(forKey: "com.projectparent.isMedsCardTracked")
     @AppStorage("com.projectparent.isWindCardTracked") var isWindCardTracked: Bool = UserDefaults.standard.bool(forKey: "com.projectparent.isWindCardTracked")
     @AppStorage("com.projectparent.isPooCardTracked") var isPooCardTracked: Bool = UserDefaults.standard.bool(forKey: "com.projectparent.isPooCardTracked")
+    @AppStorage("com.projectparent.isTestCardTracked") var isTestCardTracked: Bool = UserDefaults.standard.bool(forKey: "com.projectparent.isTestCardTracked")
     
     @EnvironmentObject
     private var IAP: IAPController
@@ -102,6 +103,11 @@ struct SettingsView: View {
                     {
                         Text("Bottles")
                         Text("Enable the app to track the number of bottles you have given to your baby")
+                    }
+                    Toggle(isOn: $isTestCardTracked)
+                    {
+                        Text("Test View")
+                        Text("Experiment with the new UI")
                     }
                     //Toggle(isOn: $homeCardStore.sleepHomeCard.toTrack)
                     //ENABLE FOR MILESTONE 2
@@ -261,6 +267,10 @@ struct SettingsView: View {
         .onChange(of: isPooCardTracked)
         {
             HomeCards[6].toTrack = isPooCardTracked
+        }
+        .onChange(of: isTestCardTracked)
+        {
+            HomeCards[7].toTrack = isTestCardTracked
         }
         .onChange(of: bottleSettings.enableBottleNotification)
         {

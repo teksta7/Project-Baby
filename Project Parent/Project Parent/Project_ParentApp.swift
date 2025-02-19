@@ -8,30 +8,31 @@
 import SwiftUI
 import GoogleMobileAds
 
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
 
   private let adCoordinator = AdCoordinator()
     
-  func application(_ application: UIApplication,
-      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-      
-    //GADMobileAds.sharedInstance().start(completionHandler: nil)
-      GADMobileAds.sharedInstance().start()
-      print("Ad setup")
-      
-      if UNMutableNotificationContent().badge?.intValue ?? 0 > 0
-      {
-          BottleNotificationController().removeExistingNotifications("projectparent")
-      }
-
-    return true
-  }
+//  func application(_ application: UIApplication,
+//      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+//      
+//    //GADMobileAds.sharedInstance().start(completionHandler: nil)
+//      GADMobileAds.sharedInstance().start()
+//      print("Ad setup")
+//      
+//      if UNMutableNotificationContent().badge?.intValue ?? 0 > 0
+//      {
+//          BottleNotificationController().removeExistingNotifications("projectparent")
+//      }
+//
+//    return true
+//  }
         
-    func applicationWillTerminate(_ application: UIApplication) {
+    func applicationWillTerminate(_ application: UIApplication) async {
         if UNMutableNotificationContent().badge?.intValue ?? 0 > 0
         {
             BottleNotificationController().removeExistingNotifications("projectparent")
         }
+        await ActivityController().cancelAllRunningActivities()
         
     }
     
@@ -60,6 +61,50 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         {
             BottleNotificationController().removeExistingNotifications("projectparent")
         }
+    }
+    
+    
+    //For Live Activity
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+        UNUserNotificationCenter.current().delegate = self
+        UNUserNotificationCenter.current()
+            .requestAuthorization(
+                options: [.alert, .sound, .badge]) { granted, _ in
+                    guard granted else { return }
+                    UNUserNotificationCenter.current().getNotificationSettings { settings in
+                        guard settings.authorizationStatus == .authorized else { return }
+                        DispatchQueue.main.async {
+                            application.registerForRemoteNotifications()
+                        }
+                    }
+                }
+        //GADMobileAds.sharedInstance().start(completionHandler: nil)
+          //GADMobileAds.sharedInstance().start()
+          //print("Ad setup")
+        
+          if UNMutableNotificationContent().badge?.intValue ?? 0 > 0
+          {
+              BottleNotificationController().removeExistingNotifications("projectparent")
+          }
+        return true
+    }
+    
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        guard let aps = userInfo["aps"] as? [String: AnyObject] else {
+            completionHandler(.failed)
+            return
+        }
+        print("got something, aka the \(aps)")
+    }
+    
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        let tokenParts = deviceToken.map { data in String(format: "%02.2hhx", data) }
+        let token = tokenParts.joined()
+        print("Device Token: \(token)")
+    }
+    
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+        print("Device Token not found.")
     }
 }
 

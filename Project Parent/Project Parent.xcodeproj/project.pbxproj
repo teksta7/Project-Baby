@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		831EB39F2D5E4B9800FD4579 /* ActivityController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 831EB39E2D5E4B9700FD4579 /* ActivityController.swift */; };
+		831EB3A32D5F66BD00FD4579 /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 831EB3A22D5F66B900FD4579 /* TestView.swift */; };
 		8327700A2D3182C80018D853 /* Project_Parent.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 832770062D3182C80018D853 /* Project_Parent.xcdatamodeld */; };
 		832DED502CB3E7C300E3793F /* BabyProfileOnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832DED4F2CB3E7C300E3793F /* BabyProfileOnboardingView.swift */; };
 		832DED522CB3E7E200E3793F /* CardSelectionOnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832DED512CB3E7E200E3793F /* CardSelectionOnboardingView.swift */; };
@@ -52,6 +54,9 @@
 		83B2AD0A2C77E1F400663BC8 /* FeatureCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B2AD092C77E1F400663BC8 /* FeatureCardView.swift */; };
 		83BC12762CAEAA1300D19428 /* InitialOnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83BC12752CAEAA1300D19428 /* InitialOnboardingView.swift */; };
 		83C0BACF2CA02C2A00949DF7 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C0BACE2CA02C2A00949DF7 /* ProfileView.swift */; };
+		83E859922D4F8B6600204DAD /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83A839962CE7915800379F01 /* WidgetKit.framework */; };
+		83E859932D4F8B6600204DAD /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83A839982CE7915800379F01 /* SwiftUI.framework */; };
+		83E859A42D4F8B6800204DAD /* BottleFeedTrackerExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 83E859912D4F8B6600204DAD /* BottleFeedTrackerExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		83F6BDA82CF0E9DB005E3265 /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = 83F6BDA72CF0E9DB005E3265 /* GoogleMobileAds */; };
 		83F6BDAA2CF0ED2B005E3265 /* AdCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F6BDA92CF0ED2B005E3265 /* AdCoordinator.swift */; };
 		83F6BDAF2CF63405005E3265 /* GoogleMobileAdsConsentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F6BDAE2CF63405005E3265 /* GoogleMobileAdsConsentManager.swift */; };
@@ -72,6 +77,13 @@
 			remoteGlobalIDString = 838A3A9C2C6EB80E00F8495D;
 			remoteInfo = "Project Baby";
 		};
+		83E859A22D4F8B6800204DAD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 838A3A952C6EB80E00F8495D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 83E859902D4F8B6600204DAD;
+			remoteInfo = BottleFeedTrackerExtension;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -81,6 +93,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
+				83E859A42D4F8B6800204DAD /* BottleFeedTrackerExtension.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -88,6 +101,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		831EB39E2D5E4B9700FD4579 /* ActivityController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityController.swift; sourceTree = "<group>"; };
+		831EB3A22D5F66B900FD4579 /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 		832770082D3182C80018D853 /* Project_Parent.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Project_Parent.xcdatamodel; sourceTree = "<group>"; };
 		832DED4F2CB3E7C300E3793F /* BabyProfileOnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BabyProfileOnboardingView.swift; sourceTree = "<group>"; };
 		832DED512CB3E7E200E3793F /* CardSelectionOnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardSelectionOnboardingView.swift; sourceTree = "<group>"; };
@@ -140,9 +155,39 @@
 		83B2AD092C77E1F400663BC8 /* FeatureCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureCardView.swift; sourceTree = "<group>"; };
 		83BC12752CAEAA1300D19428 /* InitialOnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialOnboardingView.swift; sourceTree = "<group>"; };
 		83C0BACE2CA02C2A00949DF7 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		83E859912D4F8B6600204DAD /* BottleFeedTrackerExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = BottleFeedTrackerExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		83F6BDA92CF0ED2B005E3265 /* AdCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdCoordinator.swift; sourceTree = "<group>"; };
 		83F6BDAE2CF63405005E3265 /* GoogleMobileAdsConsentManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleMobileAdsConsentManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		83E859A52D4F8B6800204DAD /* Exceptions for "BottleFeedTracker" folder in "BottleFeedTrackerExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 83E859902D4F8B6600204DAD /* BottleFeedTrackerExtension */;
+		};
+		83E859AC2D4F8C5300204DAD /* Exceptions for "BottleFeedTracker" folder in "Project Parent" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				BottleFeedTrackerAttributes.swift,
+			);
+			target = 838A3A9C2C6EB80E00F8495D /* Project Parent */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		83E859942D4F8B6600204DAD /* BottleFeedTracker */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				83E859AC2D4F8C5300204DAD /* Exceptions for "BottleFeedTracker" folder in "Project Parent" target */,
+				83E859A52D4F8B6800204DAD /* Exceptions for "BottleFeedTracker" folder in "BottleFeedTrackerExtension" target */,
+			);
+			path = BottleFeedTracker;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		838A3A9A2C6EB80E00F8495D /* Frameworks */ = {
@@ -168,6 +213,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		83E8598E2D4F8B6600204DAD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				83E859932D4F8B6600204DAD /* SwiftUI.framework in Frameworks */,
+				83E859922D4F8B6600204DAD /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -178,6 +232,7 @@
 				838A3A9F2C6EB80E00F8495D /* Project Parent */,
 				838A3AB52C6EB80F00F8495D /* Project ParentTests */,
 				838A3ABF2C6EB80F00F8495D /* Project ParentUITests */,
+				83E859942D4F8B6600204DAD /* BottleFeedTracker */,
 				83A839952CE7915800379F01 /* Frameworks */,
 				838A3A9E2C6EB80E00F8495D /* Products */,
 			);
@@ -189,6 +244,7 @@
 				838A3A9D2C6EB80E00F8495D /* Project Parent.app */,
 				838A3AB22C6EB80F00F8495D /* Project ParentTests.xctest */,
 				838A3ABC2C6EB80F00F8495D /* Project ParentUITests.xctest */,
+				83E859912D4F8B6600204DAD /* BottleFeedTrackerExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -249,6 +305,7 @@
 		838A3AD02C6EB86300F8495D /* Contollers */ = {
 			isa = PBXGroup;
 			children = (
+				831EB39E2D5E4B9700FD4579 /* ActivityController.swift */,
 				83B1F24D2D0EE63300B4F482 /* IAPController.swift */,
 				83F6BDAE2CF63405005E3265 /* GoogleMobileAdsConsentManager.swift */,
 				83F6BDA92CF0ED2B005E3265 /* AdCoordinator.swift */,
@@ -274,6 +331,7 @@
 				838A3AEE2C718DAC00F8495D /* SettingsView.swift */,
 				839AD7F52C80A19E0006B3F1 /* SingleBottleView.swift */,
 				838A3ADC2C6FA3C500F8495D /* SleepView.swift */,
+				831EB3A22D5F66B900FD4579 /* TestView.swift */,
 				83C0BACE2CA02C2A00949DF7 /* ProfileView.swift */,
 				838A3ADE2C6FA3CF00F8495D /* PooView.swift */,
 				838A3AE02C6FA3EF00F8495D /* WindView.swift */,
@@ -334,6 +392,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				83E859A32D4F8B6800204DAD /* PBXTargetDependency */,
 			);
 			name = "Project Parent";
 			productName = "Project Baby";
@@ -376,6 +435,28 @@
 			productReference = 838A3ABC2C6EB80F00F8495D /* Project ParentUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		83E859902D4F8B6600204DAD /* BottleFeedTrackerExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 83E859A62D4F8B6800204DAD /* Build configuration list for PBXNativeTarget "BottleFeedTrackerExtension" */;
+			buildPhases = (
+				83E8598D2D4F8B6600204DAD /* Sources */,
+				83E8598E2D4F8B6600204DAD /* Frameworks */,
+				83E8598F2D4F8B6600204DAD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				83E859942D4F8B6600204DAD /* BottleFeedTracker */,
+			);
+			name = BottleFeedTrackerExtension;
+			packageProductDependencies = (
+			);
+			productName = BottleFeedTrackerExtension;
+			productReference = 83E859912D4F8B6600204DAD /* BottleFeedTrackerExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -383,7 +464,7 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1610;
+				LastSwiftUpdateCheck = 1620;
 				LastUpgradeCheck = 1610;
 				TargetAttributes = {
 					838A3A9C2C6EB80E00F8495D = {
@@ -396,6 +477,9 @@
 					838A3ABB2C6EB80F00F8495D = {
 						CreatedOnToolsVersion = 15.4;
 						TestTargetID = 838A3A9C2C6EB80E00F8495D;
+					};
+					83E859902D4F8B6600204DAD = {
+						CreatedOnToolsVersion = 16.2;
 					};
 				};
 			};
@@ -418,6 +502,7 @@
 				838A3A9C2C6EB80E00F8495D /* Project Parent */,
 				838A3AB12C6EB80F00F8495D /* Project ParentTests */,
 				838A3ABB2C6EB80F00F8495D /* Project ParentUITests */,
+				83E859902D4F8B6600204DAD /* BottleFeedTrackerExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -443,6 +528,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		838A3ABA2C6EB80F00F8495D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		83E8598F2D4F8B6600204DAD /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -481,6 +573,7 @@
 				838A3AE72C6FD98E00F8495D /* TopMiniCardView.swift in Sources */,
 				838A3AA12C6EB80E00F8495D /* Project_ParentApp.swift in Sources */,
 				838A3AED2C718CBF00F8495D /* ChartsView.swift in Sources */,
+				831EB39F2D5E4B9800FD4579 /* ActivityController.swift in Sources */,
 				838A3AE92C7185EE00F8495D /* CoreDataController.swift in Sources */,
 				83694DF42C7CA6F100C5C8FC /* BottleListView.swift in Sources */,
 				839CBC7C2C8E702A00DE05CE /* BottleNotificationController.swift in Sources */,
@@ -492,6 +585,7 @@
 				83C0BACF2CA02C2A00949DF7 /* ProfileView.swift in Sources */,
 				83B2AD0A2C77E1F400663BC8 /* FeatureCardView.swift in Sources */,
 				838A3ADD2C6FA3C500F8495D /* SleepView.swift in Sources */,
+				831EB3A32D5F66BD00FD4579 /* TestView.swift in Sources */,
 				83BC12762CAEAA1300D19428 /* InitialOnboardingView.swift in Sources */,
 				838A3AD72C6EB97100F8495D /* HomeCard.swift in Sources */,
 			);
@@ -514,6 +608,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		83E8598D2D4F8B6600204DAD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -526,6 +627,11 @@
 			isa = PBXTargetDependency;
 			target = 838A3A9C2C6EB80E00F8495D /* Project Parent */;
 			targetProxy = 838A3ABD2C6EB80F00F8495D /* PBXContainerItemProxy */;
+		};
+		83E859A32D4F8B6800204DAD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 83E859902D4F8B6600204DAD /* BottleFeedTrackerExtension */;
+			targetProxy = 83E859A22D4F8B6800204DAD /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -658,7 +764,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = "Project Parent/Project Parent.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.1.0;
+				CURRENT_PROJECT_VERSION = 1.2.0;
 				DEVELOPMENT_ASSET_PATHS = "\"Project Parent/Preview Content\"";
 				DEVELOPMENT_TEAM = JVBR4R2UHW;
 				ENABLE_PREVIEWS = YES;
@@ -677,13 +783,13 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.0;
+				MARKETING_VERSION = 1.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.teksta.projectparent;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
-				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -698,7 +804,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = "Project Parent/Project Parent.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.1.0;
+				CURRENT_PROJECT_VERSION = 1.2.0;
 				DEVELOPMENT_ASSET_PATHS = "\"Project Parent/Preview Content\"";
 				DEVELOPMENT_TEAM = JVBR4R2UHW;
 				ENABLE_PREVIEWS = YES;
@@ -717,13 +823,13 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.0;
+				MARKETING_VERSION = 1.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.teksta.projectparent;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
-				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -802,6 +908,62 @@
 			};
 			name = Release;
 		};
+		83E859A72D4F8B6800204DAD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1.2.0;
+				DEVELOPMENT_TEAM = JVBR4R2UHW;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = BottleFeedTracker/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = BottleFeedTracker;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.2.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.teksta.projectparent.BottleFeedTracker;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		83E859A82D4F8B6800204DAD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1.2.0;
+				DEVELOPMENT_TEAM = JVBR4R2UHW;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = BottleFeedTracker/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = BottleFeedTracker;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.2.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.teksta.projectparent.BottleFeedTracker;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -837,6 +999,15 @@
 			buildConfigurations = (
 				838A3ACD2C6EB80F00F8495D /* Debug */,
 				838A3ACE2C6EB80F00F8495D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		83E859A62D4F8B6800204DAD /* Build configuration list for PBXNativeTarget "BottleFeedTrackerExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				83E859A72D4F8B6800204DAD /* Debug */,
+				83E859A82D4F8B6800204DAD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

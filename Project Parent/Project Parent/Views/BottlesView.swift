@@ -7,6 +7,7 @@
 
 import SwiftUI
 import StoreKit
+import ActivityKit
 
 private struct AdControllerViewRepresentable: UIViewControllerRepresentable
 {
@@ -65,6 +66,9 @@ struct BottlesView: View {
     
     @State private var adtimeRemaining = 60
     let adTimer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+    
+    @StateObject private var activityController = ActivityController.shared
+
     
     var body: some View {
         ZStack
@@ -277,6 +281,36 @@ struct BottlesView: View {
                                             bottleFeedTimer.toggle()
                                             if bottleFeedTimer == true
                                             {
+                                                //Trigger live activity
+                                                if (activityController.activityID?.isEmpty == false)
+                                                {
+                                                    Task {
+                                                        await activityController.updateActivity()
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    let attributes = BottleFeedTrackerAttributes(babyName: ProfileController().babyName, averageBottleDuration: UserDefaults.standard.double(forKey: "projectparent.averageBottleDuration"))
+                                                    
+                                                    let contentState = BottleFeedTrackerAttributes.ContentState(bottleDuration: bottleDuration, estimatedEndTimeStamp: Date().addingTimeInterval(UserDefaults.standard.double(forKey: "projectparent.averageBottleDuration")))
+                                                    
+                                                    
+                                                    let content = ActivityContent(state: contentState,
+                                                                                  staleDate: nil,
+                                                                                  relevanceScore: 0)
+                                                    let activity = try? Activity.request(
+                                                        attributes: attributes,
+                                                        content: content,
+                                                        pushType: .token
+                                                    )
+                                                    
+                                                    Task {
+                                                        await activityController.start()
+                                                    }
+                                                    guard let activity = activity else { return }
+                                                    print("ACTIVITY IDENTIFIER:\n\(activity.id)")
+                                                }
+                                                
                                                 startTimeToSave = Date.now
                                                 bottleFeedButtonLabel = "Finish Bottle Feed"
                                                 bottleFeedButtonColor = .orange
@@ -284,6 +318,9 @@ struct BottlesView: View {
                                             else
                                             {
                                                 endTimeToSave = Date.now
+                                                Task {
+                                                    await activityController.cancelAllRunningActivities()
+                                                }
                                                 
                                                 //Code to add bottle
                                                 if (addBottleToModel(addtionalNotes: notesToSave, startTime: startTimeToSave, endTime: endTimeToSave, ounces: ouncesToSave)) == true

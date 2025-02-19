@@ -109,6 +109,11 @@ struct HomeView: View {
                                     {
                                         SettingsView()
                                     }
+                                case "TEST":
+                                    withAnimation()
+                                    {
+                                        TestView()
+                                    }
                                 default:
                                     //BottlesView()
                                     EmptyView()
@@ -148,7 +153,8 @@ struct HomeView: View {
             {
                 print("APPEAR")
                 localHomeCards = HomeCards
-                UIApplication.shared.applicationIconBadgeNumber = 0
+                //UIApplication.shared.applicationIconBadgeNumber = 0
+                UNUserNotificationCenter.current().setBadgeCount(0)
                 //UNUserNotificationCenter.current().setBadgeCount(0)
             }
             .navigationTitle("Project Parent")

@@ -16,6 +16,7 @@ class ProfileController
     @AppStorage("projectparent.babyBirthDateTime") var birthDay = 0.0
     @AppStorage("projectparent.currentWeight") var currentWeight: Double = 0.0
     var localProfileString = (UserDefaults.standard.string(forKey: "projectparent.babyName") ?? "Unknown")+"'s Profile"
+    @AppStorage("projectparent.babyName") var babyName = (UserDefaults.standard.string(forKey: "projectparent.babyName")) ?? "Unknown"
 
     
     func lbsOzToKg(pounds: Double, ounces: Double) -> Double
