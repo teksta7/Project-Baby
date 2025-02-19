@@ -156,7 +156,7 @@ struct InitialOnboardingView: View {
                                 {
                                     print("Onboarding Complete")
                                     UserDefaults.standard.set(true, forKey: "projectparent.toggleInAppAds")
-                                    AdCoordinator().enableAds()
+                                    //AdCoordinator().enableAds()
                                     showSuccessAlert = true
                                     DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
                                         showWelcomeOnboarding = false
