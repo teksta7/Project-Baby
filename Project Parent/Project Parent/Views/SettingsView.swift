@@ -53,7 +53,7 @@ struct SettingsView: View {
                                         try await
                                         //IAP.purchase(product)
                                         IAP.purchase(IAP.products[0])
-                                        AdCoordinator().disableAds()
+                                        //AdCoordinator().disableAds()
                                     }
                                     catch {
                                         print (error)

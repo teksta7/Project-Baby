@@ -79,7 +79,7 @@ class IAPController: ObservableObject
                 //Successful Purchase
                 await transaction.finish()
                 await self.updatePurchasedProducts()
-                AdCoordinator().disableAds()
+                //AdCoordinator().disableAds()
             case let .success(.unverified(_, error)):
                 //Successful Purchase but transaction cannot be verified
                 break

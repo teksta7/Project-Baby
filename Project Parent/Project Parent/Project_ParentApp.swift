@@ -16,8 +16,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
       
     //GADMobileAds.sharedInstance().start(completionHandler: nil)
-      GADMobileAds.sharedInstance().start()
-      print("Ad setup")
+      //GADMobileAds.sharedInstance().start()
+      //print("Ad setup")
       
       if UNMutableNotificationContent().badge?.intValue ?? 0 > 0
       {

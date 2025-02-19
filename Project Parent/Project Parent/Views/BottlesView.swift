@@ -364,22 +364,22 @@ struct BottlesView: View {
                         imagePadding = 10.0
                     }
                     
-                    if adCoordinator.adsEnabled == true
-                    {
-                        Task {
-                            await adCoordinator.loadAd()
-                        }
-                    }
+//                    if adCoordinator.adsEnabled == true
+//                    {
+//                        Task {
+//                            await adCoordinator.loadAd()
+//                        }
+//                    }
                 }
                 .onDisappear()
                 {
                     // Re-enable the idle timer when the view disappears to allow the screen to sleep
                     UIApplication.shared.isIdleTimerDisabled = false
                     
-                    if (adCoordinator.adsEnabled == true)
-                    {
-                        adCoordinator.showAd()
-                    }
+//                    if (adCoordinator.adsEnabled == true)
+//                    {
+//                        adCoordinator.showAd()
+//                    }
                     //Code placeholder to run in background for counter
 //                    DispatchQueue.global(qos: .background).async {
 //                    // Your background code here
