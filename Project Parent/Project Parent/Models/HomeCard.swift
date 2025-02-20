@@ -28,12 +28,13 @@ class HomeCardStore: ObservableObject
     var windHomeCard: HomeCard = .init(color: .blue, viewString: "WIND", presentedString: "Wind", imageToDisplay: "wind", toTrack: UserDefaults().bool(forKey: "com.projectparent.isWindCardTracked"))
     var pooHomeCard: HomeCard = .init(color: .brown, viewString: "POO", presentedString: "Nappies", imageToDisplay: "toilet", toTrack: UserDefaults().bool(forKey: "com.projectparent.isPooCardTracked"))
     var settingsHomeCard: HomeCard = .init(color: .gray, viewString: "SETTINGS", presentedString: "Settings", imageToDisplay: "gear", toTrack: true)
+    var testHomeCard: HomeCard = .init(color: .purple, viewString: "TEST", presentedString: "Test", imageToDisplay: "testtube.2", toTrack: true)
     
     @Published var homeCards: [HomeCard] = []
 }
 
 
-var HomeCards: [HomeCard] = [HomeCardStore().profileHomeCard, HomeCardStore().bottlesHomeCard, HomeCardStore().sleepHomeCard, HomeCardStore().foodHomeCard, HomeCardStore().medsHomeCard, HomeCardStore().windHomeCard, HomeCardStore().pooHomeCard, HomeCardStore().settingsHomeCard]
+var HomeCards: [HomeCard] = [HomeCardStore().profileHomeCard, HomeCardStore().bottlesHomeCard, HomeCardStore().sleepHomeCard, HomeCardStore().foodHomeCard, HomeCardStore().medsHomeCard, HomeCardStore().windHomeCard, HomeCardStore().pooHomeCard, HomeCardStore().settingsHomeCard,HomeCardStore().testHomeCard]
 
 //var HomeCards: [HomeCard] = [
 //    .init(color: .mint, viewString: "PROFILE", presentedString: "Finley's Profile", imageToDisplay: "figure.child", toTrack: true), // Baby Profile

@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8304F8AB2D6634F900884485 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83A839962CE7915800379F01 /* WidgetKit.framework */; };
+		8304F8AC2D6634F900884485 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83A839982CE7915800379F01 /* SwiftUI.framework */; };
+		8304F8BD2D6634FA00884485 /* BottleFeedTrackerExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 8304F8AA2D6634F800884485 /* BottleFeedTrackerExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		8304F8C72D6642EF00884485 /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8304F8C62D6642EF00884485 /* TestView.swift */; };
 		8327700A2D3182C80018D853 /* Project_Parent.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 832770062D3182C80018D853 /* Project_Parent.xcdatamodeld */; };
 		832DED502CB3E7C300E3793F /* BabyProfileOnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832DED4F2CB3E7C300E3793F /* BabyProfileOnboardingView.swift */; };
 		832DED522CB3E7E200E3793F /* CardSelectionOnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832DED512CB3E7E200E3793F /* CardSelectionOnboardingView.swift */; };
@@ -58,6 +62,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		8304F8BB2D6634FA00884485 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 838A3A952C6EB80E00F8495D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8304F8A92D6634F800884485;
+			remoteInfo = BottleFeedTrackerExtension;
+		};
 		838A3AB32C6EB80F00F8495D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 838A3A952C6EB80E00F8495D /* Project object */;
@@ -81,6 +92,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
+				8304F8BD2D6634FA00884485 /* BottleFeedTrackerExtension.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -88,6 +100,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		8304F8AA2D6634F800884485 /* BottleFeedTrackerExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = BottleFeedTrackerExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		8304F8C62D6642EF00884485 /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 		832770082D3182C80018D853 /* Project_Parent.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Project_Parent.xcdatamodel; sourceTree = "<group>"; };
 		832DED4F2CB3E7C300E3793F /* BabyProfileOnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BabyProfileOnboardingView.swift; sourceTree = "<group>"; };
 		832DED512CB3E7E200E3793F /* CardSelectionOnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardSelectionOnboardingView.swift; sourceTree = "<group>"; };
@@ -144,7 +158,37 @@
 		83F6BDAE2CF63405005E3265 /* GoogleMobileAdsConsentManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleMobileAdsConsentManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		8304F8BE2D6634FA00884485 /* Exceptions for "BottleFeedTracker" folder in "BottleFeedTrackerExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 8304F8A92D6634F800884485 /* BottleFeedTrackerExtension */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		8304F8AD2D6634F900884485 /* BottleFeedTracker */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				8304F8BE2D6634FA00884485 /* Exceptions for "BottleFeedTracker" folder in "BottleFeedTrackerExtension" target */,
+			);
+			path = BottleFeedTracker;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
 /* Begin PBXFrameworksBuildPhase section */
+		8304F8A72D6634F800884485 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8304F8AC2D6634F900884485 /* SwiftUI.framework in Frameworks */,
+				8304F8AB2D6634F900884485 /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		838A3A9A2C6EB80E00F8495D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -178,6 +222,7 @@
 				838A3A9F2C6EB80E00F8495D /* Project Parent */,
 				838A3AB52C6EB80F00F8495D /* Project ParentTests */,
 				838A3ABF2C6EB80F00F8495D /* Project ParentUITests */,
+				8304F8AD2D6634F900884485 /* BottleFeedTracker */,
 				83A839952CE7915800379F01 /* Frameworks */,
 				838A3A9E2C6EB80E00F8495D /* Products */,
 			);
@@ -189,6 +234,7 @@
 				838A3A9D2C6EB80E00F8495D /* Project Parent.app */,
 				838A3AB22C6EB80F00F8495D /* Project ParentTests.xctest */,
 				838A3ABC2C6EB80F00F8495D /* Project ParentUITests.xctest */,
+				8304F8AA2D6634F800884485 /* BottleFeedTrackerExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -284,6 +330,7 @@
 				83B2AD092C77E1F400663BC8 /* FeatureCardView.swift */,
 				83AE2E892C82046400ACF31F /* CustomAlertView.swift */,
 				839CBC792C8A72A700DE05CE /* TimePickerView.swift */,
+				8304F8C62D6642EF00884485 /* TestView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -322,6 +369,28 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		8304F8A92D6634F800884485 /* BottleFeedTrackerExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8304F8BF2D6634FA00884485 /* Build configuration list for PBXNativeTarget "BottleFeedTrackerExtension" */;
+			buildPhases = (
+				8304F8A62D6634F800884485 /* Sources */,
+				8304F8A72D6634F800884485 /* Frameworks */,
+				8304F8A82D6634F800884485 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				8304F8AD2D6634F900884485 /* BottleFeedTracker */,
+			);
+			name = BottleFeedTrackerExtension;
+			packageProductDependencies = (
+			);
+			productName = BottleFeedTrackerExtension;
+			productReference = 8304F8AA2D6634F800884485 /* BottleFeedTrackerExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		838A3A9C2C6EB80E00F8495D /* Project Parent */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 838A3AC62C6EB80F00F8495D /* Build configuration list for PBXNativeTarget "Project Parent" */;
@@ -334,6 +403,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				8304F8BC2D6634FA00884485 /* PBXTargetDependency */,
 			);
 			name = "Project Parent";
 			productName = "Project Baby";
@@ -383,9 +453,12 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1610;
+				LastSwiftUpdateCheck = 1620;
 				LastUpgradeCheck = 1610;
 				TargetAttributes = {
+					8304F8A92D6634F800884485 = {
+						CreatedOnToolsVersion = 16.2;
+					};
 					838A3A9C2C6EB80E00F8495D = {
 						CreatedOnToolsVersion = 15.4;
 					};
@@ -418,11 +491,19 @@
 				838A3A9C2C6EB80E00F8495D /* Project Parent */,
 				838A3AB12C6EB80F00F8495D /* Project ParentTests */,
 				838A3ABB2C6EB80F00F8495D /* Project ParentUITests */,
+				8304F8A92D6634F800884485 /* BottleFeedTrackerExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		8304F8A82D6634F800884485 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		838A3A9B2C6EB80E00F8495D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -452,6 +533,13 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		8304F8A62D6634F800884485 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		838A3A992C6EB80E00F8495D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -480,6 +568,7 @@
 				838A3AA32C6EB80E00F8495D /* HomeView.swift in Sources */,
 				838A3AE72C6FD98E00F8495D /* TopMiniCardView.swift in Sources */,
 				838A3AA12C6EB80E00F8495D /* Project_ParentApp.swift in Sources */,
+				8304F8C72D6642EF00884485 /* TestView.swift in Sources */,
 				838A3AED2C718CBF00F8495D /* ChartsView.swift in Sources */,
 				838A3AE92C7185EE00F8495D /* CoreDataController.swift in Sources */,
 				83694DF42C7CA6F100C5C8FC /* BottleListView.swift in Sources */,
@@ -517,6 +606,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		8304F8BC2D6634FA00884485 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8304F8A92D6634F800884485 /* BottleFeedTrackerExtension */;
+			targetProxy = 8304F8BB2D6634FA00884485 /* PBXContainerItemProxy */;
+		};
 		838A3AB42C6EB80F00F8495D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 838A3A9C2C6EB80E00F8495D /* Project Parent */;
@@ -530,6 +624,62 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		8304F8C02D6634FA00884485 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1.2.0;
+				DEVELOPMENT_TEAM = JVBR4R2UHW;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = BottleFeedTracker/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = BottleFeedTracker;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.2.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.teksta.projectparent.BottleFeedTracker;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		8304F8C12D6634FA00884485 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1.2.0;
+				DEVELOPMENT_TEAM = JVBR4R2UHW;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = BottleFeedTracker/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = BottleFeedTracker;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.2.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.teksta.projectparent.BottleFeedTracker;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		838A3AC42C6EB80F00F8495D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -805,6 +955,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		8304F8BF2D6634FA00884485 /* Build configuration list for PBXNativeTarget "BottleFeedTrackerExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8304F8C02D6634FA00884485 /* Debug */,
+				8304F8C12D6634FA00884485 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		838A3A982C6EB80E00F8495D /* Build configuration list for PBXProject "Project Parent" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

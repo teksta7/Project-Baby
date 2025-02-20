@@ -109,6 +109,11 @@ struct HomeView: View {
                                     {
                                         SettingsView()
                                     }
+                                case "TEST":
+                                    withAnimation()
+                                    {
+                                        TestView()
+                                    }
                                 default:
                                     //BottlesView()
                                     EmptyView()
