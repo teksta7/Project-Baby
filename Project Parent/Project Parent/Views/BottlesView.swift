@@ -7,6 +7,7 @@
 
 import SwiftUI
 import StoreKit
+import ActivityKit
 
 private struct AdControllerViewRepresentable: UIViewControllerRepresentable
 {
@@ -21,8 +22,21 @@ private struct AdControllerViewRepresentable: UIViewControllerRepresentable
     }
 }
 
+struct BottleFeedTrackerAttributes: ActivityAttributes {
+    struct ContentState: Codable, Hashable {
+        // Dynamic stateful properties about your activity go here!
+        var bottleDuration: Int
+    }
+    
+    // Fixed non-changing properties about your activity go here!
+    var babyName: String
+    var estimatedEndTimeStamp: Date
+}
+
 struct BottlesView: View {
     private var adCoordinator = AdCoordinator()
+    
+    @State private var activity: Activity<BottleFeedTrackerAttributes>?
 
     @Environment(\.managedObjectContext) private var viewContext
     @Environment(\.requestReview) private var requestReview
@@ -257,6 +271,10 @@ struct BottlesView: View {
                                 if ((bottleDuration >= 0) && (bottleFeedTimer == true)) {
                                     withAnimation{
                                         bottleDuration += 1
+//                                        if activity?.id.isEmpty == false
+//                                        {
+                                            self.updateLiveActivity()
+//                                        }
                                     }
                                 }
                             }
@@ -277,6 +295,16 @@ struct BottlesView: View {
                                             bottleFeedTimer.toggle()
                                             if bottleFeedTimer == true
                                             {
+//                                                if (activity?.id.isEmpty == true) {
+                                                    print("Launcing Live Activity")
+                                                    self.launchLiveActivity()
+//                                                }
+//                                                else
+//                                                {
+//
+//                                                }
+                                               
+                                                
                                                 startTimeToSave = Date.now
                                                 bottleFeedButtonLabel = "Finish Bottle Feed"
                                                 bottleFeedButtonColor = .orange
@@ -284,6 +312,9 @@ struct BottlesView: View {
                                             else
                                             {
                                                 endTimeToSave = Date.now
+                                                Task {
+                                                    await self.endLiveActivity()
+                                                }
                                                 
                                                 //Code to add bottle
                                                 if (addBottleToModel(addtionalNotes: notesToSave, startTime: startTimeToSave, endTime: endTimeToSave, ounces: ouncesToSave)) == true
@@ -434,6 +465,53 @@ struct BottlesView: View {
             return true
         }
     }
+
+private extension BottlesView {
+    func launchLiveActivity() {
+        if ActivityAuthorizationInfo().areActivitiesEnabled {
+            print("Start live activity")
+            activity = try? Activity.request(
+                attributes: BottleFeedTrackerAttributes(babyName: UserDefaults.standard.string(forKey: "projectparent.babyName") ?? "Unknown", estimatedEndTimeStamp: Date(timeIntervalSinceNow: UserDefaults.standard.double(forKey: "projectparent.averageBottleDuration"))),
+                content: .init(
+                    state: BottleFeedTrackerAttributes.ContentState(bottleDuration: bottleDuration),
+                    staleDate: nil, relevanceScore: 0
+                )
+            )
+        }
+    }
+}
+
+private extension BottlesView {
+    func endLiveActivity() async {
+        print("End live activity")
+        await self.activity?.end(
+           .init(
+            state: .init(bottleDuration: 0),
+               staleDate: nil
+           ),
+           dismissalPolicy: .after(.now + 4) // System will remove the notification after 4 seconds. You also have: .default (= 4 hours)/.immediate/.after(Date)
+       )
+    }
+}
+
+private extension BottlesView {
+    func updateLiveActivity() {
+        //guard let activity else { return }
+        
+        print("Update live activity")
+        Task {
+            await self.activity?.update(
+                    ActivityContent<BottleFeedTrackerAttributes.ContentState>(
+                        state: .init(bottleDuration: bottleDuration),
+                        staleDate: nil,
+                        relevanceScore: 0
+                    ),
+                    alertConfiguration: nil
+                )
+            }
+                }
+    }
+
     
     func resetViewForNewBottleFeed()
     {
