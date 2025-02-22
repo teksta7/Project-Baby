@@ -18,6 +18,11 @@ struct TestView: View {
                     self.launchLiveActivity()
                     
                 }
+                Button("update") {
+                    Task {
+                        self.updateLiveActivity()
+                    }
+                }
                 Button("End") {
                     Task {
                         await self.endLiveActivity()
@@ -34,7 +39,7 @@ private extension TestView {
         print("End live activity")
         await self.activity?.end(
            .init(
-               state: .init(value: 0),
+            state: .init(bottleDuration: 0),
                staleDate: nil
            ),
            dismissalPolicy: .after(.now + 4) // System will remove the notification after 4 seconds. You also have: .default (= 4 hours)/.immediate/.after(Date)
@@ -47,24 +52,30 @@ private extension TestView {
         if ActivityAuthorizationInfo().areActivitiesEnabled {
             print("Start live activity")
             activity = try? Activity.request(
-                attributes: LiveActivityWidgetSampleAttributes(name: UUID().uuidString),
+                attributes: LiveActivityWidgetSampleAttributes(babyName: UserDefaults.standard.string(forKey: "projectparent.babyName") ?? "Unknown", estimatedEndTimeStamp: Date(timeIntervalSinceNow: UserDefaults.standard.double(forKey: "projectparent.averageBottleDuration"))),
                 content: .init(
-                    state: LiveActivityWidgetSampleAttributes.ContentState(value: 0),
+                    state: LiveActivityWidgetSampleAttributes.ContentState(bottleDuration: 0),
                     staleDate: nil
                 )
             )
         }
-        Task {
-            for await pushToken in self.activity!.pushTokenUpdates {
-                let pushTokenString = pushToken.reduce ("") { $0 + String(format: "%02x", $1) }
-                print("New push token: \(pushTokenString)")
-                //try await self.sendPushToken (hero: hero, pushTokenString: pushTokenString)
-            }
-        }
-        //print (self.activity?.id ?? "No activity")
-        //print (self.activity?.pushToken ?? "No push token")
     }
 }
+
+private extension TestView {
+    func updateLiveActivity() {
+        guard let activity else { return }
+        
+        print("Update live activity")
+        Task {
+            await self.activity?.update(
+                .init(
+                    state: .init(bottleDuration: Int.random(in: 0...100)),
+                    staleDate: nil
+                )
+                )}
+                }
+    }
 
 //private extension TestView {
 //    func didEnterBackground() {
@@ -105,11 +116,12 @@ private extension TestView {
 struct LiveActivityWidgetSampleAttributes: ActivityAttributes {
     struct ContentState: Codable, Hashable {
         // Dynamic stateful properties about your activity go here!
-        var value: Int
+        var bottleDuration: Int
     }
     
     // Fixed non-changing properties about your activity go here!
-    var name: String
+    var babyName: String
+    var estimatedEndTimeStamp: Date
 }
 
 #Preview {
