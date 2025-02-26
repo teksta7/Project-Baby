@@ -9,18 +9,18 @@ import SwiftUI
 import StoreKit
 import ActivityKit
 
-private struct AdControllerViewRepresentable: UIViewControllerRepresentable
-{
-    let viewController = UIViewController()
-    
-    func makeUIViewController(context: Context) -> some UIViewController {
-        return viewController
-    }
-    
-    func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {
-        
-    }
-}
+//private struct AdControllerViewRepresentable: UIViewControllerRepresentable
+//{
+//    let viewController = UIViewController()
+//    
+//    func makeUIViewController(context: Context) -> some UIViewController {
+//        return viewController
+//    }
+//    
+//    func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {
+//        
+//    }
+//}
 
 struct BottleFeedTrackerAttributes: ActivityAttributes {
     struct ContentState: Codable, Hashable {
@@ -31,12 +31,17 @@ struct BottleFeedTrackerAttributes: ActivityAttributes {
     // Fixed non-changing properties about your activity go here!
     var babyName: String
     var estimatedEndTimeStamp: Date
+    var startTimeStamp: Date
+    var dateRange: ClosedRange<Date>
 }
+
 
 struct BottlesView: View {
     private var adCoordinator = AdCoordinator()
     
-    @State private var activity: Activity<BottleFeedTrackerAttributes>?
+    var center = UNUserNotificationCenter.current()
+    
+    @State var activity: Activity<BottleFeedTrackerAttributes>?
 
     @Environment(\.managedObjectContext) private var viewContext
     @Environment(\.requestReview) private var requestReview
@@ -75,8 +80,8 @@ struct BottlesView: View {
     @State var latestBottleID: UUID = UUID()
     
     
-    let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
-    
+    @State var timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+        
     @State private var adtimeRemaining = 60
     let adTimer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
@@ -267,17 +272,7 @@ struct BottlesView: View {
                         
                         Text("\(UtilFunctions().convertSecondsToMinutes(bottleDuration)) ").bold().font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
                         //Text("\(bottleDuration) seconds").bold().font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
-                            .onReceive(timer) { _ in
-                                if ((bottleDuration >= 0) && (bottleFeedTimer == true)) {
-                                    withAnimation{
-                                        bottleDuration += 1
-//                                        if activity?.id.isEmpty == false
-//                                        {
-                                            self.updateLiveActivity()
-//                                        }
-                                    }
-                                }
-                            }
+                            
                         ZStack
                         {
                             RoundedRectangle(cornerRadius: 10)
@@ -292,11 +287,15 @@ struct BottlesView: View {
                                         }
                                         else
                                         {
+                                            Task {
+                                                self.timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+                                            }
+                                           
                                             bottleFeedTimer.toggle()
                                             if bottleFeedTimer == true
                                             {
 //                                                if (activity?.id.isEmpty == true) {
-                                                    print("Launcing Live Activity")
+                                                    print("Launching Live Activity")
                                                     self.launchLiveActivity()
 //                                                }
 //                                                else
@@ -376,7 +375,8 @@ struct BottlesView: View {
             }
                 .onAppear()
                 {
-                    UIApplication.shared.applicationIconBadgeNumber = 0
+                    //UIApplication.shared.applicationIconBadgeNumber = 0
+                    center.setBadgeCount(0)
                     // Disable the idle timer when the view appears to prevent screen to sleep
                     UIApplication.shared.isIdleTimerDisabled = true
                     //AdCoordinator().enableAds()
@@ -426,6 +426,18 @@ struct BottlesView: View {
                 CustomAlertView(show: $showWarningAlert, icon: .warning, text: "Invalid ounces", gradientColor: .yellow, circleAColor: .yellow, details: "Hold down on the ounces card to set a value other than 0", corner: 30)
                 CustomAlertView(show: $showErrorAlert, icon: .error, text: "Whoops", gradientColor: .red, circleAColor: .red, details: "Couldn't save the bottle, please try again", corner: 30)
             }
+        .onReceive(timer) { _ in
+            //print("Current Bottle Duration Timer: \(bottleDuration)")
+            if ((bottleDuration >= 0) && (bottleFeedTimer == true)) {
+                withAnimation{
+                    bottleDuration += 1
+//                    if (bottleDuration.isMultiple(of: 60))
+//                    {
+                        self.updateLiveActivity()
+                    //}
+                }
+            }
+        }
             
         }
         func addBottleToModel(addtionalNotes: String, startTime: Date, endTime: Date, ounces: CGFloat) -> Bool
@@ -470,8 +482,10 @@ private extension BottlesView {
     func launchLiveActivity() {
         if ActivityAuthorizationInfo().areActivitiesEnabled {
             print("Start live activity")
+            print(Date.now)
+            print(Date.now.addingTimeInterval(UserDefaults.standard.double(forKey: "projectparent.averagebottleduration")))
             activity = try? Activity.request(
-                attributes: BottleFeedTrackerAttributes(babyName: UserDefaults.standard.string(forKey: "projectparent.babyName") ?? "Unknown", estimatedEndTimeStamp: Date(timeIntervalSinceNow: UserDefaults.standard.double(forKey: "projectparent.averageBottleDuration"))),
+                attributes: BottleFeedTrackerAttributes(babyName: UserDefaults.standard.string(forKey: "projectparent.babyName") ?? "Unknown", estimatedEndTimeStamp: Date(timeIntervalSinceNow: UserDefaults.standard.double(forKey: "projectparent.averagebottleduration")), startTimeStamp: startTimeToSave, dateRange: Date.now...Date.now.addingTimeInterval(UserDefaults.standard.double(forKey: "projectparent.averagebottleduration"))),
                 content: .init(
                     state: BottleFeedTrackerAttributes.ContentState(bottleDuration: bottleDuration),
                     staleDate: nil, relevanceScore: 0
@@ -517,6 +531,16 @@ private extension BottlesView {
     {
         //Reset all values in view to 0 upon completion of bottle feed
     }
+
+    func startTimer()
+    {
+        let timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
+            DispatchQueue.main.async {
+                    //bottleDuration += 1
+                }
+            }
+            RunLoop.current.add(timer, forMode: .common)
+        }
     
     #Preview {
         BottlesView()

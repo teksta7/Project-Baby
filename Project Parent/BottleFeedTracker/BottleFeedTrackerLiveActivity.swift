@@ -19,6 +19,9 @@ struct BottleFeedTrackerAttributes: ActivityAttributes {
     // Fixed non-changing properties about your activity go here!
     var babyName: String
     var estimatedEndTimeStamp: Date
+    var startTimeStamp: Date
+    var dateRange: ClosedRange<Date>
+
     //var profileImage: UIImage?
 }
 
@@ -46,6 +49,7 @@ struct BottleFeedTrackerLiveActivity: Widget {
                     {
                         //Text("\(context.state.bottleDuration)")
                         Text("\(UtilFunctions().convertSecondsToMinutes(context.state.bottleDuration))")
+                        //Text("\(UtilFunctions().percentageBetweenDates(startDate: context.attributes.startTimeStamp, endDate: context.attributes.estimatedEndTimeStamp, targetDate: Date.now))")
                         
                     }
                     
@@ -58,8 +62,16 @@ struct BottleFeedTrackerLiveActivity: Widget {
 //                    .progressViewStyle(.linear)
                     
                 }
-                ProgressView(value: 0.1)
-                    .scaleEffect(x: 1, y: 2, anchor: .center)
+//                ProgressView(value: UtilFunctions().percentageBetweenTimestamps(startTimestamp: context.attributes.startTimeStamp.timeIntervalSince1970, endTimestamp: context.attributes.estimatedEndTimeStamp.timeIntervalSince1970, targetTimestamp: Date.now.timeIntervalSince1970), total: 1)
+                VStack
+                {
+                    ProgressView(timerInterval: context.attributes.dateRange, countsDown: false, label: { EmptyView() },                                 currentValueLabel: {EmptyView() })
+                        .scaleEffect(x: 1, y: 1, anchor: .center)
+                        .frame(alignment: .center)
+                    Text("Progress compared to the average feed duration").padding(.horizontal)
+                        .font(.caption)
+                        .foregroundStyle(.white)
+                }
                 //ProgressView(timerInterval: Date.now...context.attributes.estimatedEndTimeStamp)
             }
             .activityBackgroundTint(Color.green.opacity(0.5))
@@ -92,14 +104,24 @@ struct BottleFeedTrackerLiveActivity: Widget {
                     {
                         Text("\(context.attributes.babyName)'s bottle feed:")
                             .bold()
+                        //Text("\(UtilFunctions().percentageBetweenDates(startDate: context.attributes.startTimeStamp, endDate: context.attributes.estimatedEndTimeStamp, targetDate: Date.now))")
+                        //Text("\(UtilFunctions().percentageBetweenTimestamps(startTimestamp: context.attributes.startTimeStamp.timeIntervalSince1970, endTimestamp: context.attributes.estimatedEndTimeStamp.timeIntervalSince1970, targetTimestamp: Date.now.timeIntervalSince1970))")
                         Text("\(UtilFunctions().convertSecondsToMinutes(context.state.bottleDuration))")
                             .frame(alignment: .trailing)
                     }
                 }
                 DynamicIslandExpandedRegion(.bottom) {
                     // Expanded bottom UI goes here
-                    ProgressView(value: 0.1)
-                        .scaleEffect(x: 1, y: 2, anchor: .center)
+                    //ProgressView(value: UtilFunctions().percentageBetweenTimestamps(startTimestamp: context.attributes.startTimeStamp.timeIntervalSince1970, endTimestamp: context.attributes.estimatedEndTimeStamp.timeIntervalSince1970, targetTimestamp: Date.now.timeIntervalSince1970), total: 1)
+                    VStack
+                    {
+                        ProgressView(timerInterval: context.attributes.dateRange, countsDown: false, label: { EmptyView() },                                 currentValueLabel: {EmptyView() })
+                            .scaleEffect(x: 1, y: 1, anchor: .center)
+                            .frame(alignment: .center)
+                        Text("Progress compared to the average feed duration").padding(.horizontal)
+                            .font(.caption)
+                            .foregroundStyle(.gray)
+                    }
                 }
             } compactLeading: {
                 // Compact leading UI goes here
@@ -109,10 +131,10 @@ struct BottleFeedTrackerLiveActivity: Widget {
                     .frame(width: 20, height: 20, alignment: .leading)
             } compactTrailing: {
                 // Compact trailing UI goes here
-                Text("\(context.state.bottleDuration)s")
+                Text("\(UtilFunctions().getMinutes(context.state.bottleDuration)) min")
             } minimal: {
                 // Minimal UI goes here
-                Text("\(context.state.bottleDuration)s")
+                Text("\(UtilFunctions().getMinutes(context.state.bottleDuration))m")
             }
         }
     }

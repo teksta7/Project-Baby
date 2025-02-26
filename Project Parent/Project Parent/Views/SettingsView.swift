@@ -40,12 +40,12 @@ struct SettingsView: View {
                 Section(header: Text("Purchase Options"))
                 {
                     if IAP.hasUnlockedNoAds == true {
-                        Text("You have purchased no ads, enjoy!")
+                        Text("Thank you for donating!")
                         }
                     else
                     {
                         ForEach(IAP.products) { product in
-                            Button ("Remove Ads")
+                            Button ("Donate")
                             {
                                 Task
                                 {
@@ -104,11 +104,17 @@ struct SettingsView: View {
                         Text("Bottles")
                         Text("Enable the app to track the number of bottles you have given to your baby")
                     }
-                    Toggle(isOn: $isTestCardTracked)
-                    {
-                        Text("Test View")
-                        Text("EXPERIMENTAL")
-                    }
+                    
+                    //TEST VIEW - enable when needed
+//                    Toggle(isOn: $isTestCardTracked)
+//                    {
+//                        Text("Test View")
+//                        Text("EXPERIMENTAL")
+//                    }
+                    
+                    
+                    
+                    
                     //Toggle(isOn: $homeCardStore.sleepHomeCard.toTrack)
                     //ENABLE FOR MILESTONE 2
 //                    Toggle(isOn: $isSleepCardTracked)
@@ -268,10 +274,10 @@ struct SettingsView: View {
         {
             HomeCards[6].toTrack = isPooCardTracked
         }
-        .onChange(of: isTestCardTracked)
-        {
-            HomeCards[8].toTrack = isTestCardTracked
-        }
+//        .onChange(of: isTestCardTracked)
+//        {
+//            HomeCards[8].toTrack = isTestCardTracked
+//        }
         .onChange(of: bottleSettings.enableBottleNotification)
         {
             if bottleSettings.enableBottleNotification == true

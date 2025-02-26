@@ -47,6 +47,33 @@ class UtilFunctions
         return "\(hours) hours \(minutesLeft.formatted()) minutes"
     }
     
+    func getMinutes(_ seconds: Int) -> Int {
+        let minutes = seconds / 60
+        //let secondsLeft = seconds % 60
+        return minutes
+    }
+    
+    
+    func percentageBetweenTimestamps(startTimestamp: TimeInterval, endTimestamp: TimeInterval, targetTimestamp: TimeInterval) -> Double {
+        //start date = dateTime stamp bottle started
+        //end date = estimated dateTime stamp for when bottle will end (will use the estimated average)
+        //target date = current dateTime stamp at the point this function is called
+        let totalTimeInterval = endTimestamp - startTimestamp
+        let targetTimeInterval = targetTimestamp - startTimestamp
+        let percentage = (targetTimeInterval / totalTimeInterval) * 100
+        return percentage
+    }
+    
+    func percentageBetweenDates(startDate: Date, endDate: Date, targetDate: Date) -> Double {
+        //start date = dateTime stamp bottle started
+        //end date = estimated dateTime stamp for when bottle will end (will use the estimated average)
+        //target date = current dateTime stamp at the point this function is called
+        let totalTimeInterval = endDate.timeIntervalSince(startDate)
+        let targetTimeInterval = targetDate.timeIntervalSince(startDate)
+        let percentage = (targetTimeInterval / totalTimeInterval) * 100
+        return percentage
+    }
+    
 }
 
 extension Date {

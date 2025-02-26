@@ -12,7 +12,7 @@ import StoreKit
 @MainActor
 class IAPController: ObservableObject
 {
-    private let productIds = ["com.teksta.projectparent.noads"]
+    private let productIds = ["com.teksta.projectparent.donate"]
     
     @Published
     private(set) var products: [Product] = []
