@@ -20,17 +20,17 @@
       "internalID" : "832A1271",
       "localizations" : [
         {
-          "description" : "Remove ads from Project Parent",
-          "displayName" : "Ad removal",
+          "description" : "Donate to support further app development",
+          "displayName" : "Donate",
           "locale" : "en_US"
         },
         {
-          "description" : "Remove ads from Project Parent",
-          "displayName" : "Ad Removal",
+          "description" : "Donate to support further app development",
+          "displayName" : "Donate",
           "locale" : "en_GB"
         }
       ],
-      "productID" : "com.teksta.projectparent.noads",
+      "productID" : "com.teksta.projectparent.donate",
       "referenceName" : "Lifetime",
       "type" : "NonConsumable"
     }

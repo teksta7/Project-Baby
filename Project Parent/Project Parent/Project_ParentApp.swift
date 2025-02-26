@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import GoogleMobileAds
+//import GoogleMobileAds
 
 class AppDelegate: UIResponder, UIApplicationDelegate {
 

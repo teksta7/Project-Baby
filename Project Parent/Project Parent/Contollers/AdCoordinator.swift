@@ -6,12 +6,12 @@
 //
 
 import Foundation
-import GoogleMobileAds
+//import GoogleMobileAds
 import SwiftUI
 import StoreKit
 
 
-class AdCoordinator: NSObject, GADFullScreenContentDelegate {
+class AdCoordinator: NSObject {
 //    private var appAd: GADInterstitialAd?
 //    @AppStorage("projectparent.toggleInAppAds") var adsEnabled: Bool = UserDefaults.standard.bool(forKey: "projectparent.toggleInAppAds")
 //    //@AppStorage("toggleInAppAds") var adsEnabled: Bool = UserDefaults.standard.bool(forKey: "toggleInAppAds")
@@ -69,29 +69,29 @@ class AdCoordinator: NSObject, GADFullScreenContentDelegate {
                 print(error)
             }
         }
-    // [START ad_events]
-      func adDidRecordImpression(_ ad: GADFullScreenPresentingAd) {
-        print("\(#function) called")
-      }
-
-      func adDidRecordClick(_ ad: GADFullScreenPresentingAd) {
-        print("\(#function) called")
-      }
-
-      func ad(
-        _ ad: GADFullScreenPresentingAd,
-        didFailToPresentFullScreenContentWithError error: Error
-      ) {
-        print("\(#function) called")
-      }
-
-      func adWillPresentFullScreenContent(_ ad: GADFullScreenPresentingAd) {
-        print("\(#function) called")
-      }
-
-      func adWillDismissFullScreenContent(_ ad: GADFullScreenPresentingAd) {
-        print("\(#function) called")
-      }
+//    // [START ad_events]
+//      func adDidRecordImpression(_ ad: GADFullScreenPresentingAd) {
+//        print("\(#function) called")
+//      }
+//
+//      func adDidRecordClick(_ ad: GADFullScreenPresentingAd) {
+//        print("\(#function) called")
+//      }
+//
+//      func ad(
+//        _ ad: GADFullScreenPresentingAd,
+//        didFailToPresentFullScreenContentWithError error: Error
+//      ) {
+//        print("\(#function) called")
+//      }
+//
+//      func adWillPresentFullScreenContent(_ ad: GADFullScreenPresentingAd) {
+//        print("\(#function) called")
+//      }
+//
+//      func adWillDismissFullScreenContent(_ ad: GADFullScreenPresentingAd) {
+//        print("\(#function) called")
+//      }
 
       // [END ad_events]
   }

@@ -31,7 +31,7 @@ class BottleNotificationController
     func scheduleBottleNotification(_ minutesUntilNotification: Int, _ bottleID: UUID) async
     {
         //FOR DEBUG PURPOSES
-        await removeExistingNotifications("projectparent")
+        removeExistingNotifications("projectparent")
         
         // Obtain the notification settings.
         let settings = await center.notificationSettings()
@@ -121,8 +121,8 @@ class BottleNotificationController
     }
     
     func checkPendingNotifications() async {
-        let notificationCenter = UNUserNotificationCenter.current()
-        let notificationRequests = await notificationCenter.pendingNotificationRequests()
+        //let notificationCenter = UNUserNotificationCenter.current()
+        let notificationRequests = await center.pendingNotificationRequests()
             
         for notification in notificationRequests {
             print("> \(notification.identifier)")
@@ -131,13 +131,13 @@ class BottleNotificationController
     
     func removeExistingNotifications(_ notificationIdentifier: String) 
     {
-        let notificationCenter = UNUserNotificationCenter.current()
+        //let notificationCenter = UNUserNotificationCenter.current()
 
         // Removing all delivered notifications
-        notificationCenter.removeAllDeliveredNotifications()
+        center.removeAllDeliveredNotifications()
 
         // Removing all pending notifications
-        notificationCenter.removeAllPendingNotificationRequests()
+        center.removeAllPendingNotificationRequests()
         
         var notificationIdentifiers = [""]
 
@@ -150,7 +150,9 @@ class BottleNotificationController
         {
             notificationIdentifiers = [notificationIdentifier]
         }
-        notificationCenter.removePendingNotificationRequests(withIdentifiers: notificationIdentifiers)
+        center.removePendingNotificationRequests(withIdentifiers: notificationIdentifiers)
+        center.setBadgeCount(0)
+        
 
         print("Removed all notifications from app")
     }

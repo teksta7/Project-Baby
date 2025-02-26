@@ -41,10 +41,42 @@ class UtilFunctions
         return "\(minutes) minutes \(secondsLeft.formatted()) seconds"
     }
     
+    func getMinutes(_ seconds: Int) -> Int {
+        let minutes = seconds / 60
+        //let secondsLeft = seconds % 60
+        return minutes
+    }
+    
     func convertSecondsToHours(_ seconds: Int) -> String {
         let hours = seconds / 3600
         let minutesLeft = seconds % 3600 / 60
         return "\(hours) hours \(minutesLeft.formatted()) minutes"
+    }
+    
+    func percentageBetweenTimestamps(startTimestamp: TimeInterval, endTimestamp: TimeInterval, targetTimestamp: TimeInterval) -> Double {
+        //start date = dateTime stamp bottle started
+        //end date = estimated dateTime stamp for when bottle will end (will use the estimated average)
+        //target date = current dateTime stamp at the point this function is called
+        let totalTimeInterval = endTimestamp - startTimestamp
+        print("totalTimeInterval: \(totalTimeInterval)")
+        let targetTimeInterval = targetTimestamp - startTimestamp
+        print("targetTimeInterval: \(targetTimeInterval)")
+       // let percentage = (targetTimeInterval / totalTimeInterval) / 10
+        let percentage = (targetTimeInterval + totalTimeInterval) / 100
+        return percentage
+    }
+    
+    func percentageBetweenDates(startDate: Date, endDate: Date, targetDate: Date) -> Double {
+        //start date = dateTime stamp bottle started
+        //end date = estimated dateTime stamp for when bottle will end (will use the estimated average)
+        //target date = current dateTime stamp at the point this function is called
+        let totalTimeInterval = endDate.timeIntervalSince(startDate)
+        print("totalTimeInterval: \(totalTimeInterval)")
+        let targetTimeInterval = targetDate.timeIntervalSince(startDate)
+        print("targetTimeInterval: \(targetTimeInterval)")
+        let percentage = (targetTimeInterval / totalTimeInterval) * 100
+        print("percentage: \(percentage)")
+        return percentage
     }
     
 }
