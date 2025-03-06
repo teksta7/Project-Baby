@@ -295,14 +295,11 @@ struct BottlesView: View {
                                             if bottleFeedTimer == true
                                             {
 //                                                if (activity?.id.isEmpty == true) {
+                                                if(bottleSettings.isBottleFeedLiveActivityOn == true)
+                                                {
                                                     print("Launching Live Activity")
                                                     self.launchLiveActivity()
-//                                                }
-//                                                else
-//                                                {
-//
-//                                                }
-                                               
+                                                }
                                                 
                                                 startTimeToSave = Date.now
                                                 bottleFeedButtonLabel = "Finish Bottle Feed"
@@ -406,6 +403,9 @@ struct BottlesView: View {
                 {
                     // Re-enable the idle timer when the view disappears to allow the screen to sleep
                     UIApplication.shared.isIdleTimerDisabled = false
+                    Task {
+                        await self.endLiveActivity()
+                    }
                     
 //                    if (adCoordinator.adsEnabled == true)
 //                    {
@@ -433,7 +433,10 @@ struct BottlesView: View {
                     bottleDuration += 1
 //                    if (bottleDuration.isMultiple(of: 60))
 //                    {
+                    if(bottleSettings.isBottleFeedLiveActivityOn == true)
+                    {
                         self.updateLiveActivity()
+                    }
                     //}
                 }
             }
