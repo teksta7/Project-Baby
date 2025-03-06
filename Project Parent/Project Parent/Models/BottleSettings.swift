@@ -18,6 +18,12 @@ final class BottleSettings: ObservableObject {
             objectWillChange.send()
         }
     }
+    @UserDefault("isBottleFeedLiveActivityOn", defaultValue: false)
+    var isBottleFeedLiveActivityOn: Bool {
+        willSet {
+            objectWillChange.send()
+        }
+    }
    
     @UserDefault("toggleInAppAds", defaultValue: true)
     var toggleInAppAds: Bool {

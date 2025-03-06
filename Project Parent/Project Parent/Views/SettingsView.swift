@@ -22,6 +22,7 @@ struct SettingsView: View {
     @AppStorage("com.projectparent.isWindCardTracked") var isWindCardTracked: Bool = UserDefaults.standard.bool(forKey: "com.projectparent.isWindCardTracked")
     @AppStorage("com.projectparent.isPooCardTracked") var isPooCardTracked: Bool = UserDefaults.standard.bool(forKey: "com.projectparent.isPooCardTracked")
     @AppStorage("com.projectparent.isTestCardTracked") var isTestCardTracked: Bool = UserDefaults.standard.bool(forKey: "com.projectparent.isTestCardTracked")
+    @AppStorage("com.projectparent.isBottleFeedLiveActivityOn") var isBottleFeedLiveActivityOn: Bool = UserDefaults.standard.bool(forKey: "com.projectparent.isBottleFeedLiveActivityOn")
     
     @EnvironmentObject
     private var IAP: IAPController
@@ -195,6 +196,11 @@ struct SettingsView: View {
                             .foregroundStyle(.cyan)
                             .bold()
                         TextField("Enter default note", text: $bottleSettings.setDefaultBottleNote)
+                    }
+                    Toggle(isOn: $bottleSettings.isBottleFeedLiveActivityOn)
+                    {
+                        Text("Live Activities for Bottle Feeds")
+                        Text("The app will display your bottle feed progress even when you switch apps")
                     }
                 }
 
