@@ -10,25 +10,38 @@ import ActivityKit
 import BottleFeedTrackerExtension
 
 struct TestView: View {
-        @State private var activity: Activity<LiveActivityWidgetSampleAttributes>?
-
-        var body: some View {
-            VStack {
-                Button("Start") {
-                    self.launchLiveActivity()
-                    
-                }
-                Button("update") {
-                    Task {
-                        self.updateLiveActivity()
-                    }
-                }
-                Button("End") {
-                    Task {
-                        await self.endLiveActivity()
-                    }
+    @State private var activity: Activity<LiveActivityWidgetSampleAttributes>?
+    
+    @ObservedObject var bottleTimerController = BottleTimerController()
+    
+    var body: some View {
+        VStack {
+            Button("Start") {
+                self.launchLiveActivity()
+                
+            }
+            Button("update") {
+                Task {
+                    self.updateLiveActivity()
                 }
             }
+            Button("End") {
+                Task {
+                    await self.endLiveActivity()
+                }
+            }
+        }
+        VStack {
+            Text(bottleTimerController.message)
+            Button(bottleTimerController.isRunning ? "Stop" : "Start") {
+                if bottleTimerController.isRunning {
+                    bottleTimerController.stop()
+                } else {
+                    bottleTimerController.start()
+                }
+            }
+        }
+            
 //            .onChange(of: scenePhase) { newPhase in
 //            }
         }

@@ -39,12 +39,17 @@ struct BottleFeedTrackerAttributes: ActivityAttributes {
 struct BottlesView: View {
     private var adCoordinator = AdCoordinator()
     
+    //@Environment(\.scenePhase) var scenePhase
+    //@State private var isAppActive = true
+    
     var center = UNUserNotificationCenter.current()
     
     @State var activity: Activity<BottleFeedTrackerAttributes>?
 
     @Environment(\.managedObjectContext) private var viewContext
     @Environment(\.requestReview) private var requestReview
+    @ObservedObject var bottleTimerController = BottleTimerController()
+
     @State var bottlesBeforeReview = 10
     
     @State var bottleFeedTimer: Bool = false
@@ -270,7 +275,8 @@ struct BottlesView: View {
                         .padding(.vertical, 10)
                         
                         
-                        Text("\(UtilFunctions().convertSecondsToMinutes(bottleDuration)) ").bold().font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
+                        //Text("\(UtilFunctions().convertSecondsToMinutes(bottleDuration)) ").bold().font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
+                        Text("\(UtilFunctions().convertSecondsToMinutes(bottleTimerController.bottleDuration)) ").bold().font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
                         //Text("\(bottleDuration) seconds").bold().font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
                             
                         ZStack
@@ -287,13 +293,18 @@ struct BottlesView: View {
                                         }
                                         else
                                         {
-                                            Task {
-                                                self.timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
-                                            }
+                                            
+//                                            Task {
+//                                                self.timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+//                                            }
                                            
-                                            bottleFeedTimer.toggle()
-                                            if bottleFeedTimer == true
+                                            //bottleFeedTimer.toggle()
+                                            ///--------------------------------------
+                                            if bottleTimerController.isRunning == false
+                                            
+                                            //if bottleFeedTimer == true
                                             {
+                                                bottleTimerController.start()
 //                                                if (activity?.id.isEmpty == true) {
                                                 if(bottleSettings.isBottleFeedLiveActivityOn == true)
                                                 {
@@ -307,10 +318,12 @@ struct BottlesView: View {
                                             }
                                             else
                                             {
+                                                bottleTimerController.stop()
                                                 endTimeToSave = Date.now
                                                 Task {
                                                     await self.endLiveActivity()
                                                 }
+                                                
                                                 
                                                 //Code to add bottle
                                                 if (addBottleToModel(addtionalNotes: notesToSave, startTime: startTimeToSave, endTime: endTimeToSave, ounces: ouncesToSave)) == true
@@ -405,6 +418,7 @@ struct BottlesView: View {
                     UIApplication.shared.isIdleTimerDisabled = false
                     Task {
                         await self.endLiveActivity()
+                        bottleTimerController.stop()
                     }
                     
 //                    if (adCoordinator.adsEnabled == true)
@@ -427,10 +441,14 @@ struct BottlesView: View {
                 CustomAlertView(show: $showErrorAlert, icon: .error, text: "Whoops", gradientColor: .red, circleAColor: .red, details: "Couldn't save the bottle, please try again", corner: 30)
             }
         .onReceive(timer) { _ in
+        //.onReceive() { _ in
+            //guard isAppActive else { return }
             //print("Current Bottle Duration Timer: \(bottleDuration)")
-            if ((bottleDuration >= 0) && (bottleFeedTimer == true)) {
+            //if ((bottleDuration >= 0) && (bottleFeedTimer == true)) {
+            //if ((bottleDuration >= 0) && (bottleTimerController.isRunning == true)) {
+            if ((bottleTimerController.bottleDuration > 0) && (bottleTimerController.isRunning == true)) {
                 withAnimation{
-                    bottleDuration += 1
+                    //bottleDuration += 1
 //                    if (bottleDuration.isMultiple(of: 60))
 //                    {
                     if(bottleSettings.isBottleFeedLiveActivityOn == true)
@@ -441,6 +459,13 @@ struct BottlesView: View {
                 }
             }
         }
+//        .onChange(of: scenePhase) {
+//            if scenePhase == .active {
+//                isAppActive = true
+//            } else {
+//                isAppActive = false
+//            }
+//        }
             
         }
         func addBottleToModel(addtionalNotes: String, startTime: Date, endTime: Date, ounces: CGFloat) -> Bool
@@ -519,7 +544,7 @@ private extension BottlesView {
         Task {
             await self.activity?.update(
                     ActivityContent<BottleFeedTrackerAttributes.ContentState>(
-                        state: .init(bottleDuration: bottleDuration),
+                        state: .init(bottleDuration: bottleTimerController.bottleDuration),
                         staleDate: nil,
                         relevanceScore: 0
                     ),

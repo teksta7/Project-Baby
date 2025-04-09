@@ -22,6 +22,7 @@
 		83694DF62C7CA70A00C5C8FC /* BottleChartsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83694DF52C7CA70A00C5C8FC /* BottleChartsView.swift */; };
 		83694DF82C7CB34800C5C8FC /* BottleController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83694DF72C7CB34700C5C8FC /* BottleController.swift */; };
 		83694DFA2C7CBA0700C5C8FC /* ConversionUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83694DF92C7CBA0700C5C8FC /* ConversionUtil.swift */; };
+		837249EC2D79E02900F01F84 /* BottleTimerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837249EB2D79E02900F01F84 /* BottleTimerController.swift */; };
 		838A3AA12C6EB80E00F8495D /* Project_ParentApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838A3AA02C6EB80E00F8495D /* Project_ParentApp.swift */; };
 		838A3AA32C6EB80E00F8495D /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838A3AA22C6EB80E00F8495D /* HomeView.swift */; };
 		838A3AA52C6EB80F00F8495D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 838A3AA42C6EB80F00F8495D /* Assets.xcassets */; };
@@ -113,6 +114,7 @@
 		83694DF52C7CA70A00C5C8FC /* BottleChartsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottleChartsView.swift; sourceTree = "<group>"; };
 		83694DF72C7CB34700C5C8FC /* BottleController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottleController.swift; sourceTree = "<group>"; };
 		83694DF92C7CBA0700C5C8FC /* ConversionUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversionUtil.swift; sourceTree = "<group>"; };
+		837249EB2D79E02900F01F84 /* BottleTimerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottleTimerController.swift; sourceTree = "<group>"; };
 		838A3A9D2C6EB80E00F8495D /* Project Parent.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Project Parent.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		838A3AA02C6EB80E00F8495D /* Project_ParentApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project_ParentApp.swift; sourceTree = "<group>"; };
 		838A3AA22C6EB80E00F8495D /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -301,6 +303,7 @@
 				839CBC7B2C8E702A00DE05CE /* BottleNotificationController.swift */,
 				832DED532CB3EF9600E3793F /* ImageFileController.swift */,
 				832DED572CC1086700E3793F /* ProfileController.swift */,
+				837249EB2D79E02900F01F84 /* BottleTimerController.swift */,
 			);
 			path = Contollers;
 			sourceTree = "<group>";
@@ -554,6 +557,7 @@
 				83AE2E8C2C852F9200ACF31F /* GeneralUtil.swift in Sources */,
 				832DED502CB3E7C300E3793F /* BabyProfileOnboardingView.swift in Sources */,
 				83AE2E8A2C82046400ACF31F /* CustomAlertView.swift in Sources */,
+				837249EC2D79E02900F01F84 /* BottleTimerController.swift in Sources */,
 				838A3AE52C6FA41000F8495D /* MedsView.swift in Sources */,
 				83694DF82C7CB34800C5C8FC /* BottleController.swift in Sources */,
 				83694DF62C7CA70A00C5C8FC /* BottleChartsView.swift in Sources */,
