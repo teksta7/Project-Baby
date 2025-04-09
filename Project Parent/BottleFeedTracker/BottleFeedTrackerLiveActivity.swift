@@ -41,14 +41,16 @@ struct BottleFeedTrackerLiveActivity: Widget {
                         .resizable()
                         .scaledToFit()
                         .frame(width: 40, height: 40, alignment: .leading)
-                    Text("\(context.attributes.babyName)'s bottle feed:")
+                    Text("\(context.attributes.babyName)'s bottle feed in progress")
                         .bold()
                     Text("")
                         .bold()
                     VStack
                     {
-                        //Text("\(context.state.bottleDuration)")
-                        Text("\(UtilFunctions().convertSecondsToMinutes(context.state.bottleDuration))")
+                        //Text("\(UtilFunctions().convertSecondsToMinutes(context.state.bottleDuration))")
+                        //Text("in progress").bold()
+                        
+                        
                         //Text("\(UtilFunctions().percentageBetweenDates(startDate: context.attributes.startTimeStamp, endDate: context.attributes.estimatedEndTimeStamp, targetDate: Date.now))")
                         
                     }
@@ -102,11 +104,14 @@ struct BottleFeedTrackerLiveActivity: Widget {
                     // Expanded center UI goes here
                     HStack
                     {
-                        Text("\(context.attributes.babyName)'s bottle feed:")
+                        Text("\(context.attributes.babyName)'s bottle feed in progress")
                             .bold()
                         //Text("\(UtilFunctions().percentageBetweenDates(startDate: context.attributes.startTimeStamp, endDate: context.attributes.estimatedEndTimeStamp, targetDate: Date.now))")
                         //Text("\(UtilFunctions().percentageBetweenTimestamps(startTimestamp: context.attributes.startTimeStamp.timeIntervalSince1970, endTimestamp: context.attributes.estimatedEndTimeStamp.timeIntervalSince1970, targetTimestamp: Date.now.timeIntervalSince1970))")
-                        Text("\(UtilFunctions().convertSecondsToMinutes(context.state.bottleDuration))")
+                        
+                        //Text("in progress").bold()
+                        
+                        //Text("\(UtilFunctions().convertSecondsToMinutes(context.state.bottleDuration))")
                             .frame(alignment: .trailing)
                     }
                 }

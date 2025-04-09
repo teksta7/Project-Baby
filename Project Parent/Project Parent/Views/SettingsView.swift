@@ -280,10 +280,10 @@ struct SettingsView: View {
         {
             HomeCards[6].toTrack = isPooCardTracked
         }
-//        .onChange(of: isTestCardTracked)
-//        {
-//            HomeCards[8].toTrack = isTestCardTracked
-//        }
+        .onChange(of: isTestCardTracked)
+        {
+            HomeCards[8].toTrack = isTestCardTracked
+        }
         .onChange(of: bottleSettings.enableBottleNotification)
         {
             if bottleSettings.enableBottleNotification == true
