@@ -1,0 +1,489 @@
+-- Merging decision tree log ---
+application
+INJECTED from /Users/teksta/source/Project-Baby/Android/app/src/main/AndroidManifest.xml:12:5-29:19
+INJECTED from /Users/teksta/source/Project-Baby/Android/app/src/main/AndroidManifest.xml:12:5-29:19
+MERGED from [:skipstone:SkipBridge] /Users/teksta/Library/Developer/Xcode/DerivedData/ProjectParent-akjhrhiwmkeqpvfhekqifpgisxqb/Build/Intermediates.noindex/BuildToolPluginIntermediates/project-baby.output/ProjectParent/skipstone/SkipBridge/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:8:5-13:19
+MERGED from [:skipstone:SkipBridge] /Users/teksta/Library/Developer/Xcode/DerivedData/ProjectParent-akjhrhiwmkeqpvfhekqifpgisxqb/Build/Intermediates.noindex/BuildToolPluginIntermediates/project-baby.output/ProjectParent/skipstone/SkipBridge/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:8:5-13:19
+MERGED from [androidx.test:runner:1.6.1] /Users/teksta/.gradle/caches/8.14.1/transforms/729b560567c5be331d1f2c251ae2c7df/transformed/runner-1.6.1/AndroidManifest.xml:30:5-20
+MERGED from [androidx.test:runner:1.6.1] /Users/teksta/.gradle/caches/8.14.1/transforms/729b560567c5be331d1f2c251ae2c7df/transformed/runner-1.6.1/AndroidManifest.xml:30:5-20
+MERGED from [androidx.compose.ui:ui-tooling-android:1.8.1] /Users/teksta/.gradle/caches/8.14.1/transforms/92e07644ee3d8cede6182ff771f24380/transformed/ui-tooling-release/AndroidManifest.xml:22:5-26:19
+MERGED from [androidx.compose.ui:ui-tooling-android:1.8.1] /Users/teksta/.gradle/caches/8.14.1/transforms/92e07644ee3d8cede6182ff771f24380/transformed/ui-tooling-release/AndroidManifest.xml:22:5-26:19
+MERGED from [androidx.window:window:1.3.0] /Users/teksta/.gradle/caches/8.14.1/transforms/e16375dd6349a6e92b71cf21f5dc7d0f/transformed/window-1.3.0/AndroidManifest.xml:22:5-29:19
+MERGED from [androidx.window:window:1.3.0] /Users/teksta/.gradle/caches/8.14.1/transforms/e16375dd6349a6e92b71cf21f5dc7d0f/transformed/window-1.3.0/AndroidManifest.xml:22:5-29:19
+MERGED from [androidx.emoji2:emoji2:1.4.0] /Users/teksta/.gradle/caches/8.14.1/transforms/bcbe9bb66e5a9b6be15af2f2ff19b554/transformed/emoji2-1.4.0/AndroidManifest.xml:23:5-33:19
+MERGED from [androidx.emoji2:emoji2:1.4.0] /Users/teksta/.gradle/caches/8.14.1/transforms/bcbe9bb66e5a9b6be15af2f2ff19b554/transformed/emoji2-1.4.0/AndroidManifest.xml:23:5-33:19
+MERGED from [androidx.core:core:1.13.1] /Users/teksta/.gradle/caches/8.14.1/transforms/bb2cfe922d9659664bc98b8265f40a52/transformed/core-1.13.1/AndroidManifest.xml:28:5-89
+MERGED from [androidx.core:core:1.13.1] /Users/teksta/.gradle/caches/8.14.1/transforms/bb2cfe922d9659664bc98b8265f40a52/transformed/core-1.13.1/AndroidManifest.xml:28:5-89
+MERGED from [androidx.lifecycle:lifecycle-process:2.8.7] /Users/teksta/.gradle/caches/8.14.1/transforms/765a13698f6b85bbd7e0f75e015cc00b/transformed/lifecycle-process-2.8.7/AndroidManifest.xml:23:5-33:19
+MERGED from [androidx.lifecycle:lifecycle-process:2.8.7] /Users/teksta/.gradle/caches/8.14.1/transforms/765a13698f6b85bbd7e0f75e015cc00b/transformed/lifecycle-process-2.8.7/AndroidManifest.xml:23:5-33:19
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/teksta/.gradle/caches/8.14.1/transforms/401bde26a998e8a9c5b17daabccfcb95/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:24:5-25:19
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/teksta/.gradle/caches/8.14.1/transforms/401bde26a998e8a9c5b17daabccfcb95/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:24:5-25:19
+MERGED from [androidx.profileinstaller:profileinstaller:1.4.1] /Users/teksta/.gradle/caches/8.14.1/transforms/4adeb29c46232fc5fc267f2643e98f3e/transformed/profileinstaller-1.4.1/AndroidManifest.xml:23:5-53:19
+MERGED from [androidx.profileinstaller:profileinstaller:1.4.1] /Users/teksta/.gradle/caches/8.14.1/transforms/4adeb29c46232fc5fc267f2643e98f3e/transformed/profileinstaller-1.4.1/AndroidManifest.xml:23:5-53:19
+MERGED from [androidx.startup:startup-runtime:1.1.1] /Users/teksta/.gradle/caches/8.14.1/transforms/cbe5e97098ae3b1adac7c9d610ebeb28/transformed/startup-runtime-1.1.1/AndroidManifest.xml:25:5-31:19
+MERGED from [androidx.startup:startup-runtime:1.1.1] /Users/teksta/.gradle/caches/8.14.1/transforms/cbe5e97098ae3b1adac7c9d610ebeb28/transformed/startup-runtime-1.1.1/AndroidManifest.xml:25:5-31:19
+	android:extractNativeLibs
+		INJECTED from /Users/teksta/source/Project-Baby/Android/app/src/main/AndroidManifest.xml
+	android:appComponentFactory
+		ADDED from [androidx.core:core:1.13.1] /Users/teksta/.gradle/caches/8.14.1/transforms/bb2cfe922d9659664bc98b8265f40a52/transformed/core-1.13.1/AndroidManifest.xml:28:18-86
+	android:supportsRtl
+		ADDED from /Users/teksta/source/Project-Baby/Android/app/src/main/AndroidManifest.xml:15:9-35
+	android:label
+		INJECTED from /Users/teksta/source/Project-Baby/Android/app/src/main/AndroidManifest.xml
+		ADDED from /Users/teksta/source/Project-Baby/Android/app/src/main/AndroidManifest.xml:13:9-40
+	android:icon
+		ADDED from /Users/teksta/source/Project-Baby/Android/app/src/main/AndroidManifest.xml:17:9-43
+	android:allowBackup
+		ADDED from /Users/teksta/source/Project-Baby/Android/app/src/main/AndroidManifest.xml:16:9-35
+	android:name
+		ADDED from /Users/teksta/source/Project-Baby/Android/app/src/main/AndroidManifest.xml:14:9-39
+manifest
+ADDED from /Users/teksta/source/Project-Baby/Android/app/src/main/AndroidManifest.xml:3:1-30:12
+INJECTED from /Users/teksta/source/Project-Baby/Android/app/src/main/AndroidManifest.xml:3:1-30:12
+INJECTED from /Users/teksta/source/Project-Baby/Android/app/src/main/AndroidManifest.xml:3:1-30:12
+INJECTED from /Users/teksta/source/Project-Baby/Android/app/src/main/AndroidManifest.xml:3:1-30:12
+MERGED from [:skipstone:ProjectParent] /Users/teksta/Library/Developer/Xcode/DerivedData/ProjectParent-akjhrhiwmkeqpvfhekqifpgisxqb/Build/Intermediates.noindex/BuildToolPluginIntermediates/project-baby.output/ProjectParent/skipstone/ProjectParent/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:2:1-7:12
+MERGED from [:skipstone:SkipSwiftUI] /Users/teksta/Library/Developer/Xcode/DerivedData/ProjectParent-akjhrhiwmkeqpvfhekqifpgisxqb/Build/Intermediates.noindex/BuildToolPluginIntermediates/project-baby.output/ProjectParent/skipstone/SkipSwiftUI/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:2:1-7:12
+MERGED from [:skipstone:SkipAndroidBridge] /Users/teksta/Library/Developer/Xcode/DerivedData/ProjectParent-akjhrhiwmkeqpvfhekqifpgisxqb/Build/Intermediates.noindex/BuildToolPluginIntermediates/project-baby.output/ProjectParent/skipstone/SkipAndroidBridge/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:2:1-7:12
+MERGED from [:skipstone:SkipBridge] /Users/teksta/Library/Developer/Xcode/DerivedData/ProjectParent-akjhrhiwmkeqpvfhekqifpgisxqb/Build/Intermediates.noindex/BuildToolPluginIntermediates/project-baby.output/ProjectParent/skipstone/SkipBridge/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:2:1-15:12
+MERGED from [:skipstone:SkipUI] /Users/teksta/Library/Developer/Xcode/DerivedData/ProjectParent-akjhrhiwmkeqpvfhekqifpgisxqb/Build/Intermediates.noindex/BuildToolPluginIntermediates/project-baby.output/ProjectParent/skipstone/SkipUI/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:2:1-7:12
+MERGED from [:skipstone:SkipModel] /Users/teksta/Library/Developer/Xcode/DerivedData/ProjectParent-akjhrhiwmkeqpvfhekqifpgisxqb/Build/Intermediates.noindex/BuildToolPluginIntermediates/project-baby.output/ProjectParent/skipstone/SkipModel/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:2:1-7:12
+MERGED from [:skipstone:SkipFoundation] /Users/teksta/Library/Developer/Xcode/DerivedData/ProjectParent-akjhrhiwmkeqpvfhekqifpgisxqb/Build/Intermediates.noindex/BuildToolPluginIntermediates/project-baby.output/ProjectParent/skipstone/SkipFoundation/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:2:1-7:12
+MERGED from [:skipstone:SkipLib] /Users/teksta/Library/Developer/Xcode/DerivedData/ProjectParent-akjhrhiwmkeqpvfhekqifpgisxqb/Build/Intermediates.noindex/BuildToolPluginIntermediates/project-baby.output/ProjectParent/skipstone/SkipLib/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.test:runner:1.6.1] /Users/teksta/.gradle/caches/8.14.1/transforms/729b560567c5be331d1f2c251ae2c7df/transformed/runner-1.6.1/AndroidManifest.xml:17:1-32:12
+MERGED from [androidx.test.services:storage:1.5.0] /Users/teksta/.gradle/caches/8.14.1/transforms/08e82fb6de0dc45f725a74f88bc8a781/transformed/storage-1.5.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.test:monitor:1.7.1] /Users/teksta/.gradle/caches/8.14.1/transforms/a298e8dc25488119a284e5356a8b74c8/transformed/monitor-1.7.1/AndroidManifest.xml:17:1-24:12
+MERGED from [io.coil-kt.coil3:coil-svg-android:3.0.4] /Users/teksta/.gradle/caches/8.14.1/transforms/8e4fb46f26ca29879420c4b95f6fd06e/transformed/coil-svg-release/AndroidManifest.xml:2:1-7:12
+MERGED from [io.coil-kt.coil3:coil-compose-android:3.0.4] /Users/teksta/.gradle/caches/8.14.1/transforms/6d92c9894fec59fc3f812d169ef20d07/transformed/coil-compose-release/AndroidManifest.xml:2:1-7:12
+MERGED from [io.coil-kt.coil3:coil-android:3.0.4] /Users/teksta/.gradle/caches/8.14.1/transforms/a52a652f847dbe8fa7d293ae3ed636ca/transformed/coil-release/AndroidManifest.xml:2:1-7:12
+MERGED from [io.coil-kt.coil3:coil-compose-core-android:3.0.4] /Users/teksta/.gradle/caches/8.14.1/transforms/60347f72796d651a6ed0fa87da0ce618/transformed/coil-compose-core-release/AndroidManifest.xml:2:1-7:12
+MERGED from [io.coil-kt.coil3:coil-network-core-android:3.0.4] /Users/teksta/.gradle/caches/8.14.1/transforms/4e9ba36f51195ac5eb86af09c5b5c490/transformed/coil-network-core-release/AndroidManifest.xml:2:1-7:12
+MERGED from [io.coil-kt.coil3:coil-core-android:3.0.4] /Users/teksta/.gradle/caches/8.14.1/transforms/547d79cec4b2852ddfebaa6c76cde1e2/transformed/coil-core-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.appcompat:appcompat-resources:1.7.0] /Users/teksta/.gradle/caches/8.14.1/transforms/35862a2970ce9e740e6d5257cfc353ed/transformed/appcompat-resources-1.7.0/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.appcompat:appcompat:1.7.0] /Users/teksta/.gradle/caches/8.14.1/transforms/52707540ebd8f511ef02cf0df87aa01d/transformed/appcompat-1.7.0/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.navigation:navigation-common:2.8.5] /Users/teksta/.gradle/caches/8.14.1/transforms/ced1a582276987fb069596e2a670420a/transformed/navigation-common-2.8.5/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.navigation:navigation-runtime:2.8.5] /Users/teksta/.gradle/caches/8.14.1/transforms/8eee14f7fae7df77cbeffc80ce75fc35/transformed/navigation-runtime-2.8.5/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.navigation:navigation-common-ktx:2.8.5] /Users/teksta/.gradle/caches/8.14.1/transforms/19948c094ae3509b66e134764d5efa90/transformed/navigation-common-ktx-2.8.5/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.navigation:navigation-runtime-ktx:2.8.5] /Users/teksta/.gradle/caches/8.14.1/transforms/14b1dc0bb6897b6d9d9ce462d6928047/transformed/navigation-runtime-ktx-2.8.5/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.navigation:navigation-compose:2.8.5] /Users/teksta/.gradle/caches/8.14.1/transforms/e9710517e58825057007e7b3f1e6ce23/transformed/navigation-compose-2.8.5/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.material3:material3-android:1.4.0-alpha14] /Users/teksta/.gradle/caches/8.14.1/transforms/03cba6184c3dbfc7ee0e818f4741c662/transformed/material3-release/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.fragment:fragment:1.5.4] /Users/teksta/.gradle/caches/8.14.1/transforms/f3447f3c82cceff858b910b4d4c6417e/transformed/fragment-1.5.4/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.compose.animation:animation-core-android:1.8.1] /Users/teksta/.gradle/caches/8.14.1/transforms/d1f4bd8b0475270aa97c2928a5bfa355/transformed/animation-core-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.material:material-ripple-android:1.8.1] /Users/teksta/.gradle/caches/8.14.1/transforms/2bd82ca7d5ec4693f6df6ce8b61b71b8/transformed/material-ripple-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.animation:animation-android:1.8.1] /Users/teksta/.gradle/caches/8.14.1/transforms/276f78d6626382105aad416ce0ceba4b/transformed/animation-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.foundation:foundation-layout-android:1.8.1] /Users/teksta/.gradle/caches/8.14.1/transforms/8b19f90f89a89a3f2aa0eb5e9addd661/transformed/foundation-layout-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.material3.adaptive:adaptive-android:1.1.0] /Users/teksta/.gradle/caches/8.14.1/transforms/68704584ada76d2c5d5eb62c3bdfcea2/transformed/adaptive-release/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.compose.foundation:foundation-android:1.8.1] /Users/teksta/.gradle/caches/8.14.1/transforms/3d7149f29e0aac6e4c79d5491fe0b531/transformed/foundation-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.ui:ui-tooling-preview-android:1.8.1] /Users/teksta/.gradle/caches/8.14.1/transforms/edc715e48fd67037fb7bed6bc927d07d/transformed/ui-tooling-preview-release/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.compose.ui:ui-tooling-data-android:1.8.1] /Users/teksta/.gradle/caches/8.14.1/transforms/194724e81cbeb58f82247ba840393fb2/transformed/ui-tooling-data-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.ui:ui-unit-android:1.8.1] /Users/teksta/.gradle/caches/8.14.1/transforms/20865b454d635f120e6a4ead9c7443c3/transformed/ui-unit-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.ui:ui-graphics-android:1.8.1] /Users/teksta/.gradle/caches/8.14.1/transforms/1e60e9728a650a78a7145bd2644df078/transformed/ui-graphics-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.ui:ui-geometry-android:1.8.1] /Users/teksta/.gradle/caches/8.14.1/transforms/8f09c5d2172f4c21aa172e6023350b95/transformed/ui-geometry-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.ui:ui-util-android:1.8.1] /Users/teksta/.gradle/caches/8.14.1/transforms/cbae7174004e62f9123dd2b286253e49/transformed/ui-util-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.ui:ui-text-android:1.8.1] /Users/teksta/.gradle/caches/8.14.1/transforms/1e21a3e7beb43ff814862a49dd8b20c2/transformed/ui-text-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.ui:ui-tooling-android:1.8.1] /Users/teksta/.gradle/caches/8.14.1/transforms/92e07644ee3d8cede6182ff771f24380/transformed/ui-tooling-release/AndroidManifest.xml:17:1-28:12
+MERGED from [androidx.compose.material:material-android:1.8.1] /Users/teksta/.gradle/caches/8.14.1/transforms/1edc4beb72d7f97ef90c66d470f8efcd/transformed/material-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.loader:loader:1.0.0] /Users/teksta/.gradle/caches/8.14.1/transforms/79205f5c6750c9c837586eeab71b2135/transformed/loader-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-runtime-compose-android:2.8.7] /Users/teksta/.gradle/caches/8.14.1/transforms/0dbd9671f0c11704574bd7b35d8cedcc/transformed/lifecycle-runtime-compose-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.lifecycle:lifecycle-livedata-core-ktx:2.8.7] /Users/teksta/.gradle/caches/8.14.1/transforms/245ccfb52931d226f3586694b205b7b1/transformed/lifecycle-livedata-core-ktx-2.8.7/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.lifecycle:lifecycle-runtime-ktx-android:2.8.7] /Users/teksta/.gradle/caches/8.14.1/transforms/5445468a9e1a15c96f6d1d29e957eb29/transformed/lifecycle-runtime-ktx-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.8.7] /Users/teksta/.gradle/caches/8.14.1/transforms/46352e537cb40b0204bd530858df22b5/transformed/lifecycle-livedata-2.8.7/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.7] /Users/teksta/.gradle/caches/8.14.1/transforms/a53c45937ac255fcf6d610cd4c8f2701/transformed/lifecycle-viewmodel-ktx-2.8.7/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.8.7] /Users/teksta/.gradle/caches/8.14.1/transforms/a88997fc6959f0f318a02a15a75b8010/transformed/lifecycle-livedata-core-2.8.7/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:2.8.7] /Users/teksta/.gradle/caches/8.14.1/transforms/3651f5f210355dd336d3a8dfcbc99c89/transformed/lifecycle-viewmodel-savedstate-2.8.7/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] /Users/teksta/.gradle/caches/8.14.1/transforms/2810ef81205bab72e1c48e0a7c55565a/transformed/drawerlayout-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] /Users/teksta/.gradle/caches/8.14.1/transforms/14ddb4f6e80c31821f9ad0078dfc8c9b/transformed/vectordrawable-animated-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] /Users/teksta/.gradle/caches/8.14.1/transforms/691d1b717e0264cc09a62821b589f867/transformed/vectordrawable-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.viewpager:viewpager:1.0.0] /Users/teksta/.gradle/caches/8.14.1/transforms/7981a0845038eee8e9931bc4ef09dcd1/transformed/viewpager-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.customview:customview:1.0.0] /Users/teksta/.gradle/caches/8.14.1/transforms/b693c0563508e4a6b47e9623cda0e20d/transformed/customview-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.graphics:graphics-shapes-android:1.0.1] /Users/teksta/.gradle/caches/8.14.1/transforms/0762c7d8cc3dcbe4e7db50ebfbbc8db7/transformed/graphics-shapes-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.customview:customview-poolingcontainer:1.0.0] /Users/teksta/.gradle/caches/8.14.1/transforms/bd8c4f1e81f8ede2e3f471e0b4c63572/transformed/customview-poolingcontainer-1.0.0/AndroidManifest.xml:17:1-23:12
+MERGED from [androidx.core:core-ktx:1.13.1] /Users/teksta/.gradle/caches/8.14.1/transforms/f9e4611ca372f7606ebbb5e20a8ee475/transformed/core-ktx-1.13.1/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.window:window-core-android:1.3.0] /Users/teksta/.gradle/caches/8.14.1/transforms/eeed0090868634452a3263ea9d037e11/transformed/window-core-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.window:window:1.3.0] /Users/teksta/.gradle/caches/8.14.1/transforms/e16375dd6349a6e92b71cf21f5dc7d0f/transformed/window-1.3.0/AndroidManifest.xml:17:1-31:12
+MERGED from [androidx.autofill:autofill:1.0.0] /Users/teksta/.gradle/caches/8.14.1/transforms/26de813f6e3e41499ada7b92a7347353/transformed/autofill-1.0.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.emoji2:emoji2-views-helper:1.4.0] /Users/teksta/.gradle/caches/8.14.1/transforms/b06a00f404261640353fc9e061de748a/transformed/emoji2-views-helper-1.4.0/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.emoji2:emoji2:1.4.0] /Users/teksta/.gradle/caches/8.14.1/transforms/bcbe9bb66e5a9b6be15af2f2ff19b554/transformed/emoji2-1.4.0/AndroidManifest.xml:17:1-35:12
+MERGED from [androidx.graphics:graphics-path:1.0.1] /Users/teksta/.gradle/caches/8.14.1/transforms/61c7946b5cebe118fd6026914f5f909e/transformed/graphics-path-1.0.1/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.core:core:1.13.1] /Users/teksta/.gradle/caches/8.14.1/transforms/bb2cfe922d9659664bc98b8265f40a52/transformed/core-1.13.1/AndroidManifest.xml:17:1-30:12
+MERGED from [androidx.lifecycle:lifecycle-runtime-android:2.8.7] /Users/teksta/.gradle/caches/8.14.1/transforms/a378b3dd09c3994c5a6447da783b4213/transformed/lifecycle-runtime-release/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-process:2.8.7] /Users/teksta/.gradle/caches/8.14.1/transforms/765a13698f6b85bbd7e0f75e015cc00b/transformed/lifecycle-process-2.8.7/AndroidManifest.xml:17:1-35:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-compose-android:2.8.7] /Users/teksta/.gradle/caches/8.14.1/transforms/b7b515a73ef0daaa4216a6d5dbb91c87/transformed/lifecycle-viewmodel-compose-release/AndroidManifest.xml:2:1-7:12
+MERGED from [com.google.accompanist:accompanist-drawablepainter:0.36.0] /Users/teksta/.gradle/caches/8.14.1/transforms/889af25d5fb96b726bfa55b688cf3828/transformed/accompanist-drawablepainter-0.36.0/AndroidManifest.xml:17:1-23:12
+MERGED from [androidx.compose.material:material-icons-extended-android:1.7.8] /Users/teksta/.gradle/caches/8.14.1/transforms/3826bbdae3b5583956320af1ac6b237b/transformed/material-icons-extended-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.material:material-icons-core-android:1.7.8] /Users/teksta/.gradle/caches/8.14.1/transforms/6117af237cc3d6912a826a498ab0c86b/transformed/material-icons-core-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.ui:ui-android:1.8.1] /Users/teksta/.gradle/caches/8.14.1/transforms/e497d774a5e2d42ecbadd62438ad6691/transformed/ui-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.activity:activity-ktx:1.9.3] /Users/teksta/.gradle/caches/8.14.1/transforms/05694e91af16f39801f8b2b0750ea97e/transformed/activity-ktx-1.9.3/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.activity:activity:1.9.3] /Users/teksta/.gradle/caches/8.14.1/transforms/3c6cdde7ded8471748d5e84b00200aa1/transformed/activity-1.9.3/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.activity:activity-compose:1.9.3] /Users/teksta/.gradle/caches/8.14.1/transforms/c867659fccd73c849706cdceea3b9547/transformed/activity-compose-1.9.3/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.8.7] /Users/teksta/.gradle/caches/8.14.1/transforms/1acf1fdb06134df391e9b5b90fb109d9/transformed/lifecycle-viewmodel-2.8.7/AndroidManifest.xml:2:1-5:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-android:2.8.7] /Users/teksta/.gradle/caches/8.14.1/transforms/57e0cface083e7519896294cff8025bc/transformed/lifecycle-viewmodel-release/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.compose.runtime:runtime-saveable-android:1.8.1] /Users/teksta/.gradle/caches/8.14.1/transforms/197074e36427392e63f46dfa23a3d742/transformed/runtime-saveable-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.runtime:runtime-android:1.8.1] /Users/teksta/.gradle/caches/8.14.1/transforms/73a898a1491a823e580630fa23197991/transformed/runtime-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.savedstate:savedstate-ktx:1.2.1] /Users/teksta/.gradle/caches/8.14.1/transforms/9e981183a36fb50258d83c81747b7090/transformed/savedstate-ktx-1.2.1/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.savedstate:savedstate:1.2.1] /Users/teksta/.gradle/caches/8.14.1/transforms/afcf5098b82deb902802a58fbad3b77c/transformed/savedstate-1.2.1/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.annotation:annotation-experimental:1.4.1] /Users/teksta/.gradle/caches/8.14.1/transforms/3498af4b12808ed54c41a66f6c778f56/transformed/annotation-experimental-1.4.1/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/teksta/.gradle/caches/8.14.1/transforms/401bde26a998e8a9c5b17daabccfcb95/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:17:1-27:12
+MERGED from [androidx.window.extensions.core:core:1.0.0] /Users/teksta/.gradle/caches/8.14.1/transforms/972627d75a4cab22c7f8484bb7fa6854/transformed/core-1.0.0/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.profileinstaller:profileinstaller:1.4.1] /Users/teksta/.gradle/caches/8.14.1/transforms/4adeb29c46232fc5fc267f2643e98f3e/transformed/profileinstaller-1.4.1/AndroidManifest.xml:17:1-55:12
+MERGED from [androidx.startup:startup-runtime:1.1.1] /Users/teksta/.gradle/caches/8.14.1/transforms/cbe5e97098ae3b1adac7c9d610ebeb28/transformed/startup-runtime-1.1.1/AndroidManifest.xml:17:1-33:12
+MERGED from [androidx.tracing:tracing:1.1.0] /Users/teksta/.gradle/caches/8.14.1/transforms/94c7e9ce78714da0ab73e4f18ea3e263/transformed/tracing-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /Users/teksta/.gradle/caches/8.14.1/transforms/8bc12a326bd58eb3439e38fad84e6e54/transformed/cursoradapter-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/teksta/.gradle/caches/8.14.1/transforms/86bdf773101b695371783f279756ebb5/transformed/interpolator-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.arch.core:core-runtime:2.2.0] /Users/teksta/.gradle/caches/8.14.1/transforms/321730b78489a70ce0c84378e1a35d06/transformed/core-runtime-2.2.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.exifinterface:exifinterface:1.3.7] /Users/teksta/.gradle/caches/8.14.1/transforms/c27fdd32e97266674f7c5b63c1694c90/transformed/exifinterface-1.3.7/AndroidManifest.xml:17:1-24:12
+MERGED from [com.caverock:androidsvg-aar:1.4] /Users/teksta/.gradle/caches/8.14.1/transforms/ef116536486cfcb657132d772a6335f4/transformed/androidsvg-aar-1.4/AndroidManifest.xml:2:1-11:12
+	package
+		INJECTED from /Users/teksta/source/Project-Baby/Android/app/src/main/AndroidManifest.xml
+	android:versionName
+		INJECTED from /Users/teksta/source/Project-Baby/Android/app/src/main/AndroidManifest.xml
+	xmlns:tools
+		ADDED from /Users/teksta/source/Project-Baby/Android/app/src/main/AndroidManifest.xml:3:70-116
+	android:versionCode
+		INJECTED from /Users/teksta/source/Project-Baby/Android/app/src/main/AndroidManifest.xml
+	xmlns:android
+		ADDED from /Users/teksta/source/Project-Baby/Android/app/src/main/AndroidManifest.xml:3:11-69
+uses-permission#android.permission.INTERNET
+ADDED from /Users/teksta/source/Project-Baby/Android/app/src/main/AndroidManifest.xml:9:5-67
+	android:name
+		ADDED from /Users/teksta/source/Project-Baby/Android/app/src/main/AndroidManifest.xml:9:22-64
+activity#project.parent.MainActivity
+ADDED from /Users/teksta/source/Project-Baby/Android/app/src/main/AndroidManifest.xml:18:9-28:20
+	android:windowSoftInputMode
+		ADDED from /Users/teksta/source/Project-Baby/Android/app/src/main/AndroidManifest.xml:23:13-55
+	android:exported
+		ADDED from /Users/teksta/source/Project-Baby/Android/app/src/main/AndroidManifest.xml:20:13-36
+	android:configChanges
+		ADDED from /Users/teksta/source/Project-Baby/Android/app/src/main/AndroidManifest.xml:21:13-225
+	android:theme
+		ADDED from /Users/teksta/source/Project-Baby/Android/app/src/main/AndroidManifest.xml:22:13-72
+	android:name
+		ADDED from /Users/teksta/source/Project-Baby/Android/app/src/main/AndroidManifest.xml:19:13-41
+intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
+ADDED from /Users/teksta/source/Project-Baby/Android/app/src/main/AndroidManifest.xml:24:13-27:29
+action#android.intent.action.MAIN
+ADDED from /Users/teksta/source/Project-Baby/Android/app/src/main/AndroidManifest.xml:25:17-69
+	android:name
+		ADDED from /Users/teksta/source/Project-Baby/Android/app/src/main/AndroidManifest.xml:25:25-66
+category#android.intent.category.LAUNCHER
+ADDED from /Users/teksta/source/Project-Baby/Android/app/src/main/AndroidManifest.xml:26:17-77
+	android:name
+		ADDED from /Users/teksta/source/Project-Baby/Android/app/src/main/AndroidManifest.xml:26:27-74
+uses-sdk
+INJECTED from /Users/teksta/source/Project-Baby/Android/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /Users/teksta/source/Project-Baby/Android/app/src/main/AndroidManifest.xml
+INJECTED from /Users/teksta/source/Project-Baby/Android/app/src/main/AndroidManifest.xml
+MERGED from [:skipstone:ProjectParent] /Users/teksta/Library/Developer/Xcode/DerivedData/ProjectParent-akjhrhiwmkeqpvfhekqifpgisxqb/Build/Intermediates.noindex/BuildToolPluginIntermediates/project-baby.output/ProjectParent/skipstone/ProjectParent/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:5:5-44
+MERGED from [:skipstone:ProjectParent] /Users/teksta/Library/Developer/Xcode/DerivedData/ProjectParent-akjhrhiwmkeqpvfhekqifpgisxqb/Build/Intermediates.noindex/BuildToolPluginIntermediates/project-baby.output/ProjectParent/skipstone/ProjectParent/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:5:5-44
+MERGED from [:skipstone:SkipSwiftUI] /Users/teksta/Library/Developer/Xcode/DerivedData/ProjectParent-akjhrhiwmkeqpvfhekqifpgisxqb/Build/Intermediates.noindex/BuildToolPluginIntermediates/project-baby.output/ProjectParent/skipstone/SkipSwiftUI/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:5:5-44
+MERGED from [:skipstone:SkipSwiftUI] /Users/teksta/Library/Developer/Xcode/DerivedData/ProjectParent-akjhrhiwmkeqpvfhekqifpgisxqb/Build/Intermediates.noindex/BuildToolPluginIntermediates/project-baby.output/ProjectParent/skipstone/SkipSwiftUI/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:5:5-44
+MERGED from [:skipstone:SkipAndroidBridge] /Users/teksta/Library/Developer/Xcode/DerivedData/ProjectParent-akjhrhiwmkeqpvfhekqifpgisxqb/Build/Intermediates.noindex/BuildToolPluginIntermediates/project-baby.output/ProjectParent/skipstone/SkipAndroidBridge/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:5:5-44
+MERGED from [:skipstone:SkipAndroidBridge] /Users/teksta/Library/Developer/Xcode/DerivedData/ProjectParent-akjhrhiwmkeqpvfhekqifpgisxqb/Build/Intermediates.noindex/BuildToolPluginIntermediates/project-baby.output/ProjectParent/skipstone/SkipAndroidBridge/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:5:5-44
+MERGED from [:skipstone:SkipBridge] /Users/teksta/Library/Developer/Xcode/DerivedData/ProjectParent-akjhrhiwmkeqpvfhekqifpgisxqb/Build/Intermediates.noindex/BuildToolPluginIntermediates/project-baby.output/ProjectParent/skipstone/SkipBridge/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:6:5-44
+MERGED from [:skipstone:SkipBridge] /Users/teksta/Library/Developer/Xcode/DerivedData/ProjectParent-akjhrhiwmkeqpvfhekqifpgisxqb/Build/Intermediates.noindex/BuildToolPluginIntermediates/project-baby.output/ProjectParent/skipstone/SkipBridge/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:6:5-44
+MERGED from [:skipstone:SkipUI] /Users/teksta/Library/Developer/Xcode/DerivedData/ProjectParent-akjhrhiwmkeqpvfhekqifpgisxqb/Build/Intermediates.noindex/BuildToolPluginIntermediates/project-baby.output/ProjectParent/skipstone/SkipUI/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:5:5-44
+MERGED from [:skipstone:SkipUI] /Users/teksta/Library/Developer/Xcode/DerivedData/ProjectParent-akjhrhiwmkeqpvfhekqifpgisxqb/Build/Intermediates.noindex/BuildToolPluginIntermediates/project-baby.output/ProjectParent/skipstone/SkipUI/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:5:5-44
+MERGED from [:skipstone:SkipModel] /Users/teksta/Library/Developer/Xcode/DerivedData/ProjectParent-akjhrhiwmkeqpvfhekqifpgisxqb/Build/Intermediates.noindex/BuildToolPluginIntermediates/project-baby.output/ProjectParent/skipstone/SkipModel/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:5:5-44
+MERGED from [:skipstone:SkipModel] /Users/teksta/Library/Developer/Xcode/DerivedData/ProjectParent-akjhrhiwmkeqpvfhekqifpgisxqb/Build/Intermediates.noindex/BuildToolPluginIntermediates/project-baby.output/ProjectParent/skipstone/SkipModel/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:5:5-44
+MERGED from [:skipstone:SkipFoundation] /Users/teksta/Library/Developer/Xcode/DerivedData/ProjectParent-akjhrhiwmkeqpvfhekqifpgisxqb/Build/Intermediates.noindex/BuildToolPluginIntermediates/project-baby.output/ProjectParent/skipstone/SkipFoundation/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:5:5-44
+MERGED from [:skipstone:SkipFoundation] /Users/teksta/Library/Developer/Xcode/DerivedData/ProjectParent-akjhrhiwmkeqpvfhekqifpgisxqb/Build/Intermediates.noindex/BuildToolPluginIntermediates/project-baby.output/ProjectParent/skipstone/SkipFoundation/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:5:5-44
+MERGED from [:skipstone:SkipLib] /Users/teksta/Library/Developer/Xcode/DerivedData/ProjectParent-akjhrhiwmkeqpvfhekqifpgisxqb/Build/Intermediates.noindex/BuildToolPluginIntermediates/project-baby.output/ProjectParent/skipstone/SkipLib/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:5:5-44
+MERGED from [:skipstone:SkipLib] /Users/teksta/Library/Developer/Xcode/DerivedData/ProjectParent-akjhrhiwmkeqpvfhekqifpgisxqb/Build/Intermediates.noindex/BuildToolPluginIntermediates/project-baby.output/ProjectParent/skipstone/SkipLib/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:5:5-44
+MERGED from [androidx.test:runner:1.6.1] /Users/teksta/.gradle/caches/8.14.1/transforms/729b560567c5be331d1f2c251ae2c7df/transformed/runner-1.6.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.test:runner:1.6.1] /Users/teksta/.gradle/caches/8.14.1/transforms/729b560567c5be331d1f2c251ae2c7df/transformed/runner-1.6.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.test.services:storage:1.5.0] /Users/teksta/.gradle/caches/8.14.1/transforms/08e82fb6de0dc45f725a74f88bc8a781/transformed/storage-1.5.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.test.services:storage:1.5.0] /Users/teksta/.gradle/caches/8.14.1/transforms/08e82fb6de0dc45f725a74f88bc8a781/transformed/storage-1.5.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.test:monitor:1.7.1] /Users/teksta/.gradle/caches/8.14.1/transforms/a298e8dc25488119a284e5356a8b74c8/transformed/monitor-1.7.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.test:monitor:1.7.1] /Users/teksta/.gradle/caches/8.14.1/transforms/a298e8dc25488119a284e5356a8b74c8/transformed/monitor-1.7.1/AndroidManifest.xml:20:5-22:41
+MERGED from [io.coil-kt.coil3:coil-svg-android:3.0.4] /Users/teksta/.gradle/caches/8.14.1/transforms/8e4fb46f26ca29879420c4b95f6fd06e/transformed/coil-svg-release/AndroidManifest.xml:5:5-44
+MERGED from [io.coil-kt.coil3:coil-svg-android:3.0.4] /Users/teksta/.gradle/caches/8.14.1/transforms/8e4fb46f26ca29879420c4b95f6fd06e/transformed/coil-svg-release/AndroidManifest.xml:5:5-44
+MERGED from [io.coil-kt.coil3:coil-compose-android:3.0.4] /Users/teksta/.gradle/caches/8.14.1/transforms/6d92c9894fec59fc3f812d169ef20d07/transformed/coil-compose-release/AndroidManifest.xml:5:5-44
+MERGED from [io.coil-kt.coil3:coil-compose-android:3.0.4] /Users/teksta/.gradle/caches/8.14.1/transforms/6d92c9894fec59fc3f812d169ef20d07/transformed/coil-compose-release/AndroidManifest.xml:5:5-44
+MERGED from [io.coil-kt.coil3:coil-android:3.0.4] /Users/teksta/.gradle/caches/8.14.1/transforms/a52a652f847dbe8fa7d293ae3ed636ca/transformed/coil-release/AndroidManifest.xml:5:5-44
+MERGED from [io.coil-kt.coil3:coil-android:3.0.4] /Users/teksta/.gradle/caches/8.14.1/transforms/a52a652f847dbe8fa7d293ae3ed636ca/transformed/coil-release/AndroidManifest.xml:5:5-44
+MERGED from [io.coil-kt.coil3:coil-compose-core-android:3.0.4] /Users/teksta/.gradle/caches/8.14.1/transforms/60347f72796d651a6ed0fa87da0ce618/transformed/coil-compose-core-release/AndroidManifest.xml:5:5-44
+MERGED from [io.coil-kt.coil3:coil-compose-core-android:3.0.4] /Users/teksta/.gradle/caches/8.14.1/transforms/60347f72796d651a6ed0fa87da0ce618/transformed/coil-compose-core-release/AndroidManifest.xml:5:5-44
+MERGED from [io.coil-kt.coil3:coil-network-core-android:3.0.4] /Users/teksta/.gradle/caches/8.14.1/transforms/4e9ba36f51195ac5eb86af09c5b5c490/transformed/coil-network-core-release/AndroidManifest.xml:5:5-44
+MERGED from [io.coil-kt.coil3:coil-network-core-android:3.0.4] /Users/teksta/.gradle/caches/8.14.1/transforms/4e9ba36f51195ac5eb86af09c5b5c490/transformed/coil-network-core-release/AndroidManifest.xml:5:5-44
+MERGED from [io.coil-kt.coil3:coil-core-android:3.0.4] /Users/teksta/.gradle/caches/8.14.1/transforms/547d79cec4b2852ddfebaa6c76cde1e2/transformed/coil-core-release/AndroidManifest.xml:5:5-44
+MERGED from [io.coil-kt.coil3:coil-core-android:3.0.4] /Users/teksta/.gradle/caches/8.14.1/transforms/547d79cec4b2852ddfebaa6c76cde1e2/transformed/coil-core-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.appcompat:appcompat-resources:1.7.0] /Users/teksta/.gradle/caches/8.14.1/transforms/35862a2970ce9e740e6d5257cfc353ed/transformed/appcompat-resources-1.7.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.appcompat:appcompat-resources:1.7.0] /Users/teksta/.gradle/caches/8.14.1/transforms/35862a2970ce9e740e6d5257cfc353ed/transformed/appcompat-resources-1.7.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.appcompat:appcompat:1.7.0] /Users/teksta/.gradle/caches/8.14.1/transforms/52707540ebd8f511ef02cf0df87aa01d/transformed/appcompat-1.7.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.appcompat:appcompat:1.7.0] /Users/teksta/.gradle/caches/8.14.1/transforms/52707540ebd8f511ef02cf0df87aa01d/transformed/appcompat-1.7.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.navigation:navigation-common:2.8.5] /Users/teksta/.gradle/caches/8.14.1/transforms/ced1a582276987fb069596e2a670420a/transformed/navigation-common-2.8.5/AndroidManifest.xml:20:5-44
+MERGED from [androidx.navigation:navigation-common:2.8.5] /Users/teksta/.gradle/caches/8.14.1/transforms/ced1a582276987fb069596e2a670420a/transformed/navigation-common-2.8.5/AndroidManifest.xml:20:5-44
+MERGED from [androidx.navigation:navigation-runtime:2.8.5] /Users/teksta/.gradle/caches/8.14.1/transforms/8eee14f7fae7df77cbeffc80ce75fc35/transformed/navigation-runtime-2.8.5/AndroidManifest.xml:20:5-44
+MERGED from [androidx.navigation:navigation-runtime:2.8.5] /Users/teksta/.gradle/caches/8.14.1/transforms/8eee14f7fae7df77cbeffc80ce75fc35/transformed/navigation-runtime-2.8.5/AndroidManifest.xml:20:5-44
+MERGED from [androidx.navigation:navigation-common-ktx:2.8.5] /Users/teksta/.gradle/caches/8.14.1/transforms/19948c094ae3509b66e134764d5efa90/transformed/navigation-common-ktx-2.8.5/AndroidManifest.xml:5:5-44
+MERGED from [androidx.navigation:navigation-common-ktx:2.8.5] /Users/teksta/.gradle/caches/8.14.1/transforms/19948c094ae3509b66e134764d5efa90/transformed/navigation-common-ktx-2.8.5/AndroidManifest.xml:5:5-44
+MERGED from [androidx.navigation:navigation-runtime-ktx:2.8.5] /Users/teksta/.gradle/caches/8.14.1/transforms/14b1dc0bb6897b6d9d9ce462d6928047/transformed/navigation-runtime-ktx-2.8.5/AndroidManifest.xml:5:5-44
+MERGED from [androidx.navigation:navigation-runtime-ktx:2.8.5] /Users/teksta/.gradle/caches/8.14.1/transforms/14b1dc0bb6897b6d9d9ce462d6928047/transformed/navigation-runtime-ktx-2.8.5/AndroidManifest.xml:5:5-44
+MERGED from [androidx.navigation:navigation-compose:2.8.5] /Users/teksta/.gradle/caches/8.14.1/transforms/e9710517e58825057007e7b3f1e6ce23/transformed/navigation-compose-2.8.5/AndroidManifest.xml:5:5-44
+MERGED from [androidx.navigation:navigation-compose:2.8.5] /Users/teksta/.gradle/caches/8.14.1/transforms/e9710517e58825057007e7b3f1e6ce23/transformed/navigation-compose-2.8.5/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.material3:material3-android:1.4.0-alpha14] /Users/teksta/.gradle/caches/8.14.1/transforms/03cba6184c3dbfc7ee0e818f4741c662/transformed/material3-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.compose.material3:material3-android:1.4.0-alpha14] /Users/teksta/.gradle/caches/8.14.1/transforms/03cba6184c3dbfc7ee0e818f4741c662/transformed/material3-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.fragment:fragment:1.5.4] /Users/teksta/.gradle/caches/8.14.1/transforms/f3447f3c82cceff858b910b4d4c6417e/transformed/fragment-1.5.4/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.fragment:fragment:1.5.4] /Users/teksta/.gradle/caches/8.14.1/transforms/f3447f3c82cceff858b910b4d4c6417e/transformed/fragment-1.5.4/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.animation:animation-core-android:1.8.1] /Users/teksta/.gradle/caches/8.14.1/transforms/d1f4bd8b0475270aa97c2928a5bfa355/transformed/animation-core-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.animation:animation-core-android:1.8.1] /Users/teksta/.gradle/caches/8.14.1/transforms/d1f4bd8b0475270aa97c2928a5bfa355/transformed/animation-core-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.material:material-ripple-android:1.8.1] /Users/teksta/.gradle/caches/8.14.1/transforms/2bd82ca7d5ec4693f6df6ce8b61b71b8/transformed/material-ripple-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.material:material-ripple-android:1.8.1] /Users/teksta/.gradle/caches/8.14.1/transforms/2bd82ca7d5ec4693f6df6ce8b61b71b8/transformed/material-ripple-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.animation:animation-android:1.8.1] /Users/teksta/.gradle/caches/8.14.1/transforms/276f78d6626382105aad416ce0ceba4b/transformed/animation-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.animation:animation-android:1.8.1] /Users/teksta/.gradle/caches/8.14.1/transforms/276f78d6626382105aad416ce0ceba4b/transformed/animation-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.foundation:foundation-layout-android:1.8.1] /Users/teksta/.gradle/caches/8.14.1/transforms/8b19f90f89a89a3f2aa0eb5e9addd661/transformed/foundation-layout-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.foundation:foundation-layout-android:1.8.1] /Users/teksta/.gradle/caches/8.14.1/transforms/8b19f90f89a89a3f2aa0eb5e9addd661/transformed/foundation-layout-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.material3.adaptive:adaptive-android:1.1.0] /Users/teksta/.gradle/caches/8.14.1/transforms/68704584ada76d2c5d5eb62c3bdfcea2/transformed/adaptive-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.compose.material3.adaptive:adaptive-android:1.1.0] /Users/teksta/.gradle/caches/8.14.1/transforms/68704584ada76d2c5d5eb62c3bdfcea2/transformed/adaptive-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.compose.foundation:foundation-android:1.8.1] /Users/teksta/.gradle/caches/8.14.1/transforms/3d7149f29e0aac6e4c79d5491fe0b531/transformed/foundation-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.foundation:foundation-android:1.8.1] /Users/teksta/.gradle/caches/8.14.1/transforms/3d7149f29e0aac6e4c79d5491fe0b531/transformed/foundation-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-tooling-preview-android:1.8.1] /Users/teksta/.gradle/caches/8.14.1/transforms/edc715e48fd67037fb7bed6bc927d07d/transformed/ui-tooling-preview-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.compose.ui:ui-tooling-preview-android:1.8.1] /Users/teksta/.gradle/caches/8.14.1/transforms/edc715e48fd67037fb7bed6bc927d07d/transformed/ui-tooling-preview-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.compose.ui:ui-tooling-data-android:1.8.1] /Users/teksta/.gradle/caches/8.14.1/transforms/194724e81cbeb58f82247ba840393fb2/transformed/ui-tooling-data-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-tooling-data-android:1.8.1] /Users/teksta/.gradle/caches/8.14.1/transforms/194724e81cbeb58f82247ba840393fb2/transformed/ui-tooling-data-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-unit-android:1.8.1] /Users/teksta/.gradle/caches/8.14.1/transforms/20865b454d635f120e6a4ead9c7443c3/transformed/ui-unit-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-unit-android:1.8.1] /Users/teksta/.gradle/caches/8.14.1/transforms/20865b454d635f120e6a4ead9c7443c3/transformed/ui-unit-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-graphics-android:1.8.1] /Users/teksta/.gradle/caches/8.14.1/transforms/1e60e9728a650a78a7145bd2644df078/transformed/ui-graphics-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-graphics-android:1.8.1] /Users/teksta/.gradle/caches/8.14.1/transforms/1e60e9728a650a78a7145bd2644df078/transformed/ui-graphics-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-geometry-android:1.8.1] /Users/teksta/.gradle/caches/8.14.1/transforms/8f09c5d2172f4c21aa172e6023350b95/transformed/ui-geometry-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-geometry-android:1.8.1] /Users/teksta/.gradle/caches/8.14.1/transforms/8f09c5d2172f4c21aa172e6023350b95/transformed/ui-geometry-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-util-android:1.8.1] /Users/teksta/.gradle/caches/8.14.1/transforms/cbae7174004e62f9123dd2b286253e49/transformed/ui-util-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-util-android:1.8.1] /Users/teksta/.gradle/caches/8.14.1/transforms/cbae7174004e62f9123dd2b286253e49/transformed/ui-util-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-text-android:1.8.1] /Users/teksta/.gradle/caches/8.14.1/transforms/1e21a3e7beb43ff814862a49dd8b20c2/transformed/ui-text-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-text-android:1.8.1] /Users/teksta/.gradle/caches/8.14.1/transforms/1e21a3e7beb43ff814862a49dd8b20c2/transformed/ui-text-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-tooling-android:1.8.1] /Users/teksta/.gradle/caches/8.14.1/transforms/92e07644ee3d8cede6182ff771f24380/transformed/ui-tooling-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.compose.ui:ui-tooling-android:1.8.1] /Users/teksta/.gradle/caches/8.14.1/transforms/92e07644ee3d8cede6182ff771f24380/transformed/ui-tooling-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.compose.material:material-android:1.8.1] /Users/teksta/.gradle/caches/8.14.1/transforms/1edc4beb72d7f97ef90c66d470f8efcd/transformed/material-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.material:material-android:1.8.1] /Users/teksta/.gradle/caches/8.14.1/transforms/1edc4beb72d7f97ef90c66d470f8efcd/transformed/material-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.loader:loader:1.0.0] /Users/teksta/.gradle/caches/8.14.1/transforms/79205f5c6750c9c837586eeab71b2135/transformed/loader-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.loader:loader:1.0.0] /Users/teksta/.gradle/caches/8.14.1/transforms/79205f5c6750c9c837586eeab71b2135/transformed/loader-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime-compose-android:2.8.7] /Users/teksta/.gradle/caches/8.14.1/transforms/0dbd9671f0c11704574bd7b35d8cedcc/transformed/lifecycle-runtime-compose-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime-compose-android:2.8.7] /Users/teksta/.gradle/caches/8.14.1/transforms/0dbd9671f0c11704574bd7b35d8cedcc/transformed/lifecycle-runtime-compose-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core-ktx:2.8.7] /Users/teksta/.gradle/caches/8.14.1/transforms/245ccfb52931d226f3586694b205b7b1/transformed/lifecycle-livedata-core-ktx-2.8.7/AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core-ktx:2.8.7] /Users/teksta/.gradle/caches/8.14.1/transforms/245ccfb52931d226f3586694b205b7b1/transformed/lifecycle-livedata-core-ktx-2.8.7/AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime-ktx-android:2.8.7] /Users/teksta/.gradle/caches/8.14.1/transforms/5445468a9e1a15c96f6d1d29e957eb29/transformed/lifecycle-runtime-ktx-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime-ktx-android:2.8.7] /Users/teksta/.gradle/caches/8.14.1/transforms/5445468a9e1a15c96f6d1d29e957eb29/transformed/lifecycle-runtime-ktx-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.8.7] /Users/teksta/.gradle/caches/8.14.1/transforms/46352e537cb40b0204bd530858df22b5/transformed/lifecycle-livedata-2.8.7/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.8.7] /Users/teksta/.gradle/caches/8.14.1/transforms/46352e537cb40b0204bd530858df22b5/transformed/lifecycle-livedata-2.8.7/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.7] /Users/teksta/.gradle/caches/8.14.1/transforms/a53c45937ac255fcf6d610cd4c8f2701/transformed/lifecycle-viewmodel-ktx-2.8.7/AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.7] /Users/teksta/.gradle/caches/8.14.1/transforms/a53c45937ac255fcf6d610cd4c8f2701/transformed/lifecycle-viewmodel-ktx-2.8.7/AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.8.7] /Users/teksta/.gradle/caches/8.14.1/transforms/a88997fc6959f0f318a02a15a75b8010/transformed/lifecycle-livedata-core-2.8.7/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.8.7] /Users/teksta/.gradle/caches/8.14.1/transforms/a88997fc6959f0f318a02a15a75b8010/transformed/lifecycle-livedata-core-2.8.7/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:2.8.7] /Users/teksta/.gradle/caches/8.14.1/transforms/3651f5f210355dd336d3a8dfcbc99c89/transformed/lifecycle-viewmodel-savedstate-2.8.7/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:2.8.7] /Users/teksta/.gradle/caches/8.14.1/transforms/3651f5f210355dd336d3a8dfcbc99c89/transformed/lifecycle-viewmodel-savedstate-2.8.7/AndroidManifest.xml:20:5-44
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] /Users/teksta/.gradle/caches/8.14.1/transforms/2810ef81205bab72e1c48e0a7c55565a/transformed/drawerlayout-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] /Users/teksta/.gradle/caches/8.14.1/transforms/2810ef81205bab72e1c48e0a7c55565a/transformed/drawerlayout-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] /Users/teksta/.gradle/caches/8.14.1/transforms/14ddb4f6e80c31821f9ad0078dfc8c9b/transformed/vectordrawable-animated-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] /Users/teksta/.gradle/caches/8.14.1/transforms/14ddb4f6e80c31821f9ad0078dfc8c9b/transformed/vectordrawable-animated-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] /Users/teksta/.gradle/caches/8.14.1/transforms/691d1b717e0264cc09a62821b589f867/transformed/vectordrawable-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] /Users/teksta/.gradle/caches/8.14.1/transforms/691d1b717e0264cc09a62821b589f867/transformed/vectordrawable-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.viewpager:viewpager:1.0.0] /Users/teksta/.gradle/caches/8.14.1/transforms/7981a0845038eee8e9931bc4ef09dcd1/transformed/viewpager-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.viewpager:viewpager:1.0.0] /Users/teksta/.gradle/caches/8.14.1/transforms/7981a0845038eee8e9931bc4ef09dcd1/transformed/viewpager-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.customview:customview:1.0.0] /Users/teksta/.gradle/caches/8.14.1/transforms/b693c0563508e4a6b47e9623cda0e20d/transformed/customview-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.customview:customview:1.0.0] /Users/teksta/.gradle/caches/8.14.1/transforms/b693c0563508e4a6b47e9623cda0e20d/transformed/customview-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.graphics:graphics-shapes-android:1.0.1] /Users/teksta/.gradle/caches/8.14.1/transforms/0762c7d8cc3dcbe4e7db50ebfbbc8db7/transformed/graphics-shapes-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.graphics:graphics-shapes-android:1.0.1] /Users/teksta/.gradle/caches/8.14.1/transforms/0762c7d8cc3dcbe4e7db50ebfbbc8db7/transformed/graphics-shapes-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.customview:customview-poolingcontainer:1.0.0] /Users/teksta/.gradle/caches/8.14.1/transforms/bd8c4f1e81f8ede2e3f471e0b4c63572/transformed/customview-poolingcontainer-1.0.0/AndroidManifest.xml:20:5-21:38
+MERGED from [androidx.customview:customview-poolingcontainer:1.0.0] /Users/teksta/.gradle/caches/8.14.1/transforms/bd8c4f1e81f8ede2e3f471e0b4c63572/transformed/customview-poolingcontainer-1.0.0/AndroidManifest.xml:20:5-21:38
+MERGED from [androidx.core:core-ktx:1.13.1] /Users/teksta/.gradle/caches/8.14.1/transforms/f9e4611ca372f7606ebbb5e20a8ee475/transformed/core-ktx-1.13.1/AndroidManifest.xml:5:5-44
+MERGED from [androidx.core:core-ktx:1.13.1] /Users/teksta/.gradle/caches/8.14.1/transforms/f9e4611ca372f7606ebbb5e20a8ee475/transformed/core-ktx-1.13.1/AndroidManifest.xml:5:5-44
+MERGED from [androidx.window:window-core-android:1.3.0] /Users/teksta/.gradle/caches/8.14.1/transforms/eeed0090868634452a3263ea9d037e11/transformed/window-core-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.window:window-core-android:1.3.0] /Users/teksta/.gradle/caches/8.14.1/transforms/eeed0090868634452a3263ea9d037e11/transformed/window-core-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.window:window:1.3.0] /Users/teksta/.gradle/caches/8.14.1/transforms/e16375dd6349a6e92b71cf21f5dc7d0f/transformed/window-1.3.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.window:window:1.3.0] /Users/teksta/.gradle/caches/8.14.1/transforms/e16375dd6349a6e92b71cf21f5dc7d0f/transformed/window-1.3.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.autofill:autofill:1.0.0] /Users/teksta/.gradle/caches/8.14.1/transforms/26de813f6e3e41499ada7b92a7347353/transformed/autofill-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.autofill:autofill:1.0.0] /Users/teksta/.gradle/caches/8.14.1/transforms/26de813f6e3e41499ada7b92a7347353/transformed/autofill-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.emoji2:emoji2-views-helper:1.4.0] /Users/teksta/.gradle/caches/8.14.1/transforms/b06a00f404261640353fc9e061de748a/transformed/emoji2-views-helper-1.4.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.emoji2:emoji2-views-helper:1.4.0] /Users/teksta/.gradle/caches/8.14.1/transforms/b06a00f404261640353fc9e061de748a/transformed/emoji2-views-helper-1.4.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.emoji2:emoji2:1.4.0] /Users/teksta/.gradle/caches/8.14.1/transforms/bcbe9bb66e5a9b6be15af2f2ff19b554/transformed/emoji2-1.4.0/AndroidManifest.xml:21:5-44
+MERGED from [androidx.emoji2:emoji2:1.4.0] /Users/teksta/.gradle/caches/8.14.1/transforms/bcbe9bb66e5a9b6be15af2f2ff19b554/transformed/emoji2-1.4.0/AndroidManifest.xml:21:5-44
+MERGED from [androidx.graphics:graphics-path:1.0.1] /Users/teksta/.gradle/caches/8.14.1/transforms/61c7946b5cebe118fd6026914f5f909e/transformed/graphics-path-1.0.1/AndroidManifest.xml:5:5-44
+MERGED from [androidx.graphics:graphics-path:1.0.1] /Users/teksta/.gradle/caches/8.14.1/transforms/61c7946b5cebe118fd6026914f5f909e/transformed/graphics-path-1.0.1/AndroidManifest.xml:5:5-44
+MERGED from [androidx.core:core:1.13.1] /Users/teksta/.gradle/caches/8.14.1/transforms/bb2cfe922d9659664bc98b8265f40a52/transformed/core-1.13.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.core:core:1.13.1] /Users/teksta/.gradle/caches/8.14.1/transforms/bb2cfe922d9659664bc98b8265f40a52/transformed/core-1.13.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime-android:2.8.7] /Users/teksta/.gradle/caches/8.14.1/transforms/a378b3dd09c3994c5a6447da783b4213/transformed/lifecycle-runtime-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime-android:2.8.7] /Users/teksta/.gradle/caches/8.14.1/transforms/a378b3dd09c3994c5a6447da783b4213/transformed/lifecycle-runtime-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-process:2.8.7] /Users/teksta/.gradle/caches/8.14.1/transforms/765a13698f6b85bbd7e0f75e015cc00b/transformed/lifecycle-process-2.8.7/AndroidManifest.xml:21:5-44
+MERGED from [androidx.lifecycle:lifecycle-process:2.8.7] /Users/teksta/.gradle/caches/8.14.1/transforms/765a13698f6b85bbd7e0f75e015cc00b/transformed/lifecycle-process-2.8.7/AndroidManifest.xml:21:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-compose-android:2.8.7] /Users/teksta/.gradle/caches/8.14.1/transforms/b7b515a73ef0daaa4216a6d5dbb91c87/transformed/lifecycle-viewmodel-compose-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-compose-android:2.8.7] /Users/teksta/.gradle/caches/8.14.1/transforms/b7b515a73ef0daaa4216a6d5dbb91c87/transformed/lifecycle-viewmodel-compose-release/AndroidManifest.xml:5:5-44
+MERGED from [com.google.accompanist:accompanist-drawablepainter:0.36.0] /Users/teksta/.gradle/caches/8.14.1/transforms/889af25d5fb96b726bfa55b688cf3828/transformed/accompanist-drawablepainter-0.36.0/AndroidManifest.xml:21:5-44
+MERGED from [com.google.accompanist:accompanist-drawablepainter:0.36.0] /Users/teksta/.gradle/caches/8.14.1/transforms/889af25d5fb96b726bfa55b688cf3828/transformed/accompanist-drawablepainter-0.36.0/AndroidManifest.xml:21:5-44
+MERGED from [androidx.compose.material:material-icons-extended-android:1.7.8] /Users/teksta/.gradle/caches/8.14.1/transforms/3826bbdae3b5583956320af1ac6b237b/transformed/material-icons-extended-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.material:material-icons-extended-android:1.7.8] /Users/teksta/.gradle/caches/8.14.1/transforms/3826bbdae3b5583956320af1ac6b237b/transformed/material-icons-extended-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.material:material-icons-core-android:1.7.8] /Users/teksta/.gradle/caches/8.14.1/transforms/6117af237cc3d6912a826a498ab0c86b/transformed/material-icons-core-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.material:material-icons-core-android:1.7.8] /Users/teksta/.gradle/caches/8.14.1/transforms/6117af237cc3d6912a826a498ab0c86b/transformed/material-icons-core-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-android:1.8.1] /Users/teksta/.gradle/caches/8.14.1/transforms/e497d774a5e2d42ecbadd62438ad6691/transformed/ui-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-android:1.8.1] /Users/teksta/.gradle/caches/8.14.1/transforms/e497d774a5e2d42ecbadd62438ad6691/transformed/ui-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.activity:activity-ktx:1.9.3] /Users/teksta/.gradle/caches/8.14.1/transforms/05694e91af16f39801f8b2b0750ea97e/transformed/activity-ktx-1.9.3/AndroidManifest.xml:5:5-44
+MERGED from [androidx.activity:activity-ktx:1.9.3] /Users/teksta/.gradle/caches/8.14.1/transforms/05694e91af16f39801f8b2b0750ea97e/transformed/activity-ktx-1.9.3/AndroidManifest.xml:5:5-44
+MERGED from [androidx.activity:activity:1.9.3] /Users/teksta/.gradle/caches/8.14.1/transforms/3c6cdde7ded8471748d5e84b00200aa1/transformed/activity-1.9.3/AndroidManifest.xml:20:5-44
+MERGED from [androidx.activity:activity:1.9.3] /Users/teksta/.gradle/caches/8.14.1/transforms/3c6cdde7ded8471748d5e84b00200aa1/transformed/activity-1.9.3/AndroidManifest.xml:20:5-44
+MERGED from [androidx.activity:activity-compose:1.9.3] /Users/teksta/.gradle/caches/8.14.1/transforms/c867659fccd73c849706cdceea3b9547/transformed/activity-compose-1.9.3/AndroidManifest.xml:5:5-44
+MERGED from [androidx.activity:activity-compose:1.9.3] /Users/teksta/.gradle/caches/8.14.1/transforms/c867659fccd73c849706cdceea3b9547/transformed/activity-compose-1.9.3/AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.8.7] /Users/teksta/.gradle/caches/8.14.1/transforms/1acf1fdb06134df391e9b5b90fb109d9/transformed/lifecycle-viewmodel-2.8.7/AndroidManifest.xml:4:5-43
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.8.7] /Users/teksta/.gradle/caches/8.14.1/transforms/1acf1fdb06134df391e9b5b90fb109d9/transformed/lifecycle-viewmodel-2.8.7/AndroidManifest.xml:4:5-43
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-android:2.8.7] /Users/teksta/.gradle/caches/8.14.1/transforms/57e0cface083e7519896294cff8025bc/transformed/lifecycle-viewmodel-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-android:2.8.7] /Users/teksta/.gradle/caches/8.14.1/transforms/57e0cface083e7519896294cff8025bc/transformed/lifecycle-viewmodel-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.compose.runtime:runtime-saveable-android:1.8.1] /Users/teksta/.gradle/caches/8.14.1/transforms/197074e36427392e63f46dfa23a3d742/transformed/runtime-saveable-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.runtime:runtime-saveable-android:1.8.1] /Users/teksta/.gradle/caches/8.14.1/transforms/197074e36427392e63f46dfa23a3d742/transformed/runtime-saveable-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.runtime:runtime-android:1.8.1] /Users/teksta/.gradle/caches/8.14.1/transforms/73a898a1491a823e580630fa23197991/transformed/runtime-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.runtime:runtime-android:1.8.1] /Users/teksta/.gradle/caches/8.14.1/transforms/73a898a1491a823e580630fa23197991/transformed/runtime-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.savedstate:savedstate-ktx:1.2.1] /Users/teksta/.gradle/caches/8.14.1/transforms/9e981183a36fb50258d83c81747b7090/transformed/savedstate-ktx-1.2.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.savedstate:savedstate-ktx:1.2.1] /Users/teksta/.gradle/caches/8.14.1/transforms/9e981183a36fb50258d83c81747b7090/transformed/savedstate-ktx-1.2.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.savedstate:savedstate:1.2.1] /Users/teksta/.gradle/caches/8.14.1/transforms/afcf5098b82deb902802a58fbad3b77c/transformed/savedstate-1.2.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.savedstate:savedstate:1.2.1] /Users/teksta/.gradle/caches/8.14.1/transforms/afcf5098b82deb902802a58fbad3b77c/transformed/savedstate-1.2.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.annotation:annotation-experimental:1.4.1] /Users/teksta/.gradle/caches/8.14.1/transforms/3498af4b12808ed54c41a66f6c778f56/transformed/annotation-experimental-1.4.1/AndroidManifest.xml:5:5-44
+MERGED from [androidx.annotation:annotation-experimental:1.4.1] /Users/teksta/.gradle/caches/8.14.1/transforms/3498af4b12808ed54c41a66f6c778f56/transformed/annotation-experimental-1.4.1/AndroidManifest.xml:5:5-44
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/teksta/.gradle/caches/8.14.1/transforms/401bde26a998e8a9c5b17daabccfcb95/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/teksta/.gradle/caches/8.14.1/transforms/401bde26a998e8a9c5b17daabccfcb95/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.window.extensions.core:core:1.0.0] /Users/teksta/.gradle/caches/8.14.1/transforms/972627d75a4cab22c7f8484bb7fa6854/transformed/core-1.0.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.window.extensions.core:core:1.0.0] /Users/teksta/.gradle/caches/8.14.1/transforms/972627d75a4cab22c7f8484bb7fa6854/transformed/core-1.0.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.profileinstaller:profileinstaller:1.4.1] /Users/teksta/.gradle/caches/8.14.1/transforms/4adeb29c46232fc5fc267f2643e98f3e/transformed/profileinstaller-1.4.1/AndroidManifest.xml:21:5-44
+MERGED from [androidx.profileinstaller:profileinstaller:1.4.1] /Users/teksta/.gradle/caches/8.14.1/transforms/4adeb29c46232fc5fc267f2643e98f3e/transformed/profileinstaller-1.4.1/AndroidManifest.xml:21:5-44
+MERGED from [androidx.startup:startup-runtime:1.1.1] /Users/teksta/.gradle/caches/8.14.1/transforms/cbe5e97098ae3b1adac7c9d610ebeb28/transformed/startup-runtime-1.1.1/AndroidManifest.xml:21:5-23:41
+MERGED from [androidx.startup:startup-runtime:1.1.1] /Users/teksta/.gradle/caches/8.14.1/transforms/cbe5e97098ae3b1adac7c9d610ebeb28/transformed/startup-runtime-1.1.1/AndroidManifest.xml:21:5-23:41
+MERGED from [androidx.tracing:tracing:1.1.0] /Users/teksta/.gradle/caches/8.14.1/transforms/94c7e9ce78714da0ab73e4f18ea3e263/transformed/tracing-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.tracing:tracing:1.1.0] /Users/teksta/.gradle/caches/8.14.1/transforms/94c7e9ce78714da0ab73e4f18ea3e263/transformed/tracing-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /Users/teksta/.gradle/caches/8.14.1/transforms/8bc12a326bd58eb3439e38fad84e6e54/transformed/cursoradapter-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /Users/teksta/.gradle/caches/8.14.1/transforms/8bc12a326bd58eb3439e38fad84e6e54/transformed/cursoradapter-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/teksta/.gradle/caches/8.14.1/transforms/86bdf773101b695371783f279756ebb5/transformed/interpolator-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/teksta/.gradle/caches/8.14.1/transforms/86bdf773101b695371783f279756ebb5/transformed/interpolator-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.arch.core:core-runtime:2.2.0] /Users/teksta/.gradle/caches/8.14.1/transforms/321730b78489a70ce0c84378e1a35d06/transformed/core-runtime-2.2.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.arch.core:core-runtime:2.2.0] /Users/teksta/.gradle/caches/8.14.1/transforms/321730b78489a70ce0c84378e1a35d06/transformed/core-runtime-2.2.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.exifinterface:exifinterface:1.3.7] /Users/teksta/.gradle/caches/8.14.1/transforms/c27fdd32e97266674f7c5b63c1694c90/transformed/exifinterface-1.3.7/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.exifinterface:exifinterface:1.3.7] /Users/teksta/.gradle/caches/8.14.1/transforms/c27fdd32e97266674f7c5b63c1694c90/transformed/exifinterface-1.3.7/AndroidManifest.xml:20:5-22:41
+MERGED from [com.caverock:androidsvg-aar:1.4] /Users/teksta/.gradle/caches/8.14.1/transforms/ef116536486cfcb657132d772a6335f4/transformed/androidsvg-aar-1.4/AndroidManifest.xml:7:5-9:41
+MERGED from [com.caverock:androidsvg-aar:1.4] /Users/teksta/.gradle/caches/8.14.1/transforms/ef116536486cfcb657132d772a6335f4/transformed/androidsvg-aar-1.4/AndroidManifest.xml:7:5-9:41
+	android:targetSdkVersion
+		INJECTED from /Users/teksta/source/Project-Baby/Android/app/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /Users/teksta/source/Project-Baby/Android/app/src/main/AndroidManifest.xml
+meta-data#SKIP_BRIDGE_MODULES
+ADDED from [:skipstone:SkipBridge] /Users/teksta/Library/Developer/Xcode/DerivedData/ProjectParent-akjhrhiwmkeqpvfhekqifpgisxqb/Build/Intermediates.noindex/BuildToolPluginIntermediates/project-baby.output/ProjectParent/skipstone/SkipBridge/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:10:9-12:45
+	android:value
+		ADDED from [:skipstone:SkipBridge] /Users/teksta/Library/Developer/Xcode/DerivedData/ProjectParent-akjhrhiwmkeqpvfhekqifpgisxqb/Build/Intermediates.noindex/BuildToolPluginIntermediates/project-baby.output/ProjectParent/skipstone/SkipBridge/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:12:13-42
+	android:name
+		ADDED from [:skipstone:SkipBridge] /Users/teksta/Library/Developer/Xcode/DerivedData/ProjectParent-akjhrhiwmkeqpvfhekqifpgisxqb/Build/Intermediates.noindex/BuildToolPluginIntermediates/project-baby.output/ProjectParent/skipstone/SkipBridge/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:11:13-47
+queries
+ADDED from [androidx.test:runner:1.6.1] /Users/teksta/.gradle/caches/8.14.1/transforms/729b560567c5be331d1f2c251ae2c7df/transformed/runner-1.6.1/AndroidManifest.xml:24:5-28:15
+package#androidx.test.orchestrator
+ADDED from [androidx.test:runner:1.6.1] /Users/teksta/.gradle/caches/8.14.1/transforms/729b560567c5be331d1f2c251ae2c7df/transformed/runner-1.6.1/AndroidManifest.xml:25:9-62
+	android:name
+		ADDED from [androidx.test:runner:1.6.1] /Users/teksta/.gradle/caches/8.14.1/transforms/729b560567c5be331d1f2c251ae2c7df/transformed/runner-1.6.1/AndroidManifest.xml:25:18-59
+package#androidx.test.services
+ADDED from [androidx.test:runner:1.6.1] /Users/teksta/.gradle/caches/8.14.1/transforms/729b560567c5be331d1f2c251ae2c7df/transformed/runner-1.6.1/AndroidManifest.xml:26:9-58
+	android:name
+		ADDED from [androidx.test:runner:1.6.1] /Users/teksta/.gradle/caches/8.14.1/transforms/729b560567c5be331d1f2c251ae2c7df/transformed/runner-1.6.1/AndroidManifest.xml:26:18-55
+package#com.google.android.apps.common.testing.services
+ADDED from [androidx.test:runner:1.6.1] /Users/teksta/.gradle/caches/8.14.1/transforms/729b560567c5be331d1f2c251ae2c7df/transformed/runner-1.6.1/AndroidManifest.xml:27:9-83
+	android:name
+		ADDED from [androidx.test:runner:1.6.1] /Users/teksta/.gradle/caches/8.14.1/transforms/729b560567c5be331d1f2c251ae2c7df/transformed/runner-1.6.1/AndroidManifest.xml:27:18-80
+activity#androidx.compose.ui.tooling.PreviewActivity
+ADDED from [androidx.compose.ui:ui-tooling-android:1.8.1] /Users/teksta/.gradle/caches/8.14.1/transforms/92e07644ee3d8cede6182ff771f24380/transformed/ui-tooling-release/AndroidManifest.xml:23:9-25:39
+	android:exported
+		ADDED from [androidx.compose.ui:ui-tooling-android:1.8.1] /Users/teksta/.gradle/caches/8.14.1/transforms/92e07644ee3d8cede6182ff771f24380/transformed/ui-tooling-release/AndroidManifest.xml:25:13-36
+	android:name
+		ADDED from [androidx.compose.ui:ui-tooling-android:1.8.1] /Users/teksta/.gradle/caches/8.14.1/transforms/92e07644ee3d8cede6182ff771f24380/transformed/ui-tooling-release/AndroidManifest.xml:24:13-71
+uses-library#androidx.window.extensions
+ADDED from [androidx.window:window:1.3.0] /Users/teksta/.gradle/caches/8.14.1/transforms/e16375dd6349a6e92b71cf21f5dc7d0f/transformed/window-1.3.0/AndroidManifest.xml:23:9-25:40
+	android:required
+		ADDED from [androidx.window:window:1.3.0] /Users/teksta/.gradle/caches/8.14.1/transforms/e16375dd6349a6e92b71cf21f5dc7d0f/transformed/window-1.3.0/AndroidManifest.xml:25:13-37
+	android:name
+		ADDED from [androidx.window:window:1.3.0] /Users/teksta/.gradle/caches/8.14.1/transforms/e16375dd6349a6e92b71cf21f5dc7d0f/transformed/window-1.3.0/AndroidManifest.xml:24:13-54
+uses-library#androidx.window.sidecar
+ADDED from [androidx.window:window:1.3.0] /Users/teksta/.gradle/caches/8.14.1/transforms/e16375dd6349a6e92b71cf21f5dc7d0f/transformed/window-1.3.0/AndroidManifest.xml:26:9-28:40
+	android:required
+		ADDED from [androidx.window:window:1.3.0] /Users/teksta/.gradle/caches/8.14.1/transforms/e16375dd6349a6e92b71cf21f5dc7d0f/transformed/window-1.3.0/AndroidManifest.xml:28:13-37
+	android:name
+		ADDED from [androidx.window:window:1.3.0] /Users/teksta/.gradle/caches/8.14.1/transforms/e16375dd6349a6e92b71cf21f5dc7d0f/transformed/window-1.3.0/AndroidManifest.xml:27:13-51
+provider#androidx.startup.InitializationProvider
+ADDED from [androidx.emoji2:emoji2:1.4.0] /Users/teksta/.gradle/caches/8.14.1/transforms/bcbe9bb66e5a9b6be15af2f2ff19b554/transformed/emoji2-1.4.0/AndroidManifest.xml:24:9-32:20
+MERGED from [androidx.lifecycle:lifecycle-process:2.8.7] /Users/teksta/.gradle/caches/8.14.1/transforms/765a13698f6b85bbd7e0f75e015cc00b/transformed/lifecycle-process-2.8.7/AndroidManifest.xml:24:9-32:20
+MERGED from [androidx.lifecycle:lifecycle-process:2.8.7] /Users/teksta/.gradle/caches/8.14.1/transforms/765a13698f6b85bbd7e0f75e015cc00b/transformed/lifecycle-process-2.8.7/AndroidManifest.xml:24:9-32:20
+MERGED from [androidx.profileinstaller:profileinstaller:1.4.1] /Users/teksta/.gradle/caches/8.14.1/transforms/4adeb29c46232fc5fc267f2643e98f3e/transformed/profileinstaller-1.4.1/AndroidManifest.xml:24:9-32:20
+MERGED from [androidx.profileinstaller:profileinstaller:1.4.1] /Users/teksta/.gradle/caches/8.14.1/transforms/4adeb29c46232fc5fc267f2643e98f3e/transformed/profileinstaller-1.4.1/AndroidManifest.xml:24:9-32:20
+MERGED from [androidx.startup:startup-runtime:1.1.1] /Users/teksta/.gradle/caches/8.14.1/transforms/cbe5e97098ae3b1adac7c9d610ebeb28/transformed/startup-runtime-1.1.1/AndroidManifest.xml:26:9-30:34
+MERGED from [androidx.startup:startup-runtime:1.1.1] /Users/teksta/.gradle/caches/8.14.1/transforms/cbe5e97098ae3b1adac7c9d610ebeb28/transformed/startup-runtime-1.1.1/AndroidManifest.xml:26:9-30:34
+	tools:node
+		ADDED from [androidx.emoji2:emoji2:1.4.0] /Users/teksta/.gradle/caches/8.14.1/transforms/bcbe9bb66e5a9b6be15af2f2ff19b554/transformed/emoji2-1.4.0/AndroidManifest.xml:28:13-31
+	android:authorities
+		ADDED from [androidx.emoji2:emoji2:1.4.0] /Users/teksta/.gradle/caches/8.14.1/transforms/bcbe9bb66e5a9b6be15af2f2ff19b554/transformed/emoji2-1.4.0/AndroidManifest.xml:26:13-68
+	android:exported
+		ADDED from [androidx.emoji2:emoji2:1.4.0] /Users/teksta/.gradle/caches/8.14.1/transforms/bcbe9bb66e5a9b6be15af2f2ff19b554/transformed/emoji2-1.4.0/AndroidManifest.xml:27:13-37
+	android:name
+		ADDED from [androidx.emoji2:emoji2:1.4.0] /Users/teksta/.gradle/caches/8.14.1/transforms/bcbe9bb66e5a9b6be15af2f2ff19b554/transformed/emoji2-1.4.0/AndroidManifest.xml:25:13-67
+meta-data#androidx.emoji2.text.EmojiCompatInitializer
+ADDED from [androidx.emoji2:emoji2:1.4.0] /Users/teksta/.gradle/caches/8.14.1/transforms/bcbe9bb66e5a9b6be15af2f2ff19b554/transformed/emoji2-1.4.0/AndroidManifest.xml:29:13-31:52
+	android:value
+		ADDED from [androidx.emoji2:emoji2:1.4.0] /Users/teksta/.gradle/caches/8.14.1/transforms/bcbe9bb66e5a9b6be15af2f2ff19b554/transformed/emoji2-1.4.0/AndroidManifest.xml:31:17-49
+	android:name
+		ADDED from [androidx.emoji2:emoji2:1.4.0] /Users/teksta/.gradle/caches/8.14.1/transforms/bcbe9bb66e5a9b6be15af2f2ff19b554/transformed/emoji2-1.4.0/AndroidManifest.xml:30:17-75
+permission#${applicationId}.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
+ADDED from [androidx.core:core:1.13.1] /Users/teksta/.gradle/caches/8.14.1/transforms/bb2cfe922d9659664bc98b8265f40a52/transformed/core-1.13.1/AndroidManifest.xml:22:5-24:47
+	android:protectionLevel
+		ADDED from [androidx.core:core:1.13.1] /Users/teksta/.gradle/caches/8.14.1/transforms/bb2cfe922d9659664bc98b8265f40a52/transformed/core-1.13.1/AndroidManifest.xml:24:9-44
+	android:name
+		ADDED from [androidx.core:core:1.13.1] /Users/teksta/.gradle/caches/8.14.1/transforms/bb2cfe922d9659664bc98b8265f40a52/transformed/core-1.13.1/AndroidManifest.xml:23:9-81
+permission#com.teksta.projectparent.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
+ADDED from [androidx.core:core:1.13.1] /Users/teksta/.gradle/caches/8.14.1/transforms/bb2cfe922d9659664bc98b8265f40a52/transformed/core-1.13.1/AndroidManifest.xml:22:5-24:47
+	android:protectionLevel
+		ADDED from [androidx.core:core:1.13.1] /Users/teksta/.gradle/caches/8.14.1/transforms/bb2cfe922d9659664bc98b8265f40a52/transformed/core-1.13.1/AndroidManifest.xml:24:9-44
+	android:name
+		ADDED from [androidx.core:core:1.13.1] /Users/teksta/.gradle/caches/8.14.1/transforms/bb2cfe922d9659664bc98b8265f40a52/transformed/core-1.13.1/AndroidManifest.xml:23:9-81
+uses-permission#${applicationId}.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
+ADDED from [androidx.core:core:1.13.1] /Users/teksta/.gradle/caches/8.14.1/transforms/bb2cfe922d9659664bc98b8265f40a52/transformed/core-1.13.1/AndroidManifest.xml:26:5-97
+	android:name
+		ADDED from [androidx.core:core:1.13.1] /Users/teksta/.gradle/caches/8.14.1/transforms/bb2cfe922d9659664bc98b8265f40a52/transformed/core-1.13.1/AndroidManifest.xml:26:22-94
+uses-permission#com.teksta.projectparent.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
+ADDED from [androidx.core:core:1.13.1] /Users/teksta/.gradle/caches/8.14.1/transforms/bb2cfe922d9659664bc98b8265f40a52/transformed/core-1.13.1/AndroidManifest.xml:26:5-97
+	android:name
+		ADDED from [androidx.core:core:1.13.1] /Users/teksta/.gradle/caches/8.14.1/transforms/bb2cfe922d9659664bc98b8265f40a52/transformed/core-1.13.1/AndroidManifest.xml:26:22-94
+meta-data#androidx.lifecycle.ProcessLifecycleInitializer
+ADDED from [androidx.lifecycle:lifecycle-process:2.8.7] /Users/teksta/.gradle/caches/8.14.1/transforms/765a13698f6b85bbd7e0f75e015cc00b/transformed/lifecycle-process-2.8.7/AndroidManifest.xml:29:13-31:52
+	android:value
+		ADDED from [androidx.lifecycle:lifecycle-process:2.8.7] /Users/teksta/.gradle/caches/8.14.1/transforms/765a13698f6b85bbd7e0f75e015cc00b/transformed/lifecycle-process-2.8.7/AndroidManifest.xml:31:17-49
+	android:name
+		ADDED from [androidx.lifecycle:lifecycle-process:2.8.7] /Users/teksta/.gradle/caches/8.14.1/transforms/765a13698f6b85bbd7e0f75e015cc00b/transformed/lifecycle-process-2.8.7/AndroidManifest.xml:30:17-78
+meta-data#androidx.profileinstaller.ProfileInstallerInitializer
+ADDED from [androidx.profileinstaller:profileinstaller:1.4.1] /Users/teksta/.gradle/caches/8.14.1/transforms/4adeb29c46232fc5fc267f2643e98f3e/transformed/profileinstaller-1.4.1/AndroidManifest.xml:29:13-31:52
+	android:value
+		ADDED from [androidx.profileinstaller:profileinstaller:1.4.1] /Users/teksta/.gradle/caches/8.14.1/transforms/4adeb29c46232fc5fc267f2643e98f3e/transformed/profileinstaller-1.4.1/AndroidManifest.xml:31:17-49
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.4.1] /Users/teksta/.gradle/caches/8.14.1/transforms/4adeb29c46232fc5fc267f2643e98f3e/transformed/profileinstaller-1.4.1/AndroidManifest.xml:30:17-85
+receiver#androidx.profileinstaller.ProfileInstallReceiver
+ADDED from [androidx.profileinstaller:profileinstaller:1.4.1] /Users/teksta/.gradle/caches/8.14.1/transforms/4adeb29c46232fc5fc267f2643e98f3e/transformed/profileinstaller-1.4.1/AndroidManifest.xml:34:9-52:20
+	android:enabled
+		ADDED from [androidx.profileinstaller:profileinstaller:1.4.1] /Users/teksta/.gradle/caches/8.14.1/transforms/4adeb29c46232fc5fc267f2643e98f3e/transformed/profileinstaller-1.4.1/AndroidManifest.xml:37:13-35
+	android:exported
+		ADDED from [androidx.profileinstaller:profileinstaller:1.4.1] /Users/teksta/.gradle/caches/8.14.1/transforms/4adeb29c46232fc5fc267f2643e98f3e/transformed/profileinstaller-1.4.1/AndroidManifest.xml:38:13-36
+	android:permission
+		ADDED from [androidx.profileinstaller:profileinstaller:1.4.1] /Users/teksta/.gradle/caches/8.14.1/transforms/4adeb29c46232fc5fc267f2643e98f3e/transformed/profileinstaller-1.4.1/AndroidManifest.xml:39:13-57
+	android:directBootAware
+		ADDED from [androidx.profileinstaller:profileinstaller:1.4.1] /Users/teksta/.gradle/caches/8.14.1/transforms/4adeb29c46232fc5fc267f2643e98f3e/transformed/profileinstaller-1.4.1/AndroidManifest.xml:36:13-44
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.4.1] /Users/teksta/.gradle/caches/8.14.1/transforms/4adeb29c46232fc5fc267f2643e98f3e/transformed/profileinstaller-1.4.1/AndroidManifest.xml:35:13-76
+intent-filter#action:name:androidx.profileinstaller.action.INSTALL_PROFILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.4.1] /Users/teksta/.gradle/caches/8.14.1/transforms/4adeb29c46232fc5fc267f2643e98f3e/transformed/profileinstaller-1.4.1/AndroidManifest.xml:40:13-42:29
+action#androidx.profileinstaller.action.INSTALL_PROFILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.4.1] /Users/teksta/.gradle/caches/8.14.1/transforms/4adeb29c46232fc5fc267f2643e98f3e/transformed/profileinstaller-1.4.1/AndroidManifest.xml:41:17-91
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.4.1] /Users/teksta/.gradle/caches/8.14.1/transforms/4adeb29c46232fc5fc267f2643e98f3e/transformed/profileinstaller-1.4.1/AndroidManifest.xml:41:25-88
+intent-filter#action:name:androidx.profileinstaller.action.SKIP_FILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.4.1] /Users/teksta/.gradle/caches/8.14.1/transforms/4adeb29c46232fc5fc267f2643e98f3e/transformed/profileinstaller-1.4.1/AndroidManifest.xml:43:13-45:29
+action#androidx.profileinstaller.action.SKIP_FILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.4.1] /Users/teksta/.gradle/caches/8.14.1/transforms/4adeb29c46232fc5fc267f2643e98f3e/transformed/profileinstaller-1.4.1/AndroidManifest.xml:44:17-85
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.4.1] /Users/teksta/.gradle/caches/8.14.1/transforms/4adeb29c46232fc5fc267f2643e98f3e/transformed/profileinstaller-1.4.1/AndroidManifest.xml:44:25-82
+intent-filter#action:name:androidx.profileinstaller.action.SAVE_PROFILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.4.1] /Users/teksta/.gradle/caches/8.14.1/transforms/4adeb29c46232fc5fc267f2643e98f3e/transformed/profileinstaller-1.4.1/AndroidManifest.xml:46:13-48:29
+action#androidx.profileinstaller.action.SAVE_PROFILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.4.1] /Users/teksta/.gradle/caches/8.14.1/transforms/4adeb29c46232fc5fc267f2643e98f3e/transformed/profileinstaller-1.4.1/AndroidManifest.xml:47:17-88
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.4.1] /Users/teksta/.gradle/caches/8.14.1/transforms/4adeb29c46232fc5fc267f2643e98f3e/transformed/profileinstaller-1.4.1/AndroidManifest.xml:47:25-85
+intent-filter#action:name:androidx.profileinstaller.action.BENCHMARK_OPERATION
+ADDED from [androidx.profileinstaller:profileinstaller:1.4.1] /Users/teksta/.gradle/caches/8.14.1/transforms/4adeb29c46232fc5fc267f2643e98f3e/transformed/profileinstaller-1.4.1/AndroidManifest.xml:49:13-51:29
+action#androidx.profileinstaller.action.BENCHMARK_OPERATION
+ADDED from [androidx.profileinstaller:profileinstaller:1.4.1] /Users/teksta/.gradle/caches/8.14.1/transforms/4adeb29c46232fc5fc267f2643e98f3e/transformed/profileinstaller-1.4.1/AndroidManifest.xml:50:17-95
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.4.1] /Users/teksta/.gradle/caches/8.14.1/transforms/4adeb29c46232fc5fc267f2643e98f3e/transformed/profileinstaller-1.4.1/AndroidManifest.xml:50:25-92

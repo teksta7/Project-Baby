@@ -1,0 +1,86 @@
+[
+    {
+        "merged": "project.parent.app-debug-74:/mipmap-anydpi_ic_launcher.xml.flat",
+        "source": "project.parent.app-main-76:/mipmap-anydpi/ic_launcher.xml"
+    },
+    {
+        "merged": "project.parent.app-debug-74:/mipmap-mdpi_ic_launcher_foreground.png.flat",
+        "source": "project.parent.app-main-76:/mipmap-mdpi/ic_launcher_foreground.png"
+    },
+    {
+        "merged": "project.parent.app-debug-74:/mipmap-hdpi_ic_launcher_foreground.png.flat",
+        "source": "project.parent.app-main-76:/mipmap-hdpi/ic_launcher_foreground.png"
+    },
+    {
+        "merged": "project.parent.app-debug-74:/mipmap-xxxhdpi_ic_launcher_background.png.flat",
+        "source": "project.parent.app-main-76:/mipmap-xxxhdpi/ic_launcher_background.png"
+    },
+    {
+        "merged": "project.parent.app-debug-74:/mipmap-xxxhdpi_ic_launcher_monochrome.png.flat",
+        "source": "project.parent.app-main-76:/mipmap-xxxhdpi/ic_launcher_monochrome.png"
+    },
+    {
+        "merged": "project.parent.app-debug-74:/mipmap-xxxhdpi_ic_launcher.png.flat",
+        "source": "project.parent.app-main-76:/mipmap-xxxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "project.parent.app-debug-74:/mipmap-xxhdpi_ic_launcher_background.png.flat",
+        "source": "project.parent.app-main-76:/mipmap-xxhdpi/ic_launcher_background.png"
+    },
+    {
+        "merged": "project.parent.app-debug-74:/mipmap-mdpi_ic_launcher_monochrome.png.flat",
+        "source": "project.parent.app-main-76:/mipmap-mdpi/ic_launcher_monochrome.png"
+    },
+    {
+        "merged": "project.parent.app-debug-74:/mipmap-mdpi_ic_launcher.png.flat",
+        "source": "project.parent.app-main-76:/mipmap-mdpi/ic_launcher.png"
+    },
+    {
+        "merged": "project.parent.app-debug-74:/mipmap-xxxhdpi_ic_launcher_foreground.png.flat",
+        "source": "project.parent.app-main-76:/mipmap-xxxhdpi/ic_launcher_foreground.png"
+    },
+    {
+        "merged": "project.parent.app-debug-74:/mipmap-xxhdpi_ic_launcher_monochrome.png.flat",
+        "source": "project.parent.app-main-76:/mipmap-xxhdpi/ic_launcher_monochrome.png"
+    },
+    {
+        "merged": "project.parent.app-debug-74:/mipmap-hdpi_ic_launcher.png.flat",
+        "source": "project.parent.app-main-76:/mipmap-hdpi/ic_launcher.png"
+    },
+    {
+        "merged": "project.parent.app-debug-74:/mipmap-xxhdpi_ic_launcher.png.flat",
+        "source": "project.parent.app-main-76:/mipmap-xxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "project.parent.app-debug-74:/mipmap-mdpi_ic_launcher_background.png.flat",
+        "source": "project.parent.app-main-76:/mipmap-mdpi/ic_launcher_background.png"
+    },
+    {
+        "merged": "project.parent.app-debug-74:/mipmap-xhdpi_ic_launcher_monochrome.png.flat",
+        "source": "project.parent.app-main-76:/mipmap-xhdpi/ic_launcher_monochrome.png"
+    },
+    {
+        "merged": "project.parent.app-debug-74:/mipmap-hdpi_ic_launcher_background.png.flat",
+        "source": "project.parent.app-main-76:/mipmap-hdpi/ic_launcher_background.png"
+    },
+    {
+        "merged": "project.parent.app-debug-74:/mipmap-xhdpi_ic_launcher.png.flat",
+        "source": "project.parent.app-main-76:/mipmap-xhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "project.parent.app-debug-74:/mipmap-hdpi_ic_launcher_monochrome.png.flat",
+        "source": "project.parent.app-main-76:/mipmap-hdpi/ic_launcher_monochrome.png"
+    },
+    {
+        "merged": "project.parent.app-debug-74:/mipmap-xxhdpi_ic_launcher_foreground.png.flat",
+        "source": "project.parent.app-main-76:/mipmap-xxhdpi/ic_launcher_foreground.png"
+    },
+    {
+        "merged": "project.parent.app-debug-74:/mipmap-xhdpi_ic_launcher_foreground.png.flat",
+        "source": "project.parent.app-main-76:/mipmap-xhdpi/ic_launcher_foreground.png"
+    },
+    {
+        "merged": "project.parent.app-debug-74:/mipmap-xhdpi_ic_launcher_background.png.flat",
+        "source": "project.parent.app-main-76:/mipmap-xhdpi/ic_launcher_background.png"
+    }
+]
