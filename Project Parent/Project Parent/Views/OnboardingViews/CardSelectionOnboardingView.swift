@@ -51,11 +51,11 @@ struct CardSelectionOnboardingView: View {
                     }
                     
                     //Toggle(isOn: $homeCardStore.sleepHomeCard.toTrack)
-//                    Toggle(isOn: $isSleepCardTracked)
-//                    {
-//                        Text("Sleep (COMING SOON)")
-//                        Text("Enable the app to track the amount sleep your baby has had")
-//                    }
+                    Toggle(isOn: $isSleepCardTracked)
+                    {
+                        Text("Sleep")
+                        Text("Enable the app to track the amount sleep your baby has had")
+                    }
 //                    Toggle(isOn: $isFoodCardTracked)
 //                    {
 //                        Text("Food (COMING SOON)")

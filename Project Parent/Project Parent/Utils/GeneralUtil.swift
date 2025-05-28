@@ -47,12 +47,6 @@ class UtilFunctions
         return "\(hours) hours \(minutesLeft.formatted()) minutes"
     }
     
-    func getMinutes(_ seconds: Int) -> Int {
-        let minutes = seconds / 60
-        //let secondsLeft = seconds % 60
-        return minutes
-    }
-    
     
     func percentageBetweenTimestamps(startTimestamp: TimeInterval, endTimestamp: TimeInterval, targetTimestamp: TimeInterval) -> Double {
         //start date = dateTime stamp bottle started
