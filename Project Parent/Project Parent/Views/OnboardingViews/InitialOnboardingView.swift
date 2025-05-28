@@ -32,8 +32,7 @@ struct InitialOnboardingView: View {
                     .resizable()
                     .offset(y: -200)
                     .frame(width: 200 + DeviceDimensions().width/5, height: 200 + DeviceDimensions().height/15)
-                    //.frame(width: DeviceDimensions().width/1.75, height: DeviceDimensions().height/4)
-                    //.frame(width: 200, height: 200)
+
                 Text("Welcome to Project Parent").bold().font(.largeTitle)
                     .offset(y: -65)
                     .frame(width: 250)
@@ -42,7 +41,7 @@ struct InitialOnboardingView: View {
                     .offset(y: -15)
                     .frame(width: 250)
                     .multilineTextAlignment(.center)
-                //Text("Complete the sections below to setup the app").font(.title3)
+  
                     .offset(y: 60)
                     
                     

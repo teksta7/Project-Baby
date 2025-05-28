@@ -118,11 +118,11 @@ struct SettingsView: View {
                     
                     //Toggle(isOn: $homeCardStore.sleepHomeCard.toTrack)
                     //ENABLE FOR MILESTONE 2
-//                    Toggle(isOn: $isSleepCardTracked)
-//                    {
-//                        Text("Sleep (COMING SOON)")
-//                        Text("Enable the app to track the amount sleep your baby has had")
-//                    }
+                    Toggle(isOn: $isSleepCardTracked)
+                    {
+                        Text("Sleep")
+                        Text("Enable the app to track the amount sleep your baby has had")
+                    }
 //                    //ENABLE FOR MILESTONE 3
 //                    Toggle(isOn: $isFoodCardTracked)
 //                    {
@@ -202,6 +202,10 @@ struct SettingsView: View {
                         Text("Live Activities for Bottle Feeds")
                         Text("The app will display your bottle feed progress even when you switch apps")
                     }
+                }
+                Section(header: Text("Sleep"))
+                {
+                    
                 }
 
                 //RE-ENABLE THIS SECTION IN PARTS
