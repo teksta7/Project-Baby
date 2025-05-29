@@ -3,7 +3,7 @@ import SkipFuse
 import SkipFuseUI
 
 /// A logger for the ProjectParent module.
-let logger: Logger = Logger(subsystem: "com.teksta.projectparentV2", category: "ProjectParent")
+let logger: Logger = Logger(subsystem: "com.teksta.projectparent", category: "ProjectParent")
 
 /// The shared top-level view for the app, loaded from the platform-specific App delegates below.
 ///
@@ -11,12 +11,33 @@ let logger: Logger = Logger(subsystem: "com.teksta.projectparentV2", category: "
 /* SKIP @bridge */public struct ProjectParentRootView : View {
     /* SKIP @bridge */public init() {
     }
+    
+    //Controller for setup data
+    //@StateObject private var coreDataController: CoreDataController = CoreDataController()
 
     public var body: some View {
-        ContentView()
-            .task {
-                logger.info("Skip app logs are viewable in the Xcode console for iOS; Android logs can be viewed in Studio or using adb logcat")
-            }
+        InitialOnboardingView()
+           //.environmentObject(coreDataController)
+           //.environment(\.managedObjectContext, coreDataController.container.viewContext)
+           //.environmentObject(IAP)
+           .preferredColorScheme(.dark)
+           .task {
+               logger.info("Skip app logs are viewable in the Xcode console for iOS; Android logs can be viewed in Studio or using adb logcat")
+               logger.info("Attempting to load in-app products...")
+               //await IAP.updatePurchasedProducts()
+               do {
+                   //try await IAP.loadProducts()
+                   logger.info( "In-app products loaded successfully")
+               } catch {
+                   logger.error("In-app products cannot be loaded")
+                   print(error)
+               }
+           }
+        
+//        ContentView()
+//            .task {
+//                logger.info("Skip app logs are viewable in the Xcode console for iOS; Android logs can be viewed in Studio or using adb logcat")
+//            }
     }
 }
 
@@ -31,6 +52,14 @@ let logger: Logger = Logger(subsystem: "com.teksta.projectparentV2", category: "
 
     /* SKIP @bridge */public func onStart() {
         logger.debug("onStart")
+        #if os(Android)
+        
+        #else
+        if UNMutableNotificationContent().badge?.intValue ?? 0 > 0
+             {
+                 //BottleNotificationController().removeExistingNotifications("projectparent")
+             }
+        #endif
     }
 
     /* SKIP @bridge */public func onResume() {
@@ -43,6 +72,15 @@ let logger: Logger = Logger(subsystem: "com.teksta.projectparentV2", category: "
 
     /* SKIP @bridge */public func onStop() {
         logger.debug("onStop")
+        
+        #if os(Android)
+        
+        #else
+        if UNMutableNotificationContent().badge?.intValue ?? 0 > 0
+               {
+                   //BottleNotificationController().removeExistingNotifications("projectparent")
+               }
+        #endif
     }
 
     /* SKIP @bridge */public func onDestroy() {

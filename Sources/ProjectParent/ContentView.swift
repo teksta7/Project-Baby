@@ -45,8 +45,8 @@ struct WelcomeView : View {
         VStack(spacing: 0) {
             Text("Hello [\(welcomeName)](https://skip.tools)!")
                 .padding()
-            Image(systemName: "heart.fill")
-                .foregroundStyle(.red)
+            Image(systemName: "play.fill")
+                .foregroundStyle(.blue)
                 .scaleEffect(heartBeating ? 1.5 : 1.0)
                 .animation(.easeInOut(duration: 1).repeatForever(), value: heartBeating)
                 .onAppear { heartBeating = true }
