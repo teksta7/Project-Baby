@@ -1,0 +1,7 @@
+package com.teksta.projectparent
+
+interface Platform {
+    val name: String
+}
+
+expect fun getPlatform(): Platform
