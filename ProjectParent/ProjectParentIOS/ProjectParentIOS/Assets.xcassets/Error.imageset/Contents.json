@@ -1,6 +1,7 @@
 {
-  "colors" : [
+  "images" : [
     {
+      "filename" : "x.circle.fill@5x.png",
       "idiom" : "universal"
     }
   ],
