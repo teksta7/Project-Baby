@@ -22,7 +22,8 @@ fun CardSelectionOnboardingScreen(
     val coroutineScope = rememberCoroutineScope()
 
     Scaffold(
-        topBar = { TopAppBar(title = { Text("Card Selection") }) }
+        topBar = { TopAppBar(modifier = Modifier.statusBarsPadding()
+            ,title = { Text("Card Selection") }) }
     ) { paddingValues ->
         Column(
             modifier = Modifier

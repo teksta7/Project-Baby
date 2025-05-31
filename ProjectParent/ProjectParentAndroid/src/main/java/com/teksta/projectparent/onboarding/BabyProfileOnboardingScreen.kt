@@ -57,11 +57,13 @@ fun BabyProfileOnboardingScreen(
     }
 
     Scaffold(
-        topBar = { TopAppBar(title = { Text("Create a Baby Profile") }) }
+        topBar = { TopAppBar(modifier = Modifier.statusBarsPadding(),
+            title = { Text("Create a Baby Profile") }) }
     ) { paddingValues ->
         Column(
             modifier = Modifier
                 .padding(paddingValues)
+                .statusBarsPadding()
                 .padding(16.dp)
                 .verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.CenterHorizontally,

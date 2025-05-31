@@ -6,5 +6,6 @@ build
 captures
 .externalNativeBuild
 .cxx
+.salive
 local.properties
 xcuserdata
