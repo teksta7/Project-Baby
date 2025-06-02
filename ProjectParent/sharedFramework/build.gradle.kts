@@ -39,6 +39,9 @@ kotlin {
 
             // NEW: Kotlinx Datetime library for multiplatform date/time handling
             implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.6.0")
+
+            implementation("com.benasher44:uuid:0.8.2")
+
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)

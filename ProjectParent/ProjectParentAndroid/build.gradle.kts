@@ -65,6 +65,11 @@ dependencies {
 
     implementation("androidx.compose.material3:material3:1.2.1") // Or latest M3 version
 
+    implementation("com.russhwolf:multiplatform-settings-no-arg:1.1.1")
+
+
+    implementation("androidx.compose.foundation:foundation:1.6.7") // Ensure foundation is up to date for pager
+
     // This is for viewing @Preview composables in Android Studio
     debugImplementation("androidx.compose.ui:ui-tooling")
 }

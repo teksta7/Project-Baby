@@ -47,8 +47,9 @@ class OnboardingViewModel {
 
     fun onBabyProfileOnboardingDismiss() {
         // This would be called when the baby profile sheet is closed
-        val isComplete = settings.getBoolean("isBabyProfileOnboardingComplete", false)
-        _uiState.update { it.copy(showBabyProfileSheet = false, isBabyProfileOnboardingComplete = isComplete) }
+        //val isComplete = settings.getBoolean("isBabyProfileOnboardingComplete", false)
+        settings.putBoolean("isBabyProfileOnboardingComplete", true)
+        _uiState.update { it.copy(showBabyProfileSheet = false, isBabyProfileOnboardingComplete = true) }
     }
 
     fun onCardSelectionOnboardingDismiss() {
