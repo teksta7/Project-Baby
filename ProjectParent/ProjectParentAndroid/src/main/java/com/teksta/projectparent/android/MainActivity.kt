@@ -1,10 +1,11 @@
-package com.teksta.projectparent.android
+package com.teksta.projectparent.android // Assuming this is your MainActivity's package
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material.Surface
+import androidx.compose.material.Surface // Make sure this is androidx.compose.material.Surface
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.core.view.WindowCompat
@@ -12,29 +13,50 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.russhwolf.settings.Settings
-import com.teksta.projectparent.HomeViewModel
 import com.teksta.projectparent.home.HomeScreen
+import com.teksta.projectparent.HomeViewModel
+import com.teksta.projectparent.bottles.BottlesScreen
+import com.teksta.projectparent.models.BottlesViewModel
 import com.teksta.projectparent.navigation.AppRoutes
 import com.teksta.projectparent.onboarding.*
-import com.teksta.projectparent.android.ProjectParentTheme
-import androidx.compose.runtime.LaunchedEffect
-import androidx.navigation.NavBackStackEntry
-
+import com.teksta.projectparent.services.AndroidAppContext // Your object for application context
+import com.teksta.projectparent.services.BottleFeedTrackerManager
+import com.teksta.projectparent.services.BottleNotificationController
+import com.teksta.projectparent.services.InAppReviewManager
+import com.teksta.projectparent.services.ScreenIdleManager
+import com.teksta.projectparent.services.getPlatformContext // This returns Application context
+//import com.teksta.projectparent.ui.theme.ProjectParentTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        WindowCompat.setDecorFitsSystemWindows(window, false)
 
-        // This enables edge-to-edge drawing. It's important for ensuring
-        // status bar padding modifiers work correctly.
-       // WindowCompat.setDecorFitsSystemWindows(window, false)
+        // Initialize AndroidAppContext with the Application context
+        AndroidAppContext.applicationContext = this.applicationContext
 
-        // In a production app, you would use a dependency injection library like Koin or Hilt
-        // to provide these ViewModels instead of creating them directly here.
         val onboardingViewModel = OnboardingViewModel()
         val babyProfileViewModel = BabyProfileViewModel()
         val cardSelectionViewModel = CardSelectionViewModel()
         val homeViewModel = HomeViewModel()
+        val bottleNotificationController = BottleNotificationController(getPlatformContext())
+
+        // For managers that specifically need an Activity, pass 'this' (the MainActivity instance)
+        // Ensure their 'expect constructor' takes 'Any' and 'actual constructor' casts to 'Activity'
+        val inAppReviewManager = InAppReviewManager(this) // <<< PASS Activity (this)
+        val screenIdleManager = ScreenIdleManager(this)   // <<< PASS Activity (this)
+
+        // BottleFeedTrackerManager can often work with Application context
+        val bottleFeedTrackerManager = BottleFeedTrackerManager(getPlatformContext())
+
+
+        val bottlesViewModel = BottlesViewModel(
+            settings = Settings(),
+            bottleNotificationController = bottleNotificationController,
+            bottleFeedTrackerManager = bottleFeedTrackerManager,
+            inAppReviewManager = inAppReviewManager,
+            screenIdleManager = screenIdleManager
+        )
 
         setContent {
             ProjectParentTheme {
@@ -43,7 +65,8 @@ class MainActivity : ComponentActivity() {
                         onboardingViewModel = onboardingViewModel,
                         babyProfileViewModel = babyProfileViewModel,
                         cardSelectionViewModel = cardSelectionViewModel,
-                        homeViewModel = homeViewModel
+                        homeViewModel = homeViewModel,
+                        bottlesViewModel = bottlesViewModel
                     )
                 }
             }
@@ -56,11 +79,11 @@ fun AppNavigation(
     onboardingViewModel: OnboardingViewModel,
     babyProfileViewModel: BabyProfileViewModel,
     cardSelectionViewModel: CardSelectionViewModel,
-    homeViewModel: HomeViewModel
+    homeViewModel: HomeViewModel,
+    bottlesViewModel: BottlesViewModel
 ) {
     val navController = rememberNavController()
 
-    // Decide the starting screen based on whether onboarding is complete
     val startDestination = if (Settings().getBoolean("showWelcomeOnboarding", true)) {
         AppRoutes.ONBOARDING_INITIAL
     } else {
@@ -68,25 +91,12 @@ fun AppNavigation(
     }
 
     NavHost(navController = navController, startDestination = startDestination) {
-        // --- Onboarding Graph ---
-        composable(AppRoutes.ONBOARDING_INITIAL) { navBackStackEntry: NavBackStackEntry ->
-            // This LaunchedEffect will run when this screen becomes the current destination
-            // (e.g., on initial launch if it's the start, or when navigating back to it).
-            // Using 'Unit' as key1 makes it run once when the composable enters the composition.
-            // To make it re-run when you navigate *back* to it, you can use a key that changes,
-            // or more simply, rely on the ViewModel being up-to-date if the settings are the source of truth.
-            // A more robust key for re-running on "resume" would be `navController.currentBackStackEntryAsState().value`
-            // For simplicity and given our ViewModel structure, calling it here should work
-            // when the screen is initially composed or recomposed after settings change.
-            LaunchedEffect(key1 = Unit) { // Or key1 = navBackStackEntry for re-trigger on back navigation
-                onboardingViewModel.refreshOnboardingStepStatuses()
-            }
+        composable(AppRoutes.ONBOARDING_INITIAL) {
             InitialOnboardingScreen(
                 viewModel = onboardingViewModel,
                 navigateToBabyProfile = { navController.navigate(AppRoutes.ONBOARDING_BABY_PROFILE) },
                 navigateToCardSelection = { navController.navigate(AppRoutes.ONBOARDING_CARD_SELECTION) },
                 navigateToHome = {
-                    // Navigate to home and clear all onboarding screens from the back stack
                     navController.navigate(AppRoutes.HOME) {
                         popUpTo(AppRoutes.ONBOARDING_INITIAL) { inclusive = true }
                     }
@@ -105,26 +115,32 @@ fun AppNavigation(
                 onDismissRequest = { navController.popBackStack() }
             )
         }
-
-        // --- Main App Graph ---
         composable(AppRoutes.HOME) {
             HomeScreen(
                 viewModel = homeViewModel,
-                onNavigate = { route -> navController.navigate(route) },
+                onNavigate = { routeString ->
+                    val route = when (routeString) {
+                        "PROFILE" -> AppRoutes.PROFILE
+                        "BOTTLES" -> AppRoutes.BOTTLES
+                        //"SLEEP" -> AppRoutes.SLEEP
+                        "SETTINGS" -> AppRoutes.SETTINGS // Assuming you add this route
+                        else -> return@HomeScreen
+                    }
+                    navController.navigate(route)
+                },
                 onNavigateToCharts = { navController.navigate(AppRoutes.CHARTS) }
             )
         }
-
-        // Add placeholders for the other main app screens
-        composable(AppRoutes.PROFILE) {
-            // ProfileScreen(...)
-        }
         composable(AppRoutes.BOTTLES) {
-            // BottlesScreen(...)
+            BottlesScreen(
+                viewModel = bottlesViewModel,
+                onNavigateToBottleList = { navController.navigate(AppRoutes.BOTTLE_LIST) }
+            )
         }
-        composable(AppRoutes.CHARTS) {
-            // BottleChartsScreen(...)
-        }
-        // ... and so on
+        // Define other composable routes (PROFILE, BOTTLE_LIST, CHARTS, SETTINGS etc.)
+        composable(AppRoutes.PROFILE) { Text("Profile Screen (To be implemented)")}
+        composable(AppRoutes.BOTTLE_LIST) { Text("Bottle List Screen (To be implemented)")}
+        composable(AppRoutes.CHARTS) { Text("Charts Screen (To be implemented)")}
+        composable(AppRoutes.SETTINGS) { Text("Settings Screen (To be implemented)")}
     }
 }

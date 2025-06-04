@@ -37,6 +37,8 @@ kotlin {
             // Use the 'no-arg' artifact to easily create instances in common code
             implementation("com.russhwolf:multiplatform-settings-no-arg:1.1.1")
 
+            implementation("com.google.android.play:core-ktx:1.8.1") // Or latest version
+
             // NEW: Kotlinx Datetime library for multiplatform date/time handling
             implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.6.0")
 
@@ -50,7 +52,7 @@ kotlin {
 }
 
 android {
-    namespace = "com.teksta.projectparent"
+    namespace = "com.teksta.projectparent.android"
     compileSdk = 35
     defaultConfig {
         minSdk = 33

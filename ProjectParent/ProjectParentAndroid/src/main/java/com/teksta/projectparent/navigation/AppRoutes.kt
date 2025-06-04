@@ -11,5 +11,8 @@ object AppRoutes {
     const val PROFILE = "profile"
     const val BOTTLES = "bottles"
     const val CHARTS = "charts"
+    const val SETTINGS = "settings"
+    const val BOTTLE_LIST = "bottle_list"
+
     // Add other main app screen routes here...
 }
