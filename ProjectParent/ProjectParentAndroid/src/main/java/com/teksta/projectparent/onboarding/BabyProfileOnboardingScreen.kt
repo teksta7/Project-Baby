@@ -31,6 +31,13 @@ import kotlinx.datetime.TimeZone
 import kotlinx.datetime.atTime
 import kotlinx.datetime.toInstant
 import kotlinx.datetime.toLocalDateTime
+import androidx.compose.foundation.clickable // Make sure this is imported
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.ContentScale
+import coil.compose.AsyncImage // <<< IMPORT COIL
+
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -69,11 +76,23 @@ fun BabyProfileOnboardingScreen(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            Icon(
-                imageVector = Icons.Default.ChildFriendly,
-                contentDescription = "Baby Profile Icon",
-                modifier = Modifier.size(100.dp)
-            )
+            if (uiState.selectedImageUri != null) {
+                AsyncImage(
+                    model = Uri.parse(uiState.selectedImageUri), // Load image from Uri string
+                    contentDescription = "Selected Baby Profile Picture",
+                    modifier = Modifier
+                        .size(120.dp) // Make it a bit larger
+                        .clip(CircleShape), // Clip to a circle
+                    contentScale = ContentScale.Crop // Crop to fill the circle
+                )
+            } else {
+                Icon(
+                    imageVector = Icons.Default.ChildFriendly,
+                    contentDescription = "Baby Profile Icon Placeholder",
+                    modifier = Modifier.size(100.dp)
+                )
+            }
+            // --- End of image display ---
 
             OutlinedTextField(
                 value = uiState.babyName,
@@ -100,6 +119,7 @@ fun BabyProfileOnboardingScreen(
             GenderPicker(
                 selectedGender = uiState.gender,
                 onGenderSelected = viewModel::onGenderSelected
+
             )
 
 //            // Button to launch the date picker dialog
@@ -144,10 +164,17 @@ fun BabyProfileOnboardingScreen(
                             datePickerState.selectedDateMillis?.let {
                                 viewModel.onBirthDateSelected(it)
                             }
-                        }) { Text("OK") }
+                        },
+                            colors = ButtonDefaults.textButtonColors(
+                                contentColor = MaterialTheme.colors.background // Or your desired color e.g. Color.White or a specific theme color
+                            ) ) { Text("OK") }
                     },
                     dismissButton = {
-                        TextButton(onClick = { showDatePickerDialog = false }) { Text("Cancel") }
+                        TextButton(onClick = { showDatePickerDialog = false },
+                            colors = ButtonDefaults.textButtonColors(
+                                contentColor = MaterialTheme.colors.background // Or your desired color e.g. Color.White or a specific theme color
+                            )
+                        ) { Text("Cancel") }
                     }
                 ) {
                     DatePicker(state = datePickerState)
@@ -181,13 +208,35 @@ fun BabyProfileOnboardingScreen(
 
 @Composable
 private fun GenderPicker(selectedGender: String, onGenderSelected: (String) -> Unit) {
-    Row(verticalAlignment = Alignment.CenterVertically) {
-        Text("Gender:")
-        Row {
-            RadioButton(selected = selectedGender == "Boy", onClick = { onGenderSelected("Boy") })
+    Row(
+        modifier = Modifier.fillMaxWidth(), // Make the whole row take available width
+        verticalAlignment = Alignment.CenterVertically, // Vertically center "Gender:" and the options Row
+        horizontalArrangement = Arrangement.Center // <<< ADD THIS LINE
+
+    ) {
+        Text(
+            text = "Gender:",
+            modifier = Modifier.padding(end = 16.dp) // Add some spacing after the "Gender:" label
+        )
+        Row( // This inner Row groups the "Boy" option
+            verticalAlignment = Alignment.CenterVertically, // Vertically center RadioButton and "Boy"
+            modifier = Modifier.clickable { onGenderSelected("Boy") } // Make the whole segment clickable
+        ) {
+            RadioButton(
+                selected = (selectedGender == "Boy"),
+                onClick = { onGenderSelected("Boy") }
+            )
             Text("Boy")
-            Spacer(Modifier.width(8.dp))
-            RadioButton(selected = selectedGender == "Girl", onClick = { onGenderSelected("Girl") })
+        }
+        Spacer(Modifier.width(16.dp)) // Spacing between "Boy" and "Girl" options
+        Row( // This inner Row groups the "Girl" option
+            verticalAlignment = Alignment.CenterVertically, // Vertically center RadioButton and "Girl"
+            modifier = Modifier.clickable { onGenderSelected("Girl") } // Make the whole segment clickable
+        ) {
+            RadioButton(
+                selected = (selectedGender == "Girl"),
+                onClick = { onGenderSelected("Girl") }
+            )
             Text("Girl")
         }
     }

@@ -70,6 +70,9 @@ dependencies {
 
     implementation("androidx.compose.foundation:foundation:1.6.7") // Ensure foundation is up to date for pager
 
+    // Coil for image loading in Compose
+    implementation("io.coil-kt:coil-compose:2.6.0") // Or the latest version of Coil
+
     // This is for viewing @Preview composables in Android Studio
     debugImplementation("androidx.compose.ui:ui-tooling")
 }

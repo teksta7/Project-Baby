@@ -19,7 +19,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.teksta.projectparent.R
+import com.teksta.projectparent.android.R
 import org.jetbrains.annotations.Debug
 
 // Your generated resource class
@@ -50,11 +50,11 @@ fun InitialOnboardingScreen(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
-//            Image(
-//                painter = painterResource(id = com.teksta.projectparent.android.R.mipmap.app_icon), // Your logo from drawable resources
-//                contentDescription = "App Logo",
-//                modifier = Modifier.size(200.dp)
-//            )
+            Image(
+                painter = painterResource(id = R.drawable.app_logo), // Your logo from drawable resources
+                contentDescription = "App Logo",
+                modifier = Modifier.size(200.dp)
+            )
 
             Text(
                 text = "Welcome to Project Parent",

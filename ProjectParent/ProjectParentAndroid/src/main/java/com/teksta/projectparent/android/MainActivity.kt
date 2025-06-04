@@ -17,6 +17,9 @@ import com.teksta.projectparent.home.HomeScreen
 import com.teksta.projectparent.navigation.AppRoutes
 import com.teksta.projectparent.onboarding.*
 import com.teksta.projectparent.android.ProjectParentTheme
+import androidx.compose.runtime.LaunchedEffect
+import androidx.navigation.NavBackStackEntry
+
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -66,7 +69,18 @@ fun AppNavigation(
 
     NavHost(navController = navController, startDestination = startDestination) {
         // --- Onboarding Graph ---
-        composable(AppRoutes.ONBOARDING_INITIAL) {
+        composable(AppRoutes.ONBOARDING_INITIAL) { navBackStackEntry: NavBackStackEntry ->
+            // This LaunchedEffect will run when this screen becomes the current destination
+            // (e.g., on initial launch if it's the start, or when navigating back to it).
+            // Using 'Unit' as key1 makes it run once when the composable enters the composition.
+            // To make it re-run when you navigate *back* to it, you can use a key that changes,
+            // or more simply, rely on the ViewModel being up-to-date if the settings are the source of truth.
+            // A more robust key for re-running on "resume" would be `navController.currentBackStackEntryAsState().value`
+            // For simplicity and given our ViewModel structure, calling it here should work
+            // when the screen is initially composed or recomposed after settings change.
+            LaunchedEffect(key1 = Unit) { // Or key1 = navBackStackEntry for re-trigger on back navigation
+                onboardingViewModel.refreshOnboardingStepStatuses()
+            }
             InitialOnboardingScreen(
                 viewModel = onboardingViewModel,
                 navigateToBabyProfile = { navController.navigate(AppRoutes.ONBOARDING_BABY_PROFILE) },

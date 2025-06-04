@@ -37,6 +37,21 @@ class OnboardingViewModel {
         }
     }
 
+    // Public function to re-check settings and update UI state
+    fun refreshOnboardingStepStatuses() {
+        val babyComplete = settings.getBoolean("isBabyProfileOnboardingComplete", false)
+        val cardsComplete = settings.getBoolean("isCardSelectionOnboardingComplete", false)
+        _uiState.update {
+            it.copy(
+                showWelcomeOnboarding = settings.getBoolean("showWelcomeOnboarding", true), // Also refresh this
+                isBabyProfileOnboardingComplete = babyComplete,
+                isCardSelectionOnboardingComplete = cardsComplete
+            )
+        }
+        println("OnboardingViewModel: Refreshed. Baby Complete: $babyComplete, Cards Complete: $cardsComplete")
+    }
+
+
     fun onBabyProfileClicked() {
         _uiState.update { it.copy(showBabyProfileSheet = true) }
     }
