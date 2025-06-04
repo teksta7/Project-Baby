@@ -94,11 +94,21 @@ class HomeViewModel {
      * The `viewString` is a platform-agnostic identifier.
      */
     private fun createAllPossibleCards(): List<HomeCard> {
+        // --- Read the saved baby's name ---
+        val babyName = settings.getString("babyName", "Baby") // Default to "Baby" if not set
+
+        // --- Determine the profile card text ---
+        val profileCardText = if (babyName.isNotBlank() && babyName != "Baby") {
+            "$babyName's Profile"
+        } else {
+            "Profile" // Fallback if no name is set or it's the default
+        }
+
         return listOf(
             HomeCard(
                 colorValue = 0xFF4FD1C5, // Mint
                 viewString = "PROFILE",
-                presentedString = "Profile",
+                presentedString = profileCardText,
                 imageToDisplay = "person",
                 toTrack = true, // Always shown by default
                 trackingSettingKey = "isProfileCardTracked"
