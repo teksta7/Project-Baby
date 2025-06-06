@@ -1,12 +1,17 @@
 package com.teksta.projectparent.android // Assuming this is your MainActivity's package
 
+import android.Manifest
+import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
+import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.compose.setContent
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.Surface // Make sure this is androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.core.view.WindowCompat
 import androidx.navigation.compose.NavHost
@@ -59,6 +64,29 @@ class MainActivity : ComponentActivity() {
         )
 
         setContent {
+            // --- This is the new code for requesting permission ---
+            // Create a launcher for the permission request
+            val requestPermissionLauncher = rememberLauncherForActivityResult(
+                contract = ActivityResultContracts.RequestPermission(),
+                onResult = { isGranted: Boolean ->
+                    if (isGranted) {
+                        // Permission is granted. You can now post notifications.
+                        println("Notification permission granted.")
+                    } else {
+                        // Permission denied. Handle appropriately (e.g., show a message).
+                        // Your foreground service notifications will NOT work without this.
+                        println("Notification permission DENIED.")
+                    }
+                }
+            )
+
+            // Request permission when the composable is first launched, if on Android 13+
+            LaunchedEffect(Unit) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                    requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+                }
+            }
+            // --- End of new code ---
             ProjectParentTheme {
                 Surface(modifier = Modifier.fillMaxSize()) {
                     AppNavigation(

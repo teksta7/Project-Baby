@@ -21,9 +21,9 @@ expect class ScreenIdleManager(activityAsAny: Any) {
     fun allowScreenToDim()
 }
 
-expect class BottleNotificationController(contextHolderAsAny: Any) { // <<< MODIFIED to accept contextHolder
+expect class BottleNotificationController(contextHolderAsAny: Any) {
     suspend fun requestNotificationAccessByUser()
-    // You might add other functions here later like:
-    // suspend fun scheduleBottleNotification(minutesUntilNotification: Int, bottleID: String)
-    // fun removeExistingNotifications(notificationIdentifier: String)
+    suspend fun scheduleBottleNotification(minutesUntilNotification: Int, bottleID: String)
+    fun removeExistingNotifications(notificationIdentifier: String)
+    fun removeAllNotifications()
 }

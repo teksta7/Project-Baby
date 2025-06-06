@@ -119,14 +119,14 @@ class BottlesViewModel(
             }
             settings.putInt("bottlesBeforeReview", _uiState.value.bottlesBeforeReview)
 
-            // Schedule notification
-            // val latestBottleID = newBottle.id
-            // viewModelScope.launch {
-            //    bottleNotificationController.scheduleBottleNotification(
-            //        settings.getInt("com.projectparent.localTimeBetweenFeeds", 0),
-            //        latestBottleID
-            //    )
-            // }
+             //Schedule notification
+//             val latestBottleID = newBottle.id
+//             viewModelScope.launch {
+//                bottleNotificationController.scheduleBottleNotification(
+//                    settings.getInt("com.projectparent.localTimeBetweenFeeds", 0),
+//                    latestBottleID
+//                )
+//             }
 
             if (_uiState.value.bottlesBeforeReview <= 0) {
                 inAppReviewManager.requestReview()
@@ -143,12 +143,12 @@ class BottlesViewModel(
             startTimer()
             screenIdleManager.keepScreenOn()
             // TODO: Get average bottle duration for estimated end time
-            // val averageDurationMillis = settings.getLong("projectparent.averagebottleduration", 300_000L) // 5 mins default
-            // bottleFeedTrackerManager.startTracking(
-            //     babyName = settings.getString("projectparent.babyName", "Baby"),
-            //     estimatedEndTimeStamp = startTimeMillis + averageDurationMillis,
-            //     startTimeStamp = startTimeMillis
-            // )
+             val averageDurationMillis = settings.getLong("projectparent.averagebottleduration", 300_000L) // 5 mins default
+             bottleFeedTrackerManager.startTracking(
+                 babyName = settings.getString("projectparent.babyName", "Baby"),
+                 estimatedEndTimeStamp = startTimeMillis + averageDurationMillis,
+                 startTimeStamp = startTimeMillis
+             )
 
             _uiState.update {
                 it.copy(
