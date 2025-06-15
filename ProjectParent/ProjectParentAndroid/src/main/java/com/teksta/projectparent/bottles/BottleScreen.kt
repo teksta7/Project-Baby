@@ -1,5 +1,9 @@
 package com.teksta.projectparent.bottles
 
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -14,11 +18,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
+import androidx.core.content.ContextCompat
+import com.teksta.projectparent.android.R
+import com.teksta.projectparent.android.services.BottleTrackingService
 import com.teksta.projectparent.models.BottlesViewModel
-//import com.teksta.projectparent.R
 
 @Composable
 fun BottlesScreen(
@@ -27,38 +34,49 @@ fun BottlesScreen(
 ) {
     val uiState by viewModel.uiState.collectAsState()
     val scaffoldState = rememberScaffoldState()
+    val context = LocalContext.current
 
-    // Handle navigation request
+    // This effect handles navigation requests from the ViewModel
     LaunchedEffect(uiState.showBottleListScreen) {
         if (uiState.showBottleListScreen) {
             onNavigateToBottleList()
-            viewModel.bottleListNavigationComplete() // Reset the trigger
+            viewModel.bottleListNavigationComplete() // Reset the trigger after navigation
         }
     }
 
-    // Handle alerts
+    // This effect handles showing snackbar alerts from the ViewModel
     LaunchedEffect(uiState.alertMessage) {
         uiState.alertMessage?.let {
             scaffoldState.snackbarHostState.showSnackbar(it, duration = SnackbarDuration.Short)
-            viewModel.dismissAlert() // Important to dismiss the alert in ViewModel
+            viewModel.dismissAlert()
         }
     }
 
-    // Keep screen on when timer is running
-    DisposableEffect(uiState.isTimerRunning) {
-        if (uiState.isTimerRunning) {
-            // viewModel.screenIdleManager.keepScreenOn() // Call through ViewModel
-        }
-        onDispose {
-            // viewModel.screenIdleManager.allowScreenToDim() // Call through ViewModel
-        }
-    }
+    // This effect manages the lifecycle of the BroadcastReceiver
     DisposableEffect(Unit) {
+        val receiver = object : BroadcastReceiver() {
+            override fun onReceive(context: Context?, intent: Intent?) {
+                if (intent?.action == BottleTrackingService.ACTION_TIMER_UPDATE) {
+                    val duration = intent.getIntExtra(BottleTrackingService.EXTRA_DURATION_SECONDS, 0)
+                    viewModel.updateDurationFromBroadcast(duration)
+                }
+            }
+        }
+
+        val filter = IntentFilter(BottleTrackingService.ACTION_TIMER_UPDATE)
+        ContextCompat.registerReceiver(
+            context,
+            receiver,
+            filter,
+            ContextCompat.RECEIVER_NOT_EXPORTED
+        )
+
+        // onDispose is called when the composable leaves the screen
         onDispose {
-            viewModel.onDispose() // Ensure ViewModel cleans up
+            context.unregisterReceiver(receiver)
+            viewModel.onDispose() // Also notify the ViewModel
         }
     }
-
 
     Scaffold(
         scaffoldState = scaffoldState,
@@ -74,9 +92,8 @@ fun BottlesScreen(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            // Simplified Header Image
 //            Image(
-//                painter = painterResource(id = R.drawable.bottle_image), // Replace with your bottle image
+//                painter = painterResource(id = com.teksta.projectparent.android.R.drawable.bottle_image), // Your placeholder image
 //                contentDescription = "Bottle",
 //                modifier = Modifier
 //                    .size(150.dp)
@@ -85,7 +102,7 @@ fun BottlesScreen(
 //            )
 
             Text(
-                if (uiState.isTimerRunning) "You can amend ounces and notes during the feed." else "Tap Start to begin.",
+                text = if (uiState.isTimerRunning) "You can amend ounces and notes during the feed." else "Tap Start to begin.",
                 style = MaterialTheme.typography.caption
             )
 

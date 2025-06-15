@@ -3,6 +3,8 @@ package com.teksta.projectparent.onboarding
 // In sharedFramework/src/commonMain/kotlin/com/teksta/projectparent/onboarding/CardSelectionViewModel.kt
 
 import com.russhwolf.settings.Settings
+import com.teksta.projectparent.services.getPlatformContext
+import com.teksta.projectparent.services.BottleNotificationController
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -20,13 +22,16 @@ data class CardSelectionUiState(
 )
 
 // Expect declaration for platform-specific notification controller
-expect class BottleNotificationController() {
+expect class BottleNotificationController(contextHolderAsAny: Any) { // <<< ADD `contextHolder: Any` HERE
     suspend fun requestNotificationAccessByUser()
+    suspend fun scheduleBottleNotification(minutesUntilNotification: Int, bottleID: String)
+    fun removeExistingNotifications(notificationIdentifier: String)
+    fun removeAllNotifications()
 }
 
 class CardSelectionViewModel {
     private val settings: Settings = Settings()
-    private val bottleNotificationController: BottleNotificationController = BottleNotificationController()
+    private val bottleNotificationController: BottleNotificationController = BottleNotificationController(getPlatformContext())
 
     private val _uiState = MutableStateFlow(CardSelectionUiState())
     val uiState = _uiState.asStateFlow()

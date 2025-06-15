@@ -10,11 +10,24 @@ import androidx.core.content.ContextCompat
 // For simplicity, this example assumes a context is available. A better way is DI.
 // This is a placeholder, real implementation requires more setup for notifications.
 
-actual class BottleNotificationController { // Add constructor if needed, e.g. (private val context: Context)
+actual class BottleNotificationController actual constructor(contextHolderAsAny: Any) { // Add constructor if needed, e.g. (private val context: Context)
     actual suspend fun requestNotificationAccessByUser() {
+        //private val context: Context = contextHolderAsAny as Context
         println("Android: Requesting notification access (placeholder)")
         // Actual Android notification permission request logic would go here.
         // This involves checking for POST_NOTIFICATIONS permission on Android 13+
         // and using NotificationManager.areNotificationsEnabled()
+    }
+
+    actual suspend fun scheduleBottleNotification(
+        minutesUntilNotification: Int,
+        bottleID: String
+    ) {
+    }
+
+    actual fun removeExistingNotifications(notificationIdentifier: String) {
+    }
+
+    actual fun removeAllNotifications() {
     }
 }

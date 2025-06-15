@@ -17,6 +17,7 @@ import androidx.core.view.WindowCompat
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navDeepLink
 import com.russhwolf.settings.Settings
 import com.teksta.projectparent.home.HomeScreen
 import com.teksta.projectparent.HomeViewModel
@@ -159,7 +160,7 @@ fun AppNavigation(
                 onNavigateToCharts = { navController.navigate(AppRoutes.CHARTS) }
             )
         }
-        composable(AppRoutes.BOTTLES) {
+        composable(AppRoutes.BOTTLES, deepLinks = listOf(navDeepLink { uriPattern = AppRoutes.BOTTLES_DEEPLINK })) {
             BottlesScreen(
                 viewModel = bottlesViewModel,
                 onNavigateToBottleList = { navController.navigate(AppRoutes.BOTTLE_LIST) }

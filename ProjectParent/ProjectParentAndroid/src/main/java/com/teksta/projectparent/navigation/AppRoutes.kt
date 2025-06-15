@@ -1,6 +1,8 @@
 package com.teksta.projectparent.navigation
 
 object AppRoutes {
+    private const val URI = "app://com.teksta.projectparent"
+
     // Onboarding Flow
     const val ONBOARDING_INITIAL = "onboarding_initial"
     const val ONBOARDING_BABY_PROFILE = "onboarding_baby_profile"
@@ -10,6 +12,7 @@ object AppRoutes {
     const val HOME = "home"
     const val PROFILE = "profile"
     const val BOTTLES = "bottles"
+    const val BOTTLES_DEEPLINK = "$URI/$BOTTLES" // <<< ADD THIS
     const val CHARTS = "charts"
     const val SETTINGS = "settings"
     const val BOTTLE_LIST = "bottle_list"
