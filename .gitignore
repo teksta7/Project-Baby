@@ -1,0 +1,31 @@
+# Ignore Gradle build output
+.gradle/
+build/
+composeApp/build/
+
+# Ignore Xcode build output
+DerivedData/
+*.xcworkspace/
+*.xcuserstate
+*.xcuserdata/
+*.xcodeproj/project.xcworkspace/
+*.xcodeproj/xcuserdata/
+
+# Ignore macOS system files
+.DS_Store
+
+# Ignore local properties
+local.properties
+
+# Ignore other IDE/project files
+.idea/
+.vscode/
+
+# Ignore iOS build output
+iosApp/build/
+iOS_V1/Project Parent/Project Parent.xcodeproj/xcuserdata/
+iOS_V1/Project Parent/Project Parent.xcodeproj/project.xcworkspace/
+iOS_V1/Project Parent/Project Parent.xcworkspace/
+
+# Ignore Kotlin build output
+.kotlin/ 
