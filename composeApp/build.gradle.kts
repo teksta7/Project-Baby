@@ -7,33 +7,46 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
+    id("com.squareup.sqldelight") version "1.5.5"
+    //id("org.jetbrains.compose.resources") version "1.6.10"
 }
 
 kotlin {
-    androidTarget {
-        @OptIn(ExperimentalKotlinGradlePluginApi::class)
-        compilerOptions {
-            jvmTarget.set(JvmTarget.JVM_11)
-        }
-    }
-    
-    listOf(
-        iosX64(),
-        iosArm64(),
-        iosSimulatorArm64()
-    ).forEach { iosTarget ->
-        iosTarget.binaries.framework {
-            baseName = "ComposeApp"
-            isStatic = true
-        }
-    }
-    
+    android()
+    iosX64()
+    iosArm64()
+    iosSimulatorArm64()
+
     sourceSets {
-        
-        androidMain.dependencies {
-            implementation(compose.preview)
-            implementation(libs.androidx.activity.compose)
+        val commonMain by getting
+        val commonTest by getting
+
+        val iosX64Main by getting
+        val iosArm64Main by getting
+        val iosSimulatorArm64Main by getting
+
+        // Create iosMain and set it as the parent of all iOS targets
+        val iosMain by creating {
+            dependsOn(commonMain)
         }
+        iosX64Main.dependsOn(iosMain)
+        iosArm64Main.dependsOn(iosMain)
+        iosSimulatorArm64Main.dependsOn(iosMain)
+
+        val androidMain by getting {
+            dependencies {
+                implementation(compose.preview)
+                implementation(libs.androidx.activity.compose)
+                implementation("com.squareup.sqldelight:android-driver:1.5.5")
+                implementation("com.google.android.material:material:1.12.0") // Or the latest version
+            }
+        }
+        iosMain.dependencies {
+            implementation("com.squareup.sqldelight:native-driver:1.5.5")
+        }
+//        commonMain {
+//            resources.srcDir("src/commonMain/composeResources")
+//        }
         commonMain.dependencies {
             implementation(compose.runtime)
             implementation(compose.foundation)
@@ -43,6 +56,11 @@ kotlin {
             implementation(compose.components.uiToolingPreview)
             implementation(libs.androidx.lifecycle.viewmodel)
             implementation(libs.androidx.lifecycle.runtimeCompose)
+            implementation("com.squareup.sqldelight:runtime:1.5.5")
+            implementation("com.russhwolf:multiplatform-settings-no-arg:1.3.0")
+            implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.5.0")
+            implementation("org.jetbrains.compose.material:material-icons-extended:1.6.10")
+            
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
@@ -79,5 +97,18 @@ android {
 
 dependencies {
     debugImplementation(compose.uiTooling)
+}
+
+sqldelight {
+    database("AppDatabase") {
+        packageName = "com.teksta.projectparent.db"
+    }
+}
+
+repositories {
+    mavenCentral()
+    google()
+    gradlePluginPortal()
+    maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
 }
 

@@ -1,0 +1,18 @@
+CREATE TABLE BottleFeed (
+    id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    amount REAL NOT NULL,
+    timestamp INTEGER NOT NULL,
+    note TEXT
+);
+
+selectAll:
+SELECT * FROM BottleFeed ORDER BY timestamp DESC;
+
+insertFeed:
+INSERT INTO BottleFeed(amount, timestamp, note) VALUES (?, ?, ?);
+
+updateFeed:
+UPDATE BottleFeed SET amount = ?, timestamp = ?, note = ? WHERE id = ?;
+
+deleteFeed:
+DELETE FROM BottleFeed WHERE id = ?; 
