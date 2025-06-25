@@ -30,6 +30,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.text.style.TextAlign
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -41,16 +42,18 @@ fun InitialOnboardingScreen(
     onShowCardSelection: () -> Unit,
     onFinish: () -> Unit
 ) {
-    var babyCardColor by remember { mutableStateOf(Color.Yellow) }
-    var cardsCardColor by remember { mutableStateOf(Color.Yellow) }
+    val cardBackground = Color(0xFFFFC107) // Material Amber 500 for better readability
+
+    var babyCardColor by remember { mutableStateOf(cardBackground) }
+    var cardsCardColor by remember { mutableStateOf(cardBackground) }
     var finishColor by remember { mutableStateOf(Color.Red) }
     var showWarning by remember { mutableStateOf(false) }
     var showSuccess by remember { mutableStateOf(false) }
 
     LaunchedEffect(isBabyProfileComplete, isCardSelectionComplete) {
-        babyCardColor = if (isBabyProfileComplete) Color.Green else Color.Yellow
-        cardsCardColor = if (isCardSelectionComplete) Color.Green else Color.Yellow
-        finishColor = if (isBabyProfileComplete && isCardSelectionComplete) Color.Green else Color.Yellow
+        babyCardColor = if (isBabyProfileComplete) Color(0xFF4CAF50) else cardBackground
+        cardsCardColor = if (isCardSelectionComplete) Color(0xFF4CAF50) else cardBackground
+        finishColor = if (isBabyProfileComplete && isCardSelectionComplete) Color(0xFF4CAF50) else Color.Red
     }
 
     if (showWelcomeOnboarding) {
@@ -65,10 +68,16 @@ fun InitialOnboardingScreen(
                 Image(
                     painter = appLogoPainter(),
                     contentDescription = "App Logo",
-                    modifier = Modifier.size(160.dp).padding(bottom = 24.dp)
+                    modifier = Modifier.size(240.dp).padding(bottom = 24.dp)
                 )
-                Text("Welcome to Project Parent", fontSize = 28.sp, fontWeight = FontWeight.Bold, color = Color.White, modifier = Modifier.padding(bottom = 8.dp))
-                Text("Let's get started by completing the sections below to setup the app...", fontSize = 18.sp, color = Color.White, modifier = Modifier.padding(bottom = 32.dp))
+                Text(
+                    "Welcome to Project Parent", fontSize = 28.sp, fontWeight = FontWeight.Bold, color = Color.White, modifier = Modifier.padding(bottom = 8.dp),
+                    textAlign = TextAlign.Center
+                )
+                Text(
+                    "Let's get started by completing the sections below to setup the app...", fontSize = 18.sp, color = Color.White, modifier = Modifier.padding(bottom = 32.dp),
+                    textAlign = TextAlign.Center
+                )
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceEvenly
