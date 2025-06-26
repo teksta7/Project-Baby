@@ -8,14 +8,33 @@ plugins {
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
     id("com.squareup.sqldelight") version "1.5.5"
+    kotlin("native.cocoapods")
     //id("org.jetbrains.compose.resources") version "1.6.10"
 }
 
 kotlin {
-    android()
+    android {
+        compilations.all {
+            kotlinOptions {
+                jvmTarget = "11"
+            }
+        }
+    }
     iosX64()
     iosArm64()
     iosSimulatorArm64()
+    
+    // Configure framework for iOS targets
+    listOf(
+        iosX64(),
+        iosArm64(),
+        iosSimulatorArm64()
+    ).forEach {
+        it.binaries.framework {
+            baseName = "ComposeApp"
+            isStatic = true
+        }
+    }
 
     sourceSets {
         val commonMain by getting
@@ -29,6 +48,8 @@ kotlin {
         val iosMain by creating {
             dependsOn(commonMain)
         }
+        
+        // Explicitly set iOS dependencies since default template is disabled
         iosX64Main.dependsOn(iosMain)
         iosArm64Main.dependsOn(iosMain)
         iosSimulatorArm64Main.dependsOn(iosMain)
@@ -64,6 +85,19 @@ kotlin {
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
+        }
+    }
+    
+    cocoapods {
+        summary = "Some description for the Shared Module"
+        homepage = "Link to the Shared Module homepage"
+        ios.deploymentTarget = "17.0"
+        podfile = project.file("../iosApp/Podfile")
+        //version = "1"
+        
+        framework {
+            baseName = "ComposeApp"
+            isStatic = true
         }
     }
 }
@@ -104,6 +138,7 @@ sqldelight {
         packageName = "com.teksta.projectparent.db"
     }
 }
+
 
 repositories {
     mavenCentral()

@@ -12,6 +12,8 @@ import kotlinx.datetime.Clock
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
 import kotlinx.datetime.Instant
+import kotlin.math.pow
+import kotlin.math.round
 
 class BottleFeedViewModel(private val repository: BottleFeedRepository) {
     var feeds by mutableStateOf<List<BottleFeedUiModel>>(emptyList())
@@ -94,5 +96,10 @@ private fun String.toLocalDateOrNull(): kotlinx.datetime.LocalDate? =
         kotlinx.datetime.LocalDateTime.parse(this).date
     }.getOrNull()
 
-private fun Double.toStringAsFixed(digits: Int): String =
-    String.format("%.${'$'}df", this) 
+private fun Double.toStringAsFixed(digits: Int): String {
+    val factor = 10.0.pow(digits)
+    val rounded = round(this * factor) / factor
+    val parts = rounded.toString().split('.')
+    val decimals = if (parts.size > 1) parts[1].padEnd(digits, '0').take(digits) else "0".repeat(digits)
+    return "${parts[0]}.$decimals"
+} 
