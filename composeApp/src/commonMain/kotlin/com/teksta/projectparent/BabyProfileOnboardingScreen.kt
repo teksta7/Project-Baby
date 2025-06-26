@@ -10,11 +10,17 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.graphics.Color
+import androidx.compose.foundation.clickable
+import androidx.compose.material3.Text
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.statusBars
+import androidx.compose.foundation.layout.windowInsetsPadding
 //import androidx.compose.ui.text.style.LocalTextStyle
 
 @Composable
 fun BabyProfileOnboardingScreen(
-    onComplete: (name: String, gender: String, birthDate: String, weight: String) -> Unit
+    onComplete: (name: String, gender: String, birthDate: String, weight: String) -> Unit,
+    onBack: () -> Unit
 ) {
     var name by remember { mutableStateOf("") }
     var gender by remember { mutableStateOf("Boy") }
@@ -22,59 +28,80 @@ fun BabyProfileOnboardingScreen(
     var weight by remember { mutableStateOf("") }
     var showError by remember { mutableStateOf(false) }
 
-    Box(
-        modifier = Modifier.fillMaxSize().background(Color.Black),
-        contentAlignment = Alignment.Center
-    ) {
-        Column(
-            modifier = Modifier.fillMaxWidth().padding(16.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
+    Column(modifier = Modifier.fillMaxSize()) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .windowInsetsPadding(WindowInsets.statusBars)
+                .padding(top = 16.dp, start = 8.dp),
+            verticalAlignment = Alignment.CenterVertically
         ) {
-            Text("Create a Baby Profile", fontSize = 24.sp, color = Color.White, modifier = Modifier.padding(bottom = 8.dp))
-            OutlinedTextField(
-                value = name,
-                onValueChange = { name = it },
-                label = { Text("Baby's Name", color = Color.White) },
-                modifier = Modifier.fillMaxWidth().padding(bottom = 8.dp)
+            Text(
+                "< Back",
+                color = Color.White,
+                fontSize = 18.sp,
+                modifier = Modifier
+                    .clickable { onBack() }
+                    .padding(8.dp)
             )
-            Row(
-                modifier = Modifier.fillMaxWidth().padding(bottom = 8.dp),
-                verticalAlignment = Alignment.CenterVertically
+        }
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .weight(1f)
+                .background(Color.Black),
+            contentAlignment = Alignment.Center
+        ) {
+            Column(
+                modifier = Modifier.fillMaxWidth().padding(16.dp),
+                horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Text("Gender:", color = Color.White, modifier = Modifier.padding(end = 8.dp))
-                DropdownMenuBox(selected = gender, options = listOf("Boy", "Girl")) { gender = it }
-            }
-            OutlinedTextField(
-                value = birthDate,
-                onValueChange = { birthDate = it },
-                label = { Text("Birth Date (YYYY-MM-DD)", color = Color.White) },
-                modifier = Modifier.fillMaxWidth().padding(bottom = 8.dp)
-            )
-            OutlinedTextField(
-                value = weight,
-                onValueChange = { weight = it },
-                label = { Text("Birth Weight (lbs oz)", color = Color.White) },
-                modifier = Modifier.fillMaxWidth().padding(bottom = 8.dp)
-            )
-            // Placeholder for profile picture picker
-            Text("Profile picture picker coming soon...", color = Color.White, modifier = Modifier.padding(bottom = 16.dp))
-            Button(
-                onClick = {
-                    if (name.isNotBlank() && birthDate.isNotBlank() && weight.isNotBlank()) {
-                        onComplete(name, gender, birthDate, weight)
-                    } else {
-                        showError = true
+                Text("Create a Baby Profile", fontSize = 24.sp, color = Color.White, modifier = Modifier.padding(bottom = 8.dp))
+                OutlinedTextField(
+                    value = name,
+                    onValueChange = { name = it },
+                    label = { Text("Baby's Name", color = Color.White) },
+                    modifier = Modifier.fillMaxWidth().padding(bottom = 8.dp)
+                )
+                Row(
+                    modifier = Modifier.fillMaxWidth().padding(bottom = 8.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Text("Gender:", color = Color.White, modifier = Modifier.padding(end = 8.dp))
+                    DropdownMenuBox(selected = gender, options = listOf("Boy", "Girl")) { gender = it }
+                }
+                OutlinedTextField(
+                    value = birthDate,
+                    onValueChange = { birthDate = it },
+                    label = { Text("Birth Date (YYYY-MM-DD)", color = Color.White) },
+                    modifier = Modifier.fillMaxWidth().padding(bottom = 8.dp)
+                )
+                OutlinedTextField(
+                    value = weight,
+                    onValueChange = { weight = it },
+                    label = { Text("Birth Weight (lbs oz)", color = Color.White) },
+                    modifier = Modifier.fillMaxWidth().padding(bottom = 8.dp)
+                )
+                // Placeholder for profile picture picker
+                Text("Profile picture picker coming soon...", color = Color.White, modifier = Modifier.padding(bottom = 16.dp))
+                Button(
+                    onClick = {
+                        if (name.isNotBlank() && birthDate.isNotBlank() && weight.isNotBlank()) {
+                            onComplete(name, gender, birthDate, weight)
+                        } else {
+                            showError = true
+                        }
+                    },
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Text("Complete baby profile", color = Color.White)
+                }
+                if (showError) {
+                    Text("Please fill all required fields.", color = MaterialTheme.colorScheme.error, modifier = Modifier.padding(top = 8.dp))
+                    LaunchedEffect(showError) {
+                        kotlinx.coroutines.delay(1500)
+                        showError = false
                     }
-                },
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Text("Complete baby profile", color = Color.White)
-            }
-            if (showError) {
-                Text("Please fill all required fields.", color = MaterialTheme.colorScheme.error, modifier = Modifier.padding(top = 8.dp))
-                LaunchedEffect(showError) {
-                    kotlinx.coroutines.delay(1500)
-                    showError = false
                 }
             }
         }

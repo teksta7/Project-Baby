@@ -25,6 +25,10 @@ import androidx.compose.material3.LocalContentColor
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.graphics.Color
 
+private enum class OnboardingScreen {
+    Initial, BabyProfile, CardSelection
+}
+
 @Composable
 @Preview
 fun App() {
@@ -35,56 +39,60 @@ fun App() {
             Box(
                 modifier = Modifier.fillMaxSize().background(Color.Black)
             ) {
-                var showBabyProfile by remember { mutableStateOf(false) }
-                var showCardSelection by remember { mutableStateOf(false) }
                 var onboardingComplete by remember { mutableStateOf(OnboardingState.isOnboardingComplete) }
                 var babyProfileComplete by remember { mutableStateOf(OnboardingState.isBabyProfileComplete) }
                 var cardSelectionComplete by remember { mutableStateOf(OnboardingState.isCardSelectionComplete) }
-
-                when {
-                    !onboardingComplete -> {
-                        when {
-                            showBabyProfile -> {
-                                BabyProfileOnboardingScreen { name, gender, birthDate, weight ->
-                                    // Save baby profile info as needed
-                                    OnboardingState.isBabyProfileComplete = true
-                                    babyProfileComplete = true
-                                    showBabyProfile = false
-                                }
-                            }
-                            showCardSelection -> {
-                                CardSelectionOnboardingScreen { selection ->
-                                    // Save card selection as needed
-                                    OnboardingState.isCardSelectionComplete = true
-                                    cardSelectionComplete = true
-                                    showCardSelection = false
-                                }
-                            }
-                            else -> {
-                                InitialOnboardingScreen(
-                                    showWelcomeOnboarding = true,
-                                    isBabyProfileComplete = babyProfileComplete,
-                                    isCardSelectionComplete = cardSelectionComplete,
-                                    onShowBabyProfile = { showBabyProfile = true },
-                                    onShowCardSelection = { showCardSelection = true },
-                                    onFinish = {
-                                        if (babyProfileComplete && cardSelectionComplete) {
-                                            OnboardingState.isOnboardingComplete = true
-                                            onboardingComplete = true
-                                        }
-                                    }
-                                )
-                            }
-                        }
+                var currentScreen by remember { mutableStateOf(
+                    when {
+                        !onboardingComplete && OnboardingState.isBabyProfileComplete -> OnboardingScreen.Initial
+                        !onboardingComplete && OnboardingState.isCardSelectionComplete -> OnboardingScreen.Initial
+                        !onboardingComplete -> OnboardingScreen.Initial
+                        else -> null
                     }
-                    else -> {
-                        // Main Home Screen (replace with your actual home screen)
-                        Box(
-                            modifier = Modifier.fillMaxSize(),
-                            contentAlignment = Alignment.Center
-                        ) {
-                            Text("Welcome to the Home Screen! Onboarding is complete.")
-                        }
+                ) }
+
+                if (!onboardingComplete && currentScreen != null) {
+                    when (currentScreen) {
+                        OnboardingScreen.Initial -> InitialOnboardingScreen(
+                            showWelcomeOnboarding = true,
+                            isBabyProfileComplete = babyProfileComplete,
+                            isCardSelectionComplete = cardSelectionComplete,
+                            onShowBabyProfile = { currentScreen = OnboardingScreen.BabyProfile },
+                            onShowCardSelection = { currentScreen = OnboardingScreen.CardSelection },
+                            onFinish = {
+                                if (babyProfileComplete && cardSelectionComplete) {
+                                    OnboardingState.isOnboardingComplete = true
+                                    onboardingComplete = true
+                                }
+                            }
+                        )
+                        OnboardingScreen.BabyProfile -> BabyProfileOnboardingScreen(
+                            onComplete = { name, gender, birthDate, weight ->
+                                // Save baby profile info as needed
+                                OnboardingState.isBabyProfileComplete = true
+                                babyProfileComplete = true
+                                currentScreen = OnboardingScreen.Initial
+                            },
+                            onBack = { currentScreen = OnboardingScreen.Initial }
+                        )
+                        OnboardingScreen.CardSelection -> CardSelectionOnboardingScreen(
+                            onComplete = { selection ->
+                                // Save card selection as needed
+                                OnboardingState.isCardSelectionComplete = true
+                                cardSelectionComplete = true
+                                currentScreen = OnboardingScreen.Initial
+                            },
+                            onBack = { currentScreen = OnboardingScreen.Initial }
+                        )
+                        else -> null
+                    }
+                } else if (onboardingComplete) {
+                    // Main Home Screen (replace with your actual home screen)
+                    Box(
+                        modifier = Modifier.fillMaxSize(),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Text("Welcome to the Home Screen! Onboarding is complete.")
                     }
                 }
             }

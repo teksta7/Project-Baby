@@ -9,11 +9,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.graphics.Color
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.statusBars
+import androidx.compose.foundation.layout.windowInsetsPadding
 
 @Composable
 fun CardSelectionOnboardingScreen(
     initialSelection: CardSelectionState = CardSelectionState(),
-    onComplete: (CardSelectionState) -> Unit
+    onComplete: (CardSelectionState) -> Unit,
+    onBack: () -> Unit
 ) {
     var bottles by remember { mutableStateOf(initialSelection.bottles) }
     var sleep by remember { mutableStateOf(initialSelection.sleep) }
@@ -22,25 +27,46 @@ fun CardSelectionOnboardingScreen(
     var wind by remember { mutableStateOf(initialSelection.wind) }
     var poo by remember { mutableStateOf(initialSelection.poo) }
 
-    Box(
-        modifier = Modifier.fillMaxSize().background(Color.Black),
-        contentAlignment = Alignment.Center
-    ) {
-        Column(
-            modifier = Modifier.fillMaxWidth().padding(16.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
+    Column(modifier = Modifier.fillMaxSize()) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .windowInsetsPadding(WindowInsets.statusBars)
+                .padding(top = 16.dp, start = 8.dp),
+            verticalAlignment = Alignment.CenterVertically
         ) {
-            Text("Card Selection", fontSize = 24.sp, color = Color.White, modifier = Modifier.padding(bottom = 8.dp))
-            Text("Select which baby stat cards to enable.", fontSize = 16.sp, color = Color.White, modifier = Modifier.padding(bottom = 16.dp))
-            ToggleRow("Bottles", bottles) { bottles = it }
-            ToggleRow("Sleep", sleep) { sleep = it }
-            ToggleRow("Food", food) { food = it }
-            ToggleRow("Meds", meds) { meds = it }
-            ToggleRow("Wind", wind) { wind = it }
-            ToggleRow("Poo", poo) { poo = it }
-            Spacer(modifier = Modifier.height(24.dp))
-            Button(onClick = { onComplete(CardSelectionState(bottles, sleep, food, meds, wind, poo)) }, modifier = Modifier.fillMaxWidth()) {
-                Text("Complete card selection", color = Color.White)
+            Text(
+                "< Back",
+                color = Color.White,
+                fontSize = 18.sp,
+                modifier = Modifier
+                    .clickable { onBack() }
+                    .padding(8.dp)
+            )
+        }
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .weight(1f)
+                .background(Color.Black),
+            contentAlignment = Alignment.Center
+        ) {
+            Column(
+                modifier = Modifier.fillMaxWidth().padding(16.dp),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Text("Card Selection", fontSize = 24.sp, color = Color.White, modifier = Modifier.padding(bottom = 8.dp))
+                Text("Select which baby stat cards to enable.", fontSize = 16.sp, color = Color.White, modifier = Modifier.padding(bottom = 16.dp))
+                ToggleRow("Bottles", bottles) { bottles = it }
+                ToggleRow("Sleep", sleep) { sleep = it }
+                ToggleRow("Food", food) { food = it }
+                ToggleRow("Meds", meds) { meds = it }
+                ToggleRow("Wind", wind) { wind = it }
+                ToggleRow("Poo", poo) { poo = it }
+                Spacer(modifier = Modifier.height(24.dp))
+                Button(onClick = { onComplete(CardSelectionState(bottles, sleep, food, meds, wind, poo)) }, modifier = Modifier.fillMaxWidth()) {
+                    Text("Complete card selection", color = Color.White)
+                }
             }
         }
     }
