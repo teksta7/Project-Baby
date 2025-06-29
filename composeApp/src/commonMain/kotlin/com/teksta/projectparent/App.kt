@@ -1,6 +1,7 @@
 package com.teksta.projectparent
 
-import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.*
+import androidx.compose.animation.core.*
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -29,6 +30,7 @@ private enum class OnboardingScreen {
     Initial, BabyProfile, CardSelection
 }
 
+@OptIn(ExperimentalAnimationApi::class)
 @Composable
 @Preview
 fun App() {
@@ -52,47 +54,78 @@ fun App() {
                 ) }
 
                 if (!onboardingComplete && currentScreen != null) {
-                    when (currentScreen) {
-                        OnboardingScreen.Initial -> InitialOnboardingScreen(
-                            showWelcomeOnboarding = true,
-                            isBabyProfileComplete = babyProfileComplete,
-                            isCardSelectionComplete = cardSelectionComplete,
-                            onShowBabyProfile = { currentScreen = OnboardingScreen.BabyProfile },
-                            onShowCardSelection = { currentScreen = OnboardingScreen.CardSelection },
-                            onFinish = {
-                                if (babyProfileComplete && cardSelectionComplete) {
-                                    OnboardingState.isOnboardingComplete = true
-                                    onboardingComplete = true
+                    AnimatedContent(
+                        targetState = currentScreen,
+                        transitionSpec = {
+                            // Slide animation from right to left when entering, left to right when exiting
+                            slideInHorizontally(
+                                animationSpec = tween(300, easing = EaseInOutCubic),
+                                initialOffsetX = { fullWidth -> fullWidth }
+                            ) + fadeIn(
+                                animationSpec = tween(300)
+                            ) with slideOutHorizontally(
+                                animationSpec = tween(300, easing = EaseInOutCubic),
+                                targetOffsetX = { fullWidth -> -fullWidth }
+                            ) + fadeOut(
+                                animationSpec = tween(300)
+                            )
+                        }
+                    ) { screen ->
+                        when (screen) {
+                            OnboardingScreen.Initial -> InitialOnboardingScreen(
+                                showWelcomeOnboarding = true,
+                                isBabyProfileComplete = babyProfileComplete,
+                                isCardSelectionComplete = cardSelectionComplete,
+                                onShowBabyProfile = { currentScreen = OnboardingScreen.BabyProfile },
+                                onShowCardSelection = { currentScreen = OnboardingScreen.CardSelection },
+                                onFinish = {
+                                    if (babyProfileComplete && cardSelectionComplete) {
+                                        OnboardingState.isOnboardingComplete = true
+                                        onboardingComplete = true
+                                    }
                                 }
-                            }
-                        )
-                        OnboardingScreen.BabyProfile -> BabyProfileOnboardingScreen(
-                            onComplete = { name, gender, birthDate, weight, profileImageUri ->
-                                // Save baby profile info as needed
-                                OnboardingState.isBabyProfileComplete = true
-                                babyProfileComplete = true
-                                currentScreen = OnboardingScreen.Initial
-                            },
-                            onBack = { currentScreen = OnboardingScreen.Initial }
-                        )
-                        OnboardingScreen.CardSelection -> CardSelectionOnboardingScreen(
-                            onComplete = { selection ->
-                                // Save card selection as needed
-                                OnboardingState.isCardSelectionComplete = true
-                                cardSelectionComplete = true
-                                currentScreen = OnboardingScreen.Initial
-                            },
-                            onBack = { currentScreen = OnboardingScreen.Initial }
-                        )
-                        else -> null
+                            )
+                            OnboardingScreen.BabyProfile -> BabyProfileOnboardingScreen(
+                                onComplete = { name, gender, birthDate, weight, profileImageUri ->
+                                    // Save baby profile info as needed
+                                    OnboardingState.isBabyProfileComplete = true
+                                    babyProfileComplete = true
+                                    currentScreen = OnboardingScreen.Initial
+                                },
+                                onBack = { currentScreen = OnboardingScreen.Initial }
+                            )
+                            OnboardingScreen.CardSelection -> CardSelectionOnboardingScreen(
+                                onComplete = { selection ->
+                                    // Save card selection as needed
+                                    OnboardingState.isCardSelectionComplete = true
+                                    cardSelectionComplete = true
+                                    currentScreen = OnboardingScreen.Initial
+                                },
+                                onBack = { currentScreen = OnboardingScreen.Initial }
+                            )
+                            else -> null
+                        }
                     }
                 } else if (onboardingComplete) {
                     // Main Home Screen (replace with your actual home screen)
-                    Box(
-                        modifier = Modifier.fillMaxSize(),
-                        contentAlignment = Alignment.Center
+                    AnimatedVisibility(
+                        visible = true,
+                        enter = fadeIn(
+                            animationSpec = tween(500, easing = EaseInOutCubic)
+                        ) + slideInVertically(
+                            animationSpec = tween(500, easing = EaseInOutCubic),
+                            initialOffsetY = { fullHeight -> fullHeight / 4 }
+                        ),
+                        exit = fadeOut(
+                            animationSpec = tween(300)
+                        )
                     ) {
-                        Text("Welcome to the Home Screen! Onboarding is complete.")
+                        Box(
+                            modifier = Modifier.fillMaxSize(),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Text("Welcome to the Home Screen! Onboarding is complete.")
+                        }
                     }
                 }
             }
