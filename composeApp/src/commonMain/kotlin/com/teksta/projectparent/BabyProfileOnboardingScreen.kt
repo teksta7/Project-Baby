@@ -18,6 +18,7 @@ import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.ui.draw.scale
+import androidx.activity.compose.BackHandler
 import kotlinx.datetime.LocalDateTime
 import com.teksta.projectparent.DatePickerField
 import kotlinx.coroutines.delay
@@ -43,6 +44,11 @@ fun BabyProfileOnboardingScreen(
     onComplete: (name: String, gender: String, birthDate: String, weight: String, profileImageUri: String?) -> Unit,
     onBack: () -> Unit
 ) {
+    // Back gesture handler
+    BackHandler {
+        onBack()
+    }
+    
     var name by remember { mutableStateOf("") }
     var gender by remember { mutableStateOf("Boy") }
     var birthDate by remember { mutableStateOf("") }

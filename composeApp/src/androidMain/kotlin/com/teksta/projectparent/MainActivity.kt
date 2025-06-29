@@ -12,6 +12,9 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         super.onCreate(savedInstanceState)
 
+        // Initialize onboarding prefs for persistence
+        OnboardingState.init(OnboardingPrefs(this))
+
         setContent {
             App()
         }

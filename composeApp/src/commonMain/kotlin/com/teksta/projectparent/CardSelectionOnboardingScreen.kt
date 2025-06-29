@@ -16,6 +16,7 @@ import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.ui.draw.scale
+import androidx.activity.compose.BackHandler
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.CoroutineScope
@@ -28,6 +29,11 @@ fun CardSelectionOnboardingScreen(
     onComplete: (CardSelectionState) -> Unit,
     onBack: () -> Unit
 ) {
+    // Back gesture handler
+    BackHandler {
+        onBack()
+    }
+    
     var bottles by remember { mutableStateOf(initialSelection.bottles) }
     var sleep by remember { mutableStateOf(initialSelection.sleep) }
     var food by remember { mutableStateOf(initialSelection.food) }

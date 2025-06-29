@@ -18,6 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
+import androidx.activity.compose.BackHandler
 
 import projectparent.composeapp.generated.resources.Res
 import projectparent.composeapp.generated.resources.compose_multiplatform
@@ -58,6 +59,13 @@ fun App() {
                 var currentAppScreen by remember { mutableStateOf(
                     if (onboardingComplete) AppScreen.Home else AppScreen.Onboarding
                 ) }
+
+                // Handle system back/gesture: return to Home if not on Home
+                if (onboardingComplete && currentAppScreen != AppScreen.Home) {
+                    BackHandler {
+                        currentAppScreen = AppScreen.Home
+                    }
+                }
 
                 if (!onboardingComplete && currentOnboardingScreen != null) {
                     AnimatedContent(
