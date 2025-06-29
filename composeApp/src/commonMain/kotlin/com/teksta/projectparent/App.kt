@@ -30,7 +30,10 @@ private enum class OnboardingScreen {
     Initial, BabyProfile, CardSelection
 }
 
-@OptIn(ExperimentalAnimationApi::class)
+private enum class AppScreen {
+    Onboarding, Home, Profile, Bottles, Sleep, Food, Meds, Wind, Poo, Settings, Test, Charts
+}
+
 @Composable
 @Preview
 fun App() {
@@ -44,7 +47,7 @@ fun App() {
                 var onboardingComplete by remember { mutableStateOf(OnboardingState.isOnboardingComplete) }
                 var babyProfileComplete by remember { mutableStateOf(OnboardingState.isBabyProfileComplete) }
                 var cardSelectionComplete by remember { mutableStateOf(OnboardingState.isCardSelectionComplete) }
-                var currentScreen by remember { mutableStateOf(
+                var currentOnboardingScreen by remember { mutableStateOf(
                     when {
                         !onboardingComplete && OnboardingState.isBabyProfileComplete -> OnboardingScreen.Initial
                         !onboardingComplete && OnboardingState.isCardSelectionComplete -> OnboardingScreen.Initial
@@ -52,10 +55,13 @@ fun App() {
                         else -> null
                     }
                 ) }
+                var currentAppScreen by remember { mutableStateOf(
+                    if (onboardingComplete) AppScreen.Home else AppScreen.Onboarding
+                ) }
 
-                if (!onboardingComplete && currentScreen != null) {
+                if (!onboardingComplete && currentOnboardingScreen != null) {
                     AnimatedContent(
-                        targetState = currentScreen,
+                        targetState = currentOnboardingScreen,
                         transitionSpec = {
                             // Slide animation from right to left when entering, left to right when exiting
                             slideInHorizontally(
@@ -63,7 +69,7 @@ fun App() {
                                 initialOffsetX = { fullWidth -> fullWidth }
                             ) + fadeIn(
                                 animationSpec = tween(300)
-                            ) with slideOutHorizontally(
+                            ) togetherWith slideOutHorizontally(
                                 animationSpec = tween(300, easing = EaseInOutCubic),
                                 targetOffsetX = { fullWidth -> -fullWidth }
                             ) + fadeOut(
@@ -76,12 +82,13 @@ fun App() {
                                 showWelcomeOnboarding = true,
                                 isBabyProfileComplete = babyProfileComplete,
                                 isCardSelectionComplete = cardSelectionComplete,
-                                onShowBabyProfile = { currentScreen = OnboardingScreen.BabyProfile },
-                                onShowCardSelection = { currentScreen = OnboardingScreen.CardSelection },
+                                onShowBabyProfile = { currentOnboardingScreen = OnboardingScreen.BabyProfile },
+                                onShowCardSelection = { currentOnboardingScreen = OnboardingScreen.CardSelection },
                                 onFinish = {
                                     if (babyProfileComplete && cardSelectionComplete) {
                                         OnboardingState.isOnboardingComplete = true
                                         onboardingComplete = true
+                                        currentAppScreen = AppScreen.Home
                                     }
                                 }
                             )
@@ -90,44 +97,263 @@ fun App() {
                                     // Save baby profile info as needed
                                     OnboardingState.isBabyProfileComplete = true
                                     babyProfileComplete = true
-                                    currentScreen = OnboardingScreen.Initial
+                                    currentOnboardingScreen = OnboardingScreen.Initial
                                 },
-                                onBack = { currentScreen = OnboardingScreen.Initial }
+                                onBack = { currentOnboardingScreen = OnboardingScreen.Initial }
                             )
                             OnboardingScreen.CardSelection -> CardSelectionOnboardingScreen(
                                 onComplete = { selection ->
                                     // Save card selection as needed
                                     OnboardingState.isCardSelectionComplete = true
                                     cardSelectionComplete = true
-                                    currentScreen = OnboardingScreen.Initial
+                                    currentOnboardingScreen = OnboardingScreen.Initial
                                 },
-                                onBack = { currentScreen = OnboardingScreen.Initial }
+                                onBack = { currentOnboardingScreen = OnboardingScreen.Initial }
                             )
                             else -> null
                         }
                     }
                 } else if (onboardingComplete) {
-                    // Main Home Screen (replace with your actual home screen)
-                    AnimatedVisibility(
-                        visible = true,
-                        enter = fadeIn(
-                            animationSpec = tween(500, easing = EaseInOutCubic)
-                        ) + slideInVertically(
-                            animationSpec = tween(500, easing = EaseInOutCubic),
-                            initialOffsetY = { fullHeight -> fullHeight / 4 }
-                        ),
-                        exit = fadeOut(
-                            animationSpec = tween(300)
-                        )
-                    ) {
-                        Box(
-                            modifier = Modifier.fillMaxSize(),
-                            contentAlignment = Alignment.Center
-                        ) {
-                            Text("Welcome to the Home Screen! Onboarding is complete.")
+                    // Main App Navigation
+                    AnimatedContent(
+                        targetState = currentAppScreen,
+                        transitionSpec = {
+                            slideInHorizontally(
+                                animationSpec = tween(300, easing = EaseInOutCubic),
+                                initialOffsetX = { fullWidth -> fullWidth }
+                            ) + fadeIn(
+                                animationSpec = tween(300)
+                            ) togetherWith slideOutHorizontally(
+                                animationSpec = tween(300, easing = EaseInOutCubic),
+                                targetOffsetX = { fullWidth -> -fullWidth }
+                            ) + fadeOut(
+                                animationSpec = tween(300)
+                            )
+                        }
+                    ) { screen ->
+                        when (screen) {
+                            AppScreen.Home -> HomeView(
+                                onNavigateToSection = { section ->
+                                    currentAppScreen = when (section) {
+                                        "PROFILE" -> AppScreen.Profile
+                                        "BOTTLES" -> AppScreen.Bottles
+                                        "SLEEP" -> AppScreen.Sleep
+                                        "FOOD" -> AppScreen.Food
+                                        "MEDS" -> AppScreen.Meds
+                                        "WIND" -> AppScreen.Wind
+                                        "POO" -> AppScreen.Poo
+                                        "SETTINGS" -> AppScreen.Settings
+                                        "TEST" -> AppScreen.Test
+                                        else -> AppScreen.Home
+                                    }
+                                },
+                                onShowCharts = {
+                                    currentAppScreen = AppScreen.Charts
+                                }
+                            )
+                            AppScreen.Profile -> ProfileScreen(
+                                onBack = { currentAppScreen = AppScreen.Home }
+                            )
+                            AppScreen.Bottles -> BottlesScreen(
+                                onBack = { currentAppScreen = AppScreen.Home }
+                            )
+                            AppScreen.Sleep -> SleepScreen(
+                                onBack = { currentAppScreen = AppScreen.Home }
+                            )
+                            AppScreen.Food -> FoodScreen(
+                                onBack = { currentAppScreen = AppScreen.Home }
+                            )
+                            AppScreen.Meds -> MedsScreen(
+                                onBack = { currentAppScreen = AppScreen.Home }
+                            )
+                            AppScreen.Wind -> WindScreen(
+                                onBack = { currentAppScreen = AppScreen.Home }
+                            )
+                            AppScreen.Poo -> PooScreen(
+                                onBack = { currentAppScreen = AppScreen.Home }
+                            )
+                            AppScreen.Settings -> SettingsScreen(
+                                onBack = { currentAppScreen = AppScreen.Home }
+                            )
+                            AppScreen.Test -> TestScreen(
+                                onBack = { currentAppScreen = AppScreen.Home }
+                            )
+                            AppScreen.Charts -> ChartsScreen(
+                                onBack = { currentAppScreen = AppScreen.Home }
+                            )
+                            else -> HomeView(
+                                onNavigateToSection = { section ->
+                                    currentAppScreen = when (section) {
+                                        "PROFILE" -> AppScreen.Profile
+                                        "BOTTLES" -> AppScreen.Bottles
+                                        "SLEEP" -> AppScreen.Sleep
+                                        "FOOD" -> AppScreen.Food
+                                        "MEDS" -> AppScreen.Meds
+                                        "WIND" -> AppScreen.Wind
+                                        "POO" -> AppScreen.Poo
+                                        "SETTINGS" -> AppScreen.Settings
+                                        "TEST" -> AppScreen.Test
+                                        else -> AppScreen.Home
+                                    }
+                                },
+                                onShowCharts = {
+                                    currentAppScreen = AppScreen.Charts
+                                }
+                            )
                         }
                     }
                 }
+            }
+        }
+    }
+}
+
+// Placeholder screen composables - these will be implemented as you continue the migration
+@Composable
+fun ProfileScreen(onBack: () -> Unit) {
+    Box(
+        modifier = Modifier.fillMaxSize(),
+        contentAlignment = Alignment.Center
+    ) {
+        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+            Text("Profile Screen", color = Color.White)
+            Button(onClick = onBack) {
+                Text("Back to Home", color = Color.White)
+            }
+        }
+    }
+}
+
+@Composable
+fun BottlesScreen(onBack: () -> Unit) {
+    Box(
+        modifier = Modifier.fillMaxSize(),
+        contentAlignment = Alignment.Center
+    ) {
+        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+            Text("Bottles Screen", color = Color.White)
+            Button(onClick = onBack) {
+                Text("Back to Home", color = Color.White)
+            }
+        }
+    }
+}
+
+@Composable
+fun SleepScreen(onBack: () -> Unit) {
+    Box(
+        modifier = Modifier.fillMaxSize(),
+        contentAlignment = Alignment.Center
+    ) {
+        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+            Text("Sleep Screen", color = Color.White)
+            Button(onClick = onBack) {
+                Text("Back to Home", color = Color.White)
+            }
+        }
+    }
+}
+
+@Composable
+fun FoodScreen(onBack: () -> Unit) {
+    Box(
+        modifier = Modifier.fillMaxSize(),
+        contentAlignment = Alignment.Center
+    ) {
+        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+            Text("Food Screen", color = Color.White)
+            Button(onClick = onBack) {
+                Text("Back to Home", color = Color.White)
+            }
+        }
+    }
+}
+
+@Composable
+fun MedsScreen(onBack: () -> Unit) {
+    Box(
+        modifier = Modifier.fillMaxSize(),
+        contentAlignment = Alignment.Center
+    ) {
+        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+            Text("Medicine Screen", color = Color.White)
+            Button(onClick = onBack) {
+                Text("Back to Home", color = Color.White)
+            }
+        }
+    }
+}
+
+@Composable
+fun WindScreen(onBack: () -> Unit) {
+    Box(
+        modifier = Modifier.fillMaxSize(),
+        contentAlignment = Alignment.Center
+    ) {
+        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+            Text("Wind Screen", color = Color.White)
+            Button(onClick = onBack) {
+                Text("Back to Home", color = Color.White)
+            }
+        }
+    }
+}
+
+@Composable
+fun PooScreen(onBack: () -> Unit) {
+    Box(
+        modifier = Modifier.fillMaxSize(),
+        contentAlignment = Alignment.Center
+    ) {
+        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+            Text("Nappies Screen", color = Color.White)
+            Button(onClick = onBack) {
+                Text("Back to Home", color = Color.White)
+            }
+        }
+    }
+}
+
+@Composable
+fun SettingsScreen(onBack: () -> Unit) {
+    Box(
+        modifier = Modifier.fillMaxSize(),
+        contentAlignment = Alignment.Center
+    ) {
+        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+            Text("Settings Screen", color = Color.White)
+            Button(onClick = onBack) {
+                Text("Back to Home", color = Color.White)
+            }
+        }
+    }
+}
+
+@Composable
+fun TestScreen(onBack: () -> Unit) {
+    Box(
+        modifier = Modifier.fillMaxSize(),
+        contentAlignment = Alignment.Center
+    ) {
+        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+            Text("Test Screen", color = Color.White)
+            Button(onClick = onBack) {
+                Text("Back to Home", color = Color.White)
+            }
+        }
+    }
+}
+
+@Composable
+fun ChartsScreen(onBack: () -> Unit) {
+    Box(
+        modifier = Modifier.fillMaxSize(),
+        contentAlignment = Alignment.Center
+    ) {
+        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+            Text("Charts Screen", color = Color.White)
+            Button(onClick = onBack) {
+                Text("Back to Home", color = Color.White)
             }
         }
     }
