@@ -67,7 +67,7 @@ fun App() {
                             }
                         )
                         OnboardingScreen.BabyProfile -> BabyProfileOnboardingScreen(
-                            onComplete = { name, gender, birthDate, weight ->
+                            onComplete = { name, gender, birthDate, weight, profileImageUri ->
                                 // Save baby profile info as needed
                                 OnboardingState.isBabyProfileComplete = true
                                 babyProfileComplete = true
