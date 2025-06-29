@@ -106,6 +106,8 @@ android {
     namespace = "com.teksta.projectparent"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
 
+    sourceSets["main"].assets.srcDirs("src/androidMain/assets")
+
     defaultConfig {
         applicationId = "com.teksta.projectparent"
         minSdk = libs.versions.android.minSdk.get().toInt()
