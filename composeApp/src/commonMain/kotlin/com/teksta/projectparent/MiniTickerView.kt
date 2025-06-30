@@ -18,11 +18,13 @@ fun MiniTickerView(bottleFeedViewModel: BottleFeedViewModel? = null) {
     var messageIndex by remember { mutableStateOf(0) }
     var colorIndex by remember { mutableStateOf(0) }
     
-    val messages = remember(bottleFeedViewModel?.analytics) {
+    val analytics = bottleFeedViewModel?.analytics
+    
+    val messages = remember(analytics) {
         listOf(
-            "Next bottle is due: ${bottleFeedViewModel?.analytics?.nextBottleDue ?: "N/A"}",
+            "Next bottle is due: ${analytics?.nextBottleDue ?: "N/A"}",
             "Wake windows today: N/A",
-            "Average time between bottles: ${bottleFeedViewModel?.analytics?.averageTimeBetweenBottles ?: "N/A"}",
+            "Average time between bottles: ${analytics?.averageTimeBetweenBottles ?: "N/A"}",
             "Food eaten today: N/A",
             "Any medicine due: N/A",
             "Amount of wind: N/A",

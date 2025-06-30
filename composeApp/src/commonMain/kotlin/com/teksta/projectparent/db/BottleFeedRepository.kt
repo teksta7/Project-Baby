@@ -47,7 +47,7 @@ class BottleFeedRepository(private val database: AppDatabaseWrapper) {
             end_time = endTime,
             duration = duration,
             ounces = ounces,
-            additional_notes = additionalNotes ?: "None provided"
+            additional_notes = additionalNotes ?: ""
         )
         id
     }
@@ -67,7 +67,7 @@ class BottleFeedRepository(private val database: AppDatabaseWrapper) {
             end_time = endTime,
             duration = duration,
             ounces = ounces,
-            additional_notes = additionalNotes ?: "None provided",
+            additional_notes = additionalNotes ?: "",
             id = id
         )
     }

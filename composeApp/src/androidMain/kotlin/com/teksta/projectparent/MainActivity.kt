@@ -16,7 +16,7 @@ class MainActivity : ComponentActivity() {
         OnboardingState.init(OnboardingPrefs(this))
 
         setContent {
-            App(this)
+            App()
         }
     }
 }

@@ -14,6 +14,9 @@ import kotlinx.datetime.LocalDateTime
 import kotlin.math.pow
 import kotlin.math.round
 
+// Simple logging utility
+expect fun logDebug(tag: String, message: String)
+
 class BottleFeedViewModel(private val repository: BottleFeedRepository) {
     
     // UI State
@@ -52,13 +55,21 @@ class BottleFeedViewModel(private val repository: BottleFeedRepository) {
     private var timerJob: Job? = null
     
     init {
+        logDebug("BottleFeedViewModel", "Initializing BottleFeedViewModel")
         loadFeeds()
         loadAnalytics()
     }
     
     fun loadFeeds() {
         viewModelScope.launch {
+            logDebug("BottleFeedViewModel", "Loading feeds from database")
             val dbFeeds = repository.getAllFeeds()
+            logDebug("BottleFeedViewModel", "Loaded ${dbFeeds.size} feeds from database")
+            
+            dbFeeds.forEach { feed ->
+                logDebug("BottleFeedViewModel", "Feed: ID=${feed.id}, Ounces=${feed.ounces}, Notes='${feed.additional_notes}', Duration=${feed.duration}")
+            }
+            
             feeds = dbFeeds.map { feed ->
                 BottleFeedUiModel(
                     id = feed.id,
@@ -69,6 +80,11 @@ class BottleFeedViewModel(private val repository: BottleFeedRepository) {
                     notes = feed.additional_notes ?: "",
                     date = feed.date
                 )
+            }
+            
+            logDebug("BottleFeedViewModel", "Mapped to ${feeds.size} UI models")
+            feeds.forEach { uiModel ->
+                logDebug("BottleFeedViewModel", "UI Model: ID=${uiModel.id}, Ounces=${uiModel.ounces}, Notes='${uiModel.notes}', Duration=${uiModel.duration}")
             }
         }
     }
@@ -87,11 +103,16 @@ class BottleFeedViewModel(private val repository: BottleFeedRepository) {
                 totalBottles = totalBottles,
                 nextBottleDue = calculateNextBottleDue(averageTimeBetween)
             )
+            
+            logDebug("BottleFeedViewModel", "Analytics updated: bottlesToday=$bottlesToday, totalBottles=$totalBottles")
         }
     }
     
     fun startTimer() {
+        logDebug("BottleFeedViewModel", "startTimer called - ounces: $ounces, isTimerRunning: $isTimerRunning")
+        
         if (ounces <= 0.0) {
+            logDebug("BottleFeedViewModel", "Warning: ounces is $ounces, showing warning alert")
             showWarningAlert = true
             return
         }
@@ -103,6 +124,8 @@ class BottleFeedViewModel(private val repository: BottleFeedRepository) {
             buttonLabel = "Finish Bottle Feed"
             buttonColor = BottleFeedButtonColor.ORANGE
             
+            logDebug("BottleFeedViewModel", "Timer started - startTime: $startTime")
+            
             timerJob = viewModelScope.launch {
                 while (isTimerRunning) {
                     delay(1000)
@@ -113,6 +136,8 @@ class BottleFeedViewModel(private val repository: BottleFeedRepository) {
     }
     
     fun stopTimer() {
+        logDebug("BottleFeedViewModel", "stopTimer called - isTimerRunning: $isTimerRunning")
+        
         if (isTimerRunning) {
             timerJob?.cancel()
             isTimerRunning = false
@@ -120,39 +145,52 @@ class BottleFeedViewModel(private val repository: BottleFeedRepository) {
             val endTime = Clock.System.now().epochSeconds
             val duration = endTime - (startTime ?: endTime)
             
-            addBottleFeed(duration.toDouble(), endTime)
+            // Capture current values before resetting
+            val currentOunces = ounces
+            val currentNotes = notes
             
-            // Reset UI
-            buttonLabel = "Start Bottle Feed"
-            buttonColor = BottleFeedButtonColor.GREEN
-            ounces = 0.0
-            notes = ""
-            bottleDuration = 0
-            startTime = null
+            logDebug("BottleFeedViewModel", "Timer stopped - duration: $duration, ounces: $currentOunces, notes: '$currentNotes'")
+            
+            addBottleFeed(duration.toDouble(), endTime, currentOunces, currentNotes)
         }
     }
     
-    private fun addBottleFeed(duration: Double, endTime: Long) {
+    private fun addBottleFeed(duration: Double, endTime: Long, feedOunces: Double, feedNotes: String) {
         viewModelScope.launch {
             try {
                 val startTimeValue = startTime ?: return@launch
+                logDebug("BottleFeedViewModel", "Saving bottle feed - startTime: $startTimeValue, endTime: $endTime, duration: $duration, ounces: $feedOunces, notes: '$feedNotes'")
+                
                 repository.insertFeed(
                     startTime = startTimeValue,
                     endTime = endTime,
                     duration = duration,
-                    ounces = ounces,
-                    additionalNotes = notes.takeIf { it.isNotBlank() }
+                    ounces = feedOunces,
+                    additionalNotes = feedNotes
                 )
+                
+                logDebug("BottleFeedViewModel", "Bottle feed saved successfully")
                 
                 showSuccessAlert = true
                 loadFeeds()
                 loadAnalytics()
+                
+                // Reset UI after successful save
+                buttonLabel = "Start Bottle Feed"
+                buttonColor = BottleFeedButtonColor.GREEN
+                ounces = 0.0
+                notes = ""
+                bottleDuration = 0
+                startTime = null
+                
+                logDebug("BottleFeedViewModel", "UI reset after successful save")
                 
                 // Auto-hide success alert
                 delay(2000)
                 showSuccessAlert = false
                 
             } catch (e: Exception) {
+                logDebug("BottleFeedViewModel", "Error saving bottle feed: ${e.message}")
                 showErrorAlert = true
                 buttonColor = BottleFeedButtonColor.RED
                 buttonLabel = "Error"
@@ -168,6 +206,7 @@ class BottleFeedViewModel(private val repository: BottleFeedRepository) {
     
     fun deleteFeed(id: String) {
         viewModelScope.launch {
+            logDebug("BottleFeedViewModel", "Deleting feed with ID: $id")
             repository.deleteFeed(id)
             loadFeeds()
             loadAnalytics()

@@ -501,7 +501,7 @@ fun BottleListSheet(
                 .padding(16.dp)
         ) {
             Text(
-                "Bottle History",
+                "Bottle History (${feeds.size} feeds)",
                 fontSize = 20.sp,
                 color = Color.White,
                 modifier = Modifier.padding(bottom = 16.dp)
@@ -543,6 +543,12 @@ fun BottleListSheet(
                                     Text(
                                         "Notes: ${feed.notes}",
                                         color = Color.White.copy(alpha = 0.8f),
+                                        fontSize = 14.sp
+                                    )
+                                } else {
+                                    Text(
+                                        "Notes: (none)",
+                                        color = Color.White.copy(alpha = 0.5f),
                                         fontSize = 14.sp
                                     )
                                 }

@@ -1,17 +1,24 @@
 package com.teksta.projectparent
 
+import android.app.Application
 import android.content.Context
 import androidx.compose.runtime.*
+import androidx.compose.ui.platform.LocalContext
+import com.teksta.projectparent.db.AppDatabase
 import com.teksta.projectparent.db.AppDatabaseWrapper
 import com.teksta.projectparent.db.BottleFeedRepository
+import android.util.Log
 
 @Composable
-fun App(context: Context) {
-    // Initialize database and bottle feed view model
+fun App() {
+    val context = LocalContext.current
     val database = remember { AppDatabaseWrapper(context) }
-    val bottleFeedRepository = remember { BottleFeedRepository(database) }
-    val bottleFeedViewModel = remember { BottleFeedViewModel(bottleFeedRepository) }
+    val repository = remember { BottleFeedRepository(database) }
+    val bottleFeedViewModel = remember { BottleFeedViewModel(repository) }
     
-    // Call the common App composable with the initialized view model
-    App(bottleFeedViewModel = bottleFeedViewModel)
+    App(bottleFeedViewModel)
+}
+
+actual fun logDebug(tag: String, message: String) {
+    Log.d(tag, message)
 } 
