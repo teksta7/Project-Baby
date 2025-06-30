@@ -17,7 +17,8 @@ import androidx.compose.ui.unit.sp
 fun TopMiniCardView(
     average: String = "Need more data to calculate average",
     topText: String = "Average bottle feed time:",
-    onTap: () -> Unit = {}
+    onTap: () -> Unit = {},
+    modifier: Modifier = Modifier
 ) {
     var displayAverage by remember { mutableStateOf(average) }
     
@@ -26,10 +27,8 @@ fun TopMiniCardView(
     }
     
     Box(
-        modifier = Modifier
-            .fillMaxWidth()
+        modifier = modifier
             .height(80.dp)
-            .padding(horizontal = 16.dp)
             .background(
                 color = Color(0xFF3F51B5), // indigo
                 shape = RoundedCornerShape(25.dp)

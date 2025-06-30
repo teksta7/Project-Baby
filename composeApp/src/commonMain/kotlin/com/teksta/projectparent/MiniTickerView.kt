@@ -52,9 +52,8 @@ fun MiniTickerView(bottleFeedViewModel: BottleFeedViewModel? = null) {
     
     Box(
         modifier = Modifier
-            .fillMaxWidth()
+            .width(HomeCardWidth)
             .height(60.dp)
-            .padding(horizontal = 16.dp)
             .background(
                 color = currentColor,
                 shape = RoundedCornerShape(15.dp)

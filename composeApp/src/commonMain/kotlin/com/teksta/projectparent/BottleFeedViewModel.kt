@@ -237,15 +237,15 @@ class BottleFeedViewModel(private val repository: BottleFeedRepository) {
         
         if (nextBottleTime <= now) return "Due now"
         
-        val timeUntil = nextBottleTime - now
-        val hours = (timeUntil / 3600).toInt()
-        val minutes = ((timeUntil % 3600) / 60).toInt()
-        
-        return if (hours > 0) {
-            "${hours}h ${minutes}m"
-        } else {
-            "${minutes}m"
-        }
+        // Format as local time (e.g., 5:00pm)
+        val localTime = Instant.fromEpochSeconds(nextBottleTime)
+            .toLocalDateTime(TimeZone.currentSystemDefault())
+        val hour = localTime.hour
+        val minute = localTime.minute
+        val ampm = if (hour < 12) "am" else "pm"
+        val hour12 = if (hour == 0 || hour == 12) 12 else hour % 12
+        val minuteStr = minute.toString().padStart(2, '0')
+        return "$hour12:$minuteStr$ampm"
     }
     
     fun cleanup() {

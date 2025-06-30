@@ -27,6 +27,11 @@ import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.ui.graphics.graphicsLayer
 import kotlin.math.absoluteValue
+import com.russhwolf.settings.Settings
+import com.russhwolf.settings.get
+import androidx.compose.ui.platform.LocalConfiguration
+
+val HomeCardWidth = 260.dp // Shared width for cards and tickers
 
 @OptIn(ExperimentalFoundationApi::class, ExperimentalMaterial3Api::class)
 @Composable
@@ -35,7 +40,16 @@ fun HomeView(
     onNavigateToSection: (String) -> Unit = {},
     onShowCharts: () -> Unit = {}
 ) {
-    val cardsToShow = remember { HomeCards.filter { it.toTrack } }
+    // Retrieve baby's name from multiplatform-settings
+    val settings = remember { Settings() }
+    val babyName = remember { settings.getStringOrNull("baby_name") }
+    val cardsToShow = remember {
+        HomeCards.map { card ->
+            if (card.viewString == "PROFILE" && !babyName.isNullOrBlank()) {
+                card.copy(presentedString = "${babyName}'s Profile")
+            } else card
+        }.filter { it.toTrack }
+    }
     val pagerState = rememberPagerState(pageCount = { cardsToShow.size })
 
     Scaffold(
@@ -63,34 +77,45 @@ fun HomeView(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Spacer(modifier = Modifier.height(16.dp))
-            TopMiniCardView(
-                average = bottleFeedViewModel?.analytics?.averageBottleDuration ?: "N/A",
-                topText = "Average bottle feed time:",
-                onTap = onShowCharts
-            )
+            Box(Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
+                TopMiniCardView(
+                    average = bottleFeedViewModel?.analytics?.averageBottleDuration ?: "N/A",
+                    topText = "Average bottle feed time:",
+                    onTap = onShowCharts,
+                    modifier = Modifier.width(HomeCardWidth)
+                )
+            }
             Spacer(modifier = Modifier.height(16.dp))
             if (cardsToShow.isNotEmpty()) {
-                HorizontalPager(
-                    state = pagerState,
-                    modifier = Modifier.weight(1f),
-                    contentPadding = PaddingValues(horizontal = 64.dp)
-                ) { page ->
-                    val card = cardsToShow[page]
-                    HomeCardView(
-                        modifier = Modifier.graphicsLayer {
-                            val pageOffset = (
-                                (pagerState.currentPage - page) + pagerState.currentPageOffsetFraction
-                            ).absoluteValue
-                            val scale = 1f - (pageOffset * 0.1f)
-                            scaleX = scale
-                            scaleY = scale
-                            val rotation = pageOffset * 5f
-                            rotationY = if (pagerState.currentPage > page) rotation else -rotation
-                            alpha = 1f - (pageOffset * 0.3f)
-                        },
-                        homeCard = card,
-                        onCardClick = { onNavigateToSection(card.viewString) }
-                    )
+                Box(
+                    Modifier
+                        .fillMaxWidth()
+                        .weight(1f),
+                    contentAlignment = Alignment.Center
+                ) {
+                    HorizontalPager(
+                        state = pagerState,
+                        contentPadding = PaddingValues(horizontal = ((LocalConfiguration.current.screenWidthDp.dp - HomeCardWidth) / 2).coerceAtLeast(0.dp))
+                    ) { page ->
+                        val card = cardsToShow[page]
+                        HomeCardView(
+                            modifier = Modifier
+                                .graphicsLayer {
+                                    val pageOffset = (
+                                        (pagerState.currentPage - page) + pagerState.currentPageOffsetFraction
+                                    ).absoluteValue
+                                    val scale = 1f - (pageOffset * 0.15f)
+                                    scaleX = scale
+                                    scaleY = scale
+                                    val rotation = pageOffset * 5f
+                                    rotationY = if (pagerState.currentPage > page) rotation else -rotation
+                                    alpha = 1f - (pageOffset * 0.3f)
+                                }
+                                .width(HomeCardWidth),
+                            homeCard = card,
+                            onCardClick = { onNavigateToSection(card.viewString) }
+                        )
+                    }
                 }
             } else {
                 Column(
@@ -111,7 +136,9 @@ fun HomeView(
                 }
             }
             Spacer(modifier = Modifier.height(16.dp))
-            MiniTickerView(bottleFeedViewModel = bottleFeedViewModel)
+            Box(Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
+                MiniTickerView(bottleFeedViewModel = bottleFeedViewModel)
+            }
             Spacer(modifier = Modifier.height(16.dp))
         }
     }
@@ -124,10 +151,12 @@ fun HomeCardView(
     homeCard: HomeCard,
     onCardClick: () -> Unit
 ) {
+    val configuration = LocalConfiguration.current
+    val screenHeight = configuration.screenHeightDp.dp
+    val cardHeight = screenHeight * 0.5f
     Box(
         modifier = modifier
-            .fillMaxHeight(0.9f)
-            .aspectRatio(0.7f)
+            .height(cardHeight)
             .clip(RoundedCornerShape(20.dp))
             .background(homeCard.color)
             .clickable(onClick = onCardClick),

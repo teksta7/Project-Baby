@@ -38,6 +38,7 @@ import android.content.Intent
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import com.teksta.projectparent.ProfileImagePicker
+import com.russhwolf.settings.Settings
 
 @Composable
 fun BabyProfileOnboardingScreen(
@@ -298,6 +299,8 @@ fun BabyProfileOnboardingScreen(
                         onClick = {
                             if (name.isNotBlank() && birthDate.isNotBlank()) {
                                 val weight = "${weightLbs} lbs ${weightOz} oz"
+                                // Save baby's name to multiplatform-settings
+                                Settings().putString("baby_name", name)
                                 onComplete(name, gender, birthDate, weight, profileImageUri)
                             } else {
                                 showError = true
