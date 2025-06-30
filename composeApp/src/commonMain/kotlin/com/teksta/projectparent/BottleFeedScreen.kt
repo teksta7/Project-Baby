@@ -80,6 +80,7 @@ fun BottleFeedScreen(
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
+                    .windowInsetsPadding(WindowInsets.statusBars)
                     .padding(top = 16.dp, start = 8.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {

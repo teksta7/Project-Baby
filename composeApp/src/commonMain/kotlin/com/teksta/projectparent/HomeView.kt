@@ -61,7 +61,7 @@ fun HomeView(
                         "Project Parent",
                         color = Color.White,
                         fontWeight = FontWeight.Bold,
-                        fontSize = 24.sp
+                        fontSize = 36.sp
                     )
                 },
                 colors = TopAppBarDefaults.topAppBarColors(

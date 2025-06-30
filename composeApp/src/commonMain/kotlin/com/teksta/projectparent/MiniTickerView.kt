@@ -12,7 +12,15 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import kotlinx.coroutines.delay
+import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.animation.with
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.animateColorAsState
 
+@OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun MiniTickerView(bottleFeedViewModel: BottleFeedViewModel? = null) {
     var messageIndex by remember { mutableStateOf(0) }
@@ -39,7 +47,11 @@ fun MiniTickerView(bottleFeedViewModel: BottleFeedViewModel? = null) {
     )
     
     val currentMessage = messages[messageIndex]
-    val currentColor = colors[colorIndex]
+    val targetColor = colors[colorIndex]
+    val animatedColor by animateColorAsState(
+        targetValue = targetColor,
+        animationSpec = tween(durationMillis = 600)
+    )
     
     // Timer effect to rotate messages every 3 seconds
     LaunchedEffect(Unit) {
@@ -55,7 +67,7 @@ fun MiniTickerView(bottleFeedViewModel: BottleFeedViewModel? = null) {
             .width(HomeCardWidth)
             .height(60.dp)
             .background(
-                color = currentColor,
+                color = animatedColor,
                 shape = RoundedCornerShape(15.dp)
             ),
         contentAlignment = Alignment.Center
@@ -74,13 +86,20 @@ fun MiniTickerView(bottleFeedViewModel: BottleFeedViewModel? = null) {
             
             Spacer(modifier = Modifier.width(8.dp))
             
-            Text(
-                text = currentMessage,
-                color = Color.White,
-                fontSize = 12.sp,
-                textAlign = TextAlign.Center,
-                modifier = Modifier.fillMaxWidth(0.7f)
-            )
+            AnimatedContent(
+                targetState = currentMessage,
+                transitionSpec = {
+                    fadeIn(animationSpec = tween(400)) with fadeOut(animationSpec = tween(400))
+                }
+            ) { message ->
+                Text(
+                    text = message,
+                    color = Color.White,
+                    fontSize = 12.sp,
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier.fillMaxWidth(0.7f)
+                )
+            }
         }
     }
 } 
