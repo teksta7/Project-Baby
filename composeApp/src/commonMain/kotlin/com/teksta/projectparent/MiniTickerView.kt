@@ -14,19 +14,21 @@ import androidx.compose.ui.unit.sp
 import kotlinx.coroutines.delay
 
 @Composable
-fun MiniTickerView() {
+fun MiniTickerView(bottleFeedViewModel: BottleFeedViewModel? = null) {
     var messageIndex by remember { mutableStateOf(0) }
     var colorIndex by remember { mutableStateOf(0) }
     
-    val messages = listOf(
-        "Next bottle is due: N/A",
-        "Wake windows today: N/A",
-        "Average time between bottles: N/A",
-        "Food eaten today: N/A",
-        "Any medicine due: N/A",
-        "Amount of wind: N/A",
-        "Amount of nappy changes: N/A"
-    )
+    val messages = remember(bottleFeedViewModel?.analytics) {
+        listOf(
+            "Next bottle is due: ${bottleFeedViewModel?.analytics?.nextBottleDue ?: "N/A"}",
+            "Wake windows today: N/A",
+            "Average time between bottles: ${bottleFeedViewModel?.analytics?.averageTimeBetweenBottles ?: "N/A"}",
+            "Food eaten today: N/A",
+            "Any medicine due: N/A",
+            "Amount of wind: N/A",
+            "Amount of nappy changes: N/A"
+        )
+    }
     
     val colors = listOf(
         Color(0xFF2196F3), // blue

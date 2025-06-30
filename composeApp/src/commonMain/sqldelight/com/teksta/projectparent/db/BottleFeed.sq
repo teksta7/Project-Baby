@@ -1,18 +1,40 @@
 CREATE TABLE BottleFeed (
-    id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-    amount REAL NOT NULL,
-    timestamp INTEGER NOT NULL,
-    note TEXT
+    id TEXT NOT NULL PRIMARY KEY,
+    date INTEGER NOT NULL,
+    start_time INTEGER NOT NULL,
+    end_time INTEGER NOT NULL,
+    duration REAL NOT NULL,
+    ounces REAL NOT NULL,
+    additional_notes TEXT
 );
 
 selectAll:
-SELECT * FROM BottleFeed ORDER BY timestamp DESC;
+SELECT * FROM BottleFeed ORDER BY date DESC;
+
+selectToday:
+SELECT * FROM BottleFeed WHERE date >= ? ORDER BY date DESC;
+
+selectYesterday:
+SELECT * FROM BottleFeed WHERE date >= ? AND date < ? ORDER BY date DESC;
 
 insertFeed:
-INSERT INTO BottleFeed(amount, timestamp, note) VALUES (?, ?, ?);
+INSERT INTO BottleFeed(id, date, start_time, end_time, duration, ounces, additional_notes) 
+VALUES (?, ?, ?, ?, ?, ?, ?);
 
 updateFeed:
-UPDATE BottleFeed SET amount = ?, timestamp = ?, note = ? WHERE id = ?;
+UPDATE BottleFeed SET date = ?, start_time = ?, end_time = ?, duration = ?, ounces = ?, additional_notes = ? WHERE id = ?;
 
 deleteFeed:
-DELETE FROM BottleFeed WHERE id = ?; 
+DELETE FROM BottleFeed WHERE id = ?;
+
+getBottlesTakenToday:
+SELECT COUNT(*) FROM BottleFeed WHERE date >= ?;
+
+getAverageBottleDuration:
+SELECT AVG(duration) FROM BottleFeed;
+
+getTotalBottleDuration:
+SELECT SUM(duration) FROM BottleFeed;
+
+getTotalBottles:
+SELECT COUNT(*) FROM BottleFeed; 

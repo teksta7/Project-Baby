@@ -80,7 +80,7 @@ kotlin {
             implementation(libs.androidx.lifecycle.runtimeCompose)
             implementation("com.squareup.sqldelight:runtime:1.5.5")
             implementation("com.russhwolf:multiplatform-settings-no-arg:1.3.0")
-            implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.5.0")
+            implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.6.0")
             implementation("org.jetbrains.compose.material:material-icons-extended:1.6.10")
         }
         commonTest.dependencies {

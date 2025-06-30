@@ -31,6 +31,7 @@ import kotlin.math.absoluteValue
 @OptIn(ExperimentalFoundationApi::class, ExperimentalMaterial3Api::class)
 @Composable
 fun HomeView(
+    bottleFeedViewModel: BottleFeedViewModel? = null,
     onNavigateToSection: (String) -> Unit = {},
     onShowCharts: () -> Unit = {}
 ) {
@@ -63,7 +64,7 @@ fun HomeView(
         ) {
             Spacer(modifier = Modifier.height(16.dp))
             TopMiniCardView(
-                average = "0 minutes 24 seconds", // Replace with real value
+                average = bottleFeedViewModel?.analytics?.averageBottleDuration ?: "N/A",
                 topText = "Average bottle feed time:",
                 onTap = onShowCharts
             )
@@ -110,7 +111,7 @@ fun HomeView(
                 }
             }
             Spacer(modifier = Modifier.height(16.dp))
-            MiniTickerView()
+            MiniTickerView(bottleFeedViewModel = bottleFeedViewModel)
             Spacer(modifier = Modifier.height(16.dp))
         }
     }

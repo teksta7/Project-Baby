@@ -16,7 +16,7 @@ class MainActivity : ComponentActivity() {
         OnboardingState.init(OnboardingPrefs(this))
 
         setContent {
-            App()
+            App(this)
         }
     }
 }
@@ -24,5 +24,6 @@ class MainActivity : ComponentActivity() {
 @Preview
 @Composable
 fun AppAndroidPreview() {
+    // For preview, use the common App without database
     App()
 }

@@ -26,6 +26,7 @@ import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.graphics.Color
+import com.teksta.projectparent.db.BottleFeedRepository
 
 private enum class OnboardingScreen {
     Initial, BabyProfile, CardSelection
@@ -37,7 +38,7 @@ private enum class AppScreen {
 
 @Composable
 @Preview
-fun App() {
+fun App(bottleFeedViewModel: BottleFeedViewModel? = null) {
     MaterialTheme(
         colorScheme = darkColorScheme()
     ) {
@@ -59,6 +60,9 @@ fun App() {
                 var currentAppScreen by remember { mutableStateOf(
                     if (onboardingComplete) AppScreen.Home else AppScreen.Onboarding
                 ) }
+
+                // Use the provided bottleFeedViewModel if available, otherwise create a mock for preview
+                val actualBottleFeedViewModel = bottleFeedViewModel ?: remember { null as BottleFeedViewModel? }
 
                 // Handle system back/gesture: return to Home if not on Home
                 if (onboardingComplete && currentAppScreen != AppScreen.Home) {
@@ -141,6 +145,7 @@ fun App() {
                     ) { screen ->
                         when (screen) {
                             AppScreen.Home -> HomeView(
+                                bottleFeedViewModel = actualBottleFeedViewModel,
                                 onNavigateToSection = { section ->
                                     currentAppScreen = when (section) {
                                         "PROFILE" -> AppScreen.Profile
@@ -162,9 +167,27 @@ fun App() {
                             AppScreen.Profile -> ProfileScreen(
                                 onBack = { currentAppScreen = AppScreen.Home }
                             )
-                            AppScreen.Bottles -> BottlesScreen(
-                                onBack = { currentAppScreen = AppScreen.Home }
-                            )
+                            AppScreen.Bottles -> {
+                                if (actualBottleFeedViewModel != null) {
+                                    BottleFeedScreen(
+                                        viewModel = actualBottleFeedViewModel,
+                                        onBack = { currentAppScreen = AppScreen.Home }
+                                    )
+                                } else {
+                                    // Fallback for preview
+                                    Box(
+                                        modifier = Modifier.fillMaxSize(),
+                                        contentAlignment = Alignment.Center
+                                    ) {
+                                        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                                            Text("Bottle Feed Screen", color = Color.White)
+                                            Button(onClick = { currentAppScreen = AppScreen.Home }) {
+                                                Text("Back to Home", color = Color.White)
+                                            }
+                                        }
+                                    }
+                                }
+                            }
                             AppScreen.Sleep -> SleepScreen(
                                 onBack = { currentAppScreen = AppScreen.Home }
                             )
@@ -190,6 +213,7 @@ fun App() {
                                 onBack = { currentAppScreen = AppScreen.Home }
                             )
                             else -> HomeView(
+                                bottleFeedViewModel = actualBottleFeedViewModel,
                                 onNavigateToSection = { section ->
                                     currentAppScreen = when (section) {
                                         "PROFILE" -> AppScreen.Profile
@@ -225,21 +249,6 @@ fun ProfileScreen(onBack: () -> Unit) {
     ) {
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
             Text("Profile Screen", color = Color.White)
-            Button(onClick = onBack) {
-                Text("Back to Home", color = Color.White)
-            }
-        }
-    }
-}
-
-@Composable
-fun BottlesScreen(onBack: () -> Unit) {
-    Box(
-        modifier = Modifier.fillMaxSize(),
-        contentAlignment = Alignment.Center
-    ) {
-        Column(horizontalAlignment = Alignment.CenterHorizontally) {
-            Text("Bottles Screen", color = Color.White)
             Button(onClick = onBack) {
                 Text("Back to Home", color = Color.White)
             }
