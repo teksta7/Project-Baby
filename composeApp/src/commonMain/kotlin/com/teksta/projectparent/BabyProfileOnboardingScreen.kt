@@ -277,10 +277,15 @@ fun BabyProfileOnboardingScreen(
                     )
                 ) {
                     // Profile picture picker (expect/actual)
-                    ProfileImagePicker(
-                        imageUri = profileImageUri,
-                        onImageSelected = { profileImageUri = it }
-                    )
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        ProfileImagePicker(
+                            imageUri = profileImageUri,
+                            onImageSelected = { profileImageUri = it }
+                        )
+                        if (profileImageUri != null) {
+                            Spacer(modifier = Modifier.height(16.dp))
+                        }
+                    }
                 }
                 
                 // Complete button with slide animation

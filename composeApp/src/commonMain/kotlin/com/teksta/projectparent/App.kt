@@ -332,21 +332,6 @@ fun PooScreen(onBack: () -> Unit) {
 }
 
 @Composable
-fun SettingsScreen(onBack: () -> Unit) {
-    Box(
-        modifier = Modifier.fillMaxSize(),
-        contentAlignment = Alignment.Center
-    ) {
-        Column(horizontalAlignment = Alignment.CenterHorizontally) {
-            Text("Settings Screen", color = Color.White)
-            Button(onClick = onBack) {
-                Text("Back to Home", color = Color.White)
-            }
-        }
-    }
-}
-
-@Composable
 fun TestScreen(onBack: () -> Unit) {
     Box(
         modifier = Modifier.fillMaxSize(),

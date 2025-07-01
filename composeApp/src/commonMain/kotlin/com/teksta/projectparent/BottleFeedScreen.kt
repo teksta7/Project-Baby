@@ -239,7 +239,7 @@ fun BottleFeedScreen(
                             .scale(buttonScale),
                         colors = ButtonDefaults.buttonColors(
                             containerColor = when (viewModel.buttonColor) {
-                                BottleFeedButtonColor.GREEN -> Color.Green
+                                BottleFeedButtonColor.GREEN -> Color(0xFF388E3C)
                                 BottleFeedButtonColor.ORANGE -> Color(0xFFFFA500)
                                 BottleFeedButtonColor.RED -> Color.Red
                             }
@@ -263,7 +263,7 @@ fun BottleFeedScreen(
             icon = "✅",
             title = "Success",
             message = "Bottle recorded successfully",
-            color = Color.Green,
+            color = Color(0xFF388E3C),
             onDismiss = { viewModel.dismissAlerts() }
         )
     }
@@ -317,7 +317,7 @@ fun BottlesTakenCard(count: Int, onClick: () -> Unit) {
             .height(120.dp)
             .clickable { onClick() },
         colors = CardDefaults.cardColors(
-            containerColor = if (count > 0) Color.Green else Color.Blue
+            containerColor = if (count > 0) Color(0xFF388E3C) else Color.Blue
         )
     ) {
         Box(

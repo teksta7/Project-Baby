@@ -12,7 +12,7 @@ import android.util.Log
 @Composable
 fun App() {
     val context = LocalContext.current
-    val database = remember { AppDatabaseWrapper(context) }
+    val database = remember(context) { AppDatabaseWrapper(context) }
     val repository = remember { BottleFeedRepository(database) }
     val bottleFeedViewModel = remember { BottleFeedViewModel(repository) }
     
