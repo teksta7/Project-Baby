@@ -19,6 +19,7 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.window.Dialog
 import com.teksta.projectparent.HomeCards
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.runtime.saveable.listSaver
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -36,7 +37,12 @@ fun SettingsScreen(onBack: () -> Unit) {
     var durationMinutes by rememberSaveable { mutableStateOf(180) } // 3 hours default
 
     // Card toggles (local state, TODO: sync with HomeCards if needed)
-    val cardToggles = rememberSaveable {
+    val cardToggles = rememberSaveable(
+        saver = listSaver(
+            save = { it.toList() },
+            restore = { it.toMutableStateList() }
+        )
+    ) {
         mutableStateListOf(
             true, // Bottles
             false, // Sleep
