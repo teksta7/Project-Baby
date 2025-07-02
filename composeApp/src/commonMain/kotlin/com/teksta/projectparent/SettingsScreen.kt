@@ -21,6 +21,8 @@ import com.teksta.projectparent.HomeCards
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.saveable.listSaver
 import com.russhwolf.settings.Settings
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -115,7 +117,8 @@ fun SettingsScreen(onBack: () -> Unit) {
                 .padding(paddingValues)
                 .fillMaxSize()
                 .background(Color.Black)
-                .padding(16.dp),
+                .padding(16.dp)
+                .verticalScroll(rememberScrollState()),
             verticalArrangement = Arrangement.spacedBy(24.dp)
         ) {
             // --- Information ---
@@ -216,11 +219,12 @@ fun SettingsScreen(onBack: () -> Unit) {
                     Slider(
                         value = durationMinutes.toFloat(),
                         onValueChange = {
-                            durationMinutes = it.toInt()
+                            val rounded = (it / 5).toInt() * 5
+                            durationMinutes = rounded
                             saveBottleSettings()
                         },
                         valueRange = 10f..360f,
-                        steps = 35
+                        steps = ((360 - 10) / 5) - 1
                     )
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Button(
@@ -235,11 +239,12 @@ fun SettingsScreen(onBack: () -> Unit) {
                     Slider(
                         value = defaultOunces.toFloat(),
                         onValueChange = {
-                            defaultOunces = it.toDouble()
+                            val rounded = (it * 4).toInt() / 4f
+                            defaultOunces = rounded.toDouble()
                             saveBottleSettings()
                         },
                         valueRange = 0.0f..10.0f,
-                        steps = 40
+                        steps = ((10.0 / 0.25).toInt()) - 1
                     )
                     OutlinedTextField(
                         value = defaultNote,

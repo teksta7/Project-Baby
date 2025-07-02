@@ -17,6 +17,11 @@ import kotlin.math.round
 // Simple logging utility
 expect fun logDebug(tag: String, message: String)
 
+// Foreground service hooks for Android
+expect fun startBottleFeedForegroundService(babyName: String, elapsed: Int, total: Int)
+expect fun updateBottleFeedForegroundService(elapsed: Int, total: Int)
+expect fun stopBottleFeedForegroundService()
+
 class BottleFeedViewModel(private val repository: BottleFeedRepository) {
     
     // UI State
@@ -126,10 +131,15 @@ class BottleFeedViewModel(private val repository: BottleFeedRepository) {
             
             logDebug("BottleFeedViewModel", "Timer started - startTime: $startTime")
             
+            // Start foreground service on Android
+            startBottleFeedForegroundService("Baby", 0, getBottleFeedTotalDuration())
+            
             timerJob = viewModelScope.launch {
                 while (isTimerRunning) {
                     delay(1000)
                     bottleDuration++
+                    // Update foreground service on Android
+                    updateBottleFeedForegroundService(bottleDuration, getBottleFeedTotalDuration())
                 }
             }
         }
@@ -152,6 +162,8 @@ class BottleFeedViewModel(private val repository: BottleFeedRepository) {
             logDebug("BottleFeedViewModel", "Timer stopped - duration: $duration, ounces: $currentOunces, notes: '$currentNotes'")
             
             addBottleFeed(duration.toDouble(), endTime, currentOunces, currentNotes)
+            // Stop foreground service on Android
+            stopBottleFeedForegroundService()
         }
     }
     
@@ -251,6 +263,12 @@ class BottleFeedViewModel(private val repository: BottleFeedRepository) {
     fun cleanup() {
         timerJob?.cancel()
         viewModelScope.cancel()
+    }
+    
+    private fun getBottleFeedTotalDuration(): Int {
+        // Use the duration from settings if available, fallback to 180 min (3 hours)
+        // This should be replaced with actual settings retrieval if needed
+        return 180 * 60 // seconds
     }
 }
 
