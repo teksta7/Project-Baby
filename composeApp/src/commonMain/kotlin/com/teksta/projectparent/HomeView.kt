@@ -43,12 +43,27 @@ fun HomeView(
     // Retrieve baby's name from multiplatform-settings
     val settings = remember { Settings() }
     val babyName = remember { settings.getStringOrNull("baby_name") }
-    val cardsToShow = remember {
-        HomeCards.map { card ->
+    val cardTogglesKey = "card_toggles"
+    val defaultToggles = listOf(true, false, false, false, false, false, false)
+    fun loadTogglesFromSettings(): List<Boolean> {
+        val str = settings.getStringOrNull(cardTogglesKey)
+        return if (str != null) {
+            str.split(",").map { it == "1" }
+        } else {
+            defaultToggles
+        }
+    }
+    val toggles = remember { loadTogglesFromSettings() }
+    val cardsToShow = remember(babyName, toggles) {
+        HomeCards.mapIndexed { idx, card ->
             if (card.viewString == "PROFILE" && !babyName.isNullOrBlank()) {
                 card.copy(presentedString = "${babyName}'s Profile")
             } else card
-        }.filter { it.toTrack }
+        }.filterIndexed { idx, card ->
+            // Always show PROFILE and SETTINGS, otherwise use toggles
+            card.viewString == "PROFILE" || card.viewString == "SETTINGS" ||
+                (idx in 1..7 && toggles.getOrNull(idx - 1) == true)
+        }
     }
     val pagerState = rememberPagerState(pageCount = { cardsToShow.size })
 

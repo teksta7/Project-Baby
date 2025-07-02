@@ -20,11 +20,29 @@ import androidx.compose.ui.window.Dialog
 import com.teksta.projectparent.HomeCards
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.saveable.listSaver
+import com.russhwolf.settings.Settings
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SettingsScreen(onBack: () -> Unit) {
     // --- State ---
+    val settings = remember { Settings() }
+    val cardTogglesKey = "card_toggles"
+    val defaultToggles = listOf(true, false, false, false, false, false, false)
+
+    fun saveTogglesToSettings(toggles: List<Boolean>) {
+        val str = toggles.joinToString(",") { if (it) "1" else "0" }
+        settings.putString(cardTogglesKey, str)
+    }
+    fun loadTogglesFromSettings(): List<Boolean> {
+        val str = settings.getStringOrNull(cardTogglesKey)
+        return if (str != null) {
+            str.split(",").map { it == "1" }
+        } else {
+            defaultToggles
+        }
+    }
+
     var isAdsRemoved by rememberSaveable { mutableStateOf(false) }
     var isDonateDialogOpen by remember { mutableStateOf(false) }
     var isRestoreDialogOpen by remember { mutableStateOf(false) }
@@ -36,22 +54,14 @@ fun SettingsScreen(onBack: () -> Unit) {
     var defaultNote by rememberSaveable { mutableStateOf("") }
     var durationMinutes by rememberSaveable { mutableStateOf(180) } // 3 hours default
 
-    // Card toggles (local state, TODO: sync with HomeCards if needed)
+    val initialToggles = loadTogglesFromSettings()
     val cardToggles = rememberSaveable(
         saver = listSaver(
             save = { it.toList() },
             restore = { it.toMutableStateList() }
         )
     ) {
-        mutableStateListOf(
-            true, // Bottles
-            false, // Sleep
-            false, // Food
-            false, // Meds
-            false, // Wind
-            false, // Poo
-            false  // Test
-        )
+        initialToggles.toMutableStateList()
     }
     val cardLabels = listOf("Bottles", "Sleep", "Food", "Meds", "Wind", "Poo", "Test")
     val cardDescriptions = listOf(
@@ -95,7 +105,7 @@ fun SettingsScreen(onBack: () -> Unit) {
             ) {
                 Column(Modifier.padding(16.dp)) {
                     Text("App Version", color = Color.White)
-                    Text("1.0.0 (stub)", color = Color.LightGray)
+                    Text("1.0.0", color = Color.LightGray)
                 }
             }
 
@@ -133,7 +143,7 @@ fun SettingsScreen(onBack: () -> Unit) {
                                     checked = cardToggles[idx],
                                     onCheckedChange = {
                                         cardToggles[idx] = it
-                                        // TODO: Sync with HomeCards if needed
+                                        saveTogglesToSettings(cardToggles)
                                     },
                                     colors = SwitchDefaults.colors(checkedThumbColor = Color.Cyan)
                                 )
