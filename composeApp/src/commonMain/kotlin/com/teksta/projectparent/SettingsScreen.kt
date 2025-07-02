@@ -48,11 +48,19 @@ fun SettingsScreen(onBack: () -> Unit) {
     var isRestoreDialogOpen by remember { mutableStateOf(false) }
     var isDurationDialogOpen by remember { mutableStateOf(false) }
     var isOuncesDialogOpen by remember { mutableStateOf(false) }
-    var bottleNotificationEnabled by rememberSaveable { mutableStateOf(false) }
+    var bottleNotificationEnabled by rememberSaveable {
+        mutableStateOf(settings.getBoolean("bottle_notification_enabled", false))
+    }
     var liveActivityEnabled by rememberSaveable { mutableStateOf(false) }
-    var defaultOunces by rememberSaveable { mutableStateOf(4.0) }
-    var defaultNote by rememberSaveable { mutableStateOf("") }
-    var durationMinutes by rememberSaveable { mutableStateOf(180) } // 3 hours default
+    var durationMinutes by rememberSaveable {
+        mutableStateOf(settings.getInt("bottle_notification_duration", 180)) // 3 hours default
+    }
+    var defaultOunces by rememberSaveable {
+        mutableStateOf(settings.getString("default_ounces", "4.0").toDoubleOrNull() ?: 4.0)
+    }
+    var defaultNote by rememberSaveable {
+        mutableStateOf(settings.getString("default_bottle_note", ""))
+    }
 
     val initialToggles = loadTogglesFromSettings()
     val cardToggles = rememberSaveable(
@@ -73,6 +81,19 @@ fun SettingsScreen(onBack: () -> Unit) {
         "Enable the app to track any nappy changes your baby has had",
         "EXPERIMENTAL"
     )
+
+    // --- Bottle Feed Settings ---
+    val bottleNotificationKey = "bottle_notification_enabled"
+    val bottleNotificationDurationKey = "bottle_notification_duration"
+    val defaultOuncesKey = "default_ounces"
+    val defaultNoteKey = "default_bottle_note"
+
+    fun saveBottleSettings() {
+        settings.putBoolean(bottleNotificationKey, bottleNotificationEnabled)
+        settings.putInt(bottleNotificationDurationKey, durationMinutes)
+        settings.putString(defaultOuncesKey, defaultOunces.toString())
+        settings.putString(defaultNoteKey, defaultNote)
+    }
 
     // --- UI ---
     Scaffold(
@@ -166,42 +187,70 @@ fun SettingsScreen(onBack: () -> Unit) {
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Switch(
                             checked = bottleNotificationEnabled,
-                            onCheckedChange = { bottleNotificationEnabled = it },
+                            onCheckedChange = {
+                                bottleNotificationEnabled = it
+                                saveBottleSettings()
+                            },
                             colors = SwitchDefaults.colors(checkedThumbColor = Color.Cyan)
                         )
                         Spacer(Modifier.width(8.dp))
-                        Text("Next bottle feed notification", color = Color.White)
+                        Column {
+                            Text("Next bottle feed notification", color = Color.White)
+                            Text(
+                                "This will notify you when the next bottle feed is due using the duration you have given below",
+                                color = Color.LightGray,
+                                fontSize = 12.sp
+                            )
+                        }
                     }
                     Row(verticalAlignment = Alignment.CenterVertically) {
-                        Button(onClick = { isDurationDialogOpen = true }, colors = ButtonDefaults.buttonColors(containerColor = Color.Cyan)) {
+                        Button(
+                            onClick = {}, // No dialog, just show slider inline
+                            colors = ButtonDefaults.buttonColors(containerColor = Color.Cyan)
+                        ) {
                             Text("Select a duration", color = Color.Black)
                         }
                         Spacer(Modifier.width(8.dp))
                         Text("${durationMinutes} Minutes", color = Color.White)
                     }
+                    Slider(
+                        value = durationMinutes.toFloat(),
+                        onValueChange = {
+                            durationMinutes = it.toInt()
+                            saveBottleSettings()
+                        },
+                        valueRange = 10f..360f,
+                        steps = 35
+                    )
                     Row(verticalAlignment = Alignment.CenterVertically) {
-                        Button(onClick = { isOuncesDialogOpen = true }, colors = ButtonDefaults.buttonColors(containerColor = Color.Cyan)) {
+                        Button(
+                            onClick = {}, // No dialog, just show slider inline
+                            colors = ButtonDefaults.buttonColors(containerColor = Color.Cyan)
+                        ) {
                             Text("Set default ounces", color = Color.Black)
                         }
                         Spacer(Modifier.width(8.dp))
                         Text(String.format("%.2f oz", defaultOunces), color = Color.White)
                     }
+                    Slider(
+                        value = defaultOunces.toFloat(),
+                        onValueChange = {
+                            defaultOunces = it.toDouble()
+                            saveBottleSettings()
+                        },
+                        valueRange = 0.0f..10.0f,
+                        steps = 40
+                    )
                     OutlinedTextField(
                         value = defaultNote,
-                        onValueChange = { defaultNote = it },
+                        onValueChange = {
+                            defaultNote = it
+                            saveBottleSettings()
+                        },
                         label = { Text("Set default note", color = Color.Cyan) },
                         modifier = Modifier.fillMaxWidth(),
                         textStyle = LocalTextStyle.current.copy(color = Color.White)
                     )
-                    Row(verticalAlignment = Alignment.CenterVertically) {
-                        Switch(
-                            checked = liveActivityEnabled,
-                            onCheckedChange = { liveActivityEnabled = it },
-                            colors = SwitchDefaults.colors(checkedThumbColor = Color.Cyan)
-                        )
-                        Spacer(Modifier.width(8.dp))
-                        Text("Live Activities for Bottle Feeds", color = Color.White)
-                    }
                 }
             }
 
