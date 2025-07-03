@@ -293,7 +293,9 @@ fun BottleFeedScreen(
     // Bottle list sheet
     if (showBottleList) {
         BottleListSheet(
-            feeds = viewModel.feeds,
+            todayFeeds = viewModel.todayFeeds,
+            yesterdayFeeds = viewModel.yesterdayFeeds,
+            olderFeeds = viewModel.olderFeeds,
             onDismiss = { showBottleList = false },
             onDelete = { viewModel.deleteFeed(it) }
         )
@@ -488,7 +490,9 @@ fun CustomAlert(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun BottleListSheet(
-    feeds: List<BottleFeedUiModel>,
+    todayFeeds: List<BottleFeedUiModel>,
+    yesterdayFeeds: List<BottleFeedUiModel>,
+    olderFeeds: List<BottleFeedUiModel>,
     onDismiss: () -> Unit,
     onDelete: (String) -> Unit
 ) {
@@ -501,67 +505,93 @@ fun BottleListSheet(
                 .fillMaxWidth()
                 .padding(16.dp)
         ) {
+            val totalFeeds = todayFeeds.size + yesterdayFeeds.size + olderFeeds.size
             Text(
-                "Bottle History (${feeds.size} feeds)",
+                "Bottle History ($totalFeeds feeds)",
                 fontSize = 20.sp,
                 color = Color.White,
                 modifier = Modifier.padding(bottom = 16.dp)
             )
-            
             LazyColumn(
                 modifier = Modifier.weight(1f)
             ) {
-                items(feeds) { feed ->
-                    Card(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(vertical = 4.dp),
-                        colors = CardDefaults.cardColors(containerColor = Color.DarkGray)
-                    ) {
-                        Row(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(12.dp),
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            Column(modifier = Modifier.weight(1f)) {
-                                Text(
-                                    "Given at: ${feed.formattedStartTime}",
-                                    color = Color.White,
-                                    fontSize = 16.sp
-                                )
-                                Text(
-                                    "Ounces: ${feed.ounces}",
-                                    color = Color.White.copy(alpha = 0.8f),
-                                    fontSize = 14.sp
-                                )
-                                Text(
-                                    "Duration: ${feed.formattedDuration}",
-                                    color = Color.White.copy(alpha = 0.8f),
-                                    fontSize = 14.sp
-                                )
-                                if (feed.notes.isNotEmpty()) {
-                                    Text(
-                                        "Notes: ${feed.notes}",
-                                        color = Color.White.copy(alpha = 0.8f),
-                                        fontSize = 14.sp
-                                    )
-                                } else {
-                                    Text(
-                                        "Notes: (none)",
-                                        color = Color.White.copy(alpha = 0.5f),
-                                        fontSize = 14.sp
-                                    )
-                                }
-                            }
-                            TextButton(
-                                onClick = { onDelete(feed.id) }
-                            ) {
-                                Text("Delete", color = Color.Red)
-                            }
-                        }
+                if (todayFeeds.isNotEmpty()) {
+                    item {
+                        Text("Today", color = Color.Cyan, fontSize = 16.sp, modifier = Modifier.padding(vertical = 8.dp))
+                    }
+                    items(todayFeeds) { feed ->
+                        BottleFeedHistoryCard(feed, onDelete)
                     }
                 }
+                if (yesterdayFeeds.isNotEmpty()) {
+                    item {
+                        Text("Yesterday", color = Color.Cyan, fontSize = 16.sp, modifier = Modifier.padding(vertical = 8.dp))
+                    }
+                    items(yesterdayFeeds) { feed ->
+                        BottleFeedHistoryCard(feed, onDelete)
+                    }
+                }
+                if (olderFeeds.isNotEmpty()) {
+                    item {
+                        Text("Older", color = Color.Cyan, fontSize = 16.sp, modifier = Modifier.padding(vertical = 8.dp))
+                    }
+                    items(olderFeeds) { feed ->
+                        BottleFeedHistoryCard(feed, onDelete)
+                    }
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun BottleFeedHistoryCard(feed: BottleFeedUiModel, onDelete: (String) -> Unit) {
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = 4.dp),
+        colors = CardDefaults.cardColors(containerColor = Color.DarkGray)
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(12.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Column(modifier = Modifier.weight(1f)) {
+                Text(
+                    "Given at: ${feed.formattedStartTime}",
+                    color = Color.White,
+                    fontSize = 16.sp
+                )
+                Text(
+                    "Ounces: ${feed.ounces}",
+                    color = Color.White.copy(alpha = 0.8f),
+                    fontSize = 14.sp
+                )
+                Text(
+                    "Duration: ${feed.formattedDuration}",
+                    color = Color.White.copy(alpha = 0.8f),
+                    fontSize = 14.sp
+                )
+                if (feed.notes.isNotEmpty()) {
+                    Text(
+                        "Notes: ${feed.notes}",
+                        color = Color.White.copy(alpha = 0.8f),
+                        fontSize = 14.sp
+                    )
+                } else {
+                    Text(
+                        "Notes: (none)",
+                        color = Color.White.copy(alpha = 0.5f),
+                        fontSize = 14.sp
+                    )
+                }
+            }
+            TextButton(
+                onClick = { onDelete(feed.id) }
+            ) {
+                Text("Delete", color = Color.Red)
             }
         }
     }

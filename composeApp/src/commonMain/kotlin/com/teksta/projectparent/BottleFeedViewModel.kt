@@ -57,6 +57,13 @@ class BottleFeedViewModel(private val repository: BottleFeedRepository) {
     var buttonColor by mutableStateOf(BottleFeedButtonColor.GREEN)
         private set
     
+    var todayFeeds by mutableStateOf<List<BottleFeedUiModel>>(emptyList())
+        private set
+    var yesterdayFeeds by mutableStateOf<List<BottleFeedUiModel>>(emptyList())
+        private set
+    var olderFeeds by mutableStateOf<List<BottleFeedUiModel>>(emptyList())
+        private set
+    
     private val viewModelScope = CoroutineScope(Dispatchers.Default + Job())
     private var timerJob: Job? = null
     private val settings = Settings()
@@ -99,14 +106,14 @@ class BottleFeedViewModel(private val repository: BottleFeedRepository) {
     fun loadFeeds() {
         viewModelScope.launch {
             logDebug("BottleFeedViewModel", "Loading feeds from database")
-            val dbFeeds = repository.getAllFeeds()
-            logDebug("BottleFeedViewModel", "Loaded ${dbFeeds.size} feeds from database")
-            
-            dbFeeds.forEach { feed ->
-                logDebug("BottleFeedViewModel", "Feed: ID=${feed.id}, Ounces=${feed.ounces}, Notes='${feed.additional_notes}', Duration=${feed.duration}")
-            }
-            
-            feeds = dbFeeds.map { feed ->
+            val todayRaw = repository.getTodayFeeds()
+            val yesterdayRaw = repository.getYesterdayFeeds()
+            val allRaw = repository.getAllFeeds()
+            val todayIds = todayRaw.map { it.id }.toSet()
+            val yesterdayIds = yesterdayRaw.map { it.id }.toSet()
+            val olderRaw = allRaw.filter { it.id !in todayIds && it.id !in yesterdayIds }
+
+            todayFeeds = todayRaw.map { feed ->
                 BottleFeedUiModel(
                     id = feed.id,
                     ounces = feed.ounces,
@@ -117,11 +124,29 @@ class BottleFeedViewModel(private val repository: BottleFeedRepository) {
                     date = feed.date
                 )
             }
-            
-            logDebug("BottleFeedViewModel", "Mapped to ${feeds.size} UI models")
-            feeds.forEach { uiModel ->
-                logDebug("BottleFeedViewModel", "UI Model: ID=${uiModel.id}, Ounces=${uiModel.ounces}, Notes='${uiModel.notes}', Duration=${uiModel.duration}")
+            yesterdayFeeds = yesterdayRaw.map { feed ->
+                BottleFeedUiModel(
+                    id = feed.id,
+                    ounces = feed.ounces,
+                    startTime = feed.start_time,
+                    endTime = feed.end_time,
+                    duration = feed.duration,
+                    notes = feed.additional_notes ?: "",
+                    date = feed.date
+                )
             }
+            olderFeeds = olderRaw.map { feed ->
+                BottleFeedUiModel(
+                    id = feed.id,
+                    ounces = feed.ounces,
+                    startTime = feed.start_time,
+                    endTime = feed.end_time,
+                    duration = feed.duration,
+                    notes = feed.additional_notes ?: "",
+                    date = feed.date
+                )
+            }
+            logDebug("BottleFeedViewModel", "todayFeeds: ${todayFeeds.size}, yesterdayFeeds: ${yesterdayFeeds.size}, olderFeeds: ${olderFeeds.size}")
         }
     }
     
