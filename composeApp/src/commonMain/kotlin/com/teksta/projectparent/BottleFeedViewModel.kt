@@ -215,7 +215,8 @@ class BottleFeedViewModel(private val repository: BottleFeedRepository) {
             logDebug("BottleFeedViewModel", "Timer started - startTime: $startTime")
             
             val avgDuration = analytics.averageBottleDuration.toDurationSecondsOrNull() ?: getBottleFeedTotalDuration()
-            startBottleFeedForegroundService("Baby", 0, getBottleFeedTotalDuration(), avgDuration)
+            val babyName = settings.getString("baby_name", "Baby")
+            startBottleFeedForegroundService(babyName, 0, getBottleFeedTotalDuration(), avgDuration)
             
             timerJob = viewModelScope.launch {
                 while (isTimerRunning) {
@@ -233,36 +234,23 @@ class BottleFeedViewModel(private val repository: BottleFeedRepository) {
         settings.putString(notesKey, notes)
     }
     
-    fun stopTimer(fromExternal: Boolean = false, saveFeed: Boolean = false) {
-        logDebug("BottleFeedViewModel", "stopTimer called - isTimerRunning: $isTimerRunning, fromExternal: $fromExternal, saveFeed: $saveFeed")
-        
-        if (isTimerRunning) {
-            timerJob?.cancel()
-            isTimerRunning = false
-            
-            val endTime = Clock.System.now().epochSeconds
-            val duration = endTime - (startTime ?: endTime)
-            
-            // Capture current values before resetting
-            val currentOunces = ounces
-            val currentNotes = notes
-            
-            logDebug("BottleFeedViewModel", "Timer stopped - duration: $duration, ounces: $currentOunces, notes: '$currentNotes', fromExternal: $fromExternal, saveFeed: $saveFeed")
-            if (!fromExternal || saveFeed) {
-                addBottleFeed(duration.toDouble(), endTime, currentOunces, currentNotes)
+    fun stopTimer(fromExternal: Boolean = false, saveFeed: Boolean = true) {
+        logDebug("BottleFeedViewModel", "stopTimer called - fromExternal: $fromExternal, saveFeed: $saveFeed")
+        isTimerRunning = false
+        timerJob?.cancel()
+        timerJob = null
+        buttonLabel = "Start Bottle Feed"
+        buttonColor = BottleFeedButtonColor.GREEN
+        bottleDuration = 0
+        startTime = null
+        // Always stop the foreground service to prevent notification reappearance
+        stopBottleFeedForegroundService()
+        if (saveFeed) {
+            viewModelScope.launch {
+                saveFeed()
             }
-            // Reset all UI state and prevent further notification updates
-            buttonLabel = "Start Bottle Feed"
-            buttonColor = BottleFeedButtonColor.GREEN
-            ounces = settings.getString("default_ounces", "4.0").toDoubleOrNull() ?: 4.0
-            notes = settings.getString("default_bottle_note", "")
-            bottleDuration = 0
-            startTime = null
-            logDebug("BottleFeedViewModel", "State fully reset after stop.")
-            // Stop foreground service on Android
-            stopBottleFeedForegroundService()
         }
-        // Clear persisted state
+        // Reset persisted state
         settings.putBoolean(inProgressKey, false)
         settings.remove(startTimeKey)
         settings.remove(durationKey)
