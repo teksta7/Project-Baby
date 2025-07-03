@@ -23,13 +23,15 @@ class BottleFeedForegroundService : Service() {
         const val EXTRA_ELAPSED = "EXTRA_ELAPSED"
         const val EXTRA_TOTAL = "EXTRA_TOTAL"
         const val EXTRA_BABY_NAME = "EXTRA_BABY_NAME"
+        const val EXTRA_AVERAGE = "EXTRA_AVERAGE"
 
-        fun startService(context: Context, babyName: String, elapsed: Int, total: Int) {
+        fun startService(context: Context, babyName: String, elapsed: Int, total: Int, average: Int) {
             val intent = Intent(context, BottleFeedForegroundService::class.java).apply {
                 action = ACTION_START
                 putExtra(EXTRA_BABY_NAME, babyName)
                 putExtra(EXTRA_ELAPSED, elapsed)
                 putExtra(EXTRA_TOTAL, total)
+                putExtra(EXTRA_AVERAGE, average)
             }
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 context.startForegroundService(intent)
@@ -38,11 +40,12 @@ class BottleFeedForegroundService : Service() {
             }
         }
 
-        fun updateService(context: Context, elapsed: Int, total: Int) {
+        fun updateService(context: Context, elapsed: Int, total: Int, average: Int) {
             val intent = Intent(context, BottleFeedForegroundService::class.java).apply {
                 action = ACTION_UPDATE
                 putExtra(EXTRA_ELAPSED, elapsed)
                 putExtra(EXTRA_TOTAL, total)
+                putExtra(EXTRA_AVERAGE, average)
             }
             context.startService(intent)
         }
@@ -57,6 +60,7 @@ class BottleFeedForegroundService : Service() {
     private var babyName: String = ""
     private var elapsed: Int = 0
     private var total: Int = 0
+    private var average: Int = 0
 
     override fun onCreate() {
         super.onCreate()
@@ -69,8 +73,9 @@ class BottleFeedForegroundService : Service() {
                 babyName = intent.getStringExtra(EXTRA_BABY_NAME) ?: "Baby"
                 elapsed = intent.getIntExtra(EXTRA_ELAPSED, 0)
                 total = intent.getIntExtra(EXTRA_TOTAL, 0)
+                average = intent.getIntExtra(EXTRA_AVERAGE, 0)
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
-                    startForeground(NOTIFICATION_ID, buildNotification(), 8)
+                    startForeground(NOTIFICATION_ID, buildNotification(), 1)
                 } else {
                     startForeground(NOTIFICATION_ID, buildNotification())
                 }
@@ -78,6 +83,7 @@ class BottleFeedForegroundService : Service() {
             ACTION_UPDATE -> {
                 elapsed = intent.getIntExtra(EXTRA_ELAPSED, 0)
                 total = intent.getIntExtra(EXTRA_TOTAL, 0)
+                average = intent.getIntExtra(EXTRA_AVERAGE, 0)
                 updateNotification()
             }
             ACTION_STOP -> {
@@ -91,14 +97,21 @@ class BottleFeedForegroundService : Service() {
     override fun onBind(intent: Intent?): IBinder? = null
 
     private fun buildNotification(): Notification {
-        val percent = if (total > 0) (elapsed * 100 / total).coerceIn(0, 100) else 0
-        val contentText = "${babyName}'s bottle feed: ${formatTime(elapsed)} / ${formatTime(total)}"
+        val progressMax = if (average > 0) average else total
+        val percent = if (progressMax > 0) (elapsed * 100 / progressMax).coerceIn(0, 100) else 0
+        val contentText = "${babyName}'s bottle feed: ${formatTime(elapsed)} / ${formatTime(progressMax)}"
+        val intent = Intent(this, MainActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            putExtra("navigateTo", "BOTTLE_FEED")
+        }
+        val pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
         return NotificationCompat.Builder(this, CHANNEL_ID)
             .setContentTitle("Bottle Feed in Progress")
             .setContentText(contentText)
             .setSmallIcon(android.R.drawable.ic_popup_sync)
             .setProgress(100, percent, false)
             .setOngoing(true)
+            .setContentIntent(pendingIntent)
             .build()
     }
 

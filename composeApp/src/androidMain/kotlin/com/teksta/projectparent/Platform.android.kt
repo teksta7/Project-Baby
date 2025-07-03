@@ -10,14 +10,14 @@ class AndroidPlatform : Platform {
 
 actual fun getPlatform(): Platform = AndroidPlatform()
 
-actual fun startBottleFeedForegroundService(babyName: String, elapsed: Int, total: Int) {
+actual fun startBottleFeedForegroundService(babyName: String, elapsed: Int, total: Int, average: Int) {
     val context = MainActivity.instance?.applicationContext ?: return
-    BottleFeedForegroundService.startService(context, babyName, elapsed, total)
+    BottleFeedForegroundService.startService(context, babyName, elapsed, total, average)
 }
 
-actual fun updateBottleFeedForegroundService(elapsed: Int, total: Int) {
+actual fun updateBottleFeedForegroundService(elapsed: Int, total: Int, average: Int) {
     val context = MainActivity.instance?.applicationContext ?: return
-    BottleFeedForegroundService.updateService(context, elapsed, total)
+    BottleFeedForegroundService.updateService(context, elapsed, total, average)
 }
 
 actual fun stopBottleFeedForegroundService() {

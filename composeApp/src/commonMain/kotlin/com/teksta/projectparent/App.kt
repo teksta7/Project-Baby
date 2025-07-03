@@ -19,6 +19,10 @@ import androidx.compose.ui.unit.dp
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import androidx.activity.compose.BackHandler
+import com.russhwolf.settings.Settings
+import androidx.compose.ui.platform.LocalContext
+import android.app.Activity
+import android.content.Intent
 
 import projectparent.composeapp.generated.resources.Res
 import projectparent.composeapp.generated.resources.compose_multiplatform
@@ -32,13 +36,38 @@ private enum class OnboardingScreen {
     Initial, BabyProfile, CardSelection
 }
 
-private enum class AppScreen {
+enum class AppScreen {
     Onboarding, Home, Profile, Bottles, Sleep, Food, Meds, Wind, Poo, Settings, Test, Charts
 }
 
 @Composable
 @Preview
-fun App(bottleFeedViewModel: BottleFeedViewModel? = null) {
+fun App(
+    bottleFeedViewModel: BottleFeedViewModel? = null,
+    navInterceptor: ((AppScreen) -> Unit)? = null
+) {
+    val settings = remember { Settings() }
+    val context = LocalContext.current
+    var initialScreen: AppScreen by remember { mutableStateOf(AppScreen.Home) }
+    LaunchedEffect(Unit) {
+        if (context is Activity) {
+            val intent = context.intent
+            val navTo = intent.getStringExtra("navigateTo")
+            if (navTo == "BOTTLE_FEED") {
+                initialScreen = AppScreen.Bottles
+            } else {
+                // Restore last screen from settings
+                val last = settings.getStringOrNull("last_screen")
+                initialScreen = last?.let { AppScreen.valueOf(it) } ?: AppScreen.Home
+            }
+        }
+    }
+    var currentAppScreen by remember { mutableStateOf(initialScreen) }
+    fun navigateTo(screen: AppScreen) {
+        currentAppScreen = screen
+        settings.putString("last_screen", screen.name)
+        navInterceptor?.invoke(screen)
+    }
     MaterialTheme(
         colorScheme = darkColorScheme()
     ) {
@@ -56,9 +85,6 @@ fun App(bottleFeedViewModel: BottleFeedViewModel? = null) {
                         !onboardingComplete -> OnboardingScreen.Initial
                         else -> null
                     }
-                ) }
-                var currentAppScreen by remember { mutableStateOf(
-                    if (onboardingComplete) AppScreen.Home else AppScreen.Onboarding
                 ) }
 
                 // Use the provided bottleFeedViewModel if available, otherwise create a mock for preview
@@ -100,7 +126,7 @@ fun App(bottleFeedViewModel: BottleFeedViewModel? = null) {
                                     if (babyProfileComplete && cardSelectionComplete) {
                                         OnboardingState.isOnboardingComplete = true
                                         onboardingComplete = true
-                                        currentAppScreen = AppScreen.Home
+                                        navigateTo(AppScreen.Home)
                                     }
                                 }
                             )
@@ -147,7 +173,7 @@ fun App(bottleFeedViewModel: BottleFeedViewModel? = null) {
                             AppScreen.Home -> HomeView(
                                 bottleFeedViewModel = actualBottleFeedViewModel,
                                 onNavigateToSection = { section ->
-                                    currentAppScreen = when (section) {
+                                    navigateTo(when (section) {
                                         "PROFILE" -> AppScreen.Profile
                                         "BOTTLES" -> AppScreen.Bottles
                                         "SLEEP" -> AppScreen.Sleep
@@ -158,20 +184,20 @@ fun App(bottleFeedViewModel: BottleFeedViewModel? = null) {
                                         "SETTINGS" -> AppScreen.Settings
                                         "TEST" -> AppScreen.Test
                                         else -> AppScreen.Home
-                                    }
+                                    })
                                 },
                                 onShowCharts = {
-                                    currentAppScreen = AppScreen.Charts
+                                    navigateTo(AppScreen.Charts)
                                 }
                             )
                             AppScreen.Profile -> ProfileScreen(
-                                onBack = { currentAppScreen = AppScreen.Home }
+                                onBack = { navigateTo(AppScreen.Home) }
                             )
                             AppScreen.Bottles -> {
                                 if (actualBottleFeedViewModel != null) {
                                     BottleFeedScreen(
                                         viewModel = actualBottleFeedViewModel,
-                                        onBack = { currentAppScreen = AppScreen.Home }
+                                        onBack = { navigateTo(AppScreen.Home) }
                                     )
                                 } else {
                                     // Fallback for preview
@@ -181,7 +207,7 @@ fun App(bottleFeedViewModel: BottleFeedViewModel? = null) {
                                     ) {
                                         Column(horizontalAlignment = Alignment.CenterHorizontally) {
                                             Text("Bottle Feed Screen", color = Color.White)
-                                            Button(onClick = { currentAppScreen = AppScreen.Home }) {
+                                            Button(onClick = { navigateTo(AppScreen.Home) }) {
                                                 Text("Back to Home", color = Color.White)
                                             }
                                         }
@@ -189,33 +215,33 @@ fun App(bottleFeedViewModel: BottleFeedViewModel? = null) {
                                 }
                             }
                             AppScreen.Sleep -> SleepScreen(
-                                onBack = { currentAppScreen = AppScreen.Home }
+                                onBack = { navigateTo(AppScreen.Home) }
                             )
                             AppScreen.Food -> FoodScreen(
-                                onBack = { currentAppScreen = AppScreen.Home }
+                                onBack = { navigateTo(AppScreen.Home) }
                             )
                             AppScreen.Meds -> MedsScreen(
-                                onBack = { currentAppScreen = AppScreen.Home }
+                                onBack = { navigateTo(AppScreen.Home) }
                             )
                             AppScreen.Wind -> WindScreen(
-                                onBack = { currentAppScreen = AppScreen.Home }
+                                onBack = { navigateTo(AppScreen.Home) }
                             )
                             AppScreen.Poo -> PooScreen(
-                                onBack = { currentAppScreen = AppScreen.Home }
+                                onBack = { navigateTo(AppScreen.Home) }
                             )
                             AppScreen.Settings -> SettingsScreen(
-                                onBack = { currentAppScreen = AppScreen.Home }
+                                onBack = { navigateTo(AppScreen.Home) }
                             )
                             AppScreen.Test -> TestScreen(
-                                onBack = { currentAppScreen = AppScreen.Home }
+                                onBack = { navigateTo(AppScreen.Home) }
                             )
                             AppScreen.Charts -> ChartsScreen(
-                                onBack = { currentAppScreen = AppScreen.Home }
+                                onBack = { navigateTo(AppScreen.Home) }
                             )
                             else -> HomeView(
                                 bottleFeedViewModel = actualBottleFeedViewModel,
                                 onNavigateToSection = { section ->
-                                    currentAppScreen = when (section) {
+                                    navigateTo(when (section) {
                                         "PROFILE" -> AppScreen.Profile
                                         "BOTTLES" -> AppScreen.Bottles
                                         "SLEEP" -> AppScreen.Sleep
@@ -226,10 +252,10 @@ fun App(bottleFeedViewModel: BottleFeedViewModel? = null) {
                                         "SETTINGS" -> AppScreen.Settings
                                         "TEST" -> AppScreen.Test
                                         else -> AppScreen.Home
-                                    }
+                                    })
                                 },
                                 onShowCharts = {
-                                    currentAppScreen = AppScreen.Charts
+                                    navigateTo(AppScreen.Charts)
                                 }
                             )
                         }

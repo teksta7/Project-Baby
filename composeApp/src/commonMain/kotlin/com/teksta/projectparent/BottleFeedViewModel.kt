@@ -13,13 +13,14 @@ import kotlinx.datetime.Instant
 import kotlinx.datetime.LocalDateTime
 import kotlin.math.pow
 import kotlin.math.round
+import com.russhwolf.settings.Settings
 
 // Simple logging utility
 expect fun logDebug(tag: String, message: String)
 
 // Foreground service hooks for Android
-expect fun startBottleFeedForegroundService(babyName: String, elapsed: Int, total: Int)
-expect fun updateBottleFeedForegroundService(elapsed: Int, total: Int)
+// expect fun startBottleFeedForegroundService(babyName: String, elapsed: Int, total: Int, average: Int)
+// expect fun updateBottleFeedForegroundService(elapsed: Int, total: Int, average: Int)
 expect fun stopBottleFeedForegroundService()
 
 class BottleFeedViewModel(private val repository: BottleFeedRepository) {
@@ -58,11 +59,37 @@ class BottleFeedViewModel(private val repository: BottleFeedRepository) {
     
     private val viewModelScope = CoroutineScope(Dispatchers.Default + Job())
     private var timerJob: Job? = null
+    private val settings = Settings()
+    private val inProgressKey = "bottle_in_progress"
+    private val startTimeKey = "bottle_start_time"
+    private val durationKey = "bottle_duration"
+    private val ouncesKey = "bottle_ounces"
+    private val notesKey = "bottle_notes"
     
     init {
         logDebug("BottleFeedViewModel", "Initializing BottleFeedViewModel")
         loadFeeds()
         loadAnalytics()
+        // Restore in-progress state if present
+        if (settings.getBoolean(inProgressKey, false)) {
+            startTime = settings.getLongOrNull(startTimeKey)
+            bottleDuration = settings.getInt(durationKey, 0)
+            ounces = settings.getString(ouncesKey, "0.0").toDoubleOrNull() ?: 0.0
+            notes = settings.getString(notesKey, "")
+            isTimerRunning = true
+            buttonLabel = "Finish Bottle Feed"
+            buttonColor = BottleFeedButtonColor.ORANGE
+            // Auto-resume timer job if in progress
+            timerJob = viewModelScope.launch {
+                while (isTimerRunning) {
+                    delay(1000)
+                    bottleDuration++
+                    // Update foreground service on Android
+                    val avgDuration = analytics.averageBottleDuration.toDurationSecondsOrNull() ?: getBottleFeedTotalDuration()
+                    updateBottleFeedForegroundService(bottleDuration, getBottleFeedTotalDuration(), avgDuration)
+                }
+            }
+        }
     }
     
     fun loadFeeds() {
@@ -131,18 +158,23 @@ class BottleFeedViewModel(private val repository: BottleFeedRepository) {
             
             logDebug("BottleFeedViewModel", "Timer started - startTime: $startTime")
             
-            // Start foreground service on Android
-            startBottleFeedForegroundService("Baby", 0, getBottleFeedTotalDuration())
+            val avgDuration = analytics.averageBottleDuration.toDurationSecondsOrNull() ?: getBottleFeedTotalDuration()
+            startBottleFeedForegroundService("Baby", 0, getBottleFeedTotalDuration(), avgDuration)
             
             timerJob = viewModelScope.launch {
                 while (isTimerRunning) {
                     delay(1000)
                     bottleDuration++
-                    // Update foreground service on Android
-                    updateBottleFeedForegroundService(bottleDuration, getBottleFeedTotalDuration())
+                    updateBottleFeedForegroundService(bottleDuration, getBottleFeedTotalDuration(), avgDuration)
                 }
             }
         }
+        // Persist state
+        settings.putBoolean(inProgressKey, true)
+        settings.putLong(startTimeKey, startTime ?: 0L)
+        settings.putInt(durationKey, bottleDuration)
+        settings.putString(ouncesKey, ounces.toString())
+        settings.putString(notesKey, notes)
     }
     
     fun stopTimer() {
@@ -165,6 +197,12 @@ class BottleFeedViewModel(private val repository: BottleFeedRepository) {
             // Stop foreground service on Android
             stopBottleFeedForegroundService()
         }
+        // Clear persisted state
+        settings.putBoolean(inProgressKey, false)
+        settings.remove(startTimeKey)
+        settings.remove(durationKey)
+        settings.remove(ouncesKey)
+        settings.remove(notesKey)
     }
     
     private fun addBottleFeed(duration: Double, endTime: Long, feedOunces: Double, feedNotes: String) {
@@ -305,4 +343,12 @@ data class BottleFeedAnalyticsUiModel(
 
 enum class BottleFeedButtonColor {
     GREEN, ORANGE, RED
+}
+
+// Helper extension to parse duration string like "3m 20s" to seconds
+fun String.toDurationSecondsOrNull(): Int? {
+    val regex = Regex("(\\d+)m\\s*(\\d+)s")
+    val match = regex.find(this) ?: return null
+    val (min, sec) = match.destructured
+    return min.toInt() * 60 + sec.toInt()
 } 
