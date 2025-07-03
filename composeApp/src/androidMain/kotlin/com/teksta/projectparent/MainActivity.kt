@@ -14,6 +14,10 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import android.content.Intent
+import android.content.IntentFilter
+import android.content.BroadcastReceiver
+import android.content.Context.RECEIVER_NOT_EXPORTED
+import android.content.SharedPreferences
 
 class MainActivity : ComponentActivity() {
     companion object {
@@ -21,11 +25,41 @@ class MainActivity : ComponentActivity() {
             private set
         // Used for Compose navigation from notification clicks
         var navTarget: androidx.compose.runtime.MutableState<String?> = mutableStateOf(null)
+        // Reference to the current BottleFeedViewModel for broadcast sync
+        var currentBottleFeedViewModel: BottleFeedViewModel? = null
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         instance = this
         enableEdgeToEdge()
         super.onCreate(savedInstanceState)
+
+        // Register broadcast receiver for bottle feed finish/cancel
+        val filter = IntentFilter().apply {
+            addAction("com.teksta.projectparent.BOTTLE_FEED_FINISHED")
+            addAction("com.teksta.projectparent.BOTTLE_FEED_CANCELLED")
+        }
+        registerReceiver(
+            object : BroadcastReceiver() {
+                override fun onReceive(context: android.content.Context?, intent: Intent?) {
+                    val action = intent?.action
+                    android.util.Log.d("BottleFeedBroadcast", "Received broadcast: $action")
+                    currentBottleFeedViewModel?.let {
+                        when (action) {
+                            "com.teksta.projectparent.BOTTLE_FEED_FINISHED" -> {
+                                android.util.Log.d("BottleFeedBroadcast", "Calling stopTimer with saveFeed = true")
+                                it.stopTimer(fromExternal = true, saveFeed = true)
+                            }
+                            "com.teksta.projectparent.BOTTLE_FEED_CANCELLED" -> {
+                                android.util.Log.d("BottleFeedBroadcast", "Calling stopTimer with saveFeed = false")
+                                it.stopTimer(fromExternal = true, saveFeed = false)
+                            }
+                        }
+                    }
+                }
+            },
+            filter,
+            RECEIVER_NOT_EXPORTED
+        )
 
         // Request notification permission on Android 13+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
@@ -40,6 +74,18 @@ class MainActivity : ComponentActivity() {
 
         // Initialize onboarding prefs for persistence
         OnboardingState.init(OnboardingPrefs(this))
+
+        // Register SharedPreferences listener for bottle_feed_action
+        val prefs = getSharedPreferences("settings", MODE_PRIVATE)
+        val prefListener = SharedPreferences.OnSharedPreferenceChangeListener { _, key ->
+            if (key == "bottle_feed_action") {
+                val action = prefs.getString(key, "") ?: ""
+                android.util.Log.d("BottleFeedPrefListener", "bottle_feed_action changed to $action")
+                currentBottleFeedViewModel?.onBottleFeedActionChanged(action)
+                prefs.edit().putString(key, "").apply()
+            }
+        }
+        prefs.registerOnSharedPreferenceChangeListener(prefListener)
 
         setContent {
             AppAndroid()

@@ -14,6 +14,7 @@ import kotlinx.datetime.LocalDateTime
 import kotlin.math.pow
 import kotlin.math.round
 import com.russhwolf.settings.Settings
+import android.content.SharedPreferences
 
 // Simple logging utility
 expect fun logDebug(tag: String, message: String)
@@ -77,6 +78,8 @@ class BottleFeedViewModel(private val repository: BottleFeedRepository) {
         logDebug("BottleFeedViewModel", "Initializing BottleFeedViewModel")
         loadFeeds()
         loadAnalytics()
+        // Check for external finish/cancel immediately
+        checkExternalFinishOrCancel()
         // Restore in-progress state if present
         if (settings.getBoolean(inProgressKey, false)) {
             startTime = settings.getLongOrNull(startTimeKey)
@@ -86,15 +89,39 @@ class BottleFeedViewModel(private val repository: BottleFeedRepository) {
             isTimerRunning = true
             buttonLabel = "Finish Bottle Feed"
             buttonColor = BottleFeedButtonColor.ORANGE
-            // Auto-resume timer job if in progress
-            timerJob = viewModelScope.launch {
-                while (isTimerRunning) {
-                    delay(1000)
-                    bottleDuration++
-                    // Update foreground service on Android
-                    val avgDuration = analytics.averageBottleDuration.toDurationSecondsOrNull() ?: getBottleFeedTotalDuration()
-                    updateBottleFeedForegroundService(bottleDuration, getBottleFeedTotalDuration(), avgDuration)
+            // Only start timer if bottle_in_progress is still true
+            if (settings.getBoolean(inProgressKey, false)) {
+                logDebug("BottleFeedViewModel", "Starting timer job")
+                timerJob = viewModelScope.launch {
+                    while (isTimerRunning) {
+                        delay(1000)
+                        logDebug("BottleFeedViewModel", "Timer job tick: bottle_in_progress=${settings.getBoolean(inProgressKey, false)}")
+                        // Check for external finish/cancel
+                        if (settings.getBoolean("bottle_feed_finished_externally", false)) {
+                            logDebug("BottleFeedViewModel", "Detected external finish/cancel, stopping timer.")
+                            stopTimer(fromExternal = true)
+                            settings.putBoolean("bottle_feed_finished_externally", false)
+                            return@launch
+                        }
+                        // Check if bottle_in_progress is still true
+                        if (!settings.getBoolean(inProgressKey, false)) {
+                            logDebug("BottleFeedViewModel", "bottle_in_progress is false, stopping timer and resetting state.")
+                            stopTimer(fromExternal = true)
+                            return@launch
+                        }
+                        bottleDuration++
+                        // Only update foreground service if not externally finished
+                        if (isTimerRunning) {
+                            val avgDuration = analytics.averageBottleDuration.toDurationSecondsOrNull() ?: getBottleFeedTotalDuration()
+                            updateBottleFeedForegroundService(bottleDuration, getBottleFeedTotalDuration(), avgDuration)
+                        }
+                    }
                 }
+            } else {
+                logDebug("BottleFeedViewModel", "bottle_in_progress is false on init, not starting timer.")
+                isTimerRunning = false
+                buttonLabel = "Start Bottle Feed"
+                buttonColor = BottleFeedButtonColor.GREEN
             }
         } else {
             // Set to default values if not restoring
@@ -206,8 +233,8 @@ class BottleFeedViewModel(private val repository: BottleFeedRepository) {
         settings.putString(notesKey, notes)
     }
     
-    fun stopTimer() {
-        logDebug("BottleFeedViewModel", "stopTimer called - isTimerRunning: $isTimerRunning")
+    fun stopTimer(fromExternal: Boolean = false, saveFeed: Boolean = false) {
+        logDebug("BottleFeedViewModel", "stopTimer called - isTimerRunning: $isTimerRunning, fromExternal: $fromExternal, saveFeed: $saveFeed")
         
         if (isTimerRunning) {
             timerJob?.cancel()
@@ -220,9 +247,18 @@ class BottleFeedViewModel(private val repository: BottleFeedRepository) {
             val currentOunces = ounces
             val currentNotes = notes
             
-            logDebug("BottleFeedViewModel", "Timer stopped - duration: $duration, ounces: $currentOunces, notes: '$currentNotes'")
-            
-            addBottleFeed(duration.toDouble(), endTime, currentOunces, currentNotes)
+            logDebug("BottleFeedViewModel", "Timer stopped - duration: $duration, ounces: $currentOunces, notes: '$currentNotes', fromExternal: $fromExternal, saveFeed: $saveFeed")
+            if (!fromExternal || saveFeed) {
+                addBottleFeed(duration.toDouble(), endTime, currentOunces, currentNotes)
+            }
+            // Reset all UI state and prevent further notification updates
+            buttonLabel = "Start Bottle Feed"
+            buttonColor = BottleFeedButtonColor.GREEN
+            ounces = settings.getString("default_ounces", "4.0").toDoubleOrNull() ?: 4.0
+            notes = settings.getString("default_bottle_note", "")
+            bottleDuration = 0
+            startTime = null
+            logDebug("BottleFeedViewModel", "State fully reset after stop.")
             // Stop foreground service on Android
             stopBottleFeedForegroundService()
         }
@@ -336,6 +372,71 @@ class BottleFeedViewModel(private val repository: BottleFeedRepository) {
         // Use the duration from settings if available, fallback to 180 min (3 hours)
         // This should be replaced with actual settings retrieval if needed
         return 180 * 60 // seconds
+    }
+    
+    // Call this from the Composable's LaunchedEffect to check on every screen resume
+    fun checkExternalFinishOrCancel() {
+        if (settings.getBoolean("bottle_feed_finished_externally", false)) {
+            logDebug("BottleFeedViewModel", "Detected external finish/cancel (from Composable), stopping timer.")
+            stopTimer(fromExternal = true)
+            settings.putBoolean("bottle_feed_finished_externally", false)
+        }
+    }
+    
+    // Call this from Android code when the bottle_feed_action preference changes
+    fun onBottleFeedActionChanged(action: String) {
+        logDebug("BottleFeedViewModel", "onBottleFeedActionChanged called with action: $action")
+        when (action) {
+            "finish" -> {
+                logDebug("BottleFeedViewModel", "Detected finish action, calling stopTimer with saveFeed = true")
+                stopTimer(fromExternal = true, saveFeed = true)
+            }
+            "cancel" -> {
+                logDebug("BottleFeedViewModel", "Detected cancel action, calling stopTimer with saveFeed = false")
+                stopTimer(fromExternal = true, saveFeed = false)
+            }
+        }
+    }
+    
+    // Call this from the Composable's LaunchedEffect to check on every screen resume and reload timer state
+    fun reloadTimerStateFromSettings() {
+        logDebug("BottleFeedViewModel", "reloadTimerStateFromSettings called")
+        if (settings.getBoolean(inProgressKey, false)) {
+            startTime = settings.getLongOrNull(startTimeKey)
+            val now = Clock.System.now().epochSeconds
+            bottleDuration = if (startTime != null) (now - startTime!!).toInt() else 0
+            ounces = settings.getString(ouncesKey, "0.0").toDoubleOrNull() ?: 0.0
+            notes = settings.getString(notesKey, "")
+            isTimerRunning = true
+            buttonLabel = "Finish Bottle Feed"
+            buttonColor = BottleFeedButtonColor.ORANGE
+            logDebug("BottleFeedViewModel", "Restored in-progress feed: startTime=$startTime, bottleDuration=$bottleDuration (calculated), ounces=$ounces, notes=$notes")
+            // Only start timer if not already running
+            if (timerJob == null || !timerJob!!.isActive) {
+                logDebug("BottleFeedViewModel", "Starting timer job from reload")
+                timerJob = viewModelScope.launch {
+                    while (isTimerRunning) {
+                        delay(1000)
+                        logDebug("BottleFeedViewModel", "Timer job tick (reload): bottle_in_progress=${settings.getBoolean(inProgressKey, false)}")
+                        if (!settings.getBoolean(inProgressKey, false)) {
+                            logDebug("BottleFeedViewModel", "bottle_in_progress is false, stopping timer and resetting state (reload)")
+                            stopTimer(fromExternal = true)
+                            return@launch
+                        }
+                        bottleDuration = if (startTime != null) (Clock.System.now().epochSeconds - startTime!!).toInt() else bottleDuration + 1
+                        val avgDuration = analytics.averageBottleDuration.toDurationSecondsOrNull() ?: getBottleFeedTotalDuration()
+                        updateBottleFeedForegroundService(bottleDuration, getBottleFeedTotalDuration(), avgDuration)
+                    }
+                }
+            }
+        } else {
+            isTimerRunning = false
+            buttonLabel = "Start Bottle Feed"
+            buttonColor = BottleFeedButtonColor.GREEN
+            bottleDuration = 0
+            startTime = null
+            logDebug("BottleFeedViewModel", "No in-progress feed found on reload")
+        }
     }
 }
 

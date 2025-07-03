@@ -12,6 +12,10 @@ import android.os.IBinder
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.teksta.projectparent.R
+import com.teksta.projectparent.db.AppDatabaseWrapper
+import com.teksta.projectparent.db.BottleFeedRepository
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class BottleFeedForegroundService : Service() {
     companion object {
@@ -20,6 +24,8 @@ class BottleFeedForegroundService : Service() {
         const val ACTION_START = "ACTION_START_BOTTLE_FEED"
         const val ACTION_UPDATE = "ACTION_UPDATE_BOTTLE_FEED"
         const val ACTION_STOP = "ACTION_STOP_BOTTLE_FEED"
+        const val ACTION_CANCEL = "ACTION_CANCEL_BOTTLE_FEED"
+        const val ACTION_FINISH = "ACTION_FINISH_BOTTLE_FEED"
         const val EXTRA_ELAPSED = "EXTRA_ELAPSED"
         const val EXTRA_TOTAL = "EXTRA_TOTAL"
         const val EXTRA_BABY_NAME = "EXTRA_BABY_NAME"
@@ -55,6 +61,10 @@ class BottleFeedForegroundService : Service() {
             intent.action = ACTION_STOP
             context.startService(intent)
         }
+
+        fun dismissAllNotifications(context: Context) {
+            NotificationManagerCompat.from(context).cancelAll()
+        }
     }
 
     private var babyName: String = ""
@@ -70,6 +80,7 @@ class BottleFeedForegroundService : Service() {
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         when (intent?.action) {
             ACTION_START -> {
+                android.util.Log.d("BottleFeedService", "ACTION_START received")
                 babyName = intent.getStringExtra(EXTRA_BABY_NAME) ?: "Baby"
                 elapsed = intent.getIntExtra(EXTRA_ELAPSED, 0)
                 total = intent.getIntExtra(EXTRA_TOTAL, 0)
@@ -81,12 +92,26 @@ class BottleFeedForegroundService : Service() {
                 }
             }
             ACTION_UPDATE -> {
+                android.util.Log.d("BottleFeedService", "ACTION_UPDATE received")
                 elapsed = intent.getIntExtra(EXTRA_ELAPSED, 0)
                 total = intent.getIntExtra(EXTRA_TOTAL, 0)
                 average = intent.getIntExtra(EXTRA_AVERAGE, 0)
                 updateNotification()
             }
+            ACTION_CANCEL -> {
+                android.util.Log.d("BottleFeedService", "ACTION_CANCEL received")
+                clearInProgressState(sendBroadcast = true)
+                stopForeground(true)
+                stopSelf()
+            }
+            ACTION_FINISH -> {
+                android.util.Log.d("BottleFeedService", "ACTION_FINISH received")
+                saveFeedAndFinish()
+                stopForeground(true)
+                stopSelf()
+            }
             ACTION_STOP -> {
+                android.util.Log.d("BottleFeedService", "ACTION_STOP received")
                 stopForeground(true)
                 stopSelf()
             }
@@ -105,6 +130,7 @@ class BottleFeedForegroundService : Service() {
             putExtra("navigateTo", "BOTTLE_FEED")
         }
         val pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
+
         return NotificationCompat.Builder(this, CHANNEL_ID)
             .setContentTitle("Bottle Feed in Progress")
             .setContentText(contentText)
@@ -137,5 +163,51 @@ class BottleFeedForegroundService : Service() {
         val min = seconds / 60
         val sec = seconds % 60
         return String.format("%02d:%02d", min, sec)
+    }
+
+    private fun clearInProgressState(sendBroadcast: Boolean = false) {
+        val prefs = getSharedPreferences("settings", Context.MODE_PRIVATE)
+        android.util.Log.d("BottleFeedService", "clearInProgressState called, sendBroadcast=$sendBroadcast")
+        prefs.edit()
+            .putBoolean("bottle_in_progress", false)
+            .remove("bottle_start_time")
+            .remove("bottle_duration")
+            .remove("bottle_ounces")
+            .remove("bottle_notes")
+            .putBoolean("bottle_feed_finished_externally", true)
+            .putString("bottle_feed_action", if (sendBroadcast) "cancel" else "")
+            .apply()
+        NotificationManagerCompat.from(this).cancelAll()
+        if (sendBroadcast) {
+            val intent = Intent("com.teksta.projectparent.BOTTLE_FEED_CANCELLED")
+            android.util.Log.d("BottleFeedService", "Sending BOTTLE_FEED_CANCELLED broadcast")
+            sendBroadcast(intent)
+        }
+        stopSelf()
+    }
+
+    private fun saveFeedAndFinish() {
+        val prefs = getSharedPreferences("settings", Context.MODE_PRIVATE)
+        android.util.Log.d("BottleFeedService", "saveFeedAndFinish called")
+        val startTime = prefs.getLong("bottle_start_time", 0L)
+        val duration = prefs.getInt("bottle_duration", 0)
+        val ounces = prefs.getString("bottle_ounces", "0.0")?.toDoubleOrNull() ?: 0.0
+        val notes = prefs.getString("bottle_notes", "") ?: ""
+        if (startTime > 0 && duration > 0 && ounces > 0.0) {
+            GlobalScope.launch {
+                val db = AppDatabaseWrapper(applicationContext)
+                val repo = BottleFeedRepository(db)
+                val endTime = startTime + duration
+                android.util.Log.d("BottleFeedService", "Inserting feed into database: startTime=$startTime, endTime=$endTime, duration=$duration, ounces=$ounces, notes=$notes")
+                repo.insertFeed(
+                    startTime = startTime,
+                    endTime = endTime,
+                    duration = duration.toDouble(),
+                    ounces = ounces,
+                    additionalNotes = notes
+                )
+            }
+        }
+        clearInProgressState(sendBroadcast = true)
     }
 } 
