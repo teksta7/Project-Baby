@@ -89,6 +89,10 @@ class BottleFeedViewModel(private val repository: BottleFeedRepository) {
                     updateBottleFeedForegroundService(bottleDuration, getBottleFeedTotalDuration(), avgDuration)
                 }
             }
+        } else {
+            // Set to default values if not restoring
+            ounces = settings.getString("default_ounces", "4.0").toDoubleOrNull() ?: 4.0
+            notes = settings.getString("default_bottle_note", "")
         }
     }
     
@@ -228,8 +232,8 @@ class BottleFeedViewModel(private val repository: BottleFeedRepository) {
                 // Reset UI after successful save
                 buttonLabel = "Start Bottle Feed"
                 buttonColor = BottleFeedButtonColor.GREEN
-                ounces = 0.0
-                notes = ""
+                ounces = settings.getString("default_ounces", "4.0").toDoubleOrNull() ?: 4.0
+                notes = settings.getString("default_bottle_note", "")
                 bottleDuration = 0
                 startTime = null
                 
