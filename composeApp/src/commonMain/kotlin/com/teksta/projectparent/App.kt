@@ -240,6 +240,7 @@ fun App(
                                 onBack = { navigateTo(AppScreen.Home) }
                             )
                             AppScreen.Charts -> ChartsScreen(
+                                viewModel = actualBottleFeedViewModel,
                                 onBack = { navigateTo(AppScreen.Home) }
                             )
                             else -> HomeView(
@@ -361,16 +362,4 @@ fun TestScreen(onBack: () -> Unit) {
 }
 
 @Composable
-fun ChartsScreen(onBack: () -> Unit) {
-    Box(
-        modifier = Modifier.fillMaxSize(),
-        contentAlignment = Alignment.Center
-    ) {
-        Column(horizontalAlignment = Alignment.CenterHorizontally) {
-            Text("Charts Screen", color = Color.White)
-            Button(onClick = onBack) {
-                Text("Back to Home", color = Color.White)
-            }
-        }
-    }
-}
+expect fun ChartsScreen(viewModel: BottleFeedViewModel?, onBack: () -> Unit)

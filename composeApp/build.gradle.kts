@@ -59,9 +59,10 @@ kotlin {
                 implementation(compose.preview)
                 implementation(libs.androidx.activity.compose)
                 implementation("com.squareup.sqldelight:android-driver:1.5.5")
-                implementation("com.google.android.material:material:1.12.0") // Or the latest version
+                implementation("com.google.android.material:material:1.12.0")
                 implementation("com.airbnb.android:lottie-compose:6.3.0")
                 implementation("androidx.compose.material3:material3:1.2.0")
+                implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
             }
         }
 //        iosMain.dependencies {
@@ -154,5 +155,6 @@ repositories {
         }
     }
     maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
+    maven("https://jitpack.io")
 }
 
