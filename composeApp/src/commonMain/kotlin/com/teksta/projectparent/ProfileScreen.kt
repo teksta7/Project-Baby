@@ -9,6 +9,10 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -21,12 +25,19 @@ import androidx.compose.ui.unit.sp
 import android.graphics.BitmapFactory
 import android.net.Uri
 import java.io.File
+import java.util.UUID
+import androidx.compose.foundation.layout.windowInsetsPadding
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.statusBars
 
 @Composable
 fun ProfileScreen(viewModel: ProfileViewModel, onBack: () -> Unit) {
     val configuration = LocalConfiguration.current
     val screenWidth = configuration.screenWidthDp.dp
     val screenHeight = configuration.screenHeightDp.dp
+
+    var showImagePicker by remember { mutableStateOf(false) }
+    var imageKey by remember { mutableStateOf(UUID.randomUUID().toString()) }
 
     Column(
         modifier = Modifier
@@ -35,6 +46,24 @@ fun ProfileScreen(viewModel: ProfileViewModel, onBack: () -> Unit) {
             .padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+        // Back button in top left, not overlapping status bar
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .windowInsetsPadding(WindowInsets.statusBars)
+                .padding(top = 8.dp, start = 0.dp),
+            contentAlignment = Alignment.TopStart
+        ) {
+            Text(
+                text = "< Back",
+                color = Color.White,
+                fontSize = 18.sp,
+                modifier = Modifier
+                    .clickable { onBack() }
+                    .padding(8.dp)
+            )
+        }
+        Spacer(modifier = Modifier.height(8.dp))
         // Profile Image (show only image or default avatar)
         val context = LocalContext.current
         val imageUri = viewModel.profileImageUri
@@ -42,12 +71,13 @@ fun ProfileScreen(viewModel: ProfileViewModel, onBack: () -> Unit) {
             modifier = Modifier
                 .size(screenHeight / 5.5f)
                 .clip(CircleShape)
-                .background(Color.DarkGray),
+                .background(Color.DarkGray)
+                .clickable { showImagePicker = true },
             contentAlignment = Alignment.Center
         ) {
             if (!imageUri.isNullOrBlank()) {
                 val file = File(imageUri)
-                val bitmap = remember(imageUri) {
+                val bitmap = remember(imageKey, imageUri) {
                     if (file.exists()) BitmapFactory.decodeFile(file.absolutePath) else null
                 }
                 if (bitmap != null) {
@@ -62,6 +92,17 @@ fun ProfileScreen(viewModel: ProfileViewModel, onBack: () -> Unit) {
             } else {
                 Text("👶", fontSize = 64.sp)
             }
+        }
+        if (showImagePicker) {
+            Spacer(modifier = Modifier.height(12.dp))
+            ProfileImagePicker(
+                imageUri = imageUri,
+                onImageSelected = { newUri ->
+                    viewModel.updateProfileImageUri(newUri)
+                    imageKey = UUID.randomUUID().toString()
+                    showImagePicker = false
+                }
+            )
         }
         Spacer(modifier = Modifier.height(16.dp))
         // Baby Name
@@ -156,14 +197,5 @@ fun ProfileScreen(viewModel: ProfileViewModel, onBack: () -> Unit) {
             }
         }
         Spacer(modifier = Modifier.height(32.dp))
-        // Back button
-        Text(
-            text = "< Back",
-            color = Color.White,
-            fontSize = 18.sp,
-            modifier = Modifier
-                .clickable { onBack() }
-                .padding(8.dp)
-        )
     }
 } 
