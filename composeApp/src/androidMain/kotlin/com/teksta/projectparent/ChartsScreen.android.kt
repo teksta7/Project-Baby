@@ -216,6 +216,12 @@ private fun TotalBottlesChart(feeds: List<BottleFeedUiModel>) {
     val entries = sortedDays.mapIndexed { idx, (date, count) ->
         Entry(idx.toFloat(), count.toFloat())
     }
+    val dateLabels = sortedDays.map { (date, _) ->
+        val day = date.dayOfMonth.toString().padStart(2, '0')
+        val month = date.month.name.lowercase().replaceFirstChar { it.uppercase() }.take(3)
+        val year = date.year.toString()
+        "$day $month $year"
+    }
     val pointColors = List(entries.size) { idx ->
         // Generate a color gradient from green to teal
         val fraction = idx.toFloat() / (entries.size.coerceAtLeast(1))
@@ -254,9 +260,11 @@ private fun TotalBottlesChart(feeds: List<BottleFeedUiModel>) {
                     setBackgroundColor(AndroidColor.BLACK)
                     xAxis.granularity = 1f
                     xAxis.labelCount = sortedDays.size
-                    xAxis.valueFormatter = com.github.mikephil.charting.formatter.IndexAxisValueFormatter(
-                        sortedDays.map { it.key.toString() }
-                    )
+                    // xAxis.valueFormatter = com.github.mikephil.charting.formatter.IndexAxisValueFormatter(
+                    //     sortedDays.map { it.key.toString() }
+                    // )
+                    xAxis.valueFormatter = com.github.mikephil.charting.formatter.IndexAxisValueFormatter(dateLabels)
+
                     axisLeft.granularity = 1f
                     axisLeft.setLabelCount(6, false)
                     axisLeft.valueFormatter = object : com.github.mikephil.charting.formatter.ValueFormatter() {
