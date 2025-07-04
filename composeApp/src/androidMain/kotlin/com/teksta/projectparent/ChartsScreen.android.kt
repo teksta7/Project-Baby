@@ -11,6 +11,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
@@ -20,6 +21,7 @@ import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.*
 import com.github.mikephil.charting.formatter.ValueFormatter
 import kotlinx.datetime.*
+import kotlin.random.Random
 
 private enum class ChartTab(val label: String) {
     HOURLY("Hourly Duration"),
@@ -86,8 +88,16 @@ private fun HourlyDurationChart(feeds: List<BottleFeedUiModel>) {
         val hour12 = if (hourInt == 0 || hourInt == 12) 12 else hourInt % 12
         "$day $month at $hour12$ampm"
     }
+    val barColors = List(entries.size) { idx ->
+        // Generate a color gradient from cyan to blue
+        val fraction = idx.toFloat() / (entries.size.coerceAtLeast(1))
+        androidx.compose.ui.graphics.Color.Cyan.copy(
+            blue = 0.7f + 0.3f * fraction,
+            green = 0.8f - 0.4f * fraction
+        ).toArgb()
+    }
     val dataSet = BarDataSet(entries, "Feed Duration (min)").apply {
-        color = AndroidColor.CYAN
+        setColors(*barColors.toIntArray())
         valueTextColor = AndroidColor.WHITE
     }
     val barData = BarData(dataSet)
@@ -145,8 +155,16 @@ private fun DailyDurationChart(feeds: List<BottleFeedUiModel>) {
         val year = date.year.toString()
         "$day $month $year"
     }
+    val barColors = List(entries.size) { idx ->
+        // Generate a color gradient from magenta to purple
+        val fraction = idx.toFloat() / (entries.size.coerceAtLeast(1))
+        androidx.compose.ui.graphics.Color.Magenta.copy(
+            red = 0.8f - 0.3f * fraction,
+            blue = 0.7f + 0.3f * fraction
+        ).toArgb()
+    }
     val dataSet = BarDataSet(entries, "Total Feed Duration (min)").apply {
-        color = AndroidColor.MAGENTA
+        setColors(*barColors.toIntArray())
         valueTextColor = AndroidColor.WHITE
     }
     val barData = BarData(dataSet)
@@ -198,7 +216,16 @@ private fun TotalBottlesChart(feeds: List<BottleFeedUiModel>) {
     val entries = sortedDays.mapIndexed { idx, (date, count) ->
         Entry(idx.toFloat(), count.toFloat())
     }
+    val pointColors = List(entries.size) { idx ->
+        // Generate a color gradient from green to teal
+        val fraction = idx.toFloat() / (entries.size.coerceAtLeast(1))
+        androidx.compose.ui.graphics.Color.Green.copy(
+            green = 0.7f + 0.3f * fraction,
+            blue = 0.5f + 0.5f * fraction
+        ).toArgb()
+    }
     val dataSet = LineDataSet(entries, "Total Bottles").apply {
+        setCircleColors(*pointColors.toIntArray())
         color = AndroidColor.GREEN
         setDrawCircles(true)
         setDrawValues(false)
