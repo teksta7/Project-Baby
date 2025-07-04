@@ -61,6 +61,7 @@ kotlin {
                 implementation("com.squareup.sqldelight:android-driver:1.5.5")
                 implementation("com.google.android.material:material:1.12.0") // Or the latest version
                 implementation("com.airbnb.android:lottie-compose:6.3.0")
+                implementation("androidx.compose.material3:material3:1.2.0")
             }
         }
 //        iosMain.dependencies {

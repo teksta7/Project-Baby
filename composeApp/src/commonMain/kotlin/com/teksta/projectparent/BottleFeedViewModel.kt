@@ -15,6 +15,7 @@ import kotlin.math.pow
 import kotlin.math.round
 import com.russhwolf.settings.Settings
 import android.content.SharedPreferences
+import com.teksta.projectparent.scheduleBottleFeedNotification
 
 // Simple logging utility
 expect fun logDebug(tag: String, message: String)
@@ -248,6 +249,15 @@ class BottleFeedViewModel(private val repository: BottleFeedRepository) {
             val endTime = Clock.System.now().epochSeconds
             logDebug("BottleFeedViewModel", "stopTimer - calling addBottleFeed with duration: $finalDuration, endTime: $endTime, ounces: $ounces, notes: '$notes'")
             addBottleFeed(startTime, finalDuration, endTime, ounces, notes)
+            // Schedule next bottle notification if enabled
+            val notificationEnabled = settings.getBoolean("bottle_notification_enabled", false)
+            if (notificationEnabled) {
+                val durationMinutes = settings.getInt("bottle_notification_duration", 180)
+                val babyName = settings.getString("baby_name", "Baby")
+                val title = "$babyName's next bottle is due"
+                val body = "Remember when you do their next bottle, track it in the app to auto set a reminder for when the next bottle is due"
+                scheduleBottleFeedNotification(durationMinutes * 60L, title, body)
+            }
         }
         startTime = null
         // Reset persisted state

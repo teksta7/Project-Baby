@@ -23,10 +23,24 @@ import androidx.compose.runtime.saveable.listSaver
 import com.russhwolf.settings.Settings
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.ui.platform.LocalContext
+import com.teksta.projectparent.requestScheduleExactAlarmPermissionIfNeeded
+import androidx.compose.material3.SnackbarHostState
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
+import androidx.compose.runtime.Composable
+
+@Composable
+expect fun SettingsScreen(onBack: () -> Unit)
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SettingsScreen(onBack: () -> Unit) {
+fun CommonSettingsScreen(
+    onBack: () -> Unit,
+    snackbarHostState: SnackbarHostState,
+    coroutineScope: CoroutineScope,
+    context: Any
+) {
     // --- State ---
     val settings = remember { Settings() }
     val cardTogglesKey = "card_toggles"
@@ -95,6 +109,20 @@ fun SettingsScreen(onBack: () -> Unit) {
         settings.putInt(bottleNotificationDurationKey, durationMinutes)
         settings.putString(defaultOuncesKey, defaultOunces.toString())
         settings.putString(defaultNoteKey, defaultNote)
+    }
+
+    fun onToggleBottleNotification(enabled: Boolean) {
+        bottleNotificationEnabled = enabled
+        saveBottleSettings()
+        if (enabled) {
+            requestScheduleExactAlarmPermissionIfNeeded(context) { granted ->
+                if (!granted) {
+                    coroutineScope.launch {
+                        snackbarHostState.showSnackbar("Permission required to schedule bottle feed notifications. Please enable in system settings.")
+                    }
+                }
+            }
+        }
     }
 
     // --- UI ---
@@ -190,10 +218,7 @@ fun SettingsScreen(onBack: () -> Unit) {
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Switch(
                             checked = bottleNotificationEnabled,
-                            onCheckedChange = {
-                                bottleNotificationEnabled = it
-                                saveBottleSettings()
-                            },
+                            onCheckedChange = { onToggleBottleNotification(it) },
                             colors = SwitchDefaults.colors(checkedThumbColor = Color.Cyan)
                         )
                         Spacer(Modifier.width(8.dp))

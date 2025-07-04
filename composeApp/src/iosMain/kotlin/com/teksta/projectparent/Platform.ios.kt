@@ -7,3 +7,7 @@ class IOSPlatform: Platform {
 }
 
 actual fun getPlatform(): Platform = IOSPlatform()
+
+actual fun scheduleBottleFeedNotification(delaySeconds: Long, title: String, body: String) {
+    // TODO: Implement notification scheduling for iOS
+}
