@@ -22,6 +22,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import androidx.compose.runtime.rememberCoroutineScope
+import com.russhwolf.settings.Settings
 
 @Composable
 fun CardSelectionOnboardingScreen(
@@ -242,7 +243,10 @@ fun CardSelectionOnboardingScreen(
                     var buttonScale by remember { mutableStateOf(1f) }
                     
                     Button(
-                        onClick = { 
+                        onClick = {
+                            val toggles = listOf(bottles, sleep, food, meds, wind, poo, false) // Add 'Test' as false by default
+                            val str = toggles.joinToString(",") { if (it) "1" else "0" }
+                            Settings().putString("card_toggles", str)
                             onComplete(CardSelectionState(bottles, sleep, food, meds, wind, poo))
                             // Add scale animation on click
                             buttonScale = 0.95f

@@ -39,6 +39,9 @@ import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import com.teksta.projectparent.ProfileImagePicker
 import com.russhwolf.settings.Settings
+import kotlinx.datetime.LocalDate
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.atStartOfDayIn
 
 @Composable
 fun BabyProfileOnboardingScreen(
@@ -303,10 +306,14 @@ fun BabyProfileOnboardingScreen(
                     Button(
                         onClick = {
                             if (name.isNotBlank() && birthDate.isNotBlank()) {
-                                val weight = "${weightLbs} lbs ${weightOz} oz"
-                                // Save baby's name to multiplatform-settings
-                                Settings().putString("baby_name", name)
-                                onComplete(name, gender, birthDate, weight, profileImageUri)
+                                val weightKg = lbsOzToKg(weightLbs.toDouble(), weightOz.toDouble())
+                                val birthEpoch = LocalDate.parse(birthDate).atStartOfDayIn(TimeZone.currentSystemDefault()).epochSeconds
+                                val settings = Settings()
+                                settings.putString("baby_name", name)
+                                settings.putLong("baby_birthdate", birthEpoch)
+                                settings.putDouble("baby_weight_kg", weightKg)
+                                profileImageUri?.let { settings.putString("baby_profile_image_uri", it) }
+                                onComplete(name, gender, birthDate, "${weightLbs} lbs ${weightOz} oz", profileImageUri)
                             } else {
                                 showError = true
                             }
@@ -384,4 +391,9 @@ fun Stepper(value: Int, onValueChange: (Int) -> Unit, label: String) {
         Text(" $value $label ", color = Color.White, modifier = Modifier.padding(horizontal = 8.dp))
         Button(onClick = { onValueChange(value + 1) }) { Text("+") }
     }
+} 
+
+fun lbsOzToKg(pounds: Double, ounces: Double): Double {
+    val totalPounds = pounds + (ounces / 16.0)
+    return totalPounds * 0.45359237
 } 

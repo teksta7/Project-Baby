@@ -190,9 +190,13 @@ fun App(
                                     navigateTo(AppScreen.Charts)
                                 }
                             )
-                            AppScreen.Profile -> ProfileScreen(
-                                onBack = { navigateTo(AppScreen.Home) }
-                            )
+                            AppScreen.Profile -> {
+                                val profileViewModel = remember { ProfileViewModel() }
+                                ProfileScreen(
+                                    viewModel = profileViewModel,
+                                    onBack = { navigateTo(AppScreen.Home) }
+                                )
+                            }
                             AppScreen.Bottles -> {
                                 if (actualBottleFeedViewModel != null) {
                                     BottleFeedScreen(
@@ -261,22 +265,6 @@ fun App(
                         }
                     }
                 }
-            }
-        }
-    }
-}
-
-// Placeholder screen composables - these will be implemented as you continue the migration
-@Composable
-fun ProfileScreen(onBack: () -> Unit) {
-    Box(
-        modifier = Modifier.fillMaxSize(),
-        contentAlignment = Alignment.Center
-    ) {
-        Column(horizontalAlignment = Alignment.CenterHorizontally) {
-            Text("Profile Screen", color = Color.White)
-            Button(onClick = onBack) {
-                Text("Back to Home", color = Color.White)
             }
         }
     }
