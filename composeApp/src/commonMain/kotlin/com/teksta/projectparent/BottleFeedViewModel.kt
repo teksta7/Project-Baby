@@ -19,10 +19,7 @@ import android.content.SharedPreferences
 // Simple logging utility
 expect fun logDebug(tag: String, message: String)
 
-// Foreground service hooks for Android
-// expect fun startBottleFeedForegroundService(babyName: String, elapsed: Int, total: Int, average: Int)
-// expect fun updateBottleFeedForegroundService(elapsed: Int, total: Int, average: Int)
-expect fun stopBottleFeedForegroundService()
+// Foreground service hooks for Android are declared in Platform.kt
 
 class BottleFeedViewModel(private val repository: BottleFeedRepository) {
     
@@ -236,20 +233,23 @@ class BottleFeedViewModel(private val repository: BottleFeedRepository) {
     
     fun stopTimer(fromExternal: Boolean = false, saveFeed: Boolean = true) {
         logDebug("BottleFeedViewModel", "stopTimer called - fromExternal: $fromExternal, saveFeed: $saveFeed")
+        logDebug("BottleFeedViewModel", "stopTimer - startTime before save: $startTime, bottleDuration: $bottleDuration")
         isTimerRunning = false
         timerJob?.cancel()
         timerJob = null
         buttonLabel = "Start Bottle Feed"
         buttonColor = BottleFeedButtonColor.GREEN
+        // Calculate duration before resetting bottleDuration
+        val finalDuration = bottleDuration.toDouble()
         bottleDuration = 0
-        startTime = null
         // Always stop the foreground service to prevent notification reappearance
         stopBottleFeedForegroundService()
         if (saveFeed) {
-            viewModelScope.launch {
-                saveFeed()
-            }
+            val endTime = Clock.System.now().epochSeconds
+            logDebug("BottleFeedViewModel", "stopTimer - calling addBottleFeed with duration: $finalDuration, endTime: $endTime, ounces: $ounces, notes: '$notes'")
+            addBottleFeed(startTime, finalDuration, endTime, ounces, notes)
         }
+        startTime = null
         // Reset persisted state
         settings.putBoolean(inProgressKey, false)
         settings.remove(startTimeKey)
@@ -258,10 +258,11 @@ class BottleFeedViewModel(private val repository: BottleFeedRepository) {
         settings.remove(notesKey)
     }
     
-    private fun addBottleFeed(duration: Double, endTime: Long, feedOunces: Double, feedNotes: String) {
+    private fun addBottleFeed(feedStartTime: Long?, duration: Double, endTime: Long, feedOunces: Double, feedNotes: String) {
         viewModelScope.launch {
             try {
-                val startTimeValue = startTime ?: return@launch
+                logDebug("BottleFeedViewModel", "addBottleFeed called - feedStartTime: $feedStartTime, duration: $duration, endTime: $endTime, ounces: $feedOunces, notes: '$feedNotes'")
+                val startTimeValue = feedStartTime ?: return@launch
                 logDebug("BottleFeedViewModel", "Saving bottle feed - startTime: $startTimeValue, endTime: $endTime, duration: $duration, ounces: $feedOunces, notes: '$feedNotes'")
                 
                 repository.insertFeed(

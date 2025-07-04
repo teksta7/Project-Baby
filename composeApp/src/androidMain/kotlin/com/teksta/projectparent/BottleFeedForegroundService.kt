@@ -125,11 +125,6 @@ class BottleFeedForegroundService : Service() {
         val progressMax = if (average > 0) average else total
         val percent = if (progressMax > 0) (elapsed * 100 / progressMax).coerceIn(0, 100) else 0
         val contentText = "${babyName}'s bottle feed: ${formatTime(elapsed)} / ${formatTime(progressMax)}"
-        val intent = Intent(this, MainActivity::class.java).apply {
-            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-            putExtra("navigateTo", "BOTTLE_FEED")
-        }
-        val pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
 
         return NotificationCompat.Builder(this, CHANNEL_ID)
             .setContentTitle("Bottle Feed in Progress")
@@ -137,7 +132,6 @@ class BottleFeedForegroundService : Service() {
             .setSmallIcon(android.R.drawable.ic_popup_sync)
             .setProgress(100, percent, false)
             .setOngoing(true)
-            .setContentIntent(pendingIntent)
             .build()
     }
 
