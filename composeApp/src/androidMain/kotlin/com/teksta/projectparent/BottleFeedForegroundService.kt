@@ -1,3 +1,4 @@
+// BottleFeedForegroundService manages the persistent notification and background logic for bottle feed tracking on Android.
 package com.teksta.projectparent
 
 import android.app.Notification
@@ -19,6 +20,7 @@ import kotlinx.coroutines.launch
 
 class BottleFeedForegroundService : Service() {
     companion object {
+        // Notification and action constants
         const val CHANNEL_ID = "bottle_feed_channel"
         const val NOTIFICATION_ID = 1001
         const val ACTION_START = "ACTION_START_BOTTLE_FEED"
@@ -31,6 +33,7 @@ class BottleFeedForegroundService : Service() {
         const val EXTRA_BABY_NAME = "EXTRA_BABY_NAME"
         const val EXTRA_AVERAGE = "EXTRA_AVERAGE"
 
+        // Start the foreground service for a new bottle feed
         fun startService(context: Context, babyName: String, elapsed: Int, total: Int, average: Int) {
             val intent = Intent(context, BottleFeedForegroundService::class.java).apply {
                 action = ACTION_START
@@ -46,6 +49,7 @@ class BottleFeedForegroundService : Service() {
             }
         }
 
+        // Update the notification with new progress
         fun updateService(context: Context, elapsed: Int, total: Int, average: Int) {
             val intent = Intent(context, BottleFeedForegroundService::class.java).apply {
                 action = ACTION_UPDATE
@@ -56,17 +60,20 @@ class BottleFeedForegroundService : Service() {
             context.startService(intent)
         }
 
+        // Stop the foreground service
         fun stopService(context: Context) {
             val intent = Intent(context, BottleFeedForegroundService::class.java)
             intent.action = ACTION_STOP
             context.startService(intent)
         }
 
+        // Dismiss all notifications related to bottle feeds
         fun dismissAllNotifications(context: Context) {
             NotificationManagerCompat.from(context).cancelAll()
         }
     }
 
+    // State for the current feed
     private var babyName: String = ""
     private var elapsed: Int = 0
     private var total: Int = 0
@@ -77,6 +84,7 @@ class BottleFeedForegroundService : Service() {
         createNotificationChannel()
     }
 
+    // Handle service commands (start, update, cancel, finish, stop)
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         when (intent?.action) {
             ACTION_START -> {
@@ -85,6 +93,7 @@ class BottleFeedForegroundService : Service() {
                 elapsed = intent.getIntExtra(EXTRA_ELAPSED, 0)
                 total = intent.getIntExtra(EXTRA_TOTAL, 0)
                 average = intent.getIntExtra(EXTRA_AVERAGE, 0)
+                // Start the persistent notification
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
                     startForeground(NOTIFICATION_ID, buildNotification(), 1)
                 } else {
@@ -121,6 +130,7 @@ class BottleFeedForegroundService : Service() {
 
     override fun onBind(intent: Intent?): IBinder? = null
 
+    // Build the notification UI for the foreground service
     private fun buildNotification(): Notification {
         val progressMax = if (average > 0) average else total
         val percent = if (progressMax > 0) (elapsed * 100 / progressMax).coerceIn(0, 100) else 0
@@ -135,11 +145,13 @@ class BottleFeedForegroundService : Service() {
             .build()
     }
 
+    // Update the notification with new progress
     private fun updateNotification() {
         val notification = buildNotification()
         NotificationManagerCompat.from(this).notify(NOTIFICATION_ID, notification)
     }
 
+    // Create the notification channel for Android O+
     private fun createNotificationChannel() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channel = NotificationChannel(
@@ -153,12 +165,14 @@ class BottleFeedForegroundService : Service() {
         }
     }
 
+    // Format seconds as mm:ss for notification display
     private fun formatTime(seconds: Int): String {
         val min = seconds / 60
         val sec = seconds % 60
         return String.format("%02d:%02d", min, sec)
     }
 
+    // Clear the in-progress state and optionally broadcast cancellation
     private fun clearInProgressState(sendBroadcast: Boolean = false) {
         val prefs = getSharedPreferences("settings", Context.MODE_PRIVATE)
         android.util.Log.d("BottleFeedService", "clearInProgressState called, sendBroadcast=$sendBroadcast")
@@ -180,6 +194,7 @@ class BottleFeedForegroundService : Service() {
         stopSelf()
     }
 
+    // Save the completed feed to the database and finish the service
     private fun saveFeedAndFinish() {
         val prefs = getSharedPreferences("settings", Context.MODE_PRIVATE)
         android.util.Log.d("BottleFeedService", "saveFeedAndFinish called")

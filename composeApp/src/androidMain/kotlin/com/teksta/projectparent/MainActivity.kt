@@ -1,3 +1,4 @@
+// MainActivity is the Android entry point for Project Baby. It sets up notification permissions, broadcast receivers, and Compose content.
 package com.teksta.projectparent
 
 import android.Manifest
@@ -33,7 +34,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         super.onCreate(savedInstanceState)
 
-        // Register broadcast receiver for bottle feed finish/cancel
+        // Register broadcast receiver for bottle feed finish/cancel actions from notifications
         val filter = IntentFilter().apply {
             addAction("com.teksta.projectparent.BOTTLE_FEED_FINISHED")
             addAction("com.teksta.projectparent.BOTTLE_FEED_CANCELLED")
@@ -43,6 +44,7 @@ class MainActivity : ComponentActivity() {
                 override fun onReceive(context: android.content.Context?, intent: Intent?) {
                     val action = intent?.action
                     android.util.Log.d("BottleFeedBroadcast", "Received broadcast: $action")
+                    // Sync notification actions with the ViewModel
                     currentBottleFeedViewModel?.let {
                         when (action) {
                             "com.teksta.projectparent.BOTTLE_FEED_FINISHED" -> {
@@ -61,7 +63,7 @@ class MainActivity : ComponentActivity() {
             RECEIVER_NOT_EXPORTED
         )
 
-        // Request notification permission on Android 13+
+        // Request notification permission on Android 13+ (TIRAMISU)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != android.content.pm.PackageManager.PERMISSION_GRANTED) {
                 ActivityCompat.requestPermissions(
@@ -72,10 +74,10 @@ class MainActivity : ComponentActivity() {
             }
         }
 
-        // Initialize onboarding prefs for persistence
+        // Initialize onboarding preferences for multiplatform onboarding state
         OnboardingState.init(OnboardingPrefs(this))
 
-        // Register SharedPreferences listener for bottle_feed_action
+        // Register SharedPreferences listener for bottle_feed_action (syncs notification actions with ViewModel)
         val prefs = getSharedPreferences("settings", MODE_PRIVATE)
         val prefListener = SharedPreferences.OnSharedPreferenceChangeListener { _, key ->
             if (key == "bottle_feed_action") {
@@ -87,11 +89,13 @@ class MainActivity : ComponentActivity() {
         }
         prefs.registerOnSharedPreferenceChangeListener(prefListener)
 
+        // Set up the main Compose UI
         setContent {
             AppAndroid()
         }
     }
     override fun onDestroy() {
+        // Clear static instance reference on destroy
         if (instance === this) {
             instance = null
         }
@@ -99,6 +103,7 @@ class MainActivity : ComponentActivity() {
     }
     override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
+        // Used for navigation from notification clicks
         val navTo = intent.getStringExtra("navigateTo")
         navTarget.value = navTo
     }

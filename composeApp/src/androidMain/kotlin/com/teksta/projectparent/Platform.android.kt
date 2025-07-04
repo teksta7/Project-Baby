@@ -1,3 +1,4 @@
+// Platform.android.kt provides Android-specific implementations for platform APIs, notifications, and alarm scheduling.
 package com.teksta.projectparent
 
 import android.os.Build
@@ -79,7 +80,7 @@ actual fun requestScheduleExactAlarmPermissionIfNeeded(context: Any, onResult: (
     onResult(false)
 }
 
-// BroadcastReceiver to show the notification
+// BroadcastReceiver to show the scheduled bottle feed notification
 class BottleFeedNotificationReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
         val title = intent.getStringExtra("title") ?: "Bottle Reminder"
